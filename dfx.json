@@ -1,0 +1,49 @@
+{
+	"canisters": {
+		"nns-governance": {
+			"build": "",
+			"candid": "candid/nns-governance.did",
+			"remote": {
+				"id": {
+					"ic": "rrkah-fqaaa-aaaaa-aaaaq-cai",
+					"local": "rrkah-fqaaa-aaaaa-aaaaq-cai"
+				}
+			},
+			"type": "custom",
+			"wasm": ""
+		},
+		"internet_identity": {
+			"type": "custom",
+			"candid": "https://github.com/dfinity/internet-identity/releases/download/release-2023-11-17/internet_identity.did",
+			"wasm": "https://github.com/dfinity/internet-identity/releases/download/release-2023-11-17/internet_identity_dev.wasm.gz",
+			"remote": {
+				"id": {
+					"ic": "rdmx6-jaaaa-aaaaa-aaadq-cai",
+					"local": "qhbym-qaaaa-aaaaa-aaafq-cai"
+				}
+			}
+		},
+		"satellite": {
+			"candid": "https://raw.githubusercontent.com/buildwithjuno/juno/main/src/satellite/satellite.did",
+			"type": "custom",
+			"wasm": "https://github.com/junobuild/juno/releases/download/v0.0.23/satellite-v0.0.13.wasm.gz"
+		}
+	},
+	"defaults": {
+		"build": {
+			"args": "",
+			"packtool": ""
+		}
+	},
+	"networks": {
+		"local": {
+			"bind": "127.0.0.1:8080",
+			"replica": {
+				"subnet_type": "system"
+			},
+			"type": "ephemeral"
+		}
+	},
+	"output_env_file": ".env",
+	"version": 1
+}

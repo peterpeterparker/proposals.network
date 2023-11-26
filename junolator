@@ -1,0 +1,58 @@
+#!/bin/bash
+
+deploy () {
+  # Deploy II
+  dfx deploy internet_identity
+
+  # Deploy satellite
+  PRINCIPAL="$(dfx identity get-principal)"
+  dfx deploy satellite --argument "$(didc encode '(record {controllers = vec { principal"'${PRINCIPAL}'";}})' --format hex)" --argument-type raw
+
+  II="$(dfx canister id internet_identity)"
+  SAT="$(dfx canister id satellite)"
+
+  echo -e "\n**************************************************"
+  echo -e "* Satellite: ${SAT}         *"
+  echo -e "* Internet identity: ${II} *"
+  echo -e "**************************************************"
+  echo -e ""
+  echo -e "Your JS initialization code:"
+  echo -e ""
+  echo -e "await initJuno({"
+  echo -e "  satelliteId: \"${SAT}\","
+  echo -e "  localIdentityCanisterId: \"${II}\","
+  echo -e "});"
+  echo -e ""
+}
+
+init() {
+  # Init .env file with location to identity (if file does not exist yet)
+  if [[ ! -e .env ]]; then
+    IDENTITY="$(dfx identity whoami)"
+    echo "DFX_IDENTITY_PEM_PATH=${HOME}/.config/dfx/identity/${IDENTITY}/identity.pem" > .env
+  fi
+}
+
+install() {
+  npm ci
+}
+
+case $1 in
+  start)
+    dfx start
+    ;;
+  stop)
+    dfx stop
+    ;;
+  deploy)
+    init
+    install
+    deploy
+    ;;
+  config)
+    node scripts/collections.mjs
+    ;;
+  ctrl)
+    node scripts/controllers.mjs
+    ;;
+esac
