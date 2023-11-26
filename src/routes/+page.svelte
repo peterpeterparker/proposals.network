@@ -1,2 +1,11 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import Search from '$lib/components/proposals/Search.svelte';
+	import Proposals from '$lib/components/proposals/Proposals.svelte';
+	import UserProposals from '$lib/components/proposals/UserProposals.svelte';
+</script>
+
+<Search />
+
+<UserProposals />
+
+<Proposals />

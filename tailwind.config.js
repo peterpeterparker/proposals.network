@@ -1,4 +1,4 @@
-import { fontFamily, fontSize } from 'tailwindcss/defaultTheme';
+import { fontFamily } from 'tailwindcss/defaultTheme';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -7,29 +7,48 @@ export default {
 		fontFamily: {
 			sans: ['Inter', 'sans-serif', ...fontFamily.sans]
 		},
-		fontSize: {
-			...fontSize,
-			'3xl': '32px',
-			'6xl': '64px'
-		},
 		colors: {
 			inherit: 'inherit',
 			transparent: 'transparent',
 			current: 'currentColor',
 			black: 'rgb(0 0 0)',
 			white: 'rgb(255 255 255)',
-			green: {
-				50: '#F7FEE7',
-				100: '#ECFDCA',
-				200: '#E1FBAF',
-				300: '#BFF462',
-				400: '#A4E833',
-				500: '#85CE14',
-				600: '#66A50B',
-				700: '#4E7D0E',
-				800: '#3F6311',
-				900: '#365413',
-				950: '#1A2E05'
+			violet: {
+				100: '#A5B4FB',
+				200: '#A8A6FF',
+				300: '#918efa',
+				400: '#807dfa'
+			},
+			pink: {
+				200: '#FFA6F6',
+				300: '#fa8cef',
+				400: '#fa7fee'
+			},
+			red: {
+				200: '#FF9F9F',
+				300: '#fa7a7a',
+				400: '#f76363'
+			},
+			orange: {
+				200: '#FFC29F',
+				300: '#FF965B',
+				400: '#fa8543'
+			},
+			yellow: {
+				200: '#FFF59F',
+				300: '#FFF066',
+				400: '#FFE500'
+			},
+			lime: {
+				100: '#c6fab4',
+				200: '#B8FF9F',
+				300: '#9dfc7c',
+				400: '#7df752'
+			},
+			cyan: {
+				200: '#A6FAFF',
+				300: '#79F7FF',
+				400: '#53f2fc'
 			},
 			gray: {
 				50: '#F6F7F9',
@@ -43,45 +62,6 @@ export default {
 				800: '#394353',
 				900: '#343B48',
 				950: '#22262F'
-			},
-			orange: {
-				50: '#FEFAE8',
-				100: '#FDF1BA',
-				200: '#FDE48B',
-				300: '#FBCD49',
-				400: '#F7B518',
-				500: '#E79D0B',
-				600: '#C87706',
-				700: '#9F5409',
-				800: '#84420F',
-				900: '#703613',
-				950: '#411B07'
-			},
-			blue: {
-				50: '#F5F8FF',
-				100: '#DFE6FF',
-				200: '#C5D0FF',
-				300: '#A2B1FF',
-				400: '#7E88FC',
-				500: '#5E5FF6',
-				600: '#4C41EA',
-				700: '#4133CF',
-				800: '#362CA7',
-				900: '#2F2B84',
-				950: '#1E194D'
-			},
-			red: {
-				50: '#FFF4ED',
-				100: '#FFE7D4',
-				200: '#FFCAA8',
-				300: '#FFA571',
-				400: '#FF7538',
-				500: '#FE4F11',
-				600: '#EF3407',
-				700: '#C62308',
-				800: '#9D1E0F',
-				900: '#7E1C10',
-				950: '#440A06'
 			}
 		}
 	},

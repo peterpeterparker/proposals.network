@@ -1,0 +1,15 @@
+<script lang="ts">
+	import { createEventDispatcher } from 'svelte';
+	import { handleKeyPress } from '$lib/utils/keyboard.utils';
+
+	const dispatch = createEventDispatcher();
+	const close = () => dispatch('pnClose');
+</script>
+
+<div
+	role="button"
+	on:click|stopPropagation={close}
+	on:keypress={($event) => handleKeyPress({ $event, callback: close })}
+	on:click
+	class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"
+></div>
