@@ -1,13 +1,13 @@
 <script lang="ts">
 	import TableContainer from '$lib/components/ui/TableContainer.svelte';
 	import SkeletonRows from '$lib/components/ui/SkeletonRows.svelte';
-	import Section from "$lib/components/ui/Section.svelte";
+	import Section from '$lib/components/ui/Section.svelte';
 </script>
 
-<Section styleClass="bg-yellow-200">
+<Section color="secondary">
 	<h2 class="text-6xl md:text-7xl mb-12 tracking-tight font-bold mx-4">Network.</h2>
 
-	<TableContainer rows={10}>
+	<TableContainer rows={10} color="secondary">
 		<thead>
 			<tr>
 				<th>ID</th>

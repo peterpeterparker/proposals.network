@@ -4,10 +4,10 @@
 	import Section from '$lib/components/ui/Section.svelte';
 </script>
 
-<Section styleClass="bg-lime-100">
+<Section>
 	<h2 class="text-6xl md:text-7xl mb-12 tracking-tight font-bold mx-4">Your proposals.</h2>
 
-	<TableContainer rows={10} color="secondary">
+	<TableContainer rows={10}>
 		<thead>
 			<tr>
 				<th>ID</th>
