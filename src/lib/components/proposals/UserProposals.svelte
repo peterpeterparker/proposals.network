@@ -1,11 +1,10 @@
-<script>
+<script lang="ts">
 	import SkeletonRows from '$lib/components/ui/SkeletonRows.svelte';
 	import TableContainer from '$lib/components/ui/TableContainer.svelte';
+	import Section from '$lib/components/ui/Section.svelte';
 </script>
 
-<section
-	class="bg-lime-100 w-full md:h-screen lg:h-full snap-start snap-always shrink-0 border-b-2 border-black py-24 px-4"
->
+<Section styleClass="bg-lime-100">
 	<h2 class="text-6xl md:text-7xl mb-12 tracking-tight font-bold mx-4">Your proposals.</h2>
 
 	<TableContainer rows={10} color="secondary">
@@ -24,4 +23,4 @@
 			<SkeletonRows rows={10} columns={7} />
 		</tbody>
 	</TableContainer>
-</section>
+</Section>
