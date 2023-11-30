@@ -5,6 +5,9 @@
 	import IconClose from '$lib/components/icons/IconClose.svelte';
 	import IconGitHub from '$lib/components/icons/IconGitHub.svelte';
 	import IconLogo from '$lib/components/icons/IconLogo.svelte';
+	import ButtonIcon from "$lib/components/ui/ButtonIcon.svelte";
+	import IconLogout from "$lib/components/icons/IconLogout.svelte";
+	import {signOut} from "@junobuild/core";
 
 	export let visible = false;
 </script>
@@ -76,14 +79,19 @@
 					</div>
 					<div class="pb-4">
 						<div
-							class="cursor-pointer"
+							class="cursor-pointer flex gap-2 items-center"
 						>
 							<a
 								href="https://github.com/peterpeterparker/proposals.network"
 								target="_blank"
+								class="w-8 h-8 inline-flex items-center justify-center border-2 border-transparent rounded-full hover:bg-[#79F7FF] hover:border-black hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:bg-[#00E1EF]"
 								rel="noopener noreferrer"
 								aria-label="Go to proposals-network source code on GitHub"><IconGitHub /></a
 							>
+
+							<ButtonIcon disabled={false} on:click={signOut} ariaLabel="Sign-out">
+								<IconLogout />
+							</ButtonIcon>
 						</div>
 					</div>
 				</ul>

@@ -1,8 +1,57 @@
 <script lang="ts">
 	import Step from '$lib/components/ui/Step.svelte';
-	import { userInitialized } from '$lib/derived/user.derived';
+	import {
+		userInitialized,
+		userNotInitialized,
+		userNotSignedIn,
+		userSignedIn
+	} from '$lib/derived/user.derived';
+	import { debounce, isNullish } from '@dfinity/utils';
+	import { userStore } from '$lib/stores/user.store';
 
-	export let step: 'sign-in' | 'write' | 'hotkey' | 'review' | 'submit';
+	export let step: undefined | 'write' | 'hotkey' | 'review' | 'submit';
+
+	$: console.log($userStore, step);
+
+	let signInStatus: 'pending' | 'active' | 'done';
+	let writeStatus: 'pending' | 'active' | 'done';
+	let hotkeyStatus: 'pending' | 'active' | 'done';
+	let reviewStatus: 'pending' | 'active' | 'done';
+
+	const initSignInStatus = debounce(() => {
+		signInStatus =
+			isNullish(step) && $userInitialized
+				? $userSignedIn
+					? 'done'
+					: $userNotSignedIn
+					  ? 'active'
+					  : 'pending'
+				: 'pending';
+	});
+
+	$: step, $userStore, initSignInStatus();
+
+	$: step,
+		$userStore,
+		(() =>
+			(writeStatus =
+				(isNullish(step) && $userSignedIn) || step === 'write'
+					? 'active'
+					: signInStatus === 'active'
+					  ? 'pending'
+					  : $userSignedIn
+					    ? 'done'
+					    : 'pending'))();
+
+	$: step,
+		() =>
+			(hotkeyStatus =
+				step === 'hotkey' ? 'active' : ['review', 'submit'].includes(step) ? 'done' : 'pending');
+
+	$: step,
+		() =>
+			(reviewStatus =
+				step === 'review' ? 'active' : ['submit'].includes(step) ? 'done' : 'pending');
 </script>
 
 <aside
@@ -11,22 +60,22 @@
 	<label class="hidden lg:inline-block text-lg font-bold mb-4">Submit a proposal</label>
 
 	<ul class="flex lg:flex-col gap-3 lg:gap-1 lg:pb-16">
-		<Step active={step === 'sign-in' && $userInitialized}>
+		<Step status={signInStatus}>
 			<svelte:fragment slot="step">1</svelte:fragment>
 			Sign-in
 		</Step>
 
-		<Step active={step === 'write'}>
+		<Step status={writeStatus}>
 			<svelte:fragment slot="step">2</svelte:fragment>
 			Write
 		</Step>
 
-		<Step active={step === 'hotkey'}>
+		<Step status={hotkeyStatus}>
 			<svelte:fragment slot="step">3</svelte:fragment>
 			Hotkey
 		</Step>
 
-		<Step active={step === 'review'}>
+		<Step active={reviewStatus}>
 			<svelte:fragment slot="step">4</svelte:fragment>
 			Review
 		</Step>

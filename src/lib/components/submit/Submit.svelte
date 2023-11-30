@@ -6,7 +6,7 @@
 	import { userNotSignedIn } from '$lib/derived/user.derived';
 	import SubmitSignIn from "$lib/components/submit/SubmitSignIn.svelte";
 
-	let step: 'sign-in' | 'write' | 'hotkey' | 'review' | 'submit' = 'sign-in';
+	let step: undefined | 'write' | 'hotkey' | 'review' | 'submit' = undefined;
 </script>
 
 <div class="flex flex-col lg:flex-row min-h-screen" in:fade>
