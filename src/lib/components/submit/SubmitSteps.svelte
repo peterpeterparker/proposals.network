@@ -2,7 +2,6 @@
 	import Step from '$lib/components/ui/Step.svelte';
 	import {
 		userInitialized,
-		userNotInitialized,
 		userNotSignedIn,
 		userSignedIn
 	} from '$lib/derived/user.derived';
@@ -10,8 +9,6 @@
 	import { userStore } from '$lib/stores/user.store';
 
 	export let step: undefined | 'write' | 'hotkey' | 'review' | 'submit';
-
-	$: console.log($userStore, step);
 
 	let signInStatus: 'pending' | 'active' | 'done';
 	let writeStatus: 'pending' | 'active' | 'done';
