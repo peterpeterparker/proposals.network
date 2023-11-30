@@ -15,12 +15,15 @@
 
 .tiptap {
 
+	h1 {
+		margin: 0 0 1.5rem;
+	}
+
 	blockquote,
-	dl,
-	dd,
-	h1,
 	h2,
 	h3,
+	dl,
+	dd,
 	h4,
 	h5,
 	h6,
@@ -28,7 +31,7 @@
 	figure,
 	p,
 	pre {
-		margin: 0 0 16px;
+		margin: 0 0 1rem;
 	}
 
 	a {

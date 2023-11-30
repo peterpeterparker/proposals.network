@@ -10,5 +10,5 @@
 		><slot name="step" /></span
 	>
 
-	<span><slot /></span>
+	<span class="hidden sm:inline-block"><slot /></span>
 </li>
