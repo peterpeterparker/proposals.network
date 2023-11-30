@@ -5,9 +5,12 @@
 	import IconClose from '$lib/components/icons/IconClose.svelte';
 	import IconGitHub from '$lib/components/icons/IconGitHub.svelte';
 	import IconLogo from '$lib/components/icons/IconLogo.svelte';
-	import ButtonIcon from "$lib/components/ui/ButtonIcon.svelte";
-	import IconLogout from "$lib/components/icons/IconLogout.svelte";
-	import {signOut} from "@junobuild/core";
+	import ButtonIcon from '$lib/components/ui/ButtonIcon.svelte';
+	import IconLogout from '$lib/components/icons/IconLogout.svelte';
+	import { signOut } from '@junobuild/core';
+	import { userInitialized, userSignedIn } from '$lib/derived/user.derived';
+	import {signIn} from "$lib/services/auth.services";
+	import IconLogin from "$lib/components/icons/IconLogin.svelte";
 
 	export let visible = false;
 </script>
@@ -57,30 +60,28 @@
 						</div>
 						<div class="hover:underline hover:underline-offset-8 mb-4">
 							<a
-									href="https://wiki.internetcomputer.org/wiki/Network_Nervous_System"
-									rel="noreferrer nofollow noopener"
-									target="_blank">Network Nervous System</a
+								href="https://wiki.internetcomputer.org/wiki/Network_Nervous_System"
+								rel="noreferrer nofollow noopener"
+								target="_blank">Network Nervous System</a
 							>
 						</div>
 						<div class="hover:underline hover:underline-offset-8 mb-4">
 							<a
-									href="https://internetcomputer.org/docs/current/tokenomics/nns/nns-staking-voting-rewards"
-									rel="noreferrer nofollow noopener"
-									target="_blank">Staking and voting rewards</a
+								href="https://internetcomputer.org/docs/current/tokenomics/nns/nns-staking-voting-rewards"
+								rel="noreferrer nofollow noopener"
+								target="_blank">Staking and voting rewards</a
 							>
 						</div>
 						<div class="hover:underline hover:underline-offset-8 mb-4">
 							<a
-									href="https://wiki.internetcomputer.org/wiki/Governance_of_the_Internet_Computer"
-									rel="noreferrer nofollow noopener"
-									target="_blank">Governance</a
+								href="https://wiki.internetcomputer.org/wiki/Governance_of_the_Internet_Computer"
+								rel="noreferrer nofollow noopener"
+								target="_blank">Governance</a
 							>
 						</div>
 					</div>
 					<div class="pb-4">
-						<div
-							class="cursor-pointer flex gap-2 items-center"
-						>
+						<div class="cursor-pointer flex gap-2 items-center">
 							<a
 								href="https://github.com/peterpeterparker/proposals.network"
 								target="_blank"
@@ -89,9 +90,17 @@
 								aria-label="Go to proposals-network source code on GitHub"><IconGitHub /></a
 							>
 
-							<ButtonIcon disabled={false} on:click={signOut} ariaLabel="Sign-out">
-								<IconLogout />
-							</ButtonIcon>
+							{#if $userInitialized}
+								{#if $userSignedIn}
+									<ButtonIcon disabled={false} on:click={signOut} ariaLabel="Sign-out">
+										<IconLogout />
+									</ButtonIcon>
+								{:else}
+									<ButtonIcon disabled={false} on:click={signIn} ariaLabel="Sign-in">
+										<IconLogin />
+									</ButtonIcon>
+								{/if}
+							{/if}
 						</div>
 					</div>
 				</ul>
