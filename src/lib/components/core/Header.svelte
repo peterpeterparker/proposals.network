@@ -1,6 +1,7 @@
 <script>
 	import IconMenu from '$lib/components/icons/IconMenu.svelte';
 	import Menu from '$lib/components/core/Menu.svelte';
+	import IconLogo from "$lib/components/icons/IconLogo.svelte";
 
 	export let submit = false;
 
@@ -9,7 +10,7 @@
 
 <header class="bg-white h-20 w-full fixed top-0 z-40 border-b-2 border-black">
 	<div class="w-full h-full m-auto flex justify-between items-center px-5 md:px-24">
-		<a class="text-2xl font-bold" href="/">proposals.network.</a>
+		<a class="text-2xl font-bold" href="/" aria-label="Proposals.network home"><IconLogo /></a>
 		<nav class="w-1/2 h-full">
 			<ul class="flex justify-end items-center space-x-4 h-full">
 				{#if submit}

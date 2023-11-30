@@ -3,7 +3,7 @@
 </script>
 
 <section
-	class="bg-teal-200 w-full h-[calc(100vh-80px)] 2xl:h-[800px] snap-start snap-always shrink-0 border-b-2 border-black relative"
+	class="bg-pink-200 w-full h-[calc(100vh-80px)] 2xl:h-[800px] snap-start snap-always shrink-0 border-b-2 border-black relative"
 >
 	<div class="w-full h-full bg-pink-200 relative flex items-center justify-center flex-col">
 		<h1 class="text-center px-2 md:max-w-[70vw] xl:max-w-[50vw]">

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://proposals.network/sitemap.xml
+Host: https://proposals.network
