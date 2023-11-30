@@ -30,7 +30,7 @@
 			<div class="p-5">
 				<ul class="flex flex-col">
 					<div class="pb-8">
-						<span class="text-lg font-bold block mb-4">Getting started</span>
+						<span class="text-lg font-bold block mb-4">Proposals.network</span>
 						<div class="hover:underline hover:underline-offset-8 mb-4">
 							<a href="/">Browse</a>
 						</div>
@@ -52,10 +52,31 @@
 								target="_blank">Internet Computer</a
 							>
 						</div>
+						<div class="hover:underline hover:underline-offset-8 mb-4">
+							<a
+									href="https://wiki.internetcomputer.org/wiki/Network_Nervous_System"
+									rel="noreferrer nofollow noopener"
+									target="_blank">Network Nervous System</a
+							>
+						</div>
+						<div class="hover:underline hover:underline-offset-8 mb-4">
+							<a
+									href="https://internetcomputer.org/docs/current/tokenomics/nns/nns-staking-voting-rewards"
+									rel="noreferrer nofollow noopener"
+									target="_blank">Staking and voting rewards</a
+							>
+						</div>
+						<div class="hover:underline hover:underline-offset-8 mb-4">
+							<a
+									href="https://wiki.internetcomputer.org/wiki/Governance_of_the_Internet_Computer"
+									rel="noreferrer nofollow noopener"
+									target="_blank">Governance</a
+							>
+						</div>
 					</div>
 					<div class="pb-4">
 						<div
-							class="cursor-pointer border-2 border-black w-fit rounded-full p-0.5 hover:bg-[#79F7FF] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+							class="cursor-pointer"
 						>
 							<a
 								href="https://github.com/peterpeterparker/proposals.network"
