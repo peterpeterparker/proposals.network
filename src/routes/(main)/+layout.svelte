@@ -4,7 +4,7 @@
 	import Footer from '$lib/components/core/Footer.svelte';
 </script>
 
-<Header />
+<Header submit />
 
 <main class="snap-mandatory snap-y overflow-scroll">
 	<slot />
