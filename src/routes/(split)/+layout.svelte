@@ -1,11 +1,11 @@
 <script lang="ts">
-    import Header from '$lib/components/core/Header.svelte';
-    import '$lib/styles/global.scss';
-    import Footer from '$lib/components/core/Footer.svelte';
+	import Header from '$lib/components/core/Header.svelte';
+	import '$lib/styles/global.scss';
+	import Footer from '$lib/components/core/Footer.svelte';
 </script>
 
 <Header />
 
 <main class="snap-mandatory snap-y overflow-scroll">
-    <slot />
+	<slot />
 </main>

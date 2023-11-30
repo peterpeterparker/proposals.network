@@ -1,7 +1,7 @@
 <script>
 	import IconMenu from '$lib/components/icons/IconMenu.svelte';
 	import Menu from '$lib/components/core/Menu.svelte';
-	import IconLogo from "$lib/components/icons/IconLogo.svelte";
+	import IconLogo from '$lib/components/icons/IconLogo.svelte';
 
 	export let submit = false;
 

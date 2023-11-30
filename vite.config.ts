@@ -1,10 +1,10 @@
 import inject from '@rollup/plugin-inject';
 import { sveltekit } from '@sveltejs/kit/vite';
+import { readFileSync } from 'fs';
 import { join } from 'node:path';
 import { dirname } from 'path';
-import {defineConfig, loadEnv, type UserConfig} from 'vite';
-import {readFileSync} from "fs";
-import {fileURLToPath} from "url";
+import { fileURLToPath } from 'url';
+import { defineConfig, loadEnv, type UserConfig } from 'vite';
 
 const file = fileURLToPath(new URL('package.json', import.meta.url));
 const json = readFileSync(file, 'utf8');
@@ -119,7 +119,7 @@ export default defineConfig((): UserConfig => {
 		define: {
 			'process.env': {
 				...readCanisterIds({}),
-				DFX_NETWORK: network,
+				DFX_NETWORK: network
 			},
 			'import.meta.env.VITE_APP_VERSION': JSON.stringify(version),
 			'import.meta.env.VITE_DFX_NETWORK': JSON.stringify(network)
