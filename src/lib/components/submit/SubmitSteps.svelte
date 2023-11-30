@@ -75,12 +75,12 @@
 			Hotkey
 		</Step>
 
-		<Step active={reviewStatus}>
+		<Step status={reviewStatus}>
 			<svelte:fragment slot="step">4</svelte:fragment>
 			Review
 		</Step>
 
-		<Step active={step === 'submit'}>
+		<Step status={step === 'submit'}>
 			<svelte:fragment slot="step">5</svelte:fragment>
 			Submit
 		</Step>
