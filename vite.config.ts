@@ -46,6 +46,50 @@ const readCanisterIds = ({ prefix }: { prefix?: string }): Record<string, string
 	}
 };
 
+const dfxCanisterIds = ({ prefix }: { prefix?: string }): Record<string, string> => {
+	if (['ic', 'staging'].includes(network)) {
+		return {};
+	}
+
+	const dfxJsonFile = join(process.cwd(), 'dfx.json');
+
+	try {
+		type Details = {
+			remote?: {
+				id: {
+					ic: string;
+					local: string;
+				};
+			};
+		};
+
+		type DfxJson = {
+			canisters: Record<string, Details>;
+		};
+
+		const { canisters }: DfxJson = JSON.parse(readFileSync(dfxJsonFile, 'utf-8'));
+
+		return Object.entries(canisters).reduce((acc, current: [string, Details]) => {
+			const [canisterName, canisterDetails] = current;
+
+			if (canisterDetails.remote !== undefined) {
+				return {
+					...acc,
+					[`${prefix ?? ''}${canisterName
+						.replaceAll('-', '_')
+						.replaceAll("'", '')
+						.toUpperCase()}_CANISTER_ID`]: canisterDetails.remote.id.local
+				};
+			}
+
+			return acc;
+		}, {});
+	} catch (e) {
+		console.warn(`Could not get canisters ID from ${dfxJsonFile}: ${e}`);
+		return {};
+	}
+};
+
 const config: UserConfig = {
 	plugins: [sveltekit()],
 	build: {
@@ -110,8 +154,19 @@ export default defineConfig((): UserConfig => {
 			network === 'ic' ? 'production' : network === 'staging' ? 'staging' : 'development',
 			process.cwd()
 		),
-		...readCanisterIds({ prefix: 'VITE_' })
+		...readCanisterIds({ prefix: 'VITE_' }),
+		...dfxCanisterIds({ prefix: 'VITE_' })
 	};
+
+	console.log({
+		...process.env,
+		...loadEnv(
+			network === 'ic' ? 'production' : network === 'staging' ? 'staging' : 'development',
+			process.cwd()
+		),
+		...readCanisterIds({ prefix: 'VITE_' }),
+		...dfxCanisterIds({ prefix: 'VITE_' })
+	});
 
 	return {
 		...config,
@@ -119,6 +174,7 @@ export default defineConfig((): UserConfig => {
 		define: {
 			'process.env': {
 				...readCanisterIds({}),
+				...dfxCanisterIds({}),
 				DFX_NETWORK: network
 			},
 			'import.meta.env.VITE_APP_VERSION': JSON.stringify(version),

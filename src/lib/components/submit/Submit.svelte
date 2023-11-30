@@ -4,7 +4,7 @@
 	import { fade } from 'svelte/transition';
 	import UserInitializedGuard from '$lib/components/guards/UserInitializedGuard.svelte';
 	import { userNotSignedIn } from '$lib/derived/user.derived';
-	import WizardSignIn from "$lib/components/submit/WizardSignIn.svelte";
+	import SubmitSignIn from "$lib/components/submit/SubmitSignIn.svelte";
 
 	let step: 'sign-in' | 'write' | 'hotkey' | 'review' | 'submit' = 'sign-in';
 </script>
@@ -17,7 +17,7 @@
 			class="w-full lg:w-[calc(100vw-300px)] lg:ml-[300px] px-4 lg:px-16 pt-9 lg:pt-36 pb-36 h-full"
 		>
 			{#if $userNotSignedIn}
-				<WizardSignIn />
+				<SubmitSignIn />
 			{:else}
 				<Editor />
 			{/if}

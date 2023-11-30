@@ -1,6 +1,7 @@
 <script>
 	import Button from "$lib/components/ui/Button.svelte";
 	import IconICMonochrome from "$lib/components/icons/IconICMonochrome.svelte";
+	import {signIn} from "@junobuild/core";
 </script>
 
 <h1 class="font-bold capitalize text-4xl mb-12">Getting Started</h1>
@@ -13,6 +14,6 @@
 	Sign in to get started. I know it might seem like a hassle, but trust me, it's necessary. It ensures your drafts to be saved securely and, it is not possible to submit a proposal anonymously anyway.
 </p>
 
-<Button color="secondary">
+<Button color="secondary" on:click={signIn}>
 	<IconICMonochrome /> Continue with Internet Identity
 </Button>
