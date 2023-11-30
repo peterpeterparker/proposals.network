@@ -10,7 +10,7 @@
 </script>
 
 {#if visible}
-	<div class="navbar-menu relative z-50 block">
+	<div class="navbar-menu relative z-20 block">
 		<Backdrop on:pnClose={() => (visible = false)} />
 		<nav
 			in:blur={{ amount: 10, duration: 250 }}

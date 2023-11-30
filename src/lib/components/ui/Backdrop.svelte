@@ -11,5 +11,5 @@
 	on:click|stopPropagation={close}
 	on:keypress={($event) => handleKeyPress({ $event, callback: close })}
 	on:click
-	class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"
+	class="fixed inset-0 bg-gray-800 opacity-80"
 ></div>

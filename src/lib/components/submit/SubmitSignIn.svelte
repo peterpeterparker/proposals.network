@@ -1,7 +1,7 @@
 <script>
 	import Button from "$lib/components/ui/Button.svelte";
 	import IconICMonochrome from "$lib/components/icons/IconICMonochrome.svelte";
-	import {signIn} from "@junobuild/core";
+	import {signIn} from "$lib/services/auth.services";
 </script>
 
 <h1 class="font-bold capitalize text-4xl mb-12">Getting Started</h1>
