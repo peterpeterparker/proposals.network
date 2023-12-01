@@ -1,4 +1,4 @@
-import type { User } from '@junobuild/core';
 import { writable } from 'svelte/store';
+import type { UserOption } from '$lib/types/user';
 
-export const userStore = writable<User | undefined | null>(undefined);
+export const userStore = writable<UserOption>(undefined);
