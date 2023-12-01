@@ -1,14 +1,14 @@
+import { get, getLastChange } from '$lib/services/idb.services';
 import type { PostMessage, PostMessageDataRequest } from '$lib/types/post-message';
-import type {User} from "@junobuild/core";
-import {getLastChange, getProposals} from "$lib/services/idb.services";
 
-import type {UserOption} from "$lib/types/user";
-import {isNullish, nonNullish} from "@dfinity/utils";
+import type { ProposalContent, ProposalMetadata } from '$lib/types/juno';
+import { isNullish, nonNullish } from '@dfinity/utils';
+import { getDoc, setManyDocs, unsafeIdentity } from '@junobuild/core';
 
 onmessage = async ({ data: { msg, data } }: MessageEvent<PostMessage<PostMessageDataRequest>>) => {
 	switch (msg) {
 		case 'start':
-			await startTimer(data?.user);
+			await startTimer(data);
 			break;
 		case 'stop':
 			stopTimer();
@@ -27,19 +27,19 @@ const stopTimer = () => {
 	timer = undefined;
 };
 
-const startTimer = async (user: UserOption) => {
+const startTimer = async (data: PostMessageDataRequest | undefined) => {
 	// Avoid re-starting the timer
 	if (nonNullish(timer)) {
 		return;
 	}
 
-	if (isNullish(user)) {
+	if (isNullish(data)) {
 		// We do nothing if no user
-		console.error('Attempted to initiate a worker without a user.');
+		console.error('Attempted to initiate a worker without a user and satellite information.');
 		return;
 	}
 
-	const execute = async () => await sync(user);
+	const execute = async () => await sync(data);
 
 	// We starts now but also schedule the update after wards
 	await execute();
@@ -50,11 +50,7 @@ const startTimer = async (user: UserOption) => {
 let inProgress = false;
 let lastChangeProcessed: number | undefined = undefined;
 
-const sync = async (user: UserOption) => {
-	if (isNullish(user)) {
-		return;
-	}
-
+const sync = async (data: PostMessageDataRequest) => {
 	if (inProgress) {
 		// Already in progress
 		return;
@@ -79,56 +75,60 @@ const sync = async (user: UserOption) => {
 	});
 
 	try {
-        const entries = await getProposals();
+		const value = await get();
 
-		// TODO: save entries
-        console.log(entries);
+		if (isNullish(value)) {
+			return;
+		}
 
-		// const [scene, metadata] = await Promise.all([getScene(), getMetadata()]);
-        //
-		// if (scene === undefined) {
-		// 	throw new Error('No scene found.');
-		// }
-        //
-		// if (metadata === undefined) {
-		// 	throw new Error('No metadata found.');
-		// }
-        //
-		// const { files, elements, ...rest } = scene;
-		// const { key, ...restMetadata } = metadata;
-        //
-		// const satellite = {
-		// 	identity: await unsafeIdentity(),
-		// 	satelliteId: 'fqotu-wqaaa-aaaal-acp3a-cai'
-		// };
-        //
-		// const doc = await getDoc<JunoScene>({
-		// 	collection: 'scenes',
-		// 	key,
-		// 	satellite
-		// });
-        //
-		// await setDoc<JunoScene>({
-		// 	collection: 'scenes',
-		// 	doc: {
-		// 		...doc,
-		// 		key,
-		// 		data: {
-		// 			elements,
-		// 			...rest,
-		// 			...restMetadata,
-		// 			lastChange
-		// 		}
-		// 	},
-		// 	satellite
-		// });
-        //
-		// await uploadFiles({
-		// 	elements,
-		// 	files,
-		// 	satellite,
-		// 	key
-		// });
+		const [key, title, contentData] = value;
+
+		const { user, governanceId, ...rest } = data;
+
+		const satellite = {
+			identity: await unsafeIdentity(),
+			...rest
+		};
+
+		const [metadata, content] = await Promise.all([
+			getDoc<ProposalMetadata>({
+				collection: 'metadata',
+				key,
+				satellite
+			}),
+			getDoc<ProposalContent>({
+				collection: 'content',
+				key,
+				satellite
+			})
+		]);
+
+		await setManyDocs({
+			satellite,
+			docs: [
+				{
+					collection: 'metadata',
+					doc: {
+						key,
+						description: governanceId,
+						data: {
+							title,
+							lastChange
+						},
+						...(nonNullish(metadata) && { updated_at: metadata.updated_at })
+					}
+				},
+				{
+					collection: 'content',
+					doc: {
+						key,
+						data: contentData,
+						...(nonNullish(content) && { updated_at: content.updated_at })
+					}
+				}
+			]
+		});
+
 
 		// Save timestamp to skip further changes if no changes
 		lastChangeProcessed = lastChange;

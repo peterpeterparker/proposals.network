@@ -33,14 +33,14 @@
 		"build": {
 			"args": "",
 			"packtool": ""
+		},
+		"replica": {
+			"subnet_type": "system"
 		}
 	},
 	"networks": {
 		"local": {
 			"bind": "127.0.0.1:8000",
-			"replica": {
-				"subnet_type": "system"
-			},
 			"type": "ephemeral"
 		}
 	},

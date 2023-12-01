@@ -2,21 +2,19 @@
 	"collections": {
 		"db": [
 			{
-				"collection": "demo",
+				"collection": "metadata",
 				"read": "managed",
 				"write": "managed",
-				"memory": "heap"
-			}
-		],
-		"storage": [
+				"memory": "stable"
+			},
 			{
-				"collection": "images",
+				"collection": "content",
 				"read": "managed",
 				"write": "managed",
-				"max_size": 5000,
 				"memory": "stable"
 			}
-		]
+		],
+		"storage": []
 	},
-	"controllers": ["enter-here-valid-principals"]
+	"controllers": []
 }

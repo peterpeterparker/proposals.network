@@ -2,29 +2,33 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { authSubscribe, initJuno } from '@junobuild/core';
 	import { userStore } from '$lib/stores/user.store';
-	import { II_CANISTER_ID, SATELLITE_ID } from '$lib/constants/app.constants';
-	import { isNullish, nonNullish } from '@dfinity/utils';
-    import {displayAndCleanLogoutMsg, toastAndReload} from '$lib/services/auth.services';
+	import { isNullish } from '@dfinity/utils';
+	import { displayAndCleanLogoutMsg, toastAndReload } from '$lib/services/auth.services';
+	import { junoEnvironment } from '$lib/utils/juno.utils';
+    import {toasts} from "$lib/stores/toasts.store";
 
 	let unsubscribe: (() => void) | undefined = undefined;
 
 	onMount(async () => {
-		if (isNullish(SATELLITE_ID)) {
-			console.error('Juno not initialized. Satellite ID is undefined or null.');
+		const env = junoEnvironment();
+
+		if (isNullish(env)) {
+			toasts.error({
+                msg: { text: 'Juno not initialized. Satellite ID is undefined or null.' }
+            });
 			return;
 		}
 
 		unsubscribe = authSubscribe((user) => userStore.set(user));
 
 		await initJuno({
-			satelliteId: SATELLITE_ID,
-			...(nonNullish(II_CANISTER_ID) && { localIdentityCanisterId: II_CANISTER_ID }),
+			...env,
 			workers: {
 				auth: true
 			}
 		});
 
-        displayAndCleanLogoutMsg();
+		displayAndCleanLogoutMsg();
 	});
 
 	const automaticSignOut = () =>
