@@ -36,24 +36,23 @@ export const signIn = async (): Promise<{
 	}
 };
 
-export const signOut = async ({ msg = undefined, clear }: { msg?: ToastMsg; clear: boolean }) => {
+export const signOut = async () => {
 	// To mask not operational UI (a side effect of sometimes slow JS loading after window.reload because of service worker and no cache).
 	busy.start();
 
-	await Promise.all([junoSignOut(), ...[clear ? [cleanUp()] : []]]);
+	await Promise.all([junoSignOut(), cleanUp()]);
 
-	if (nonNullish(msg)) {
-		appendMsgToUrl(msg);
-	}
-
-	// Auth: Delegation and identity are cleared from indexedDB by agent-js so, we do not need to clear these
-
-	// Preferences: We do not clear local storage as well. It contains anonymous information such as the selected theme.
-	// Information the user want to preserve across sign-in. e.g. if I select the light theme, logout and sign-in again, I am happy if the dapp still uses the light theme.
-
-	// We reload the page to make sure all the states are cleared
-	window.location.reload();
+	reload();
 };
+
+export const toastAndReload = (msg: ToastMsg) => {
+	appendMsgToUrl(msg);
+
+	reload();
+}
+
+// We reload because agent-js has issue performing following sign-in if AuthClient is not reset. It will notably not be able to open new popup for II.
+const reload = () => window.location.reload();
 
 const cleanUp = (): Promise<void> => clearProposals();
 

@@ -93,7 +93,7 @@
 								{#if $userSignedIn}
 									<ButtonIcon
 										disabled={false}
-										on:click={async () => signOut({ clear: true })}
+										on:click={signOut}
 										ariaLabel="Sign-out"
 									>
 										<IconLogout />

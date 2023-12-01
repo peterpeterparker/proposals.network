@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
-	import {Editor, type JSONContent} from '@tiptap/core';
+	import { Editor, type JSONContent } from '@tiptap/core';
 	import StarterKit from '@tiptap/starter-kit';
 	import Highlight from '@tiptap/extension-highlight';
 	import Typography from '@tiptap/extension-typography';
@@ -45,7 +45,7 @@
 				onUpdate: async ({ editor }) => {
 					const json = editor.getJSON();
 					await onUpdate(json);
-				},
+				}
 			}))
 	);
 

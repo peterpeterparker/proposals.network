@@ -29,7 +29,8 @@
 		"dev": "vite dev",
 		"deploy": "./junolator deploy",
 		"config": "./junolator config",
-		"collections": "node scripts/collections.mjs"
+		"collections": "node scripts/collections.mjs",
+		"postinstall": "node -e \"require('fs').cpSync('node_modules/@junobuild/core/dist/workers/', './static/workers', {recursive: true});\""
 	},
 	"devDependencies": {
 		"@dfinity/identity": "^0.19.3",

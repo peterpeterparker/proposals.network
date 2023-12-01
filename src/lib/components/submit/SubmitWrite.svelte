@@ -1,7 +1,7 @@
 <script lang="ts">
 	import template from '$lib/markdown/proposal-template.md?raw';
 	import { markdownToHTML } from '$lib/utils/html.utils';
-    import Editor from '$lib/components/ui/Editor.svelte';
+	import Editor from '$lib/components/ui/Editor.svelte';
 	import { isNullish, nonNullish } from '@dfinity/utils';
 	import type { Proposal } from '$lib/types/datastore';
 	import { nanoid } from 'nanoid';
