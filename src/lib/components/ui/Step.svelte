@@ -1,5 +1,5 @@
 <script lang="ts">
-	import IconDone from "$lib/components/icons/IconDone.svelte";
+	import IconDone from '$lib/components/icons/IconDone.svelte';
 	import { fade } from 'svelte/transition';
 
 	export let status: 'pending' | 'active' | 'done' = 'pending';

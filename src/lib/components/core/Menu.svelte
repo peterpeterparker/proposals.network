@@ -9,8 +9,8 @@
 	import IconLogout from '$lib/components/icons/IconLogout.svelte';
 	import { signOut } from '@junobuild/core';
 	import { userInitialized, userSignedIn } from '$lib/derived/user.derived';
-	import {signIn} from "$lib/services/auth.services";
-	import IconLogin from "$lib/components/icons/IconLogin.svelte";
+	import { signIn } from '$lib/services/auth.services';
+	import IconLogin from '$lib/components/icons/IconLogin.svelte';
 
 	export let visible = false;
 </script>

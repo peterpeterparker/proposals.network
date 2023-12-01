@@ -33,8 +33,6 @@
 		const previousUrl = editor.getAttributes('link').href;
 		const url = window.prompt('URL', previousUrl);
 
-		console.log(previousUrl);
-
 		// cancelled
 		if (isNullish(url)) {
 			return;
@@ -54,7 +52,7 @@
 <aside class="flex flex-wrap gap-0.5 border-b-2 border-black bg-violet-200 p-4">
 	<ButtonIcon
 		ariaLabel="Undo"
-		disabled={disabled || editor.can().redo()}
+		disabled={disabled || editor?.can().redo()}
 		on:click={() => editor?.chain().focus().undo().run()}
 	>
 		<IconUndo />
@@ -62,7 +60,7 @@
 
 	<ButtonIcon
 		ariaLabel="Redo"
-		disabled={disabled || editor.can().undo()}
+		disabled={disabled || editor?.can().undo()}
 		on:click={() => editor?.chain().focus().redo().run()}
 	>
 		<IconRedo />

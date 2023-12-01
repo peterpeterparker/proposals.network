@@ -1,11 +1,7 @@
 <script lang="ts">
 	import Step from '$lib/components/ui/Step.svelte';
-	import {
-		userInitialized,
-		userNotSignedIn,
-		userSignedIn
-	} from '$lib/derived/user.derived';
-	import { debounce, isNullish } from '@dfinity/utils';
+	import { userInitialized, userNotSignedIn, userSignedIn } from '$lib/derived/user.derived';
+	import { debounce, isNullish, nonNullish } from '@dfinity/utils';
 	import { userStore } from '$lib/stores/user.store';
 
 	export let step: undefined | 'write' | 'hotkey' | 'review' | 'submit';
@@ -43,18 +39,26 @@
 	$: step,
 		() =>
 			(hotkeyStatus =
-				step === 'hotkey' ? 'active' : ['review', 'submit'].includes(step) ? 'done' : 'pending');
+				step === 'hotkey'
+					? 'active'
+					: nonNullish(step) && ['review', 'submit'].includes(step)
+					  ? 'done'
+					  : 'pending');
 
 	$: step,
 		() =>
 			(reviewStatus =
-				step === 'review' ? 'active' : ['submit'].includes(step) ? 'done' : 'pending');
+				step === 'review'
+					? 'active'
+					: nonNullish(step) && ['submit'].includes(step)
+					  ? 'done'
+					  : 'pending');
 </script>
 
 <aside
 	class="flex justify-center lg:block lg:bg-cyan-200 lg:fixed lg:top-20 lg:left-0 lg:w-[300px] lg:h-screen lg:overflow-y-scroll lg:px-16 pt-36 lg:pt-16 lg:border-r-2 lg:border-black"
 >
-	<label class="hidden lg:inline-block text-lg font-bold mb-6">Submit a proposal</label>
+	<span class="hidden lg:inline-block text-lg font-bold mb-6">Submit a proposal</span>
 
 	<ul class="flex lg:flex-col gap-3 lg:gap-1 lg:pb-16">
 		<Step status={signInStatus}>
@@ -77,7 +81,7 @@
 			Review
 		</Step>
 
-		<Step status={step === 'submit'}>
+		<Step status={step === 'submit' ? 'active' : 'pending'}>
 			<svelte:fragment slot="step">5</svelte:fragment>
 			Submit
 		</Step>

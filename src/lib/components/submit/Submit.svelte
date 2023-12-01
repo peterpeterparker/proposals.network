@@ -4,7 +4,7 @@
 	import { fade } from 'svelte/transition';
 	import UserInitializedGuard from '$lib/components/guards/UserInitializedGuard.svelte';
 	import { userNotSignedIn } from '$lib/derived/user.derived';
-	import SubmitSignIn from "$lib/components/submit/SubmitSignIn.svelte";
+	import SubmitSignIn from '$lib/components/submit/SubmitSignIn.svelte';
 
 	let step: undefined | 'write' | 'hotkey' | 'review' | 'submit' = undefined;
 </script>

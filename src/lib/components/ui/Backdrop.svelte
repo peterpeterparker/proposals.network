@@ -12,4 +12,5 @@
 	on:keypress={($event) => handleKeyPress({ $event, callback: close })}
 	on:click
 	class="fixed inset-0 bg-gray-800 opacity-80"
+	tabindex="-1"
 ></div>

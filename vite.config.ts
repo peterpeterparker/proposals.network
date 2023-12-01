@@ -158,16 +158,6 @@ export default defineConfig((): UserConfig => {
 		...dfxCanisterIds({ prefix: 'VITE_' })
 	};
 
-	console.log({
-		...process.env,
-		...loadEnv(
-			network === 'ic' ? 'production' : network === 'staging' ? 'staging' : 'development',
-			process.cwd()
-		),
-		...readCanisterIds({ prefix: 'VITE_' }),
-		...dfxCanisterIds({ prefix: 'VITE_' })
-	});
-
 	return {
 		...config,
 		// Backwards compatibility for auto generated types of dfx that are meant for webpack and process.env
