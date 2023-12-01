@@ -83,11 +83,12 @@ const sync = async (data: PostMessageDataRequest) => {
 
 		const [key, title, contentData] = value;
 
-		const { user, governanceId, ...rest } = data;
+		const { user, governanceId, localIdentityCanisterId, ...rest } = data;
 
 		const satellite = {
 			identity: await unsafeIdentity(),
-			...rest
+			...rest,
+			...(nonNullish(localIdentityCanisterId) && { env: 'dev' as 'dev' })
 		};
 
 		const [metadata, content] = await Promise.all([
@@ -128,7 +129,6 @@ const sync = async (data: PostMessageDataRequest) => {
 				}
 			]
 		});
-
 
 		// Save timestamp to skip further changes if no changes
 		lastChangeProcessed = lastChange;
