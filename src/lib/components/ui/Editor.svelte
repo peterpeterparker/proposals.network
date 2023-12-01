@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
-	import { Editor } from '@tiptap/core';
+	import {Editor, type JSONContent} from '@tiptap/core';
 	import StarterKit from '@tiptap/starter-kit';
 	import Highlight from '@tiptap/extension-highlight';
 	import Typography from '@tiptap/extension-typography';
@@ -9,6 +9,7 @@
 	import EditorToolbar from '$lib/components/ui/EditorToolbar.svelte';
 
 	export let content: string;
+	export let onUpdate: (json: JSONContent) => Promise<void>;
 
 	let element: HTMLElement;
 	let editor: Editor | undefined;
@@ -40,7 +41,11 @@
 						class:
 							'prose dark:prose-invert prose-sm sm:prose-base lg:prose-lg xl:prose-2xl my-8 mx-5 focus:outline-none'
 					}
-				}
+				},
+				onUpdate: async ({ editor }) => {
+					const json = editor.getJSON();
+					await onUpdate(json);
+				},
 			}))
 	);
 

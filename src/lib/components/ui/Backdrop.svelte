@@ -3,7 +3,7 @@
 	import { handleKeyPress } from '$lib/utils/keyboard.utils';
 
 	const dispatch = createEventDispatcher();
-	const close = () => dispatch('pnClose');
+	const close = () => dispatch('pnwrkClose');
 </script>
 
 <div

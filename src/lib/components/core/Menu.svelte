@@ -7,9 +7,8 @@
 	import IconLogo from '$lib/components/icons/IconLogo.svelte';
 	import ButtonIcon from '$lib/components/ui/ButtonIcon.svelte';
 	import IconLogout from '$lib/components/icons/IconLogout.svelte';
-	import { signOut } from '@junobuild/core';
 	import { userInitialized, userSignedIn } from '$lib/derived/user.derived';
-	import { signIn } from '$lib/services/auth.services';
+	import { signIn, signOut } from '$lib/services/auth.services';
 	import IconLogin from '$lib/components/icons/IconLogin.svelte';
 
 	export let visible = false;
@@ -17,7 +16,7 @@
 
 {#if visible}
 	<div class="navbar-menu relative z-20 block">
-		<Backdrop on:pnClose={() => (visible = false)} />
+		<Backdrop on:pnwrkClose={() => (visible = false)} />
 		<nav
 			in:blur={{ amount: 10, duration: 250 }}
 			out:slide={{ easing: quintOut, axis: 'x', duration: 150 }}
@@ -92,7 +91,11 @@
 
 							{#if $userInitialized}
 								{#if $userSignedIn}
-									<ButtonIcon disabled={false} on:click={signOut} ariaLabel="Sign-out">
+									<ButtonIcon
+										disabled={false}
+										on:click={async () => signOut({ clear: true })}
+										ariaLabel="Sign-out"
+									>
 										<IconLogout />
 									</ButtonIcon>
 								{:else}
