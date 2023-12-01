@@ -15,7 +15,7 @@
 
 .tiptap {
 	h1 {
-		margin: 0 0 1.5rem;
+		margin: 0 0 2rem;
 	}
 
 	blockquote,
@@ -48,5 +48,11 @@
 
 	ol {
 		list-style-type: decimal;
+	}
+
+	hr {
+		margin: 1.5rem 0;
+		border-color: black;
+		border-width: 1px;
 	}
 }

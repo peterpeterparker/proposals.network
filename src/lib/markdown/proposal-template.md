@@ -39,3 +39,7 @@ Lorem Ipsum
 - Vote accept or reject on NNS Motion
 
 Developer forum: https://forum.dfinity.org/t/long-term-r-d-tokenomics-proposal/9392/3
+
+---
+
+This proposal was crafted and submitted with [proposals.network](https://proposals.network) – where ideas meet the ICP governance.

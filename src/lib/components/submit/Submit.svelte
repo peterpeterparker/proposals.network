@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Editor from '$lib/components/ui/Editor.svelte';
 	import SubmitSteps from '$lib/components/submit/SubmitSteps.svelte';
 	import { fade } from 'svelte/transition';
 	import UserInitializedGuard from '$lib/components/guards/UserInitializedGuard.svelte';
 	import { userNotSignedIn } from '$lib/derived/user.derived';
 	import SubmitSignIn from '$lib/components/submit/SubmitSignIn.svelte';
+	import SubmitWrite from "$lib/components/submit/SubmitWrite.svelte";
 
 	let step: undefined | 'write' | 'hotkey' | 'review' | 'submit' = undefined;
 </script>
@@ -19,7 +19,7 @@
 			{#if $userNotSignedIn}
 				<SubmitSignIn />
 			{:else}
-				<Editor />
+				<SubmitWrite />
 			{/if}
 		</div>
 	</UserInitializedGuard>
