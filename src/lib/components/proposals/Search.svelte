@@ -1,5 +1,6 @@
 <script lang="ts">
 	import IconChevronRight from '$lib/components/icons/IconChevronRight.svelte';
+	import Input from "$lib/components/ui/Input.svelte";
 </script>
 
 <section
@@ -11,10 +12,7 @@
 		</h1>
 
 		<div class="flex gap-1 mt-8">
-			<input
-				class="w-96 border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] transition-all"
-				placeholder="Proposal ID"
-			/>
+			<Input placeholder="Proposal ID" />
 			<button
 				class="h-12 border-black border-2 p-2.5 bg-[#A6FAFF] hover:bg-[#79F7FF] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:bg-[#00E1EF]"
 				aria-label="Open the detail of the proposal specified by its ID"

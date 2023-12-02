@@ -12,6 +12,7 @@
 	import { goto } from '$app/navigation';
 	import { wizardBusy } from '$lib/stores/busy.store';
 	import { confirmToCloseBrowser } from '$lib/utils/before-unload.utils';
+	import SubmitHotkey from "$lib/components/submit/SubmitHotkey.svelte";
 
 	let step: undefined | 'write' | 'hotkey' | 'review' | 'submit' = undefined;
 
@@ -53,6 +54,7 @@
 			{:else if step === "write"}
 				<SubmitWrite {content} on:pnwrkNext={() => step = "hotkey"} />
 			{:else if step === "hotkey"}
+				<SubmitHotkey />
 			{/if}
 		</div>
 	</UserInitializedGuard>
