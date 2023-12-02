@@ -1,5 +1,6 @@
 import type { JSONContent } from '@tiptap/core';
 import type {Doc} from "@junobuild/core";
+import type {NeuronId} from "@dfinity/nns";
 
 export type ProposalContent = JSONContent;
 export type ProposalKey = string;
@@ -14,3 +15,5 @@ export interface ProposalMetadata {
 }
 
 export type ProposalMetadataDoc = Doc<ProposalMetadata>;
+
+export type Neuron = Record<ProposalToken, NeuronId[]>
