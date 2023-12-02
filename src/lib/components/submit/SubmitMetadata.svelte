@@ -5,27 +5,53 @@
 	import { toasts } from '$lib/stores/toasts.store';
 	import type { Doc } from '@junobuild/core';
 	import type { ProposalMetadata } from '$lib/types/juno';
-	import { onMount } from 'svelte';
+	import { wizardBusy } from '$lib/stores/busy.store';
 
 	export let busy = false;
 
-	let motionText = '';
 	let title = '';
 	let url = '';
+	let motionText = '';
 
 	let docMetadata: Doc<ProposalMetadata> | undefined;
 
-	onMount(async () => (docMetadata = await getMetadata()));
-
 	let ready = false;
-	$: ready = nonNullish(docMetadata);
+
+	const init = async () => {
+		docMetadata = await getMetadata();
+
+		title = docMetadata?.data.title ?? '';
+		url = docMetadata?.data.url ?? '';
+		motionText = docMetadata?.data.motionText ?? '';
+
+		ready = true;
+	};
+
+	$: $wizardBusy,
+		(async () => {
+			if (ready) {
+				return;
+			}
+
+			await init();
+		})();
 
 	const save = async () => {
 		if (motionText === '' && title === '' && url === '') {
 			return;
 		}
 
-		const docMetadata = await getMetadata();
+		if (
+			!ready ||
+			(motionText === (docMetadata?.data.motionText ?? '') &&
+				title === (docMetadata?.data.title ?? '') &&
+				url === (docMetadata?.data.url ?? ''))
+		) {
+			return;
+		}
+
+		// Reload last timestamp
+		docMetadata = await getMetadata();
 
 		if (isNullish(docMetadata)) {
 			toasts.error({
@@ -65,8 +91,18 @@
 		})();
 </script>
 
-<Input placeholder="The proposal title." disabled={!ready} bind:value={title} />
+<Input
+	placeholder="The proposal title."
+	disabled={!ready}
+	bind:value={title}
+	pinPlaceholder={title !== ''}
+/>
 
-<Input placeholder="An URL." disabled={!ready} bind:value={url} />
+<Input placeholder="An URL." disabled={!ready} bind:value={url} pinPlaceholder={url !== ''} />
 
-<Input placeholder="Your motion text." disabled={!ready} bind:value={motionText} />
+<Input
+	placeholder="Your motion text."
+	disabled={!ready}
+	bind:value={motionText}
+	pinPlaceholder={motionText !== ''}
+/>
