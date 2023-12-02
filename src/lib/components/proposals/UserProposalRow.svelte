@@ -2,6 +2,8 @@
 	import type { ProposalKey, ProposalMetadata, ProposalMetadataDoc } from '$lib/types/juno';
 	import { nonNullish } from '@dfinity/utils';
 	import ButtonCell from '$lib/components/ui/ButtonCell.svelte';
+	import UserProposalLink from "$lib/components/proposals/UserProposalLink.svelte";
+	import UserProposalView from "$lib/components/proposals/UserProposalView.svelte";
 
 	export let doc: ProposalMetadataDoc;
 
@@ -17,7 +19,7 @@
 </script>
 
 <tr>
-	<td>{key}</td>
+	<UserProposalLink {key} />
 	<td>
 		{#if nonNullish(proposalId)}
 			{proposalId}
@@ -28,5 +30,5 @@
 	<td>{title} </td>
 	<td></td>
 	<td></td>
-	<td><ButtonCell>View</ButtonCell></td>
+	<UserProposalView {key} />
 </tr>
