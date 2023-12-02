@@ -58,9 +58,9 @@
 
 <div
 	role="alert"
-	class="toast w-11/12 sm:max-w-lg flex items-center justify-between fixed bottom-2 left-1/2 shadow-[2px_2px_0px_rgba(0,0,0,1)] border-2 border-black rounded px-4 py-2"
+	class="toast w-11/12 sm:max-w-lg flex items-center justify-between fixed bottom-2 left-1/2 shadow-[2px_2px_0px_rgba(0,0,0,1)] border-2 border-black px-4 py-2"
 	class:bg-orange-300={level === 'warn'}
-	class:bg-red-600={level === 'error'}
+	class:bg-red-400={level === 'error'}
 	class:text-white={level === 'error' || level === 'info'}
 	class:bg-blue-600={level === 'info'}
 	in:fly={{ y: 100, duration: 200 }}
