@@ -1,13 +1,23 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition';
+
 	export let placeholder: string;
 	export let value = '';
 	export let disabled = false;
+
+	let dirty = false;
 </script>
 
-<input
-	bind:value
-	class="w-96 border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] transition-all"
-	{placeholder}
-	{disabled}
-	class:opacity-20={disabled}
-/>
+<div class="bg-white border-2 border-black lg:rounded-md overflow-hidden mb-8">
+	<aside class="border-b-2 border-black bg-violet-200 p-2">
+		<span>&ZeroWidthSpace;</span>
+		{#if (dirty && value !== "")}
+			<span in:fade>
+				{placeholder}
+			</span>
+		{/if}
+	</aside>
+
+	<input bind:value {placeholder} {disabled} on:focus
+		   class:opacity-20={disabled} class="p-2.5 focus:outline-none w-full placeholder-black" on:input={() => (dirty = true)} />
+</div>

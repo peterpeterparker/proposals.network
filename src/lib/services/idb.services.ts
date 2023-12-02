@@ -84,6 +84,18 @@ export const getDocs = (): Promise<
 		getIdb(KEY_PROPOSAL_DOC_CONTENT, proposalsStore)
 	]);
 
+export const getMetadata = (): Promise<Doc<ProposalMetadata> | undefined> =>
+	getIdb(KEY_PROPOSAL_DOC_METADATA, proposalsStore);
+
+export const setMetadata = (docMetadata: Doc<ProposalMetadata>): Promise<void> =>
+	setMany(
+		[
+			[KEY_LAST_CHANGE, Date.now()],
+			[KEY_PROPOSAL_DOC_METADATA, docMetadata]
+		],
+		proposalsStore
+	);
+
 export const getLastChange = (): Promise<number | undefined> =>
 	getIdb(KEY_LAST_CHANGE, proposalsStore);
 

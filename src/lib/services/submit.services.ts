@@ -18,11 +18,10 @@ export let initUserProposal = async ({
 	routeKey: string | undefined | null;
 }): Promise<{
 	result: 'ok' | 'not_allowed' | 'error';
-	key: string | undefined;
 	content: ProposalContent | undefined;
 }> => {
 	if (isNullish(user)) {
-		return { result: 'not_allowed', key: undefined, content: undefined };
+		return { result: 'not_allowed', content: undefined };
 	}
 
 	try {
@@ -43,7 +42,6 @@ export let initUserProposal = async ({
 
 			return {
 				result: 'ok',
-				key,
 				content
 			};
 		}
@@ -53,7 +51,7 @@ export let initUserProposal = async ({
 			err
 		});
 
-		return { result: 'error', key: undefined, content: undefined };
+		return { result: 'error', content: undefined };
 	}
 
 	try {
@@ -64,7 +62,7 @@ export let initUserProposal = async ({
 				msg: { text: 'The metadata for the proposal key cannot be found.' }
 			});
 
-			return { result: 'error', key: undefined, content: undefined };
+			return { result: 'error', content: undefined };
 		}
 
 		if (isNullish(docContent)) {
@@ -72,7 +70,7 @@ export let initUserProposal = async ({
 				msg: { text: 'The content of the proposal cannot be found.' }
 			});
 
-			return { result: 'error', key: undefined, content: undefined };
+			return { result: 'error', content: undefined };
 		}
 
 		const { data: jsonContent, ...content } = docContent;
@@ -87,7 +85,6 @@ export let initUserProposal = async ({
 
 		return {
 			result: 'ok',
-			key: routeKey,
 			content: jsonContent
 		};
 	} catch (err: unknown) {
@@ -96,7 +93,7 @@ export let initUserProposal = async ({
 			err
 		});
 
-		return { result: 'error', key: undefined, content: undefined };
+		return { result: 'error', content: undefined };
 	}
 };
 

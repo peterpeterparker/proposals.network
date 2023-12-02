@@ -9,10 +9,12 @@ export type ProposalToken = string;
 export type Timestamp = number;
 
 export interface ProposalMetadata {
-	title: string;
 	lastChange: Timestamp | undefined;
-	proposalId?: bigint;
 	status: "draft" | "submitted";
+	title?: string;
+	url?: string;
+	motionText?: string;
+	proposalId?: bigint;
 }
 
 export type ProposalMetadataDoc = Doc<ProposalMetadata>;

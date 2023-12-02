@@ -1,8 +1,9 @@
-import {get, getLastChange, getLastJob, updateDocs} from '$lib/services/idb.services';
+import { get, getLastChange, getLastJob, updateDocs } from '$lib/services/idb.services';
 import type { PostMessage, PostMessageDataRequest } from '$lib/types/post-message';
 
 import { isNullish, nonNullish } from '@dfinity/utils';
 import { setManyDocs, unsafeIdentity } from '@junobuild/core';
+import type {ProposalMetadata} from "$lib/types/juno";
 
 onmessage = async ({ data: { msg, data } }: MessageEvent<PostMessage<PostMessageDataRequest>>) => {
 	switch (msg) {
@@ -96,7 +97,10 @@ const sync = async (data: PostMessageDataRequest) => {
 			...(nonNullish(localIdentityCanisterId) && { env: 'dev' as 'dev' })
 		};
 
-		// TODO: title
+		const metadataData: ProposalMetadata = nonNullish(metadata) ? metadata.data : {
+			lastChange,
+			status: "draft"
+		}
 
 		const result = await setManyDocs({
 			satellite,
@@ -106,10 +110,7 @@ const sync = async (data: PostMessageDataRequest) => {
 					doc: {
 						key,
 						description: governanceId,
-						data: {
-							title: 'TODO',
-							lastChange
-						},
+						data: metadataData,
 						...(nonNullish(metadata) && { updated_at: metadata.updated_at })
 					}
 				},
