@@ -12,9 +12,10 @@
 	import { goto } from '$app/navigation';
 	import { wizardBusy } from '$lib/stores/busy.store';
 	import { confirmToCloseBrowser } from '$lib/utils/before-unload.utils';
-	import SubmitHotkey from "$lib/components/submit/SubmitHotkey.svelte";
+	import SubmitNeuron from "$lib/components/submit/SubmitNeuron.svelte";
+	import SubmitReview from "$lib/components/submit/SubmitReview.svelte";
 
-	let step: undefined | 'write' | 'hotkey' | 'review' | 'submit' = undefined;
+	let step: undefined | 'write' | 'neuron' | 'review' | 'submit' = undefined;
 
 	let content: ProposalContent | undefined;
 	let key: string | undefined;
@@ -52,14 +53,16 @@
 
 	<UserInitializedGuard>
 		<div
-			class="w-full lg:w-[calc(100vw-300px)] lg:ml-[300px] px-4 lg:px-16 pt-9 lg:pt-36 pb-36 h-full"
+			class="w-full lg:w-[calc(100%-300px)] lg:ml-[300px] px-4 lg:px-16 pt-9 lg:pt-36 pb-36 h-full"
 		>
 			{#if $userNotSignedIn}
 				<SubmitSignIn />
 			{:else if step === "write"}
-				<SubmitWrite {content} on:pnwrkNext={() => step = "hotkey"} />
-			{:else if step === "hotkey"}
-				<SubmitHotkey on:pnwrkNext={() => step = "review"} />
+				<SubmitWrite {content} on:pnwrkNext={() => step = "neuron"} />
+			{:else if step === "neuron"}
+				<SubmitNeuron on:pnwrkNext={() => step = "review"} />
+			{:else if step === "review"}
+				<SubmitReview />
 			{/if}
 		</div>
 	</UserInitializedGuard>

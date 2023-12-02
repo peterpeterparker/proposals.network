@@ -4,11 +4,11 @@
 	import { isNullish, nonNullish } from '@dfinity/utils';
 	import { userStore } from '$lib/stores/user.store';
 
-	export let step: undefined | 'write' | 'hotkey' | 'review' | 'submit';
+	export let step: undefined | 'write' | 'neuron' | 'review' | 'submit';
 
 	let signInStatus: 'pending' | 'active' | 'done';
 	let writeStatus: 'pending' | 'active' | 'done';
-	let hotkeyStatus: 'pending' | 'active' | 'done';
+	let neuronStatus: 'pending' | 'active' | 'done';
 	let reviewStatus: 'pending' | 'active' | 'done';
 
 	const initSignInStatus = () => {
@@ -40,8 +40,8 @@
 
 	$: step,
 		(() =>
-			(hotkeyStatus =
-				step === 'hotkey'
+			(neuronStatus =
+				step === 'neuron'
 					? 'active'
 					: nonNullish(step) && ['review', 'submit'].includes(step)
 					  ? 'done'
@@ -73,9 +73,9 @@
 			Write
 		</Step>
 
-		<Step status={hotkeyStatus}>
+		<Step status={neuronStatus}>
 			<svelte:fragment slot="step">3</svelte:fragment>
-			Hotkey
+			Neuron
 		</Step>
 
 		<Step status={reviewStatus}>

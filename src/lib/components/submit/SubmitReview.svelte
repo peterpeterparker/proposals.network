@@ -1,0 +1,1 @@
+<h1 class="font-bold capitalize text-4xl mb-12">Review</h1>

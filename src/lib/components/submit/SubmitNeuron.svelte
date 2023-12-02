@@ -1,25 +1,28 @@
 <script lang="ts">
 	import { userStore } from '$lib/stores/user.store';
-	import Copy from '$lib/components/ui/Copy.svelte';
 	import { blur } from 'svelte/transition';
-	import Button from '$lib/components/ui/Button.svelte';
 	import { onMount } from 'svelte';
 	import type { Doc } from '@junobuild/core';
 	import type { Neuron } from '$lib/types/juno';
 	import { getNeuron } from '$lib/services/neuron.services';
 	import { fade } from 'svelte/transition';
-	import SpinnerScreen from '$lib/components/ui/SpinnerScreen.svelte';
-	import SubmitHokeyForm from '$lib/components/submit/SubmitHokeyForm.svelte';
+	import SubmitNeuronForm from '$lib/components/submit/SubmitNeuronForm.svelte';
 	import SpinnerText from '$lib/components/ui/SpinnerText.svelte';
+	import SubmitNeuronHotkey from '$lib/components/submit/SubmitNeuronHotkey.svelte';
+	import { nonNullish } from '@dfinity/utils';
+	import SubmitNeuronMetadata from '$lib/components/submit/SubmitNeuronMetadata.svelte';
+	import { firstNeuronId } from '$lib/utils/juno.utils';
 
 	let step: 'hotkey' | 'neuron_id' = 'hotkey';
 
 	let status: 'loading' | 'ok' | 'error' = 'loading';
 	let neuron: Doc<Neuron> | undefined;
+	let neuronId: bigint | undefined;
 
 	onMount(async () => {
 		const { result, neuron: n } = await getNeuron($userStore);
 		neuron = n;
+		neuronId = firstNeuronId(neuron);
 		status = result;
 	});
 </script>
@@ -36,19 +39,15 @@
 		<SpinnerText>Hold tight, loading neuron metadata...</SpinnerText>
 	{:else}
 		<div in:fade>
-			{#if step === 'hotkey'}
-				<div class="transition-opacity" in:blur>
-					<p class="leading-relaxed mb-4">
-						Copy your principal <Copy value={$userStore?.key ?? ''} text="Principal copied." /> and add
-						it as a hotkey to your neuron. This will grant control of the neuron to the user identified
-						by the principal on proposals.network.
-					</p>
-
-					<Button color="secondary" on:click={() => (step = 'neuron_id')}>Done</Button>
+			{#if nonNullish(neuron) && nonNullish(neuronId)}
+				<SubmitNeuronMetadata {neuronId} on:pnwrkNext />
+			{:else if step === 'hotkey'}
+				<div in:blur>
+					<SubmitNeuronHotkey on:click={() => (step = 'neuron_id')} />
 				</div>
 			{:else}
-				<div class="transition-opacity" in:blur>
-					<SubmitHokeyForm {neuron} on:pnwrkNext />
+				<div in:blur>
+					<SubmitNeuronForm {neuron} on:pnwrkNext />
 				</div>
 			{/if}
 		</div>
@@ -60,7 +59,7 @@
 		<h2 class="text-2xl mb-8">It looks like something didn't go as planned.</h2>
 
 		<p class="leading-relaxed mb-4">
-			Please try reloading your screen. If the issue persists, please report it on our <a
+			Please try reloading your screen. If the issue persists, please report it on the <a
 				href="https://github.com/peterpeterparker/proposals.network"
 				target="_blank"
 				class="underline underline-offset-2"
