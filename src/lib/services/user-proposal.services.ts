@@ -4,7 +4,7 @@ import { init } from '$lib/services/idb.services';
 import { toasts } from '$lib/stores/toasts.store';
 import type { ProposalContent, ProposalMetadata } from '$lib/types/juno';
 import type { UserOption } from '$lib/types/user';
-import { markdownToHTML } from '$lib/utils/html.utils';
+import { markdownToHTML } from '$lib/utils/markdown.utils';
 import { replaceHistory } from '$lib/utils/route.utils';
 import { isNullish } from '@dfinity/utils';
 import { getDoc, type Doc } from '@junobuild/core';

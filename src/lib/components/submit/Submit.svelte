@@ -16,14 +16,13 @@
 	import SubmitReview from "$lib/components/submit/SubmitReview.svelte";
 
 	let step: undefined | 'write' | 'neuron' | 'review' | 'submit' = undefined;
+	let neuronId: bigint | undefined;
 
 	let content: ProposalContent | undefined;
-	let key: string | undefined;
 
 	const init = async () => {
 		const {
 			result,
-			key: proposalKey,
 			content: jsonContent
 		} = await initUserProposal({ user: $userStore, routeKey: $routeKey });
 
@@ -32,7 +31,6 @@
 			return;
 		}
 
-		key = proposalKey;
 		content = jsonContent;
 
 		if (result === "not_allowed") {
@@ -60,9 +58,9 @@
 			{:else if step === "write"}
 				<SubmitWrite {content} on:pnwrkNext={() => step = "neuron"} />
 			{:else if step === "neuron"}
-				<SubmitNeuron on:pnwrkNext={() => step = "review"} />
+				<SubmitNeuron on:pnwrkNext={() => step = "review"} bind:neuronId />
 			{:else if step === "review"}
-				<SubmitReview />
+				<SubmitReview {content} {neuronId} />
 			{/if}
 		</div>
 	</UserInitializedGuard>

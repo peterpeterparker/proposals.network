@@ -1,100 +1,82 @@
-import { isNullish } from '@dfinity/utils';
-import type { marked as markedTypes, Renderer } from 'marked';
+import { isNullish } from "@dfinity/utils";
+import DOMPurify from "dompurify";
 
-type Marked = typeof markedTypes;
-
-export const targetBlankLinkRenderer = (
-	href: string | null | undefined,
-	title: string | null | undefined,
-	text: string
-): string =>
-	`<a${
-		href === null || href === undefined
-			? ''
-			: ` target="_blank" rel="noopener noreferrer" href="${href}"`
-	}${title === null || title === undefined ? '' : ` title="${title}"`}>${
-		text.length === 0 ? href ?? title : text
-	}</a>`;
+let domPurify: typeof DOMPurify | undefined = undefined;
 
 /**
- * Based on https://github.com/markedjs/marked/blob/master/src/Renderer.js#L186
- * @returns <a> tag to image
- */
-export const imageToLinkRenderer = (
-	src: string | null | undefined,
-	title: string | null | undefined,
-	alt: string
-): string => {
-	if (src === undefined || src === null || src?.length === 0) {
-		return alt;
-	}
-	const fileExtention = src.includes('.') ? (src.split('.').pop() as string) : '';
-	// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-type
-	const typeProp = fileExtention === '' ? undefined : ` type="image/${fileExtention}"`;
-	const titleDefined = title !== undefined && title !== null;
-	const titleProp = titleDefined ? ` title="${title}"` : undefined;
-	const text = alt === '' ? (titleDefined ? title : src) : alt;
-
-	return `<a href="${src}" target="_blank" rel="noopener noreferrer"${typeProp ?? ''}${
-		titleProp ?? ''
-	}>${text}</a>`;
-};
-
-const escapeHtml = (html: string): string => html.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-const escapeSvgs = (html: string): string =>
-	html.replace(/<svg[^>]*>[\s\S]*?<\/svg>/gi, escapeHtml);
-
-/**
- * Escape <img> tags or convert them to links
- */
-const transformImg = (img: string): string => {
-	const src = img.match(/src="([^"]+)"/)?.[1];
-	const alt = img.match(/alt="([^"]+)"/)?.[1] || 'img';
-	const title = img.match(/title="([^"]+)"/)?.[1];
-	const shouldEscape = isNullish(src) || src.startsWith('data:image');
-	const imageHtml = shouldEscape ? escapeHtml(img) : imageToLinkRenderer(src, title, alt);
-
-	return imageHtml;
-};
-
-/** Avoid <img> tags; instead, apply the same logic as for markdown images by either escaping them or converting them to links. */
-export const htmlRenderer = (html: string): string =>
-	/<img\s+[^>]*>/gi.test(html) ? transformImg(html) : html;
-
-/**
- * Marked.js renderer for proposal summary.
- * Customized renderers
- * - targetBlankLinkRenderer
- * - imageToLinkRenderer
- * - htmlRenderer
+ * A workaround to preserve target="_blank" attribute from sanitizer.
+ * Utilizes data-target flag (set by flagTargetAttributeHook).
  *
- * @param marked
+ * Inspired by https://github.com/cure53/DOMPurify/issues/317#issuecomment-912474068
  */
-const proposalSummaryRenderer = (marked: Marked): Renderer => {
-	const renderer = new marked.Renderer();
+const restoreTargetAttributeHook = (node: Element) => {
+  if (node.getAttribute("data-target") === "blank") {
+    // Use provided "rel" value if it contains "noopener" or "noreferrer" (https://web.dev/external-anchors-use-rel-noopener/)
+    // otherwise add "noopener".
+    // split() to avoid invalid values (e.g. "noopenernoreferrer")
+    const originRel = node.getAttribute("rel") || "";
+    const parts = originRel.split(/\s+/);
+    const rel =
+      parts.includes("noopener") || parts.includes("noreferrer")
+        ? originRel
+        : "noopener";
 
-	renderer.link = targetBlankLinkRenderer;
-	renderer.image = imageToLinkRenderer;
-	renderer.html = htmlRenderer;
+    node.setAttribute("target", "_blank");
+    node.setAttribute("rel", rel);
 
-	return renderer;
+    // remove the flag
+    node.removeAttribute("data-target");
+  }
 };
 
 /**
- * Uses markedjs.
- * Escape or transform to links some raw HTML tags (img, svg)
- * @see {@link https://github.com/markedjs/marked}
+ * Add the data attribute because "target" will be removed by sanitizer
  */
-export const markdownToHTML = async (text: string): Promise<string> => {
-	// Replace the SVG elements in the HTML with their escaped versions to improve security.
-	// It's not possible to do it with html renderer because the svg consists of multiple tags.
-	// One edge case is not covered: if the svg is inside the <code> tag, it will be rendered as with &lt; & &gt; instead of "<" & ">"
-	const escapedText = escapeSvgs(text);
+const flagTargetAttributeHook = (node: Element) => {
+  if (node.tagName === "A" && node.getAttribute("target") === "_blank") {
+    node.setAttribute("data-target", "blank");
+  }
+  return node;
+};
 
-	// The dynamic import cannot be analyzed by Vite. As it is intended, we use the /* @vite-ignore */ comment inside the import() call to suppress this warning.
-	const { marked }: { marked: Marked } = await import('marked');
+/**
+ * Sanitize a text with DOMPurify.
+ *
+ * Note: this library needs a workaround to work in the NodeJS context - i.e. for our vitest test suite.
+ * See the vitest.setup.ts for details.
+ */
+export const sanitize = (text: string): string => {
+  try {
+    // DOMPurify initialization
+    if (isNullish(domPurify)) {
+      if (typeof DOMPurify.sanitize === "function") {
+        domPurify = DOMPurify;
+      } else if (typeof global.DOMPurify.sanitize === "function") {
+        // utilize NodeJS version
+        domPurify = global.DOMPurify;
+      }
 
-	return marked(escapedText, {
-		renderer: proposalSummaryRenderer(marked)
-	});
+      // Preserve target="blank" workaround
+      domPurify?.addHook("beforeSanitizeElements", flagTargetAttributeHook);
+      domPurify?.addHook("afterSanitizeAttributes", restoreTargetAttributeHook);
+    }
+
+    return domPurify?.sanitize(text) ?? "";
+  } catch (err) {
+    console.error(err);
+  }
+
+  console.error("no DOMPurify support");
+
+  return "";
+};
+
+let elementsCounters: Record<string, number> = {};
+export const nextElementId = (prefix: string): string => {
+  elementsCounters = {
+    ...elementsCounters,
+    [prefix]: (elementsCounters[prefix] ?? 0) + 1,
+  };
+
+  return `${prefix}${elementsCounters[prefix]}`;
 };

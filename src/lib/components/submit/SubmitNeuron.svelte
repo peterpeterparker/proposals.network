@@ -13,11 +13,12 @@
 	import SubmitNeuronMetadata from '$lib/components/submit/SubmitNeuronMetadata.svelte';
 	import { firstNeuronId } from '$lib/utils/juno.utils';
 
+	export let neuronId: bigint | undefined;
+
 	let step: 'hotkey' | 'neuron_id' = 'hotkey';
 
 	let status: 'loading' | 'ok' | 'error' = 'loading';
 	let neuron: Doc<Neuron> | undefined;
-	let neuronId: bigint | undefined;
 
 	onMount(async () => {
 		const { result, neuron: n } = await getNeuron($userStore);
