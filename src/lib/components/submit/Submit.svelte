@@ -8,7 +8,7 @@
 	import type { ProposalContent } from '$lib/types/juno';
 	import { routeKey } from '$lib/derived/nav.derived';
 	import { userStore } from '$lib/stores/user.store';
-	import { initUserProposal } from '$lib/services/user-proposal.services';
+	import { initUserProposal } from '$lib/services/submit.services';
 	import { goto } from '$app/navigation';
 	import { wizardBusy } from '$lib/stores/busy.store';
 	import { confirmToCloseBrowser } from '$lib/utils/before-unload.utils';

@@ -9,6 +9,8 @@
 	import Copy from '$lib/components/ui/Copy.svelte';
 	import { markdownToHTML } from '$lib/utils/markdown.utils';
 	import ButtonText from '$lib/components/ui/ButtonText.svelte';
+	import { isBusy } from '$lib/derived/busy.derived';
+	import Button from '$lib/components/ui/Button.svelte';
 
 	export let neuronId: bigint | undefined;
 	export let content: ProposalContent | undefined;
@@ -21,36 +23,42 @@
 	});
 
 	let display: 'html' | 'markdown' = 'html';
+
+	const onSubmit = async () => {};
 </script>
 
 {#if nonNullish(html) && nonNullish(markdown) && nonNullish(neuronId)}
-	<h1 class="font-bold capitalize text-4xl mb-12">
-		Make sure everything looks good before submitting!
-	</h1>
+	<form on:submit|preventDefault={onSubmit}>
+		<h1 class="font-bold capitalize text-4xl mb-12">
+			Make sure everything looks good before submitting!
+		</h1>
 
-	<p class="leading-relaxed mb-8">
-		Review your proposal for Neuron ID: <Copy value={`${neuronId}`} text="Neuron ID copied." />.
-	</p>
+		<p class="leading-relaxed mb-8">
+			Review your proposal for Neuron ID: <Copy value={`${neuronId}`} text="Neuron ID copied." />.
+		</p>
 
-	<div
-		in:fade
-		class="tiptap focus:outline-none bg-white border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)] lg:rounded-md overflow-hidden mb-8"
-	>
-		<aside class="flex flex-wrap gap-2 items-center border-b-2 border-black bg-violet-200 p-4">
-			<ButtonText active={display === 'html'} on:click={() => (display = 'html')}>HTML</ButtonText>
-			<ButtonText active={display === 'markdown'} on:click={() => (display = 'markdown')}
-				>Markdown</ButtonText
-			>
-		</aside>
+		<div
+			in:fade
+			class="tiptap focus:outline-none bg-white border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)] lg:rounded-md overflow-hidden mb-8"
+		>
+			<aside class="flex flex-wrap gap-2 items-center border-b-2 border-black bg-violet-200 p-4">
+				<ButtonText active={display === 'html'} on:click={() => (display = 'html')}>HTML</ButtonText
+				>
+				<ButtonText active={display === 'markdown'} on:click={() => (display = 'markdown')}
+					>Markdown</ButtonText
+				>
+			</aside>
 
-		<article class="py-8 px-5">
-			{#if display === 'html'}
-				<div in:fade><Html text={html} /></div>
-			{:else}
-				<div in:fade><Html text={markdown} /></div>
-			{/if}
-		</article>
-	</div>
+			<article class="py-8 px-5">
+				{#if display === 'html'}
+					<div in:fade><Html text={html} /></div>
+				{:else}
+					<div in:fade><Html text={markdown} /></div>
+				{/if}
+			</article>
+		</div>
+		<Button color="tertiary" role="submit" disabled={$isBusy}>Submit</Button>
+	</form>
 {:else}
 	<SubmitError />
 {/if}

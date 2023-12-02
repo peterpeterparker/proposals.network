@@ -31,7 +31,7 @@ export const init = ({
 			[KEY_PROPOSAL_KEY, key],
 			[KEY_PROPOSAL_CONTENT, content],
 			[KEY_PROPOSAL_DOC_METADATA, docMetadata],
-			[KEY_PROPOSAL_DOC_CONTENT, docContent],
+			[KEY_PROPOSAL_DOC_CONTENT, docContent]
 		],
 		proposalsStore
 	);
@@ -72,6 +72,14 @@ export const get = (): Promise<
 	Promise.all([
 		getIdb(KEY_PROPOSAL_KEY, proposalsStore),
 		getIdb(KEY_PROPOSAL_CONTENT, proposalsStore),
+		getIdb(KEY_PROPOSAL_DOC_METADATA, proposalsStore),
+		getIdb(KEY_PROPOSAL_DOC_CONTENT, proposalsStore)
+	]);
+
+export const getDocs = (): Promise<
+	[Doc<ProposalMetadata> | undefined, Omit<Doc<ProposalContent>, 'data'> | undefined]
+> =>
+	Promise.all([
 		getIdb(KEY_PROPOSAL_DOC_METADATA, proposalsStore),
 		getIdb(KEY_PROPOSAL_DOC_CONTENT, proposalsStore)
 	]);

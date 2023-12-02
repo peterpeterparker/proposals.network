@@ -12,6 +12,7 @@ export interface ProposalMetadata {
 	title: string;
 	lastChange: Timestamp | undefined;
 	proposalId?: bigint;
+	status: "draft" | "submitted";
 }
 
 export type ProposalMetadataDoc = Doc<ProposalMetadata>;
