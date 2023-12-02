@@ -1,15 +1,12 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
-	import { Editor, type JSONContent } from '@tiptap/core';
-	import StarterKit from '@tiptap/starter-kit';
-	import Highlight from '@tiptap/extension-highlight';
-	import Typography from '@tiptap/extension-typography';
-	import Underline from '@tiptap/extension-underline';
-	import Link from '@tiptap/extension-link';
-	import EditorHeader from "$lib/components/ui/EditorHeader.svelte";
+	import { Editor } from '@tiptap/core';
+	import EditorHeader from '$lib/components/ui/EditorHeader.svelte';
+	import { EDITOR_EXTENSIONS } from '$lib/constants/editor.constants';
+	import type { Markdown } from '$lib/types/app';
 
-	export let content: JSONContent;
-	export let onUpdate: (json: JSONContent) => Promise<void>;
+	export let content: Markdown;
+	export let onUpdate: (json: Markdown) => Promise<void>;
 
 	let element: HTMLElement;
 	let editor: Editor | undefined;
@@ -18,19 +15,7 @@
 		async () =>
 			(editor = new Editor({
 				element: element,
-				extensions: [
-					StarterKit,
-					Highlight,
-					Typography,
-					Underline,
-					Link.configure({
-						HTMLAttributes: {
-							rel: 'noopener noreferrer'
-						}
-					}).extend({
-						inclusive: false
-					})
-				],
+				extensions: EDITOR_EXTENSIONS,
 				content,
 				onTransaction: () => {
 					// force re-render so `editor.isActive` works as expected
@@ -43,8 +28,8 @@
 					}
 				},
 				onUpdate: async ({ editor }) => {
-					const json = editor.getJSON();
-					await onUpdate(json);
+					const markdown = editor.storage.markdown.getMarkdown();
+					await onUpdate(markdown);
 				}
 			}))
 	);

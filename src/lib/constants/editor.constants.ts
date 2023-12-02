@@ -3,6 +3,7 @@ import Link from '@tiptap/extension-link';
 import Typography from '@tiptap/extension-typography';
 import Underline from '@tiptap/extension-underline';
 import StarterKit from '@tiptap/starter-kit';
+import { Markdown } from 'tiptap-markdown';
 
 export const EDITOR_EXTENSIONS = [
 	StarterKit,
@@ -15,5 +16,6 @@ export const EDITOR_EXTENSIONS = [
 		}
 	}).extend({
 		inclusive: false
-	})
+	}),
+	Markdown
 ];

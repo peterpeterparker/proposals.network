@@ -1,14 +1,11 @@
-import { EDITOR_EXTENSIONS } from '$lib/constants/editor.constants';
 import template from '$lib/markdown/proposal-template.md?raw';
 import { init } from '$lib/services/idb.services';
 import { toasts } from '$lib/stores/toasts.store';
 import type { ProposalContent, ProposalMetadata } from '$lib/types/juno';
 import type { UserOption } from '$lib/types/user';
-import { markdownToHTML } from '$lib/utils/markdown.utils';
 import { replaceHistory } from '$lib/utils/route.utils';
 import { isNullish } from '@dfinity/utils';
 import { getDoc, type Doc } from '@junobuild/core';
-import { generateJSON } from '@tiptap/core';
 import { nanoid } from 'nanoid';
 
 export let initUserProposal = async ({
@@ -29,7 +26,7 @@ export let initUserProposal = async ({
 	try {
 		if (isNullish(routeKey)) {
 			const key = nanoid();
-			const content = generateJSON(await markdownToHTML(template), EDITOR_EXTENSIONS);
+			const content = template;
 
 			await Promise.all([
 				init({
