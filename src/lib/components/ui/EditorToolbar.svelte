@@ -49,110 +49,108 @@
 	};
 </script>
 
-<aside class="flex flex-wrap gap-0.5 border-b-2 border-black bg-violet-200 p-4">
-	<ButtonIcon
+<ButtonIcon
 		ariaLabel="Undo"
 		disabled={disabled || editor?.can().redo()}
 		on:click={() => editor?.chain().focus().undo().run()}
-	>
-		<IconUndo />
-	</ButtonIcon>
+>
+	<IconUndo />
+</ButtonIcon>
 
-	<ButtonIcon
+<ButtonIcon
 		ariaLabel="Redo"
 		disabled={disabled || editor?.can().undo()}
 		on:click={() => editor?.chain().focus().redo().run()}
-	>
-		<IconRedo />
-	</ButtonIcon>
+>
+	<IconRedo />
+</ButtonIcon>
 
-	<ButtonIcon
+<ButtonIcon
 		ariaLabel="Bold"
 		{disabled}
 		active={editor?.isActive('bold') === true}
 		on:click={() => editor?.chain().focus().toggleBold().run()}
-	>
-		<IconBold />
-	</ButtonIcon>
+>
+	<IconBold />
+</ButtonIcon>
 
-	<ButtonIcon
+<ButtonIcon
 		ariaLabel="Italic"
 		{disabled}
 		active={editor?.isActive('italic') === true}
 		on:click={() => editor?.chain().focus().toggleItalic().run()}
-	>
-		<IconItalic />
-	</ButtonIcon>
+>
+	<IconItalic />
+</ButtonIcon>
 
-	<ButtonIcon
+<ButtonIcon
 		ariaLabel="Underline"
 		{disabled}
 		active={editor?.isActive('underline') === true}
 		on:click={() => editor?.commands.toggleUnderline()}
-	>
-		<IconUnderline />
-	</ButtonIcon>
+>
+	<IconUnderline />
+</ButtonIcon>
 
-	<ButtonIcon
+<ButtonIcon
 		ariaLabel="Strike through"
 		{disabled}
 		active={editor?.isActive('strike') === true}
 		on:click={() => editor?.commands.toggleStrike()}
-	>
-		<IconStrikeThrough />
-	</ButtonIcon>
+>
+	<IconStrikeThrough />
+</ButtonIcon>
 
-	<ButtonIcon
+<ButtonIcon
 		ariaLabel="Insert a link"
 		{disabled}
 		active={editor?.isActive('link') === true}
 		on:click={setUnsetLink}
-	>
-		<IconLink />
-	</ButtonIcon>
+>
+	<IconLink />
+</ButtonIcon>
 
-	<ButtonIcon
+<ButtonIcon
 		ariaLabel="H1"
 		{disabled}
 		active={editor?.isActive('heading1') === true}
 		on:click={() => editor?.chain().focus().toggleHeading({ level: 1 }).run()}
-	>
-		<IconH1 />
-	</ButtonIcon>
+>
+	<IconH1 />
+</ButtonIcon>
 
-	<ButtonIcon
+<ButtonIcon
 		ariaLabel="H2"
 		{disabled}
 		active={editor?.isActive('heading2') === true}
 		on:click={() => editor?.chain().focus().toggleHeading({ level: 2 }).run()}
-	>
-		<IconH2 />
-	</ButtonIcon>
+>
+	<IconH2 />
+</ButtonIcon>
 
-	<ButtonIcon
+<ButtonIcon
 		ariaLabel="H3"
 		{disabled}
 		active={editor?.isActive('heading3') === true}
 		on:click={() => editor?.chain().focus().toggleHeading({ level: 3 }).run()}
-	>
-		<IconH3 />
-	</ButtonIcon>
+>
+	<IconH3 />
+</ButtonIcon>
 
-	<ButtonIcon
+<ButtonIcon
 		ariaLabel="Toggle unordered list"
 		{disabled}
 		active={editor?.isActive('bulletList') === true}
 		on:click={() => editor?.chain().focus().toggleBulletList().run()}
-	>
-		<IconUnorderedList />
-	</ButtonIcon>
+>
+	<IconUnorderedList />
+</ButtonIcon>
 
-	<ButtonIcon
+<ButtonIcon
 		ariaLabel="Toggle ordered list"
 		{disabled}
 		active={editor?.isActive('orderedList') === true}
 		on:click={() => editor?.chain().focus().toggleOrderedList().run()}
-	>
-		<IconOrderedList />
-	</ButtonIcon>
-</aside>
+>
+	<IconOrderedList />
+</ButtonIcon>

@@ -6,7 +6,7 @@
 	import Typography from '@tiptap/extension-typography';
 	import Underline from '@tiptap/extension-underline';
 	import Link from '@tiptap/extension-link';
-	import EditorToolbar from '$lib/components/ui/EditorToolbar.svelte';
+	import EditorHeader from "$lib/components/ui/EditorHeader.svelte";
 
 	export let content: string;
 	export let onUpdate: (json: JSONContent) => Promise<void>;
@@ -53,7 +53,7 @@
 </script>
 
 <div class="bg-white border-2 border-black lg:rounded-md overflow-hidden">
-	<EditorToolbar {editor} />
+	<EditorHeader {editor} />
 
 	<article bind:this={element} />
 </div>
