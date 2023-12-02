@@ -21,6 +21,8 @@ Frontend canisters:
 internet_identity http://qhbym-qaaaa-aaaaa-aaafq-cai.localhost:8080/
 nns-dapp http://qsgjb-riaaa-aaaaa-aaaga-cai.localhost:8080/
 
+NeuronID: 7140188146658685712
+
 ## Design
 
 This dapp's design uses the color palette and few components of the nice [Neo-Brutalism UI](https://neo-brutalism-ui-library.vercel.app/) component library.

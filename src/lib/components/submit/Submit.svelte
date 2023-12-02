@@ -54,7 +54,7 @@
 			{:else if step === "write"}
 				<SubmitWrite {content} on:pnwrkNext={() => step = "hotkey"} />
 			{:else if step === "hotkey"}
-				<SubmitHotkey />
+				<SubmitHotkey on:pnwrkNext={() => step = "review"} />
 			{/if}
 		</div>
 	</UserInitializedGuard>

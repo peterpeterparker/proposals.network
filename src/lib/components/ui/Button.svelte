@@ -1,6 +1,7 @@
 <script lang="ts">
 	export let color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 	export let disabled = false;
+	export let role: "submit" | "button" = "button"
 
 	let primary: boolean;
 	$: primary = color === 'primary';
@@ -15,6 +16,7 @@
 <button
 	class:opacity-20={disabled}
 	on:click
+	{role}
 	{disabled}
 	class="flex items-center gap-2 border-black border-2 transition-all rounded-none h-12 px-5 hover:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
 	class:bg-cyan-200={primary}

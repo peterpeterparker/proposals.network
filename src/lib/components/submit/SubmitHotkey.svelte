@@ -3,20 +3,15 @@
 	import Copy from '$lib/components/ui/Copy.svelte';
 	import { blur } from 'svelte/transition';
 	import Button from '$lib/components/ui/Button.svelte';
-	import Input from '$lib/components/ui/Input.svelte';
-	import { isNullish } from '@dfinity/utils';
 	import { onMount } from 'svelte';
 	import type { Doc } from '@junobuild/core';
 	import type { Neuron } from '$lib/types/juno';
 	import { getNeuron } from '$lib/services/neuron.services';
 	import { fade } from 'svelte/transition';
 	import SpinnerScreen from '$lib/components/ui/SpinnerScreen.svelte';
+	import SubmitHokeyForm from "$lib/components/submit/SubmitHokeyForm.svelte";
 
 	let step: 'hotkey' | 'neuron_id' = 'hotkey';
-	let neuronId = '';
-
-	let disabled = true;
-	$: disabled = isNullish(neuronId) || neuronId === '';
 
 	let status: 'loading' | 'ok' | 'error' = 'loading';
 	let neuron: Doc<Neuron> | undefined;
@@ -42,7 +37,7 @@
 		{#if step === 'hotkey'}
 			<div class="transition-opacity" in:blur>
 				<p class="leading-relaxed mb-4">
-					Copy your principal <Copy value={$userStore.owner} text="Principal copied." /> and add it as
+					Copy your principal <Copy value={$userStore?.key ?? ""} text="Principal copied." /> and add it as
 					a hotkey to your neuron. This will grant control of the neuron to the user identified by the
 					principal on proposals.network.
 				</p>
@@ -51,18 +46,7 @@
 			</div>
 		{:else}
 			<div class="transition-opacity" in:blur>
-				<p class="leading-relaxed mb-4">
-					You're almost there! Now that your principal controls your neuron, enter your neuron ID.
-					This ID will link the proposal to your neuron.
-				</p>
-
-				<div class="mb-5">
-					<Input placeholder="Neuron ID" bind:value={neuronId} />
-				</div>
-
-				<Button color="secondary" on:click={() => (step = 'neuron_id')} {disabled}>
-					Save and continue
-				</Button>
+				<SubmitHokeyForm {neuron} on:pnwrkNext />
 			</div>
 		{/if}
 	</div>
