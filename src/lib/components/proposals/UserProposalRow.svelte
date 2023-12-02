@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { ProposalKey, ProposalMetadata, ProposalMetadataDoc } from '$lib/types/juno';
 	import { nonNullish } from '@dfinity/utils';
+	import ButtonCell from '$lib/components/ui/ButtonCell.svelte';
 
 	export let doc: ProposalMetadataDoc;
 
@@ -26,6 +27,6 @@
 	>
 	<td>{title} </td>
 	<td></td>
-    <td></td>
-    <td></td>
+	<td></td>
+	<td><ButtonCell>View</ButtonCell></td>
 </tr>
