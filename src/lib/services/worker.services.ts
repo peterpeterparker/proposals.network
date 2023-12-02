@@ -1,3 +1,4 @@
+import { wizardBusy } from '$lib/stores/busy.store';
 import type {
 	PostMessage,
 	PostMessageDataRequest,
@@ -15,10 +16,15 @@ export const initWorker = async (): Promise<ProposalWorker> => {
 
 	worker.onmessage = async ({ data }: MessageEvent<PostMessage<PostMessageDataResponse>>) => {
 		const { msg } = data;
-		// TODO:
-		//  const { msg } = data;
-		//           setBusy(msg === "busy");
-		console.log('MSG:', msg);
+
+		switch (msg) {
+			case 'busy':
+				wizardBusy.start();
+				return;
+			case 'idle':
+				wizardBusy.stop();
+				return;
+		}
 	};
 
 	return {

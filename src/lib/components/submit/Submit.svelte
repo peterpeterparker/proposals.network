@@ -10,6 +10,8 @@
 	import { userStore } from '$lib/stores/user.store';
 	import { initUserProposal } from '$lib/services/user-proposal.services';
 	import { goto } from '$app/navigation';
+	import { wizardBusy } from '$lib/stores/busy.store';
+	import { confirmToCloseBrowser } from '$lib/utils/before-unload.utils';
 
 	let step: undefined | 'write' | 'hotkey' | 'review' | 'submit' = undefined;
 
@@ -33,6 +35,8 @@
 	};
 
 	$: $userStore, $routeKey, (async () => await init())();
+
+	$: confirmToCloseBrowser($wizardBusy);
 </script>
 
 <div class="flex flex-col lg:flex-row min-h-screen" in:fade>
