@@ -32,6 +32,8 @@
 
 		key = proposalKey;
 		content = jsonContent;
+
+		step = "write";
 	};
 
 	$: $userStore, $routeKey, (async () => await init())();
@@ -48,8 +50,9 @@
 		>
 			{#if $userNotSignedIn}
 				<SubmitSignIn />
-			{:else}
-				<SubmitWrite {content} />
+			{:else if step === "write"}
+				<SubmitWrite {content} on:pnwrkNext={() => step = "hotkey"} />
+			{:else if step === "hotkey"}
 			{/if}
 		</div>
 	</UserInitializedGuard>

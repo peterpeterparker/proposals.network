@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Step from '$lib/components/ui/Step.svelte';
 	import { userInitialized, userNotSignedIn, userSignedIn } from '$lib/derived/user.derived';
-	import { debounce, isNullish, nonNullish } from '@dfinity/utils';
+	import { isNullish, nonNullish } from '@dfinity/utils';
 	import { userStore } from '$lib/stores/user.store';
 
 	export let step: undefined | 'write' | 'hotkey' | 'review' | 'submit';
@@ -11,7 +11,7 @@
 	let hotkeyStatus: 'pending' | 'active' | 'done';
 	let reviewStatus: 'pending' | 'active' | 'done';
 
-	const initSignInStatus = debounce(() => {
+	const initSignInStatus = () => {
 		signInStatus =
 			isNullish(step) && $userInitialized
 				? $userSignedIn
@@ -19,8 +19,10 @@
 					: $userNotSignedIn
 					  ? 'active'
 					  : 'pending'
-				: 'pending';
-	});
+				: isNullish(step)
+				  ? 'pending'
+				  : 'done';
+	};
 
 	$: step, $userStore, initSignInStatus();
 
@@ -37,22 +39,22 @@
 					    : 'pending'))();
 
 	$: step,
-		() =>
+		(() =>
 			(hotkeyStatus =
 				step === 'hotkey'
 					? 'active'
 					: nonNullish(step) && ['review', 'submit'].includes(step)
 					  ? 'done'
-					  : 'pending');
+					  : 'pending'))();
 
 	$: step,
-		() =>
+		(() =>
 			(reviewStatus =
 				step === 'review'
 					? 'active'
 					: nonNullish(step) && ['submit'].includes(step)
 					  ? 'done'
-					  : 'pending');
+					  : 'pending'))();
 </script>
 
 <aside

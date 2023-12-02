@@ -52,7 +52,7 @@
 	onDestroy(() => editor?.destroy());
 </script>
 
-<div class="bg-white border-2 border-black lg:rounded-md overflow-hidden">
+<div class="bg-white border-2 border-black lg:rounded-md overflow-hidden mb-8">
 	<EditorHeader {editor} />
 
 	<article bind:this={element} />
