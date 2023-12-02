@@ -9,7 +9,8 @@
 	import { getNeuron } from '$lib/services/neuron.services';
 	import { fade } from 'svelte/transition';
 	import SpinnerScreen from '$lib/components/ui/SpinnerScreen.svelte';
-	import SubmitHokeyForm from "$lib/components/submit/SubmitHokeyForm.svelte";
+	import SubmitHokeyForm from '$lib/components/submit/SubmitHokeyForm.svelte';
+	import SpinnerText from '$lib/components/ui/SpinnerText.svelte';
 
 	let step: 'hotkey' | 'neuron_id' = 'hotkey';
 
@@ -23,33 +24,35 @@
 	});
 </script>
 
-{#if status === 'loading'}
-	<SpinnerScreen />
-{:else if status === 'ok'}
-	<div in:fade>
-		<h1 class="font-bold capitalize text-4xl mb-12">Only Neurons can submit proposals</h1>
+{#if status !== 'error'}
+	<h1 class="font-bold capitalize text-4xl mb-12">Only Neurons can submit proposals</h1>
 
-		<h2 class="text-2xl mb-8">
-			Neurons with at least 10 ICP and a 6-month dissolve delay can submit motion proposals. So the
-			next step is to add a hotkey to your neuron that meets these criteria.
-		</h2>
+	<h2 class="text-2xl mb-8">
+		Neurons with at least 10 ICP and a 6-month dissolve delay can submit motion proposals. So the
+		next step is to add a hotkey to your neuron that meets these criteria.
+	</h2>
 
-		{#if step === 'hotkey'}
-			<div class="transition-opacity" in:blur>
-				<p class="leading-relaxed mb-4">
-					Copy your principal <Copy value={$userStore?.key ?? ""} text="Principal copied." /> and add it as
-					a hotkey to your neuron. This will grant control of the neuron to the user identified by the
-					principal on proposals.network.
-				</p>
+	{#if status === 'loading'}
+		<SpinnerText>Hold tight, loading neuron metadata...</SpinnerText>
+	{:else}
+		<div in:fade>
+			{#if step === 'hotkey'}
+				<div class="transition-opacity" in:blur>
+					<p class="leading-relaxed mb-4">
+						Copy your principal <Copy value={$userStore?.key ?? ''} text="Principal copied." /> and add
+						it as a hotkey to your neuron. This will grant control of the neuron to the user identified
+						by the principal on proposals.network.
+					</p>
 
-				<Button color="secondary" on:click={() => (step = 'neuron_id')}>Done</Button>
-			</div>
-		{:else}
-			<div class="transition-opacity" in:blur>
-				<SubmitHokeyForm {neuron} on:pnwrkNext />
-			</div>
-		{/if}
-	</div>
+					<Button color="secondary" on:click={() => (step = 'neuron_id')}>Done</Button>
+				</div>
+			{:else}
+				<div class="transition-opacity" in:blur>
+					<SubmitHokeyForm {neuron} on:pnwrkNext />
+				</div>
+			{/if}
+		</div>
+	{/if}
 {:else}
 	<div in:fade>
 		<h1 class="font-bold capitalize text-4xl mb-12">Oops!</h1>
