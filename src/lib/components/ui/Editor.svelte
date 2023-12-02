@@ -8,7 +8,7 @@
 	import Link from '@tiptap/extension-link';
 	import EditorHeader from "$lib/components/ui/EditorHeader.svelte";
 
-	export let content: string;
+	export let content: JSONContent;
 	export let onUpdate: (json: JSONContent) => Promise<void>;
 
 	let element: HTMLElement;
