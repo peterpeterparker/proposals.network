@@ -4,7 +4,7 @@
 	import Section from '$lib/components/ui/Section.svelte';
 	import { userNotInitialized, userNotSignedIn } from '$lib/derived/user.derived';
 	import { userStore } from '$lib/stores/user.store';
-	import { loadUserProposals } from '$lib/services/loader.services';
+	import { loadUserProposals } from '$lib/services/loader-stores.services';
 	import { userProposalsStore } from '$lib/stores/user-proposals.store';
 	import { userProposalsICPStore } from '$lib/derived/user-proposals.derived';
 	import UserProposalRow from '$lib/components/proposals/UserProposalRow.svelte';

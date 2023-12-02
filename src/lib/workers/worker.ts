@@ -1,9 +1,8 @@
-import { get, getLastChange } from '$lib/services/idb.services';
+import {get, getLastChange, getLastJob, updateDocs} from '$lib/services/idb.services';
 import type { PostMessage, PostMessageDataRequest } from '$lib/types/post-message';
 
-import type { ProposalContent, ProposalMetadata } from '$lib/types/juno';
 import { isNullish, nonNullish } from '@dfinity/utils';
-import { getDoc, setManyDocs, unsafeIdentity } from '@junobuild/core';
+import { setManyDocs, unsafeIdentity } from '@junobuild/core';
 
 onmessage = async ({ data: { msg, data } }: MessageEvent<PostMessage<PostMessageDataRequest>>) => {
 	switch (msg) {
@@ -58,12 +57,17 @@ const sync = async (data: PostMessageDataRequest) => {
 
 	const lastChange = await getLastChange();
 
-	if (lastChange === undefined) {
+	if (isNullish(lastChange)) {
 		// There weren't any changes
 		return;
 	}
 
-	if (lastChangeProcessed !== undefined && lastChange <= lastChangeProcessed) {
+	if (isNullish(lastChangeProcessed)) {
+		// Avoid unnecessary save if user reload screen and last changes were already processed
+		lastChangeProcessed = await getLastJob();
+	}
+
+	if (nonNullish(lastChangeProcessed) && lastChange <= lastChangeProcessed) {
 		// No new changes
 		return;
 	}
@@ -78,10 +82,11 @@ const sync = async (data: PostMessageDataRequest) => {
 		const value = await get();
 
 		if (isNullish(value)) {
+			console.error('Empty state');
 			return;
 		}
 
-		const [key, title, contentData] = value;
+		const [key, contentData, metadata, content] = value;
 
 		const { user, governanceId, localIdentityCanisterId, ...rest } = data;
 
@@ -91,20 +96,9 @@ const sync = async (data: PostMessageDataRequest) => {
 			...(nonNullish(localIdentityCanisterId) && { env: 'dev' as 'dev' })
 		};
 
-		const [metadata, content] = await Promise.all([
-			getDoc<ProposalMetadata>({
-				collection: 'metadata',
-				key,
-				satellite
-			}),
-			getDoc<ProposalContent>({
-				collection: 'content',
-				key,
-				satellite
-			})
-		]);
+		// TODO: title
 
-		await setManyDocs({
+		const result = await setManyDocs({
 			satellite,
 			docs: [
 				{
@@ -113,7 +107,7 @@ const sync = async (data: PostMessageDataRequest) => {
 						key,
 						description: governanceId,
 						data: {
-							title,
+							title: 'TODO',
 							lastChange
 						},
 						...(nonNullish(metadata) && { updated_at: metadata.updated_at })
@@ -128,6 +122,15 @@ const sync = async (data: PostMessageDataRequest) => {
 					}
 				}
 			]
+		});
+
+		const [updatedMetadata, updatedContent] = result;
+
+		const { data: jsonContent, ...updatedContentMetadata } = updatedContent;
+
+		await updateDocs({
+			docMetadata: updatedMetadata,
+			docContent: updatedContentMetadata
 		});
 
 		// Save timestamp to skip further changes if no changes
