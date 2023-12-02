@@ -34,6 +34,11 @@
 		key = proposalKey;
 		content = jsonContent;
 
+		if (result === "not_allowed") {
+			step = undefined;
+			return;
+		}
+
 		step = "write";
 	};
 

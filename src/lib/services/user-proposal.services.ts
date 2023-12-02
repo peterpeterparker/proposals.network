@@ -18,12 +18,12 @@ export let initUserProposal = async ({
 	user: UserOption;
 	routeKey: string | undefined | null;
 }): Promise<{
-	result: 'ok' | 'error';
+	result: 'ok' | 'not_allowed' | 'error';
 	key: string | undefined;
 	content: ProposalContent | undefined;
 }> => {
 	if (isNullish(user)) {
-		return { result: 'ok', key: undefined, content: undefined };
+		return { result: 'not_allowed', key: undefined, content: undefined };
 	}
 
 	try {
