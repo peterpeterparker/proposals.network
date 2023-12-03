@@ -4,10 +4,10 @@
 	import { isWizardBusy } from '$lib/derived/busy.derived';
 </script>
 
-<div class="inline-block ml-auto">
+<div class="fixed bottom-4 right-4 lg:right-auto lg:left-24">
 	{#if $isWizardBusy}
-		<div transition:fade>
-			<span class="visually-hidden">Saving...</span>
+		<div transition:fade class="flex text-xs gap-0.5 items-center animate-bounce">
+			<span>Saving...</span>
 			<IconSync />
 		</div>
 	{/if}

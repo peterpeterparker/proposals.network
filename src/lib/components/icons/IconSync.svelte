@@ -1,8 +1,8 @@
 <!-- https://fonts.google.com/icons?selected=Material%20Icons%20Sharp%3Async%3A -->
 <!-- Tweaked and animated -->
 <svg
-	width="20"
-	height="20"
+	width="18"
+	height="18"
 	viewBox="0 0 24 24"
 	xmlns="http://www.w3.org/2000/svg"
 	fill="currentColor"

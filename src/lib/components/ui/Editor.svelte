@@ -4,6 +4,7 @@
 	import EditorHeader from '$lib/components/ui/EditorHeader.svelte';
 	import { EDITOR_EXTENSIONS } from '$lib/constants/editor.constants';
 	import type { Markdown } from '$lib/types/app';
+	import EditorBusy from '$lib/components/ui/EditorBusy.svelte';
 
 	export let content: Markdown;
 	export let onUpdate: (json: Markdown) => Promise<void>;
@@ -36,6 +37,8 @@
 
 	onDestroy(() => editor?.destroy());
 </script>
+
+<EditorBusy />
 
 <div class="bg-white border-2 border-black lg:rounded-md overflow-hidden mb-8">
 	<EditorHeader {editor} />
