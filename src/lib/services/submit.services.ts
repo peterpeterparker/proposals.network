@@ -1,6 +1,12 @@
 import template from '$lib/markdown/proposal-template.md?raw';
-import { clear, getDocs as getDocsIdb, init } from '$lib/services/idb.services';
-import { submitMotionProposal, type MotionProposalParams } from '$lib/services/proposal.services';
+import {
+	clear,
+	getDocMetadata,
+	getDocs as getDocsIdb,
+	getEditable,
+	init
+} from '$lib/services/idb.services';
+import { type MotionProposalParams, submitMotionProposal } from '$lib/services/proposal.services';
 import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
 import type {
@@ -125,9 +131,10 @@ const updateUrl = async (proposalKey: string) => {
 
 export const submitProposal = async ({
 	user,
-	key,
-	...rest
-}: { user: UserOption; key: string } & MotionProposalParams): Promise<{
+	neuronId
+}: {
+	user: UserOption;
+} & Partial<Pick<MotionProposalParams, 'neuronId'>>): Promise<{
 	result: 'ok' | 'error';
 }> => {
 	if (isNullish(user)) {
@@ -137,74 +144,85 @@ export const submitProposal = async ({
 		return { result: 'error' };
 	}
 
+	if (isNullish(neuronId)) {
+		toasts.error({
+			msg: { text: 'A neuron ID must be provided to submit a proposal.' }
+		});
+		return { result: 'error' };
+	}
+
 	busy.start();
 
-	const [metadata, content] = await getDocs(key);
+	try {
+		await assertTimestamps();
 
-	if (isNullish(metadata) || isNullish(content)) {
-		toasts.error({
-			msg: { text: 'Invalid metadata and content to submit a proposal.' }
+		const [metadata, content] = await getEditable();
+
+		if (isNullish(metadata)) {
+			toasts.error({
+				msg: { text: 'No metadata to submit the proposal.' }
+			});
+			return { result: 'error' };
+		}
+
+		const { title, url, motionText } = metadata;
+
+		if (isNullish(title) || isNullish(url) || isNullish(motionText)) {
+			toasts.error({
+				msg: { text: 'No title, url or motion text to submit the proposal.' }
+			});
+			return { result: 'error' };
+		}
+
+		if (isNullish(content)) {
+			toasts.error({
+				msg: { text: 'No content to submit the proposal.' }
+			});
+			return { result: 'error' };
+		}
+
+		const { result, proposalId } = await submitMotionProposal({
+			user,
+			title,
+			url,
+			motionText,
+			summary: content,
+			neuronId
 		});
 
-		return { result: 'error' };
-	}
+		if (result === 'error') {
+			return { result: 'error' };
+		}
 
-	const value = await getDocsIdb();
-
-	if (isNullish(value)) {
-		toasts.error({
-			msg: { text: 'No local data can be found. That is unexpected.' }
+		const resultUpdate = await updateMetadata({
+			proposalId
 		});
 
-		return { result: 'error' };
+		await clear();
+
+		busy.stop();
+
+		return resultUpdate;
+	} finally {
+		busy.stop();
 	}
-
-	const [metadataIdb, contentIdb] = value;
-
-	if (
-		isNullish(metadata.updated_at) ||
-		metadata.updated_at !== metadataIdb?.updated_at ||
-		isNullish(content.updated_at) ||
-		content.updated_at !== content?.updated_at
-	) {
-		toasts.error({
-			msg: {
-				text: 'Timestamps are no synced, therefore the proposal cannot be submitted. Maybe you edited the proposal on another device. Try to reload and retry.'
-			}
-		});
-
-		return { result: 'error' };
-	}
-
-	const { result, proposalId } = await submitMotionProposal({
-		user,
-		...rest
-	});
-
-	if (result === 'error') {
-		return { result: 'error' };
-	}
-
-	const resultUpdate = await updateMetadata({
-		metadata,
-		proposalId
-	});
-
-	await clear();
-
-	busy.stop();
-
-	return resultUpdate;
 };
 
 const updateMetadata = async ({
-	metadata,
 	proposalId
 }: {
-	metadata: Doc<ProposalMetadata>;
 	proposalId: bigint | undefined;
 }): Promise<{ result: 'ok' | 'error' }> => {
 	try {
+		const metadata = await getDocMetadata();
+
+		if (isNullish(metadata)) {
+			toasts.error({
+				msg: { text: 'The proposal was submitted but no metadata were found to update the status.' }
+			});
+			return { result: 'error' };
+		}
+
 		await setDoc({
 			collection: 'metadata',
 			doc: {
@@ -240,3 +258,30 @@ const getDocs = (
 			key
 		})
 	]);
+
+const assertTimestamps = async () => {
+	const value = await getDocsIdb();
+
+	if (isNullish(value)) {
+		throw new Error('No local data can be found. That is unexpected');
+	}
+
+	const [key, docMetadataIdb, docContentIdb] = value;
+
+	const [docMetadata, docContent] = await getDocs(key);
+
+	if (isNullish(docMetadata) || isNullish(docContent)) {
+		throw new Error("'Invalid metadata and content saved on chain to submit a proposal.'");
+	}
+
+	if (
+		isNullish(docMetadata.updated_at) ||
+		docMetadata.updated_at !== docMetadataIdb?.updated_at ||
+		isNullish(docContent.updated_at) ||
+		docContent.updated_at !== docContentIdb?.updated_at
+	) {
+		throw new Error(
+			'Timestamps are no synced, therefore the proposal cannot be submitted. Maybe you edited the proposal on another device. Try to reload and retry'
+		);
+	}
+};

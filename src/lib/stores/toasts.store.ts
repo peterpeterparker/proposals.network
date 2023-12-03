@@ -3,6 +3,7 @@ import { errorDetailToString } from '$lib/utils/error.utils';
 import { nonNullish } from '@dfinity/utils';
 import type { Readable } from 'svelte/store';
 import { writable } from 'svelte/store';
+import {GovernanceError} from "@dfinity/nns";
 
 export interface ToastsStore extends Readable<ToastMsg[]> {
 	error: (params: { msg: Omit<ToastMsg, 'level'>; err?: unknown }) => void;

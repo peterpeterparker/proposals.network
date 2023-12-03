@@ -14,7 +14,7 @@
 	import SubmitReview from '$lib/components/submit/SubmitReview.svelte';
 	import { isWizardBusy } from '$lib/derived/busy.derived';
 
-	let step: undefined | 'write' | 'neuron' | 'review' | 'submit' = undefined;
+	let step: undefined | 'write' | 'neuron' | 'review' | 'submitted' = undefined;
 	let neuronId: bigint | undefined;
 
 	const init = async () => {
@@ -52,7 +52,7 @@
 			{:else if step === 'neuron'}
 				<SubmitNeuron on:pnwrkNext={() => (step = 'review')} bind:neuronId />
 			{:else if step === 'review'}
-				<SubmitReview {neuronId} />
+				<SubmitReview {neuronId} on:pnwrkNext={() => (step = 'submitted')} />
 			{/if}
 		</div>
 	</UserInitializedGuard>

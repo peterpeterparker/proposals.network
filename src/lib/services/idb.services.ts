@@ -1,4 +1,9 @@
-import type { ProposalContent, ProposalEditableMetadata, ProposalMetadata } from '$lib/types/juno';
+import type {
+	ProposalContent,
+	ProposalEditableMetadata,
+	ProposalKey,
+	ProposalMetadata
+} from '$lib/types/juno';
 import type { Doc } from '@junobuild/core';
 import { clear as clearIdb, createStore, get as getIdb, setMany } from 'idb-keyval';
 
@@ -113,12 +118,16 @@ export const getContent = (): Promise<
 	]);
 
 export const getDocs = (): Promise<
-	[Doc<ProposalMetadata> | undefined, Omit<Doc<ProposalContent>, 'data'> | undefined]
+	[ProposalKey, Doc<ProposalMetadata> | undefined, Omit<Doc<ProposalContent>, 'data'> | undefined]
 > =>
 	Promise.all([
+		getIdb(KEY_PROPOSAL_KEY, proposalsStore),
 		getIdb(KEY_PROPOSAL_DOC_METADATA, proposalsStore),
 		getIdb(KEY_PROPOSAL_DOC_CONTENT, proposalsStore)
 	]);
+
+export const getDocMetadata = (): Promise<Doc<ProposalMetadata> | undefined> =>
+	getIdb(KEY_PROPOSAL_DOC_METADATA, proposalsStore);
 
 export const getLastChangeMetadata = (): Promise<number | undefined> =>
 	getIdb(KEY_LAST_METADATA_CHANGE, proposalsStore);

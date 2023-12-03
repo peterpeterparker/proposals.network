@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { ProposalContent } from '$lib/types/juno';
-	import { onMount } from 'svelte';
+	import {createEventDispatcher, onMount} from 'svelte';
 	import { nonNullish } from '@dfinity/utils';
 	import Html from '$lib/components/ui/Html.svelte';
 	import { fade } from 'svelte/transition';
@@ -13,6 +13,8 @@
 	import type { ProposalEditableMetadata } from '$lib/types/juno';
 	import { getEditable } from '$lib/services/idb.services';
 	import SubmitReviewBlock from '$lib/components/submit/SubmitReviewBlock.svelte';
+	import {submitProposal} from "$lib/services/submit.services";
+	import {userStore} from "$lib/stores/user.store";
 
 	export let neuronId: bigint | undefined;
 
@@ -32,9 +34,16 @@
 
 	let display: 'html' | 'markdown' = 'html';
 
+	const dispatch = createEventDispatcher();
+
 	const onSubmit = async () => {
-		// TODO
-		console.log('TODO');
+		const {result} = await submitProposal({user: $userStore, neuronId});
+
+		if (result === "error") {
+			return;
+		}
+
+		dispatch('pnwrkNext');
 	};
 </script>
 

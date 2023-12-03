@@ -4,7 +4,7 @@
 	import { isNullish, nonNullish } from '@dfinity/utils';
 	import { userStore } from '$lib/stores/user.store';
 
-	export let step: undefined | 'write' | 'neuron' | 'review' | 'submit';
+	export let step: undefined | 'write' | 'neuron' | 'review' | 'submitted';
 
 	let signInStatus: 'pending' | 'active' | 'done';
 	let writeStatus: 'pending' | 'active' | 'done';
@@ -83,9 +83,9 @@
 			Review
 		</Step>
 
-		<Step status={step === 'submit' ? 'active' : 'pending'}>
+		<Step status={step === 'submitted' ? 'active' : 'pending'}>
 			<svelte:fragment slot="step">5</svelte:fragment>
-			Submit
+			Done
 		</Step>
 	</ul>
 </aside>
