@@ -5,45 +5,37 @@
 	import { userNotSignedIn } from '$lib/derived/user.derived';
 	import SubmitSignIn from '$lib/components/submit/SubmitSignIn.svelte';
 	import SubmitWrite from '$lib/components/submit/SubmitWrite.svelte';
-	import type { ProposalContent } from '$lib/types/juno';
 	import { routeKey } from '$lib/derived/nav.derived';
 	import { userStore } from '$lib/stores/user.store';
 	import { initUserProposal } from '$lib/services/submit.services';
 	import { goto } from '$app/navigation';
-	import { wizardBusy } from '$lib/stores/busy.store';
 	import { confirmToCloseBrowser } from '$lib/utils/before-unload.utils';
-	import SubmitNeuron from "$lib/components/submit/SubmitNeuron.svelte";
-	import SubmitReview from "$lib/components/submit/SubmitReview.svelte";
+	import SubmitNeuron from '$lib/components/submit/SubmitNeuron.svelte';
+	import SubmitReview from '$lib/components/submit/SubmitReview.svelte';
+	import {isWizardBusy} from "$lib/derived/busy.derived";
 
 	let step: undefined | 'write' | 'neuron' | 'review' | 'submit' = undefined;
 	let neuronId: bigint | undefined;
 
-	let content: ProposalContent | undefined;
-
 	const init = async () => {
-		const {
-			result,
-			content: jsonContent
-		} = await initUserProposal({ user: $userStore, routeKey: $routeKey });
+		const { result } = await initUserProposal({ user: $userStore, routeKey: $routeKey });
 
 		if (result === 'error') {
 			await goto('/', { replaceState: true });
 			return;
 		}
 
-		content = jsonContent;
-
-		if (result === "not_allowed") {
+		if (result === 'not_allowed') {
 			step = undefined;
 			return;
 		}
 
-		step = "write";
+		step = 'write';
 	};
 
 	$: $userStore, $routeKey, (async () => await init())();
 
-	$: confirmToCloseBrowser($wizardBusy);
+	$: confirmToCloseBrowser($isWizardBusy);
 </script>
 
 <div class="flex flex-col lg:flex-row min-h-screen" in:fade>
@@ -55,12 +47,12 @@
 		>
 			{#if $userNotSignedIn}
 				<SubmitSignIn />
-			{:else if step === "write"}
-				<SubmitWrite {content} on:pnwrkNext={() => step = "neuron"} />
-			{:else if step === "neuron"}
-				<SubmitNeuron on:pnwrkNext={() => step = "review"} bind:neuronId />
-			{:else if step === "review"}
-				<SubmitReview {content} {neuronId} />
+			{:else if step === 'write'}
+				<SubmitWrite on:pnwrkNext={() => (step = 'neuron')} />
+			{:else if step === 'neuron'}
+				<SubmitNeuron on:pnwrkNext={() => (step = 'review')} bind:neuronId />
+			{:else if step === 'review'}
+				<SubmitReview {neuronId} />
 			{/if}
 		</div>
 	</UserInitializedGuard>

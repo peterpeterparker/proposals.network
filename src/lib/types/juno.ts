@@ -6,16 +6,16 @@ export type ProposalContent = Markdown;
 export type ProposalKey = string;
 export type ProposalToken = string;
 
-export type Timestamp = number;
-
-export interface ProposalMetadata {
-	lastChange: Timestamp | undefined;
-	status: "draft" | "submitted";
+export interface ProposalEditableMetadata {
 	title?: string;
 	url?: string;
 	motionText?: string;
-	proposalId?: bigint;
 }
+
+export type ProposalMetadata = {
+	status: 'draft' | 'submitted';
+	proposalId?: bigint;
+} & ProposalEditableMetadata;
 
 export type ProposalMetadataDoc = Doc<ProposalMetadata>;
 

@@ -3,7 +3,7 @@ import {clear, getDocs as getDocsIdb, init} from '$lib/services/idb.services';
 import { submitMotionProposal, type MotionProposalParams } from '$lib/services/proposal.services';
 import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
-import type { ProposalContent, ProposalKey, ProposalMetadata } from '$lib/types/juno';
+import type {ProposalContent, ProposalEditableMetadata, ProposalKey, ProposalMetadata} from '$lib/types/juno';
 import type { UserOption } from '$lib/types/user';
 import { replaceHistory } from '$lib/utils/route.utils';
 import { isNullish } from '@dfinity/utils';
@@ -18,10 +18,11 @@ export let initUserProposal = async ({
 	routeKey: string | undefined | null;
 }): Promise<{
 	result: 'ok' | 'not_allowed' | 'error';
+	metadata: ProposalEditableMetadata | undefined,
 	content: ProposalContent | undefined;
 }> => {
 	if (isNullish(user)) {
-		return { result: 'not_allowed', content: undefined };
+		return { result: 'not_allowed', metadata: undefined, content: undefined };
 	}
 
 	try {
@@ -33,6 +34,7 @@ export let initUserProposal = async ({
 				init({
 					key,
 					content,
+					metadata: undefined,
 					docMetadata: undefined,
 					docContent: undefined,
 					newProposal: true
@@ -42,6 +44,7 @@ export let initUserProposal = async ({
 
 			return {
 				result: 'ok',
+				metadata: undefined,
 				content
 			};
 		}
@@ -51,18 +54,18 @@ export let initUserProposal = async ({
 			err
 		});
 
-		return { result: 'error', content: undefined };
+		return { result: 'error', metadata: undefined, content: undefined };
 	}
 
 	try {
-		const [metadata, docContent] = await getDocs(routeKey);
+		const [docMetadata, docContent] = await getDocs(routeKey);
 
-		if (isNullish(metadata)) {
+		if (isNullish(docMetadata)) {
 			toasts.error({
 				msg: { text: 'The metadata for the proposal key cannot be found.' }
 			});
 
-			return { result: 'error', content: undefined };
+			return { result: 'error', metadata: undefined, content: undefined };
 		}
 
 		if (isNullish(docContent)) {
@@ -70,21 +73,30 @@ export let initUserProposal = async ({
 				msg: { text: 'The content of the proposal cannot be found.' }
 			});
 
-			return { result: 'error', content: undefined };
+			return { result: 'error', metadata: undefined, content: undefined };
 		}
+
+		const {data, ...metadata} = docMetadata;
+		const {title, url, motionText} = data;
+		const editableMetadata = {title, url, motionText};
 
 		const { data: jsonContent, ...content } = docContent;
 
 		await init({
 			key: routeKey,
+			metadata: editableMetadata,
 			content: jsonContent,
-			docMetadata: metadata,
+			docMetadata: {
+				...metadata,
+				data
+			},
 			docContent: content as Omit<Doc<ProposalMetadata>, 'data'> | undefined,
 			newProposal: false
 		});
 
 		return {
 			result: 'ok',
+			metadata: editableMetadata,
 			content: jsonContent
 		};
 	} catch (err: unknown) {
@@ -93,7 +105,7 @@ export let initUserProposal = async ({
 			err
 		});
 
-		return { result: 'error', content: undefined };
+		return { result: 'error', metadata: undefined, content: undefined };
 	}
 };
 

@@ -1,28 +1,28 @@
 <script lang="ts">
-	import Editor from '$lib/components/ui/Editor.svelte';
-	import { nonNullish } from '@dfinity/utils';
 	import type { ProposalContent } from '$lib/types/juno';
-	import { setContent } from '$lib/services/idb.services';
-	import SubmitContinue from "$lib/components/submit/SubmitContinue.svelte";
-	import {createEventDispatcher} from "svelte";
-	import SubmitMetadata from "$lib/components/submit/SubmitMetadata.svelte";
+	import SubmitContinue from '$lib/components/submit/SubmitContinue.svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
+	import SubmitWriteEdit from '$lib/components/submit/SubmitWriteEdit.svelte';
+	import type { ProposalEditableMetadata } from '$lib/types/juno';
+	import { getEditable } from '$lib/services/idb.services';
 
-	export let content: ProposalContent | undefined;
+	let metadata: ProposalEditableMetadata | undefined;
+	let content: ProposalContent | undefined;
 
-	const onUpdate = async (content: ProposalContent) => await setContent(content);
+	onMount(async () => ([metadata, content] = await getEditable()));
 
 	const dispatch = createEventDispatcher();
 	const next = () => dispatch('pnwrkNext');
 </script>
 
-{#if nonNullish(content)}
-	<h1 class="font-bold capitalize text-4xl mb-12">Craft Your Proposal</h1>
+<h1 class="font-bold capitalize text-4xl mb-12">Craft Your Proposal</h1>
 
-	<h2 class="text-2xl mb-6">To submit a proposal, you need both a summary (explaining what it's all about) and motion text (the effective motion for voting), along with a title and a URL pointing to your community discussion.</h2>
+<h2 class="text-2xl mb-6">
+	To submit a proposal, you need both a summary (explaining what it's all about) and motion text
+	(the effective motion for voting), along with a title and a URL pointing to your community
+	discussion.
+</h2>
 
-	<Editor {content} {onUpdate} />
+<SubmitWriteEdit {metadata} {content} />
 
-	<SubmitMetadata/>
-
-	<SubmitContinue on:click={next} />
-{/if}
+<SubmitContinue on:click={next} />

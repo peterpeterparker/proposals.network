@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { ProposalContent } from '$lib/types/juno';
-	import { generateHTML } from '@tiptap/core';
 	import { onMount } from 'svelte';
 	import { nonNullish } from '@dfinity/utils';
 	import Html from '$lib/components/ui/Html.svelte';
@@ -11,20 +10,31 @@
 	import ButtonText from '$lib/components/ui/ButtonText.svelte';
 	import { isBusy } from '$lib/derived/busy.derived';
 	import Button from '$lib/components/ui/Button.svelte';
+	import type { ProposalEditableMetadata } from '$lib/types/juno';
+	import { getEditable } from '$lib/services/idb.services';
 
 	export let neuronId: bigint | undefined;
-	export let content: ProposalContent | undefined;
+
+	let metadata: ProposalEditableMetadata | undefined;
+	let content: ProposalContent | undefined;
+
+	onMount(async () => ([metadata, content] = await getEditable()));
 
 	let html: string | undefined;
 	let markdown: string | undefined;
 	onMount(async () => {
+		[metadata, content] = await getEditable();
+
 		html = nonNullish(content) ? await markdownToHTML(content) : undefined;
 		markdown = content?.replaceAll('\n', '<br/>');
 	});
 
 	let display: 'html' | 'markdown' = 'html';
 
-	const onSubmit = async () => {};
+	const onSubmit = async () => {
+		// TODO
+		console.log("TODO")
+	};
 </script>
 
 {#if nonNullish(html) && nonNullish(markdown) && nonNullish(neuronId)}

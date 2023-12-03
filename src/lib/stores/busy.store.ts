@@ -37,23 +37,31 @@ export const busy = initBusyStore();
 
 // A particular busy state used in wizards
 
-export interface BusyWizardStore extends Readable<boolean> {
-	start: () => void;
-	stop: () => void;
+export interface WizardBusyData {
+	metadata: boolean;
+	content: boolean;
+}
+
+export interface BusyWizardStore extends Readable<WizardBusyData> {
+	start: (id: keyof WizardBusyData) => void;
+	stop: (id: keyof WizardBusyData) => void;
 }
 
 const initWizardBusyStore = (): BusyWizardStore => {
-	const { subscribe, set } = writable<boolean>(false);
+	const { subscribe, update } = writable<WizardBusyData>({
+		metadata: false,
+		content: false
+	});
 
 	return {
 		subscribe,
 
-		start() {
-			set(true);
+		start(id: keyof WizardBusyData) {
+			update((state) => ({ ...state, [id]: true }));
 		},
 
-		stop() {
-			set(false);
+		stop(id: keyof WizardBusyData) {
+			update((state) => ({ ...state, [id]: false }));
 		}
 	};
 };
