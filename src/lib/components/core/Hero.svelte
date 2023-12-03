@@ -1,12 +1,15 @@
 <script lang="ts">
 	import IconChevronRight from '$lib/components/icons/IconChevronRight.svelte';
 	import InputInline from '$lib/components/ui/InputInline.svelte';
+	import HeroAnimation from "$lib/components/core/HeroAnimation.svelte";
 </script>
 
 <section
-	class="bg-pink-200 w-full h-[calc(100vh-80px)] 2xl:h-[800px] snap-start snap-always shrink-0 border-b-2 border-black relative"
+	class="relative bg-pink-200 w-full h-[calc(100vh-80px)] 2xl:h-[800px] snap-start snap-always shrink-0 border-b-2 border-black overflow-hidden"
 >
-	<div class="w-full h-full bg-pink-200 relative flex items-center justify-center flex-col">
+	<HeroAnimation />
+
+	<div class="w-full h-full relative flex items-center justify-center flex-col">
 		<h1 class="text-center px-2 md:max-w-[70vw] xl:max-w-[50vw]">
 			Browse and submit proposals on ICP.
 		</h1>

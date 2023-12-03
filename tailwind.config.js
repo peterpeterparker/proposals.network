@@ -7,6 +7,11 @@ export default {
 		fontFamily: {
 			sans: ['Inter', 'sans-serif', ...fontFamily.sans]
 		},
+		extend: {
+			animation: {
+				'spin-slow': 'spin 20s linear infinite',
+			}
+		},
 		colors: {
 			inherit: 'inherit',
 			transparent: 'transparent',
