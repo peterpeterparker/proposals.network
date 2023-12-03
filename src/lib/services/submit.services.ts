@@ -6,7 +6,7 @@ import {
 	getEditable,
 	init
 } from '$lib/services/idb.services';
-import { type MotionProposalParams, submitMotionProposal } from '$lib/services/proposal.services';
+import { submitMotionProposal, type MotionProposalParams } from '$lib/services/proposal.services';
 import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
 import type {
@@ -136,6 +136,7 @@ export const submitProposal = async ({
 	user: UserOption;
 } & Partial<Pick<MotionProposalParams, 'neuronId'>>): Promise<{
 	result: 'ok' | 'error';
+	proposalId?: bigint | undefined;
 }> => {
 	if (isNullish(user)) {
 		toasts.error({
@@ -194,7 +195,7 @@ export const submitProposal = async ({
 			return { result: 'error' };
 		}
 
-		const resultUpdate = await updateMetadata({
+		const { result: resultUpdate } = await updateMetadata({
 			proposalId
 		});
 
@@ -202,7 +203,7 @@ export const submitProposal = async ({
 
 		busy.stop();
 
-		return resultUpdate;
+		return { result: resultUpdate, proposalId };
 	} finally {
 		busy.stop();
 	}

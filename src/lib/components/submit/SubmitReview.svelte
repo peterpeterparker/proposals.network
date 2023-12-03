@@ -37,13 +37,13 @@
 	const dispatch = createEventDispatcher();
 
 	const onSubmit = async () => {
-		const {result} = await submitProposal({user: $userStore, neuronId});
+		const {result, proposalId} = await submitProposal({user: $userStore, neuronId});
 
 		if (result === "error") {
 			return;
 		}
 
-		dispatch('pnwrkNext');
+		dispatch('pnwrkDone', proposalId);
 	};
 
 	const edit = () => dispatch('pnwrkEdit');

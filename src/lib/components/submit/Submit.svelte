@@ -13,9 +13,11 @@
 	import SubmitNeuron from '$lib/components/submit/SubmitNeuron.svelte';
 	import SubmitReview from '$lib/components/submit/SubmitReview.svelte';
 	import { isWizardBusy } from '$lib/derived/busy.derived';
+	import SubmitDone from '$lib/components/submit/SubmitDone.svelte';
 
 	let step: undefined | 'write' | 'neuron' | 'review' | 'submitted' = undefined;
 	let neuronId: bigint | undefined;
+	let proposalId: bigint | undefined;
 
 	const init = async () => {
 		const { result } = await initUserProposal({ user: $userStore, routeKey: $routeKey });
@@ -36,6 +38,11 @@
 	$: $userStore, $routeKey, (async () => await init())();
 
 	$: confirmToCloseBrowser($isWizardBusy);
+
+	const done = ({detail}: CustomEvent<bigint | undefined>) => {
+		proposalId = detail;
+		step = 'submitted';
+	}
 </script>
 
 <div class="flex flex-col lg:flex-row min-h-screen" in:fade>
@@ -55,8 +62,10 @@
 				<SubmitReview
 					{neuronId}
 					on:pnwrkNext={() => (step = 'submitted')}
-					on:pnwrkEdit={() => (step = 'write')}
+					on:pnwrkDone={done}
 				/>
+			{:else if step === 'submitted'}
+				<SubmitDone {proposalId} />
 			{/if}
 		</div>
 	</UserInitializedGuard>
