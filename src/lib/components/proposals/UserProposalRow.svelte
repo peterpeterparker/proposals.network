@@ -3,6 +3,7 @@
 	import { nonNullish } from '@dfinity/utils';
 	import UserProposalLink from '$lib/components/proposals/UserProposalLink.svelte';
 	import UserProposalView from '$lib/components/proposals/UserProposalView.svelte';
+	import UserProposalStatus from '$lib/components/proposals/UserProposalStatus.svelte';
 
 	export let doc: ProposalMetadataDoc;
 
@@ -22,12 +23,9 @@
 	<td>
 		{#if nonNullish(proposalId)}
 			{proposalId}
-		{:else}
-			—
 		{/if}</td
 	>
-	<td>{title ?? ''} </td>
-	<td></td>
-	<td></td>
+	<td class="max-w-lg">{title ?? ''} </td>
+	<UserProposalStatus {proposalId} />
 	<UserProposalView {key} />
 </tr>

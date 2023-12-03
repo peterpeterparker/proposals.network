@@ -1,3 +1,4 @@
+import { clearAgents } from '$lib/api/agent.api';
 import { clear } from '$lib/services/idb.services';
 import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
@@ -54,7 +55,7 @@ export const toastAndReload = (msg: ToastMsg) => {
 // We reload because agent-js has issue performing following sign-in if AuthClient is not reset. It will notably not be able to open new popup for II.
 const reload = () => window.location.reload();
 
-const cleanUp = (): Promise<void> => clear();
+const cleanUp = (): Promise<void[]> => Promise.all([clear(), clearAgents()]);
 
 const PARAM_MSG = 'msg';
 const PARAM_LEVEL = 'level';

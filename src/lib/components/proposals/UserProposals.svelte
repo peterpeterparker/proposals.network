@@ -35,21 +35,20 @@
 	<TableContainer rows={$userProposalsICPStore?.items.length}>
 		<thead>
 			<tr>
-				<th>Key</th>
-				<th>ID</th>
-				<th>Title</th>
-				<th>Topic</th>
-				<th>Status</th>
+				<th class="w-2/12">Key</th>
+				<th class="w-1/12">ID</th>
+				<th class="max-w-lg">Title</th>
+				<th class="w-1/12">Status</th>
 				<th></th>
 			</tr>
 		</thead>
 
 		<tbody>
 			{#if $userProposalsICPStore === undefined}
-				<SkeletonRows rows={4} columns={7} />
+				<SkeletonRows rows={4} columns={6} />
 			{:else if $userProposalsICPStore === null}
 				<tr>
-					<td colspan="6">
+					<td colspan="5">
 						<div>
 							<span class="inline-block pb-2">Sign-in to submit your own proposals.</span>
 							<Button on:click={signIn}>
@@ -60,7 +59,7 @@
 				</tr>
 			{:else if $userProposalsICPStore.items_length === 0n}
 				<tr>
-					<td colspan="6">
+					<td colspan="5">
 						<div>
 							<span class="inline-block pb-2"
 								>Your basket of ideas is empty. Start crafting your first proposal now!</span

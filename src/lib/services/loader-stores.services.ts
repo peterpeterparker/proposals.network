@@ -16,6 +16,10 @@ export const loadUserProposals = (): Promise<{ success: boolean }> =>
 				filter: {
 					matcher: {
 						description: token
+					},
+					order: {
+						desc: true,
+						field: "created_at"
 					}
 				}
 			});

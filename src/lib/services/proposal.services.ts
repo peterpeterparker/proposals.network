@@ -1,45 +1,18 @@
-import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
+import { makeProposal } from '$lib/api/proposal.api';
 import { toasts } from '$lib/stores/toasts.store';
 import type { MakeProposalRequest, Motion } from '@dfinity/nns';
-import { GovernanceCanister } from '@dfinity/nns';
-import { Principal } from '@dfinity/principal';
-import { createAgent, isNullish } from '@dfinity/utils';
-import { unsafeIdentity, type User } from '@junobuild/core';
+import type { User } from '@junobuild/core';
 
 export type MotionProposalParams = Omit<MakeProposalRequest, 'action' | 'title'> & {
 	title: string;
 } & Motion;
 
-export const submitMotionProposal = async ({
-	user,
-	...rest
-}: { user: User } & MotionProposalParams): Promise<{
+export const submitMotionProposal = async (params: MotionProposalParams): Promise<{
 	result: 'ok' | 'error';
 	proposalId: bigint | undefined;
 }> => {
-	if (isNullish(GOVERNANCE_CANISTER_ID)) {
-		toasts.error({
-			msg: {
-				text: 'The ICP governance canister ID is not set, therefore the proposal cannot be submitted.'
-			}
-		});
-		return { result: 'error', proposalId: undefined };
-	}
-
 	try {
-		const agent = await createAgent({
-			host: 'http://localhost:8000',
-			identity: await unsafeIdentity(),
-			fetchRootKey: true
-		});
-
-		const { makeProposal } = GovernanceCanister.create({
-			agent,
-			canisterId: Principal.fromText(GOVERNANCE_CANISTER_ID)
-		});
-
-		const request = makeMotionProposalRequest({ ...rest });
-		const proposalId = await makeProposal(request);
+		const proposalId = await makeProposal(params);
 
 		return { result: 'ok', proposalId };
 	} catch (err: unknown) {
@@ -50,15 +23,3 @@ export const submitMotionProposal = async ({
 		return { result: 'error', proposalId: undefined };
 	}
 };
-
-const makeMotionProposalRequest = ({
-	motionText,
-	...rest
-}: MotionProposalParams): MakeProposalRequest => ({
-	action: {
-		Motion: {
-			motionText
-		}
-	},
-	...rest
-});
