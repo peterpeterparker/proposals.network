@@ -26,5 +26,5 @@ export const getAgent = async ({ identity }: { identity: Identity }): Promise<Ht
 };
 
 export const clearAgents = async (): Promise<void> => {
-    agents = null
+	agents = null;
 };

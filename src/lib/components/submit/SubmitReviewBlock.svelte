@@ -5,5 +5,5 @@
 		<slot name="actions" />
 	</aside>
 
-    <slot />
+	<slot />
 </div>

@@ -1,13 +1,14 @@
 import { makeProposal } from '$lib/api/proposal.api';
 import { toasts } from '$lib/stores/toasts.store';
 import type { MakeProposalRequest, Motion } from '@dfinity/nns';
-import type { User } from '@junobuild/core';
 
 export type MotionProposalParams = Omit<MakeProposalRequest, 'action' | 'title'> & {
 	title: string;
 } & Motion;
 
-export const submitMotionProposal = async (params: MotionProposalParams): Promise<{
+export const submitMotionProposal = async (
+	params: MotionProposalParams
+): Promise<{
 	result: 'ok' | 'error';
 	proposalId: bigint | undefined;
 }> => {

@@ -14,7 +14,7 @@
 	import SubmitReview from '$lib/components/submit/SubmitReview.svelte';
 	import { isWizardBusy } from '$lib/derived/busy.derived';
 	import SubmitDone from '$lib/components/submit/SubmitDone.svelte';
-	import SubmitReadonly from "$lib/components/submit/SubmitReadonly.svelte";
+	import SubmitReadonly from '$lib/components/submit/SubmitReadonly.svelte';
 
 	let step: undefined | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly' = undefined;
 	let neuronId: bigint | undefined;
@@ -34,7 +34,7 @@
 		}
 
 		if (result === 'readonly') {
-			step = "readonly";
+			step = 'readonly';
 			return;
 		}
 
@@ -45,10 +45,10 @@
 
 	$: confirmToCloseBrowser($isWizardBusy);
 
-	const done = ({detail}: CustomEvent<bigint | undefined>) => {
+	const done = ({ detail }: CustomEvent<bigint | undefined>) => {
 		proposalId = detail;
 		step = 'submitted';
-	}
+	};
 </script>
 
 <div class="flex flex-col lg:flex-row min-h-screen" in:fade>
@@ -65,11 +65,7 @@
 			{:else if step === 'neuron'}
 				<SubmitNeuron on:pnwrkNext={() => (step = 'review')} bind:neuronId />
 			{:else if step === 'review'}
-				<SubmitReview
-					{neuronId}
-					on:pnwrkNext={() => (step = 'submitted')}
-					on:pnwrkDone={done}
-				/>
+				<SubmitReview {neuronId} on:pnwrkNext={() => (step = 'submitted')} on:pnwrkDone={done} />
 			{:else if step === 'submitted'}
 				<SubmitDone {proposalId} />
 			{:else if step === 'readonly'}

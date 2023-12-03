@@ -31,7 +31,7 @@
 	let displayNext: boolean;
 	$: displayNext =
 		nonNullish($userProposalsICPStore) &&
-		$userProposalsICPStore.matches_pages > ($userProposalsICPStore.items_page ?? 0n) + 1n;
+		($userProposalsICPStore.matches_pages ?? 0n) > ($userProposalsICPStore.items_page ?? 0n) + 1n;
 </script>
 
 {#if nonNullish($userProposalsICPStore)}
