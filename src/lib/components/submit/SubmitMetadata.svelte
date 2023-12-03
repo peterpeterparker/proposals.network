@@ -1,8 +1,7 @@
 <script lang="ts">
 	import Input from '$lib/components/ui/Input.svelte';
-	import { getMetadata, setMetadata } from '$lib/services/idb.services';
-	import { debounce, isNullish, nonNullish } from '@dfinity/utils';
-	import { toasts } from '$lib/stores/toasts.store';
+	import { getMetadata, updateMetadata } from '$lib/services/idb.services';
+	import { debounce } from '@dfinity/utils';
 	import type { Doc } from '@junobuild/core';
 	import type { ProposalMetadata } from '$lib/types/juno';
 	import { wizardBusy } from '$lib/stores/busy.store';
@@ -50,26 +49,10 @@
 			return;
 		}
 
-		// Reload last timestamp
-		docMetadata = await getMetadata();
-
-		if (isNullish(docMetadata)) {
-			toasts.error({
-				msg: {
-					text: 'Cannot load metadata. Try to reload your window.'
-				}
-			});
-			return;
-		}
-
-		await setMetadata({
-			...docMetadata,
-			data: {
-				...docMetadata.data,
-				...(title !== '' && { title }),
-				...(url !== '' && { url }),
-				...(motionText !== '' && { motionText })
-			}
+		await updateMetadata({
+			...(title !== '' && { title }),
+			...(url !== '' && { url }),
+			...(motionText !== '' && { motionText })
 		});
 
 		busy = false;

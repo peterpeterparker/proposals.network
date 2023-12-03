@@ -1,6 +1,13 @@
 import type { ProposalContent, ProposalMetadata } from '$lib/types/juno';
 import type { Doc } from '@junobuild/core';
-import { clear as clearIdb, createStore, get as getIdb, setMany } from 'idb-keyval';
+import {
+	clear as clearIdb,
+	createStore,
+	get as getIdb,
+	set as setIdb,
+	setMany,
+	update
+} from 'idb-keyval';
 
 const KEY_PROPOSAL_KEY = 'proposal-key';
 const KEY_PROPOSAL_CONTENT = 'proposal-content';
@@ -87,14 +94,23 @@ export const getDocs = (): Promise<
 export const getMetadata = (): Promise<Doc<ProposalMetadata> | undefined> =>
 	getIdb(KEY_PROPOSAL_DOC_METADATA, proposalsStore);
 
-export const setMetadata = (docMetadata: Doc<ProposalMetadata>): Promise<void> =>
-	setMany(
-		[
-			[KEY_LAST_CHANGE, Date.now()],
-			[KEY_PROPOSAL_DOC_METADATA, docMetadata]
-		],
-		proposalsStore
-	);
+export const updateMetadata = (
+	metadata: Pick<ProposalMetadata, 'title' | 'url' | 'motionText'>
+): Promise<[void, void]> =>
+	Promise.all([
+		setIdb(KEY_LAST_CHANGE, Date.now(), proposalsStore),
+		update(
+			KEY_PROPOSAL_DOC_METADATA,
+			(doc) => ({
+				...doc,
+				data: {
+					...doc.metadata,
+					...metadata
+				}
+			}),
+			proposalsStore
+		)
+	]);
 
 export const getLastChange = (): Promise<number | undefined> =>
 	getIdb(KEY_LAST_CHANGE, proposalsStore);
