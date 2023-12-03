@@ -12,7 +12,7 @@
 	import { confirmToCloseBrowser } from '$lib/utils/before-unload.utils';
 	import SubmitNeuron from '$lib/components/submit/SubmitNeuron.svelte';
 	import SubmitReview from '$lib/components/submit/SubmitReview.svelte';
-	import {isWizardBusy} from "$lib/derived/busy.derived";
+	import { isWizardBusy } from '$lib/derived/busy.derived';
 
 	let step: undefined | 'write' | 'neuron' | 'review' | 'submit' = undefined;
 	let neuronId: bigint | undefined;

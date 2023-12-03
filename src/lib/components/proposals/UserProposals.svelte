@@ -8,10 +8,10 @@
 	import { userProposalsStore } from '$lib/stores/user-proposals.store';
 	import { userProposalsICPStore } from '$lib/derived/user-proposals.derived';
 	import UserProposalRow from '$lib/components/proposals/UserProposalRow.svelte';
-	import Button from "$lib/components/ui/Button.svelte";
-	import {signIn} from "$lib/services/auth.services";
-	import IconICMonochrome from "$lib/components/icons/IconICMonochrome.svelte";
-	import SubmitLink from "$lib/components/submit/SubmitLink.svelte";
+	import Button from '$lib/components/ui/Button.svelte';
+	import { signIn } from '$lib/services/auth.services';
+	import IconICMonochrome from '$lib/components/icons/IconICMonochrome.svelte';
+	import SubmitLink from '$lib/components/submit/SubmitLink.svelte';
 
 	const load = async () => {
 		if ($userNotInitialized) {
@@ -62,7 +62,9 @@
 				<tr>
 					<td colspan="6">
 						<div>
-							<span class="inline-block pb-2">Your basket of ideas is empty. Start crafting your first proposal now!</span>
+							<span class="inline-block pb-2"
+								>Your basket of ideas is empty. Start crafting your first proposal now!</span
+							>
 							<SubmitLink />
 						</div>
 					</td>

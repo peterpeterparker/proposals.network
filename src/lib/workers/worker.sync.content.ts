@@ -1,14 +1,9 @@
 import { getContent, updateContentDoc } from '$lib/services/idb.services';
+import type { WorkerSyncParams } from '$lib/workers/worker.sync';
 import { isNullish, nonNullish } from '@dfinity/utils';
-import { type SatelliteOptions, setDoc } from '@junobuild/core';
+import { setDoc } from '@junobuild/core';
 
-export const syncContent = async ({
-	satellite,
-	governanceId
-}: {
-	satellite: SatelliteOptions;
-	governanceId: string;
-}) => {
+export const syncContent = async ({ satellite }: WorkerSyncParams) => {
 	const value = await getContent();
 
 	if (isNullish(value)) {

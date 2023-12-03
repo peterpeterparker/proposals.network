@@ -15,7 +15,7 @@ export const initWorker = async (): Promise<ProposalWorker> => {
 	const worker: Worker = new ProposalsWorker.default();
 
 	worker.onmessage = async ({ data }: MessageEvent<PostMessage<PostMessageDataResponse>>) => {
-		const { msg   } = data;
+		const { msg } = data;
 
 		switch (msg) {
 			case 'busy':

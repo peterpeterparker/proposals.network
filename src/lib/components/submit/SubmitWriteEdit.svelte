@@ -3,7 +3,6 @@
 	import { setContent, setMetadata } from '$lib/services/idb.services';
 	import { debounce, nonNullish } from '@dfinity/utils';
 	import type { ProposalEditableMetadata } from '$lib/types/juno';
-	import { onMount } from 'svelte';
 	import type { ProposalContent } from '$lib/types/juno';
 	import Editor from '$lib/components/ui/Editor.svelte';
 

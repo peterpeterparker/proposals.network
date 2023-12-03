@@ -1,17 +1,20 @@
-import type {ProposalMetadata, ProposalMetadataDoc, ProposalToken} from '$lib/types/juno';
+import type { ProposalMetadataDoc, ProposalToken } from '$lib/types/juno';
 import type { Store } from '$lib/types/store';
 import { nonNullish } from '@dfinity/utils';
+import type { ListResults } from '@junobuild/core';
 import { writable } from 'svelte/store';
-import type {ListResults} from "@junobuild/core";
 
-export type UserProposalsData = Record<ProposalToken, ListResults<ProposalMetadataDoc>> | undefined | null;
+export type UserProposalsData =
+	| Record<ProposalToken, ListResults<ProposalMetadataDoc>>
+	| undefined
+	| null;
 
-export type UserProposalsSetData = { token: ProposalToken; proposals: ListResults<ProposalMetadataDoc> };
+export type UserProposalsSetData = {
+	token: ProposalToken;
+	proposals: ListResults<ProposalMetadataDoc>;
+};
 
-export type UserProposalsStore = Store<
-	UserProposalsData,
-	UserProposalsSetData
->;
+export type UserProposalsStore = Store<UserProposalsData, UserProposalsSetData>;
 
 const initUserProposalsStore = (): UserProposalsStore => {
 	const INITIAL: UserProposalsData = undefined;

@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let color: 'primary' | 'secondary' | 'tertiary' = 'primary';
 	export let disabled = false;
-	export let role: "submit" | "button" = "button"
+	export let role: 'submit' | 'button' = 'button';
 
 	let primary: boolean;
 	$: primary = color === 'primary';

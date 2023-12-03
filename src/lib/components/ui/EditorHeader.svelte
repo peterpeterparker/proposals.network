@@ -6,7 +6,9 @@
 	export let editor: Editor | undefined;
 </script>
 
-<aside class="flex flex-wrap gap-0.5 justify-between items-center border-b-2 border-black bg-violet-200 p-4">
+<aside
+	class="flex flex-wrap gap-0.5 justify-between items-center border-b-2 border-black bg-violet-200 p-4"
+>
 	<EditorToolbar {editor} />
 
 	<EditorBusy />

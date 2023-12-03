@@ -2,7 +2,7 @@
 	import { userStore } from '$lib/stores/user.store';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Copy from '$lib/components/ui/Copy.svelte';
-	import {createEventDispatcher} from "svelte";
+	import { createEventDispatcher } from 'svelte';
 
 	export let neuronId: bigint | undefined;
 
@@ -21,10 +21,11 @@
 <Button color="secondary" on:click={next}>Review</Button>
 
 <p class="leading-relaxed text-sm mt-8 mb-4 italic">
-    Please note that editing this data is currently not supported but, I welcome contributions via pull requests on the <a
-        href="https://github.com/peterpeterparker/proposals.network"
-        target="_blank"
-        class="underline underline-offset-2"
-        rel="noopener noreferrer nofollow">GitHub repository</a
->.
+	Please note that editing this data is currently not supported but, I welcome contributions via
+	pull requests on the <a
+		href="https://github.com/peterpeterparker/proposals.network"
+		target="_blank"
+		class="underline underline-offset-2"
+		rel="noopener noreferrer nofollow">GitHub repository</a
+	>.
 </p>

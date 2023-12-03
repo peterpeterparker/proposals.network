@@ -1,16 +1,21 @@
 import template from '$lib/markdown/proposal-template.md?raw';
-import {clear, getDocs as getDocsIdb, init} from '$lib/services/idb.services';
+import { clear, getDocs as getDocsIdb, init } from '$lib/services/idb.services';
 import { submitMotionProposal, type MotionProposalParams } from '$lib/services/proposal.services';
 import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
-import type {ProposalContent, ProposalEditableMetadata, ProposalKey, ProposalMetadata} from '$lib/types/juno';
+import type {
+	ProposalContent,
+	ProposalEditableMetadata,
+	ProposalKey,
+	ProposalMetadata
+} from '$lib/types/juno';
 import type { UserOption } from '$lib/types/user';
 import { replaceHistory } from '$lib/utils/route.utils';
 import { isNullish } from '@dfinity/utils';
 import { getDoc, setDoc, type Doc } from '@junobuild/core';
 import { nanoid } from 'nanoid';
 
-export let initUserProposal = async ({
+export const initUserProposal = async ({
 	user,
 	routeKey
 }: {
@@ -18,7 +23,7 @@ export let initUserProposal = async ({
 	routeKey: string | undefined | null;
 }): Promise<{
 	result: 'ok' | 'not_allowed' | 'error';
-	metadata: ProposalEditableMetadata | undefined,
+	metadata: ProposalEditableMetadata | undefined;
 	content: ProposalContent | undefined;
 }> => {
 	if (isNullish(user)) {
@@ -76,9 +81,9 @@ export let initUserProposal = async ({
 			return { result: 'error', metadata: undefined, content: undefined };
 		}
 
-		const {data, ...metadata} = docMetadata;
-		const {title, url, motionText} = data;
-		const editableMetadata = {title, url, motionText};
+		const { data, ...metadata } = docMetadata;
+		const { title, url, motionText } = data;
+		const editableMetadata = { title, url, motionText };
 
 		const { data: jsonContent, ...content } = docContent;
 
@@ -183,7 +188,7 @@ export const submitProposal = async ({
 	const resultUpdate = await updateMetadata({
 		metadata,
 		proposalId
-	})
+	});
 
 	await clear();
 

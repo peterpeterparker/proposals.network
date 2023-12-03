@@ -33,7 +33,7 @@
 
 	const onSubmit = async () => {
 		// TODO
-		console.log("TODO")
+		console.log('TODO');
 	};
 </script>
 

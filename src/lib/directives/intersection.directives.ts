@@ -9,7 +9,7 @@ const dispatchIntersecting = ({
 	element: HTMLElement;
 	intersecting: boolean;
 }) => {
-	const $event = new CustomEvent<IntersectingDetail>('vrcIntersecting', {
+	const $event = new CustomEvent<IntersectingDetail>('pnwrkIntersecting', {
 		detail: { intersecting },
 		bubbles: false
 	});

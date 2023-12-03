@@ -3,7 +3,7 @@ import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
 import type { ToastLevel, ToastMsg } from '$lib/types/toast';
 import { replaceHistory } from '$lib/utils/route.utils';
-import { isNullish, nonNullish } from '@dfinity/utils';
+import { isNullish } from '@dfinity/utils';
 import { signIn as junoSignIn, signOut as junoSignOut } from '@junobuild/core';
 
 export const signIn = async (): Promise<{
@@ -49,7 +49,7 @@ export const toastAndReload = (msg: ToastMsg) => {
 	appendMsgToUrl(msg);
 
 	reload();
-}
+};
 
 // We reload because agent-js has issue performing following sign-in if AuthClient is not reset. It will notably not be able to open new popup for II.
 const reload = () => window.location.reload();

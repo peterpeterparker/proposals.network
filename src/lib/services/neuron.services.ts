@@ -1,10 +1,10 @@
 import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
+import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
 import type { Neuron } from '$lib/types/juno';
 import type { UserOption } from '$lib/types/user';
 import { isNullish, nonNullish } from '@dfinity/utils';
 import { getDoc, setDoc, type Doc } from '@junobuild/core';
-import {busy} from "$lib/stores/busy.store";
 
 export const getNeuron = async (
 	user: UserOption

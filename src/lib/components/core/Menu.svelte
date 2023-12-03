@@ -91,11 +91,7 @@
 
 							{#if $userInitialized}
 								{#if $userSignedIn}
-									<ButtonIcon
-										disabled={false}
-										on:click={signOut}
-										ariaLabel="Sign-out"
-									>
+									<ButtonIcon disabled={false} on:click={signOut} ariaLabel="Sign-out">
 										<IconLogout />
 									</ButtonIcon>
 								{:else}

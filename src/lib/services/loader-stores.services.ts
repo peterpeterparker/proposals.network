@@ -1,6 +1,6 @@
 import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
 import { toasts } from '$lib/stores/toasts.store';
-import { type UserProposalsSetData, userProposalsStore } from '$lib/stores/user-proposals.store';
+import { userProposalsStore, type UserProposalsSetData } from '$lib/stores/user-proposals.store';
 import { userStore } from '$lib/stores/user.store';
 import type { ProposalMetadata, ProposalToken } from '$lib/types/juno';
 import type { Store } from '$lib/types/store';
@@ -13,11 +13,11 @@ export const loadUserProposals = (): Promise<{ success: boolean }> =>
 		fn: async (token: ProposalToken): Promise<UserProposalsSetData> => {
 			const proposals = await listDocs<ProposalMetadata>({
 				collection: 'metadata',
-                filter: {
-                    matcher: {
-                        description: token
-                    }
-                }
+				filter: {
+					matcher: {
+						description: token
+					}
+				}
 			});
 
 			return {

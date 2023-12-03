@@ -5,7 +5,7 @@
 	import { isNullish } from '@dfinity/utils';
 	import { displayAndCleanLogoutMsg, toastAndReload } from '$lib/services/auth.services';
 	import { junoEnvironment } from '$lib/utils/juno.utils';
-    import {toasts} from "$lib/stores/toasts.store";
+	import { toasts } from '$lib/stores/toasts.store';
 
 	let unsubscribe: (() => void) | undefined = undefined;
 
@@ -14,8 +14,8 @@
 
 		if (isNullish(env)) {
 			toasts.error({
-                msg: { text: 'Juno not initialized. Satellite ID is undefined or null.' }
-            });
+				msg: { text: 'Juno not initialized. Satellite ID is undefined or null.' }
+			});
 			return;
 		}
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import IconChevronRight from '$lib/components/icons/IconChevronRight.svelte';
-	import InputInline from "$lib/components/ui/InputInline.svelte";
+	import InputInline from '$lib/components/ui/InputInline.svelte';
 </script>
 
 <section

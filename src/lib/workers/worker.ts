@@ -10,14 +10,14 @@ import { syncContent } from '$lib/workers/worker.sync.content';
 import { syncMetadata } from '$lib/workers/worker.sync.metadata';
 
 const metadataSync = new WorkerSync({
-	workerId: "metadata",
+	workerId: 'metadata',
 	getLastChange: getLastChangeMetadata,
 	getLastJob: getLastJobMetadata,
 	syncData: syncMetadata
 });
 
 const contentSync = new WorkerSync({
-	workerId: "content",
+	workerId: 'content',
 	getLastChange: getLastChangeContent,
 	getLastJob: getLastJobContent,
 	syncData: syncContent
