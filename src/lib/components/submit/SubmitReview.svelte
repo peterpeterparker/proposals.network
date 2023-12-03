@@ -12,6 +12,7 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import type { ProposalEditableMetadata } from '$lib/types/juno';
 	import { getEditable } from '$lib/services/idb.services';
+	import SubmitReviewBlock from '$lib/components/submit/SubmitReviewBlock.svelte';
 
 	export let neuronId: bigint | undefined;
 
@@ -47,26 +48,41 @@
 			Review your proposal for Neuron ID: <Copy value={`${neuronId}`} text="Neuron ID copied." />.
 		</p>
 
-		<div
-			in:fade
-			class="tiptap focus:outline-none bg-white border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)] lg:rounded-md overflow-hidden mb-8"
-		>
-			<aside class="flex flex-wrap gap-2 items-center border-b-2 border-black bg-violet-200 p-4">
-				<ButtonText active={display === 'html'} on:click={() => (display = 'html')}>HTML</ButtonText
-				>
-				<ButtonText active={display === 'markdown'} on:click={() => (display = 'markdown')}
-					>Markdown</ButtonText
-				>
-			</aside>
+		<div in:fade>
+			<SubmitReviewBlock>
+				<aside slot="actions">The proposal title</aside>
+				<article class="p-2.5">{metadata?.title ?? ''}</article>
+			</SubmitReviewBlock>
 
-			<article class="py-8 px-5">
-				{#if display === 'html'}
-					<div in:fade><Html text={html} /></div>
-				{:else}
-					<div in:fade><Html text={markdown} /></div>
-				{/if}
-			</article>
+			<SubmitReviewBlock>
+				<svelte:fragment slot="actions"
+					><ButtonText active={display === 'html'} on:click={() => (display = 'html')}
+						>HTML</ButtonText
+					>
+					<ButtonText active={display === 'markdown'} on:click={() => (display = 'markdown')}
+						>Markdown</ButtonText
+					></svelte:fragment
+				>
+				<article class="py-8 px-5">
+					{#if display === 'html'}
+						<div in:fade><Html text={html} /></div>
+					{:else}
+						<div in:fade><Html text={markdown} /></div>
+					{/if}
+				</article>
+			</SubmitReviewBlock>
+
+			<SubmitReviewBlock>
+				<aside slot="actions">An URL</aside>
+				<article class="p-2.5">{metadata?.url ?? ''}</article>
+			</SubmitReviewBlock>
+
+			<SubmitReviewBlock>
+				<aside slot="actions">Your motion text</aside>
+				<article class="p-2.5">{metadata?.motionText ?? ''}</article>
+			</SubmitReviewBlock>
 		</div>
+
 		<Button color="tertiary" role="submit" disabled={$isBusy}>Submit</Button>
 	</form>
 {:else}

@@ -54,14 +54,14 @@
 </script>
 
 {#if nonNullish(content)}
-	<Input placeholder="The proposal title." bind:value={title} pinPlaceholder={title !== ''} />
+	<Input placeholder="The proposal title" bind:value={title} pinPlaceholder={title !== ''} />
 
 	<Editor {content} {onUpdate} />
 
-	<Input placeholder="An URL." bind:value={url} pinPlaceholder={url !== ''} />
+	<Input placeholder="An URL" bind:value={url} pinPlaceholder={url !== ''} />
 
 	<Input
-		placeholder="Your motion text."
+		placeholder="Your motion text"
 		bind:value={motionText}
 		pinPlaceholder={motionText !== ''}
 	/>
