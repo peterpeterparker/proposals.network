@@ -1,7 +1,7 @@
 <script lang="ts">
-	export let color: 'primary' | 'secondary' | 'tertiary' = 'primary';
+	export let color: 'primary' | 'secondary' | 'tertiary' | 'quaternary' = 'primary';
 	export let disabled = false;
-	export let role: 'submit' | 'button' = 'button';
+	export let type: 'submit' | 'button' | undefined = undefined;
 
 	let primary: boolean;
 	$: primary = color === 'primary';
@@ -11,12 +11,15 @@
 
 	let tertiary: boolean;
 	$: tertiary = color === 'tertiary';
+
+	let quaternary: boolean;
+	$: quaternary = color === 'quaternary';
 </script>
 
 <button
 	class:opacity-20={disabled}
 	on:click
-	{role}
+	{type}
 	{disabled}
 	class="flex items-center gap-2 border-black border-2 transition-all rounded-none h-12 px-5 hover:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
 	class:bg-cyan-200={primary}
@@ -27,5 +30,8 @@
 	class:active:bg-violet-400={secondary}
 	class:bg-lime-200={tertiary}
 	class:hover:bg-lime-300={tertiary}
-	class:active:bg-lime-400={tertiary}><slot /></button
+	class:active:bg-lime-400={tertiary}
+	class:bg-white={quaternary}
+	class:hover:bg-gray-100={quaternary}
+	class:active:bg-gray-200={quaternary}><slot /></button
 >

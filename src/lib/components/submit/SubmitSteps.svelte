@@ -43,7 +43,7 @@
 			(neuronStatus =
 				step === 'neuron'
 					? 'active'
-					: nonNullish(step) && ['review', 'submit'].includes(step)
+					: nonNullish(step) && ['review', 'submitted'].includes(step)
 					  ? 'done'
 					  : 'pending'))();
 
@@ -52,7 +52,7 @@
 			(reviewStatus =
 				step === 'review'
 					? 'active'
-					: nonNullish(step) && ['submit'].includes(step)
+					: nonNullish(step) && ['submitted'].includes(step)
 					  ? 'done'
 					  : 'pending'))();
 </script>

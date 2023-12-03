@@ -45,6 +45,8 @@
 
 		dispatch('pnwrkNext');
 	};
+
+	const edit = () => dispatch('pnwrkEdit');
 </script>
 
 {#if nonNullish(html) && nonNullish(markdown) && nonNullish(neuronId)}
@@ -82,7 +84,7 @@
 			</SubmitReviewBlock>
 
 			<SubmitReviewBlock>
-				<aside slot="actions">An URL</aside>
+				<aside slot="actions">An URL pointing to the forum</aside>
 				<article class="p-2.5">{metadata?.url ?? ''}</article>
 			</SubmitReviewBlock>
 
@@ -92,7 +94,10 @@
 			</SubmitReviewBlock>
 		</div>
 
-		<Button color="tertiary" role="submit" disabled={$isBusy}>Submit</Button>
+		<div class="flex gap-2">
+			<Button color="quaternary" type="button" disabled={$isBusy} on:click={edit}>Edit</Button>
+			<Button color="tertiary" type="submit" disabled={$isBusy}>Submit</Button>
+		</div>
 	</form>
 {:else}
 	<SubmitError />

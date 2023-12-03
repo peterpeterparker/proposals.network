@@ -58,7 +58,7 @@
 
 	<Editor {content} {onUpdate} />
 
-	<Input placeholder="An URL" bind:value={url} pinPlaceholder={url !== ''} />
+	<Input placeholder="An URL (https://forum.dfinity.org...)" bind:value={url} pinPlaceholder={url !== ''} />
 
 	<Input
 		placeholder="Your motion text"

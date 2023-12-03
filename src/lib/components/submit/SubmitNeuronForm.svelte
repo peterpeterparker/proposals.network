@@ -43,5 +43,5 @@
 		<Input placeholder="Neuron ID" bind:value={neuronId} disabled={$isBusy} />
 	</div>
 
-	<Button color="secondary" role="submit" disabled={$isBusy || disabled}>Save and continue</Button>
+	<Button color="secondary" type="submit" disabled={$isBusy || disabled}>Save and continue</Button>
 </form>

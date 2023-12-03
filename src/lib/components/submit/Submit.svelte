@@ -52,7 +52,11 @@
 			{:else if step === 'neuron'}
 				<SubmitNeuron on:pnwrkNext={() => (step = 'review')} bind:neuronId />
 			{:else if step === 'review'}
-				<SubmitReview {neuronId} on:pnwrkNext={() => (step = 'submitted')} />
+				<SubmitReview
+					{neuronId}
+					on:pnwrkNext={() => (step = 'submitted')}
+					on:pnwrkEdit={() => (step = 'write')}
+				/>
 			{/if}
 		</div>
 	</UserInitializedGuard>
