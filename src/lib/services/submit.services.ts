@@ -28,7 +28,7 @@ export const initUserProposal = async ({
 	user: UserOption;
 	routeKey: string | undefined | null;
 }): Promise<{
-	result: 'ok' | 'not_allowed' | 'error';
+	result: 'ok' | 'not_allowed' | 'error' | 'readonly';
 	metadata: ProposalEditableMetadata | undefined;
 	content: ProposalContent | undefined;
 }> => {
@@ -106,7 +106,7 @@ export const initUserProposal = async ({
 		});
 
 		return {
-			result: 'ok',
+			result: data.status === 'submitted' ? 'readonly' : 'ok',
 			metadata: editableMetadata,
 			content: jsonContent
 		};
@@ -183,7 +183,6 @@ export const submitProposal = async ({
 		}
 
 		const { result, proposalId } = await submitMotionProposal({
-			user,
 			title,
 			url,
 			motionText,

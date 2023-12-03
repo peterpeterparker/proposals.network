@@ -14,8 +14,9 @@
 	import SubmitReview from '$lib/components/submit/SubmitReview.svelte';
 	import { isWizardBusy } from '$lib/derived/busy.derived';
 	import SubmitDone from '$lib/components/submit/SubmitDone.svelte';
+	import SubmitReadonly from "$lib/components/submit/SubmitReadonly.svelte";
 
-	let step: undefined | 'write' | 'neuron' | 'review' | 'submitted' = undefined;
+	let step: undefined | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly' = undefined;
 	let neuronId: bigint | undefined;
 	let proposalId: bigint | undefined;
 
@@ -29,6 +30,11 @@
 
 		if (result === 'not_allowed') {
 			step = undefined;
+			return;
+		}
+
+		if (result === 'readonly') {
+			step = "readonly";
 			return;
 		}
 
@@ -66,6 +72,8 @@
 				/>
 			{:else if step === 'submitted'}
 				<SubmitDone {proposalId} />
+			{:else if step === 'readonly'}
+				<SubmitReadonly />
 			{/if}
 		</div>
 	</UserInitializedGuard>

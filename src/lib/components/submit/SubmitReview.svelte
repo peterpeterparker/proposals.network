@@ -21,10 +21,9 @@
 	let metadata: ProposalEditableMetadata | undefined;
 	let content: ProposalContent | undefined;
 
-	onMount(async () => ([metadata, content] = await getEditable()));
-
 	let html: string | undefined;
 	let markdown: string | undefined;
+
 	onMount(async () => {
 		[metadata, content] = await getEditable();
 
