@@ -12,6 +12,8 @@
 	import { signIn } from '$lib/services/auth.services';
 	import IconICMonochrome from '$lib/components/icons/IconICMonochrome.svelte';
 	import SubmitLink from '$lib/components/submit/SubmitLink.svelte';
+	import UserProposalPaginator from '$lib/components/proposals/UserProposalPaginator.svelte';
+	import { fade } from 'svelte/transition';
 
 	const load = async () => {
 		if ($userNotInitialized) {
@@ -23,7 +25,7 @@
 			return;
 		}
 
-		await loadUserProposals();
+		await loadUserProposals({ startAfter: undefined });
 	};
 
 	$: $userStore, (async () => load())();
@@ -49,30 +51,36 @@
 			{:else if $userProposalsICPStore === null}
 				<tr>
 					<td colspan="5">
-						<div>
-							<span class="inline-block pb-2">Sign-in to submit your own proposals.</span>
-							<Button on:click={signIn}>
-								<IconICMonochrome /> Continue with Internet Identity
-							</Button>
-						</div>
+						<span class="inline-block">Sign-in to submit your own proposals.</span>
 					</td>
 				</tr>
 			{:else if $userProposalsICPStore.items_length === 0n}
 				<tr>
 					<td colspan="5">
-						<div>
-							<span class="inline-block pb-2"
-								>Your basket of ideas is empty. Start crafting your first proposal now!</span
-							>
-							<SubmitLink />
-						</div>
+						<span class="inline-block"
+							>Your basket of ideas is empty. Start crafting your first proposal now!</span
+						>
 					</td>
 				</tr>
 			{:else}
-				{#each $userProposalsICPStore.items as doc}
+				{#each $userProposalsICPStore.items as doc (doc.key)}
 					<UserProposalRow {doc} />
 				{/each}
 			{/if}
 		</tbody>
 	</TableContainer>
+
+	{#if $userProposalsICPStore === null}
+		<div in:fade class="lg:mx-4 my-4">
+			<Button on:click={signIn} color="quaternary">
+				<IconICMonochrome /> Continue with Internet Identity
+			</Button>
+		</div>
+	{:else if $userProposalsICPStore?.items_length === 0n}
+		<div in:fade class="lg:mx-4 my-4">
+			<SubmitLink />
+		</div>
+	{:else}
+		<UserProposalPaginator />
+	{/if}
 </Section>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import SkeletonText from '$lib/components/ui/SkeletonText.svelte';
 	import { isNullish, nonNullish } from '@dfinity/utils';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { getProposal } from '$lib/api/proposal.api';
 	import { ProposalStatus } from '@dfinity/nns';
 	import { fade } from 'svelte/transition';
@@ -19,7 +19,6 @@
 
 		try {
 			const proposal = await getProposal({ proposalId });
-			console.log(proposal);
 
 			if (isNullish(proposal)) {
 				return;

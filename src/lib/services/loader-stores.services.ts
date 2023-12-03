@@ -1,14 +1,17 @@
-import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
+import { GOVERNANCE_CANISTER_ID, PAGINATION } from '$lib/constants/app.constants';
 import { toasts } from '$lib/stores/toasts.store';
 import { userProposalsStore, type UserProposalsSetData } from '$lib/stores/user-proposals.store';
 import { userStore } from '$lib/stores/user.store';
 import type { ProposalMetadata, ProposalToken } from '$lib/types/juno';
 import type { Store } from '$lib/types/store';
 import { isNullish } from '@dfinity/utils';
+import type { ListPaginate } from '@junobuild/core';
 import { listDocs } from '@junobuild/core';
 import { get } from 'svelte/store';
 
-export const loadUserProposals = (): Promise<{ success: boolean }> =>
+export const loadUserProposals = ({
+	startAfter
+}: Pick<ListPaginate, 'startAfter'>): Promise<{ success: boolean }> =>
 	loadPrivate({
 		fn: async (token: ProposalToken): Promise<UserProposalsSetData> => {
 			const proposals = await listDocs<ProposalMetadata>({
@@ -19,7 +22,11 @@ export const loadUserProposals = (): Promise<{ success: boolean }> =>
 					},
 					order: {
 						desc: true,
-						field: "created_at"
+						field: 'created_at'
+					},
+					paginate: {
+						limit: PAGINATION,
+						startAfter
 					}
 				}
 			});

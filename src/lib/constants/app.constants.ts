@@ -14,3 +14,5 @@ export const II_CANISTER_ID: string | null | undefined = import.meta.env
 export const HOST = nonNullish(II_CANISTER_ID) ? 'http://127.0.0.1:8000/' : 'https://icp-api.io';
 
 export const LOCAL = import.meta.env.VITE_DFX_NETWORK === "local";
+
+export const PAGINATION = 10;
