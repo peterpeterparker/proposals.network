@@ -7,7 +7,7 @@
 >
 	<div>
 		<a
-			class="text-2xl font-bold text-white flex items-center gap-3"
+			class="text-2xl font-bold text-white flex items-center gap-3 hover:underline hover:underline-offset-8"
 			href="https://juno.build"
 			target="_blank"
 			aria-label="Built with Juno"

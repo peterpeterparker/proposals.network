@@ -33,7 +33,7 @@
 			<IconCircleDashed strokeWidth={0.55} />
 		</div>
 		<div class="absolute top-[11vw] left-[11vw]">
-			<div class="animate-spin-slow"><IconLogo size="96px" /></div>
+			<div class="animate-spin-slow hidden md:block"><IconLogo size="96px" /></div>
 		</div>
 	</div>
 </div>
