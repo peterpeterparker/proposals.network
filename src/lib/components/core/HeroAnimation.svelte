@@ -4,7 +4,7 @@
 </script>
 
 <div
-	class="opacity-10 w-[50vw] aspect-square rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+	class="opacity-30 w-[50vw] aspect-square rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
 >
 	<IconCircleDashed />
 </div>
@@ -13,14 +13,14 @@
 	class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[70vw] aspect-square"
 >
 	<div class="animate-spin-slow w-full h-full">
-		<div class="border-custom opacity-10 w-full h-full">
-			<IconCircleDashed />
+		<div class="border-custom opacity-30 w-full h-full">
+			<IconCircleDashed strokeWidth={0.45} />
 		</div>
 		<div class="absolute bottom-[7vw] left-[8vw]">
-			<div class="animate-spin-slow"><IconLogo size="96px" /></div>
+			<div class="animate-spin-slow hidden md:block"><IconLogo size="96px" /></div>
 		</div>
 		<div class="absolute bottom-[7vw] right-[7vw]">
-			<div class="animate-spin"><IconLogo size="96px" /></div>
+			<div class="animate-spin hidden md:block"><IconLogo size="96px" /></div>
 		</div>
 	</div>
 </div>
@@ -29,8 +29,8 @@
 	class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90vw] aspect-square"
 >
 	<div class="animate-spin-slow w-full h-full">
-		<div class="border-custom opacity-10 w-full h-full">
-			<IconCircleDashed />
+		<div class="border-custom opacity-30 w-full h-full">
+			<IconCircleDashed strokeWidth={0.55} />
 		</div>
 		<div class="absolute top-[11vw] left-[11vw]">
 			<div class="animate-spin-slow"><IconLogo size="96px" /></div>
