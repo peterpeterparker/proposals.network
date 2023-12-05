@@ -19,6 +19,9 @@ const dispatchIntersecting = ({
 export const onIntersectionCell = (element: HTMLElement) =>
 	onIntersection({ element, rootMargin: '0px', threshold: 0.01 });
 
+export const onIntersectionTitle = (element: HTMLElement) =>
+	onIntersection({ element, rootMargin: '120px 0px', threshold: 0.7 });
+
 const onIntersection = ({
 	element,
 	rootMargin,

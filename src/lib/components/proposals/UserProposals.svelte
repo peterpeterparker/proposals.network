@@ -14,6 +14,7 @@
 	import SubmitLink from '$lib/components/submit/SubmitLink.svelte';
 	import UserProposalPaginator from '$lib/components/proposals/UserProposalPaginator.svelte';
 	import { fade } from 'svelte/transition';
+	import { USER_PAGINATION } from '$lib/constants/app.constants';
 
 	const load = async () => {
 		if ($userNotInitialized) {
@@ -47,7 +48,7 @@
 
 		<tbody>
 			{#if $userProposalsICPStore === undefined}
-				<SkeletonRows rows={4} columns={6} />
+				<SkeletonRows rows={USER_PAGINATION} columns={6} />
 			{:else if $userProposalsICPStore === null}
 				<tr>
 					<td colspan="5">

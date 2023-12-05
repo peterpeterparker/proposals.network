@@ -1,4 +1,6 @@
-import { GOVERNANCE_CANISTER_ID, PAGINATION } from '$lib/constants/app.constants';
+import { listProposals } from '$lib/api/proposal.api';
+import { GOVERNANCE_CANISTER_ID, USER_PAGINATION } from '$lib/constants/app.constants';
+import { proposalsStore, type ProposalsSetData } from '$lib/stores/proposals.store';
 import { toasts } from '$lib/stores/toasts.store';
 import { userProposalsStore, type UserProposalsSetData } from '$lib/stores/user-proposals.store';
 import { userStore } from '$lib/stores/user.store';
@@ -25,7 +27,7 @@ export const loadUserProposals = ({
 						field: 'created_at'
 					},
 					paginate: {
-						limit: PAGINATION,
+						limit: USER_PAGINATION,
 						startAfter
 					}
 				}
@@ -38,6 +40,20 @@ export const loadUserProposals = ({
 		},
 		store: userProposalsStore,
 		errorLabel: 'Unexpected error while loading your proposals'
+	});
+
+export const loadProposals = () =>
+	load({
+		fn: async (token: ProposalToken): Promise<ProposalsSetData> => {
+			const { proposals } = await listProposals();
+
+			return {
+				token,
+				proposals
+			};
+		},
+		store: proposalsStore,
+		errorLabel: 'Unexpected error while loading the network proposals'
 	});
 
 const loadPrivate = async <T, D>(params: {
@@ -54,6 +70,18 @@ const loadPrivate = async <T, D>(params: {
 		return { success: false };
 	}
 
+	return load(params);
+};
+
+const load = async <T, D>({
+	fn,
+	store,
+	errorLabel
+}: {
+	fn: (token: ProposalToken) => Promise<D>;
+	store: Store<T, D>;
+	errorLabel: string;
+}): Promise<{ success: boolean }> => {
 	if (isNullish(GOVERNANCE_CANISTER_ID)) {
 		toasts.error({
 			msg: {
@@ -63,25 +91,8 @@ const loadPrivate = async <T, D>(params: {
 		return { success: false };
 	}
 
-	return load({
-		...params,
-		token: GOVERNANCE_CANISTER_ID
-	});
-};
-
-const load = async <T, D>({
-	fn,
-	store,
-	errorLabel,
-	token
-}: {
-	fn: (token: ProposalToken) => Promise<D>;
-	store: Store<T, D>;
-	errorLabel: string;
-	token: ProposalToken;
-}): Promise<{ success: boolean }> => {
 	try {
-		const data = await fn(token);
+		const data = await fn(GOVERNANCE_CANISTER_ID);
 		store.set(data);
 	} catch (err: unknown) {
 		store.reset();

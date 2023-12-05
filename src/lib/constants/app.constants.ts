@@ -15,4 +15,5 @@ export const HOST = nonNullish(II_CANISTER_ID) ? 'http://127.0.0.1:8000/' : 'htt
 
 export const LOCAL = import.meta.env.VITE_DFX_NETWORK === 'local';
 
-export const PAGINATION = 10;
+export const USER_PAGINATION = 5;
+export const NETWORK_PAGINATION = 10;
