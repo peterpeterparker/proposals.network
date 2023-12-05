@@ -42,7 +42,8 @@ export const listProposals = async (
 				values: [ProposalStatus.Unknown]
 			}),
 			includeAllManageNeuronProposals: false
-		}
+		},
+		certified: false
 	});
 };
 
@@ -60,7 +61,7 @@ export const getProposal = async ({
 		canisterId: Principal.fromText(GOVERNANCE_CANISTER_ID)
 	});
 
-	return getProposal({ proposalId });
+	return getProposal({ proposalId, certified: false });
 };
 
 export const makeProposal = async (
