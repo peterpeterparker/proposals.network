@@ -54,16 +54,17 @@
 				<th class="w-2/12">Topic</th>
 				<th class="w-2/12">Rewards</th>
 				<th class="w-2/12">Status</th>
+				<th class="w-2/12">Expiration</th>
 				<th></th>
 			</tr>
 		</thead>
 
 		<tbody>
 			{#if isNullish($proposalsICPStore)}
-				<SkeletonRows rows={NETWORK_PAGINATION} columns={7} />
+				<SkeletonRows rows={NETWORK_PAGINATION} columns={8} />
 			{:else if $proposalsICPStore.length === 0}
 				<tr>
-					<td colspan="5">
+					<td colspan="7">
 						<span class="inline-block">No matching proposals found for now!</span>
 					</td>
 				</tr>

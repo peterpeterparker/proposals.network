@@ -6,6 +6,8 @@
 	import { ProposalRewardStatus, ProposalStatus, Topic } from '@dfinity/nns';
 	import en from '$lib/i18n/en.governance.json';
 	import { keyOf } from '$lib/utils/utils';
+	import ProposalCountdown from '$lib/components/proposals/ProposalCountdown.svelte';
+	import ProposalView from '$lib/components/proposals/ProposalView.svelte';
 
 	export let proposalInfo: ProposalInfo;
 
@@ -14,8 +16,9 @@
 	let topic: Topic;
 	let status: ProposalStatus;
 	let rewardStatus: ProposalRewardStatus;
+	let deadlineTimestampSeconds: Option<bigint>;
 
-	$: ({ id, proposal, topic, status, rewardStatus } = proposalInfo);
+	$: ({ id, proposal, topic, status, rewardStatus, deadlineTimestampSeconds } = proposalInfo);
 
 	let title: string;
 	$: title = proposal?.title ?? '';
@@ -27,5 +30,6 @@
 	<td>{keyOf({ obj: en.topics, key: Topic[topic] })}</td>
 	<td>{keyOf({ obj: en.rewards, key: ProposalRewardStatus[rewardStatus] })}</td>
 	<td>{keyOf({ obj: en.status, key: ProposalStatus[status] })}</td>
-	<td></td>
+	<td><ProposalCountdown {deadlineTimestampSeconds} /> </td>
+	<ProposalView {id} />
 </tr>
