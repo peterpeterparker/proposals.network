@@ -142,6 +142,7 @@ const config: UserConfig = {
 		}
 	},
 	worker: {
+		plugins: [sveltekit()],
 		format: 'es'
 	}
 };

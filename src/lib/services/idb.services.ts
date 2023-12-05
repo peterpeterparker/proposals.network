@@ -1,11 +1,12 @@
+import { browser } from '$app/environment';
 import type {
 	ProposalContent,
 	ProposalEditableMetadata,
 	ProposalKey,
 	ProposalMetadata
 } from '$lib/types/juno';
-import type { Doc } from '@junobuild/core';
-import { clear as clearIdb, createStore, get as getIdb, setMany } from 'idb-keyval';
+import type { Doc } from '@junobuild/core-peer';
+import { clear as clearIdb, createStore, get as getIdb, setMany, type UseStore } from 'idb-keyval';
 
 const KEY_PROPOSAL_KEY = 'proposal-key';
 const KEY_PROPOSAL_METADATA = 'proposal-metadata';
@@ -17,7 +18,10 @@ const KEY_LAST_CONTENT_CHANGE = 'last-content-change';
 const KEY_LAST_METADATA_JOB = 'last-metadata-job';
 const KEY_LAST_CONTENT_JOB = 'last-content-job';
 
-const proposalsStore = createStore('pnwrk-proposals', 'proposals');
+// SSG
+const proposalsStore = browser
+	? createStore('pnwrk-proposals', 'proposals')
+	: ({} as unknown as UseStore);
 
 export const init = ({
 	key,

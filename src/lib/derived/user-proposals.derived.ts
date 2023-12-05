@@ -2,7 +2,7 @@ import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
 import { userProposalsStore } from '$lib/stores/user-proposals.store';
 import type { ProposalMetadataDoc } from '$lib/types/juno';
 import { isNullish } from '@dfinity/utils';
-import type { ListResults } from '@junobuild/core';
+import type { ListResults } from '@junobuild/core-peer';
 import { derived, type Readable } from 'svelte/store';
 
 export const userProposalsICPStore: Readable<ListResults<ProposalMetadataDoc> | undefined | null> =

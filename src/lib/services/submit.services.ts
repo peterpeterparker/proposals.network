@@ -18,7 +18,7 @@ import type {
 import type { UserOption } from '$lib/types/user';
 import { replaceHistory } from '$lib/utils/route.utils';
 import { isNullish } from '@dfinity/utils';
-import { getDoc, setDoc, type Doc } from '@junobuild/core';
+import { getDoc, setDoc, type Doc } from '@junobuild/core-peer';
 import { nanoid } from 'nanoid';
 
 export const initUserProposal = async ({

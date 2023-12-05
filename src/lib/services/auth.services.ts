@@ -5,7 +5,7 @@ import { toasts } from '$lib/stores/toasts.store';
 import type { ToastLevel, ToastMsg } from '$lib/types/toast';
 import { replaceHistory } from '$lib/utils/route.utils';
 import { isNullish } from '@dfinity/utils';
-import { signIn as junoSignIn, signOut as junoSignOut } from '@junobuild/core';
+import { signIn as junoSignIn, signOut as junoSignOut } from '@junobuild/core-peer';
 
 export const signIn = async (): Promise<{
 	success: 'ok' | 'cancelled' | 'error';

@@ -1,7 +1,7 @@
 import { GOVERNANCE_CANISTER_ID, II_CANISTER_ID, SATELLITE_ID } from '$lib/constants/app.constants';
 import type { Neuron } from '$lib/types/juno';
 import { isNullish, nonNullish } from '@dfinity/utils';
-import type { Doc, Environment } from '@junobuild/core';
+import type { Doc, Environment } from '@junobuild/core-peer';
 
 export const junoEnvironment = ():
 	| Pick<Environment, 'satelliteId' | 'localIdentityCanisterId'>

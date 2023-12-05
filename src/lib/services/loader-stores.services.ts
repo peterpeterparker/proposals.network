@@ -9,8 +9,8 @@ import type { ProposalMetadata } from '$lib/types/juno';
 import type { Store } from '$lib/types/store';
 import type { ProposalId } from '@dfinity/nns';
 import { isNullish } from '@dfinity/utils';
-import type { ListPaginate } from '@junobuild/core';
-import { listDocs } from '@junobuild/core';
+import type { ListPaginate } from '@junobuild/core-peer';
+import { listDocs } from '@junobuild/core-peer';
 import { get } from 'svelte/store';
 
 export const loadUserProposals = ({

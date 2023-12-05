@@ -4,7 +4,7 @@ import { toasts } from '$lib/stores/toasts.store';
 import type { Neuron } from '$lib/types/juno';
 import type { UserOption } from '$lib/types/user';
 import { isNullish, nonNullish } from '@dfinity/utils';
-import { getDoc, setDoc, type Doc } from '@junobuild/core';
+import { getDoc, setDoc, type Doc } from '@junobuild/core-peer';
 
 export const getNeuron = async (
 	user: UserOption

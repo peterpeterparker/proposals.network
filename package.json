@@ -69,7 +69,7 @@
 		"@dfinity/nns": "^3.0.0-next-2023-12-02",
 		"@dfinity/principal": "^0.19.3",
 		"@dfinity/utils": "^1.1.0-next-2023-12-02",
-		"@junobuild/core": "^0.0.38",
+		"@junobuild/core-peer": "^0.0.3",
 		"@tiptap/core": "^2.1.12",
 		"@tiptap/extension-highlight": "^2.1.12",
 		"@tiptap/extension-link": "^2.1.12",
