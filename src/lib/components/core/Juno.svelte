@@ -6,6 +6,8 @@
 	import { displayAndCleanLogoutMsg, toastAndReload } from '$lib/services/auth.services';
 	import { junoEnvironment } from '$lib/utils/juno.utils';
 	import { toasts } from '$lib/stores/toasts.store';
+	import { initOrbiter } from '@junobuild/analytics';
+	import { SATELLITE_ID } from '$lib/constants/app.constants';
 
 	let unsubscribe: (() => void) | undefined = undefined;
 
@@ -21,12 +23,18 @@
 
 		unsubscribe = authSubscribe((user) => userStore.set(user));
 
-		await initJuno({
-			...env,
-			workers: {
-				auth: true
-			}
-		});
+		await Promise.all([
+			initJuno({
+				...env,
+				workers: {
+					auth: true
+				}
+			}),
+			initOrbiter({
+				satelliteId: SATELLITE_ID!,
+				orbiterId: '3iier-sqaaa-aaaal-aczaa-cai'
+			})
+		]);
 
 		displayAndCleanLogoutMsg();
 	});
