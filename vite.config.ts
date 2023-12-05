@@ -10,12 +10,7 @@ const file = fileURLToPath(new URL('package.json', import.meta.url));
 const json = readFileSync(file, 'utf8');
 const { version } = JSON.parse(json);
 
-// npm run dev = local
-// npm run build = local
-// dfx deploy = local
-// dfx deploy --network ic = ic
-// dfx deploy --network staging = staging
-const network = process.env.DFX_NETWORK ?? 'local';
+const network = process.env.NODE_ENV === 'development' ? 'local' : 'ic';
 
 const readCanisterIds = ({ prefix }: { prefix?: string }): Record<string, string> => {
 	const canisterIdsJsonFile = ['ic', 'staging'].includes(network)
@@ -47,19 +42,17 @@ const readCanisterIds = ({ prefix }: { prefix?: string }): Record<string, string
 };
 
 const dfxCanisterIds = ({ prefix }: { prefix?: string }): Record<string, string> => {
-	if (['ic', 'staging'].includes(network)) {
-		return {};
-	}
-
 	const dfxJsonFile = join(process.cwd(), 'dfx.json');
 
 	try {
+		type DetailsId = {
+			ic: string;
+			local: string;
+		};
+
 		type Details = {
 			remote?: {
-				id: {
-					ic: string;
-					local: string;
-				};
+				id: DetailsId;
 			};
 		};
 
@@ -78,7 +71,7 @@ const dfxCanisterIds = ({ prefix }: { prefix?: string }): Record<string, string>
 					[`${prefix ?? ''}${canisterName
 						.replaceAll('-', '_')
 						.replaceAll("'", '')
-						.toUpperCase()}_CANISTER_ID`]: canisterDetails.remote.id.local
+						.toUpperCase()}_CANISTER_ID`]: canisterDetails.remote.id[network as keyof DetailsId]
 				};
 			}
 
@@ -151,10 +144,7 @@ export default defineConfig((): UserConfig => {
 	// Expand environment - .env files - with canister IDs
 	process.env = {
 		...process.env,
-		...loadEnv(
-			network === 'ic' ? 'production' : network === 'staging' ? 'staging' : 'development',
-			process.cwd()
-		),
+		...loadEnv(network === 'ic' ? 'production' : 'development', process.cwd()),
 		...readCanisterIds({ prefix: 'VITE_' }),
 		...dfxCanisterIds({ prefix: 'VITE_' })
 	};

@@ -26,7 +26,12 @@
 		"satellite": {
 			"candid": "https://raw.githubusercontent.com/buildwithjuno/juno/main/src/satellite/satellite.did",
 			"type": "custom",
-			"wasm": "https://github.com/junobuild/juno/releases/download/v0.0.23/satellite-v0.0.13.wasm.gz"
+			"wasm": "https://github.com/junobuild/juno/releases/download/v0.0.23/satellite-v0.0.13.wasm.gz",
+			"remote": {
+				"id": {
+					"ic": "gz2uc-6yaaa-aaaal-adgyq-cai"
+				}
+			}
 		}
 	},
 	"defaults": {
