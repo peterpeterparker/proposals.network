@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { userProposalsICPStore } from '$lib/derived/user-proposals.derived';
 	import { nonNullish } from '@dfinity/utils';
 	import IconNavigateNext from '$lib/components/icons/IconNavigateNext.svelte';
 	import ButtonIcon from '$lib/components/ui/ButtonIcon.svelte';
 	import { last } from '$lib/utils/utils';
 	import { proposalsICPStore } from '$lib/derived/proposals.derived';
 	import { loadProposals } from '$lib/services/loader-stores.services';
+	import type { ProposalId } from '@dfinity/nns';
 
 	let previousBeforeProposal: ProposalId | undefined;
 	let beforeProposal: ProposalId | undefined;

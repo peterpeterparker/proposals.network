@@ -16,7 +16,9 @@ import { Principal } from '@dfinity/principal';
 import { assertNonNullish } from '@dfinity/utils';
 import { unsafeIdentity } from '@junobuild/core';
 
-export const listProposals = async (beforeProposal: ProposalId | undefined): Promise<ListProposalsResponse> => {
+export const listProposals = async (
+	beforeProposal: ProposalId | undefined
+): Promise<ListProposalsResponse> => {
 	assertNonNullish(GOVERNANCE_CANISTER_ID, 'The ICP governance canister ID is not set.');
 
 	const agent = await getAgent({ identity: new AnonymousIdentity() });
