@@ -9,7 +9,8 @@ export default {
 		},
 		extend: {
 			animation: {
-				'spin-slow': 'spin 20s linear infinite',
+				'spin-slow': 'spin 25s linear infinite',
+				'spin-medium': 'spin 20s linear infinite',
 			}
 		},
 		colors: {
