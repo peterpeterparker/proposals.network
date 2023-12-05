@@ -1,6 +1,5 @@
 <script lang="ts">
 	import SubmitSteps from '$lib/components/submit/SubmitSteps.svelte';
-	import { fade } from 'svelte/transition';
 	import UserInitializedGuard from '$lib/components/guards/UserInitializedGuard.svelte';
 	import { userNotSignedIn } from '$lib/derived/user.derived';
 	import SubmitSignIn from '$lib/components/submit/SubmitSignIn.svelte';
@@ -15,6 +14,7 @@
 	import { isWizardBusy } from '$lib/derived/busy.derived';
 	import SubmitDone from '$lib/components/submit/SubmitDone.svelte';
 	import SubmitReadonly from '$lib/components/submit/SubmitReadonly.svelte';
+	import SplitPane from '$lib/components/ui/SplitPane.svelte';
 
 	let step: undefined | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly' = undefined;
 	let neuronId: bigint | undefined;
@@ -51,26 +51,24 @@
 	};
 </script>
 
-<div class="flex flex-col lg:flex-row min-h-screen" in:fade>
-	<SubmitSteps {step} />
+<SplitPane>
+	<svelte:fragment slot="aside">
+		<SubmitSteps {step} />
+	</svelte:fragment>
 
 	<UserInitializedGuard>
-		<div
-			class="w-full lg:w-[calc(100%-300px)] lg:ml-[300px] px-4 lg:px-16 pt-9 lg:pt-36 pb-36 h-full"
-		>
-			{#if $userNotSignedIn}
-				<SubmitSignIn />
-			{:else if step === 'write'}
-				<SubmitWrite on:pnwrkNext={() => (step = 'neuron')} />
-			{:else if step === 'neuron'}
-				<SubmitNeuron on:pnwrkNext={() => (step = 'review')} bind:neuronId />
-			{:else if step === 'review'}
-				<SubmitReview {neuronId} on:pnwrkNext={() => (step = 'submitted')} on:pnwrkDone={done} />
-			{:else if step === 'submitted'}
-				<SubmitDone {proposalId} />
-			{:else if step === 'readonly'}
-				<SubmitReadonly />
-			{/if}
-		</div>
+		{#if $userNotSignedIn}
+			<SubmitSignIn />
+		{:else if step === 'write'}
+			<SubmitWrite on:pnwrkNext={() => (step = 'neuron')} />
+		{:else if step === 'neuron'}
+			<SubmitNeuron on:pnwrkNext={() => (step = 'review')} bind:neuronId />
+		{:else if step === 'review'}
+			<SubmitReview {neuronId} on:pnwrkNext={() => (step = 'submitted')} on:pnwrkDone={done} />
+		{:else if step === 'submitted'}
+			<SubmitDone {proposalId} />
+		{:else if step === 'readonly'}
+			<SubmitReadonly />
+		{/if}
 	</UserInitializedGuard>
-</div>
+</SplitPane>

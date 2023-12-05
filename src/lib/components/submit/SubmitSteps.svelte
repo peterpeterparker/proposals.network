@@ -57,35 +57,31 @@
 					  : 'pending'))();
 </script>
 
-<aside
-	class="flex justify-center lg:block lg:bg-cyan-200 lg:fixed lg:top-20 lg:left-0 lg:w-[300px] lg:h-screen lg:overflow-y-scroll lg:px-16 pt-36 lg:pt-16 lg:border-r-2 lg:border-black"
->
-	<span class="hidden lg:inline-block text-lg font-bold mb-6">Submit a proposal</span>
+<span class="hidden lg:inline-block text-lg font-bold mb-6">Submit a proposal</span>
 
-	<ul class="flex lg:flex-col gap-3 lg:gap-1 lg:pb-16">
-		<Step status={signInStatus}>
-			<svelte:fragment slot="step">1</svelte:fragment>
-			Sign-in
-		</Step>
+<ul class="flex lg:flex-col gap-3 lg:gap-1 lg:pb-16">
+	<Step status={signInStatus}>
+		<svelte:fragment slot="step">1</svelte:fragment>
+		Sign-in
+	</Step>
 
-		<Step status={writeStatus}>
-			<svelte:fragment slot="step">2</svelte:fragment>
-			Write
-		</Step>
+	<Step status={writeStatus}>
+		<svelte:fragment slot="step">2</svelte:fragment>
+		Write
+	</Step>
 
-		<Step status={neuronStatus}>
-			<svelte:fragment slot="step">3</svelte:fragment>
-			Neuron
-		</Step>
+	<Step status={neuronStatus}>
+		<svelte:fragment slot="step">3</svelte:fragment>
+		Neuron
+	</Step>
 
-		<Step status={reviewStatus}>
-			<svelte:fragment slot="step">4</svelte:fragment>
-			Review
-		</Step>
+	<Step status={reviewStatus}>
+		<svelte:fragment slot="step">4</svelte:fragment>
+		Review
+	</Step>
 
-		<Step status={step === 'submitted' || step === 'readonly' ? 'active' : 'pending'}>
-			<svelte:fragment slot="step">5</svelte:fragment>
-			Done
-		</Step>
-	</ul>
-</aside>
+	<Step status={step === 'submitted' || step === 'readonly' ? 'active' : 'pending'}>
+		<svelte:fragment slot="step">5</svelte:fragment>
+		Done
+	</Step>
+</ul>

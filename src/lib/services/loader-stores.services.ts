@@ -4,6 +4,7 @@ import { proposalsStore, type ProposalsSetData } from '$lib/stores/proposals.sto
 import { toasts } from '$lib/stores/toasts.store';
 import { userProposalsStore, type UserProposalsSetData } from '$lib/stores/user-proposals.store';
 import { userStore } from '$lib/stores/user.store';
+import type { GovernanceCanisterId } from '$lib/types/core';
 import type { ProposalMetadata } from '$lib/types/juno';
 import type { Store } from '$lib/types/store';
 import type { ProposalId } from '@dfinity/nns';
@@ -11,7 +12,6 @@ import { isNullish } from '@dfinity/utils';
 import type { ListPaginate } from '@junobuild/core';
 import { listDocs } from '@junobuild/core';
 import { get } from 'svelte/store';
-import type {GovernanceCanisterId} from "$lib/types/core";
 
 export const loadUserProposals = ({
 	startAfter

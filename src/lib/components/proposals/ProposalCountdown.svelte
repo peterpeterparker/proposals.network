@@ -31,6 +31,9 @@
 
 	onMount(() => {
 		fn();
+
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore NodeJS.timeout vs number
 		timer = setInterval(fn, 1000);
 	});
 	onDestroy(clear);

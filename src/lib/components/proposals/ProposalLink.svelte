@@ -3,11 +3,12 @@
 	import type { Option } from '@dfinity/nns';
 	import type { ProposalId } from '@dfinity/nns';
 	import { nonNullish } from '@dfinity/utils';
+	import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
 
 	export let id: Option<ProposalId>;
 
 	let href: string;
-	$: href = `/proposal/?id=${id ?? ''}`;
+	$: href = `/proposal/?g=${GOVERNANCE_CANISTER_ID ?? ''}&id=${id ?? ''}`;
 </script>
 
 <td>

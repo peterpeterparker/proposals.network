@@ -1,8 +1,8 @@
+import type { GovernanceCanisterId } from '$lib/types/core';
 import type { Store } from '$lib/types/store';
 import type { ProposalInfo } from '@dfinity/nns';
 import { nonNullish } from '@dfinity/utils';
 import { writable } from 'svelte/store';
-import type {GovernanceCanisterId} from "$lib/types/core";
 
 export type ProposalsData = Record<GovernanceCanisterId, ProposalInfo[]> | undefined | null;
 

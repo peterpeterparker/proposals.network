@@ -17,12 +17,16 @@ export const back = async (pop: boolean) => {
 
 export type RouteParams = {
 	key: string | null | undefined;
+	id: string | null | undefined;
+	g: string | null | undefined;
 };
 
 export const loadRouteParams = ($event: LoadEvent): RouteParams => {
 	if (!browser) {
 		return {
-			key: undefined
+			key: undefined,
+			id: undefined,
+			g: undefined
 		};
 	}
 
@@ -31,6 +35,8 @@ export const loadRouteParams = ($event: LoadEvent): RouteParams => {
 	} = $event;
 
 	return {
-		key: searchParams?.get('key')
+		key: searchParams?.get('key'),
+		id: searchParams?.get('id'),
+		g: searchParams?.get('g')
 	};
 };
