@@ -3,7 +3,7 @@
 	import { Editor } from '@tiptap/core';
 	import EditorHeader from '$lib/components/ui/EditorHeader.svelte';
 	import { EDITOR_EXTENSIONS } from '$lib/constants/editor.constants';
-	import type { Markdown } from '$lib/types/app';
+	import type { Markdown } from '$lib/types/core';
 	import EditorBusy from '$lib/components/ui/EditorBusy.svelte';
 
 	export let content: Markdown;

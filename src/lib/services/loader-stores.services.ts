@@ -4,24 +4,25 @@ import { proposalsStore, type ProposalsSetData } from '$lib/stores/proposals.sto
 import { toasts } from '$lib/stores/toasts.store';
 import { userProposalsStore, type UserProposalsSetData } from '$lib/stores/user-proposals.store';
 import { userStore } from '$lib/stores/user.store';
-import type { ProposalMetadata, ProposalToken } from '$lib/types/juno';
+import type { ProposalMetadata } from '$lib/types/juno';
 import type { Store } from '$lib/types/store';
 import type { ProposalId } from '@dfinity/nns';
 import { isNullish } from '@dfinity/utils';
 import type { ListPaginate } from '@junobuild/core';
 import { listDocs } from '@junobuild/core';
 import { get } from 'svelte/store';
+import type {GovernanceCanisterId} from "$lib/types/core";
 
 export const loadUserProposals = ({
 	startAfter
 }: Pick<ListPaginate, 'startAfter'>): Promise<{ success: boolean }> =>
 	loadPrivate({
-		fn: async (token: ProposalToken): Promise<UserProposalsSetData> => {
+		fn: async (governanceCanisterId: GovernanceCanisterId): Promise<UserProposalsSetData> => {
 			const proposals = await listDocs<ProposalMetadata>({
 				collection: 'metadata',
 				filter: {
 					matcher: {
-						description: token
+						description: governanceCanisterId
 					},
 					order: {
 						desc: true,
@@ -35,7 +36,7 @@ export const loadUserProposals = ({
 			});
 
 			return {
-				token,
+				governanceCanisterId,
 				proposals
 			};
 		},
@@ -45,11 +46,11 @@ export const loadUserProposals = ({
 
 export const loadProposals = ({ beforeProposal }: { beforeProposal: ProposalId | undefined }) =>
 	load({
-		fn: async (token: ProposalToken): Promise<ProposalsSetData> => {
+		fn: async (governanceCanisterId: GovernanceCanisterId): Promise<ProposalsSetData> => {
 			const { proposals } = await listProposals(beforeProposal);
 
 			return {
-				token,
+				governanceCanisterId,
 				proposals
 			};
 		},
@@ -58,7 +59,7 @@ export const loadProposals = ({ beforeProposal }: { beforeProposal: ProposalId |
 	});
 
 const loadPrivate = async <T, D>(params: {
-	fn: (token: ProposalToken) => Promise<D>;
+	fn: (governanceCanisterId: GovernanceCanisterId) => Promise<D>;
 	store: Store<T, D>;
 	errorLabel: string;
 }): Promise<{ success: boolean }> => {
@@ -79,7 +80,7 @@ const load = async <T, D>({
 	store,
 	errorLabel
 }: {
-	fn: (token: ProposalToken) => Promise<D>;
+	fn: (governanceCanisterId: GovernanceCanisterId) => Promise<D>;
 	store: Store<T, D>;
 	errorLabel: string;
 }): Promise<{ success: boolean }> => {
