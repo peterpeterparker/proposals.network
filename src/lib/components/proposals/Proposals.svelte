@@ -11,6 +11,7 @@
 	import { proposalsICPStore } from '$lib/derived/proposals.derived';
 	import { isNullish } from '@dfinity/utils';
 	import ProposalRow from '$lib/components/proposals/ProposalRow.svelte';
+	import ProposalPaginator from '$lib/components/proposals/ProposalPaginator.svelte';
 
 	let intersecting = false;
 	export const onTitleIntersection = ($event: Event) => {
@@ -30,7 +31,7 @@
 
 		fetchedOnce = true;
 
-		await loadProposals();
+		await loadProposals({ beforeProposal: undefined });
 	};
 
 	$: intersecting, (async () => load())();
@@ -73,4 +74,6 @@
 			{/if}
 		</tbody>
 	</TableContainer>
+
+	<ProposalPaginator />
 </Section>

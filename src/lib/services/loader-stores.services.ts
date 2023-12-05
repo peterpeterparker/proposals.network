@@ -6,6 +6,7 @@ import { userProposalsStore, type UserProposalsSetData } from '$lib/stores/user-
 import { userStore } from '$lib/stores/user.store';
 import type { ProposalMetadata, ProposalToken } from '$lib/types/juno';
 import type { Store } from '$lib/types/store';
+import type { ProposalId } from '@dfinity/nns';
 import { isNullish } from '@dfinity/utils';
 import type { ListPaginate } from '@junobuild/core';
 import { listDocs } from '@junobuild/core';
@@ -42,10 +43,10 @@ export const loadUserProposals = ({
 		errorLabel: 'Unexpected error while loading your proposals'
 	});
 
-export const loadProposals = () =>
+export const loadProposals = ({ beforeProposal }: { beforeProposal: ProposalId | undefined }) =>
 	load({
 		fn: async (token: ProposalToken): Promise<ProposalsSetData> => {
-			const { proposals } = await listProposals();
+			const { proposals } = await listProposals(beforeProposal);
 
 			return {
 				token,
