@@ -12,7 +12,7 @@
 	target="_blank"
 	aria-label={ariaLabel}
 	title={ariaLabel}
-	class="inline-flex items-center gap-0.5 underline-offset-8"
+	class="inline-flex items-center gap-0.5 underline-offset-8 truncate"
 	class:underline={underline === 'visible'}
 	class:hover:underline={underline === 'hover'}
 >
