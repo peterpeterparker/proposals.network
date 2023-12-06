@@ -3,12 +3,12 @@
 	import type { Option } from '@dfinity/nns';
 	import ProposalLink from '$lib/components/proposals/ProposalLink.svelte';
 	import type { Proposal } from '@dfinity/nns';
-	import { ProposalRewardStatus, ProposalStatus, Topic } from '@dfinity/nns';
+	import { ProposalStatus, Topic } from '@dfinity/nns';
 	import en from '$lib/i18n/en.governance.json';
 	import { keyOf } from '$lib/utils/utils';
 	import ProposalCountdown from '$lib/components/proposals/ProposalCountdown.svelte';
 	import ProposalView from '$lib/components/proposals/ProposalView.svelte';
-	import ProposalResults from "$lib/components/proposals/ProposalResults.svelte";
+	import ProposalYes from "$lib/components/proposals/ProposalYes.svelte";
 
 	export let proposalInfo: ProposalInfo;
 
@@ -16,10 +16,9 @@
 	let proposal: Option<Proposal>;
 	let topic: Topic;
 	let status: ProposalStatus;
-	let rewardStatus: ProposalRewardStatus;
 	let deadlineTimestampSeconds: Option<bigint>;
 
-	$: ({ id, proposal, topic, status, rewardStatus, deadlineTimestampSeconds } = proposalInfo);
+	$: ({ id, proposal, topic, status, deadlineTimestampSeconds } = proposalInfo);
 
 	let title: string;
 	$: title = proposal?.title ?? '';
@@ -30,7 +29,7 @@
 	<td class="max-w-lg">{title} sadklmasdklmasdklmasdlkmasdlkmasdlkamsdlkamsdalkmasdlkmasdlkmasdlkams</td>
 	<td>{keyOf({ obj: en.topics, key: Topic[topic] })}</td>
 	<td>{keyOf({ obj: en.status, key: ProposalStatus[status] })}</td>
-	<td><ProposalResults {proposalInfo} /></td>
+	<td><ProposalYes {proposalInfo} /></td>
 	<td><ProposalCountdown {deadlineTimestampSeconds} /> </td>
 	<ProposalView {id} />
 </tr>
