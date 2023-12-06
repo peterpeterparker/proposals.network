@@ -145,8 +145,8 @@ export default defineConfig((): UserConfig => {
 	process.env = {
 		...process.env,
 		...loadEnv(network === 'ic' ? 'production' : 'development', process.cwd()),
-		...readCanisterIds({ prefix: 'VITE_' }),
-		...dfxCanisterIds({ prefix: 'VITE_' })
+		...dfxCanisterIds({ prefix: 'VITE_' }),
+		...readCanisterIds({ prefix: 'VITE_' })
 	};
 
 	return {
@@ -154,8 +154,8 @@ export default defineConfig((): UserConfig => {
 		// Backwards compatibility for auto generated types of dfx that are meant for webpack and process.env
 		define: {
 			'process.env': {
-				...readCanisterIds({}),
 				...dfxCanisterIds({}),
+				...readCanisterIds({}),
 				DFX_NETWORK: network
 			},
 			'import.meta.env.VITE_APP_VERSION': JSON.stringify(version),
