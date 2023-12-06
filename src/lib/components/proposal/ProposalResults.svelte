@@ -6,6 +6,7 @@
 	import { PROPOSAL_CONTEXT_KEY } from '$lib/types/proposal.context';
 	import { E8S_PER_ICP } from '$lib/constants/app.constants';
 	import { formatPercentage } from '$lib/utils/format.utils';
+	import Container from '$lib/components/ui/Container.svelte';
 
 	const { store }: ProposalContext<ProposalInfo> =
 		getContext<ProposalContext<ProposalInfo>>(PROPOSAL_CONTEXT_KEY);
@@ -44,45 +45,51 @@
 	);
 </script>
 
-<div class="flex items-center justify-center relative w-[360px] mb-12">
-	<div
-		class="absolute rounded-full top-1/2 left-1/2 mt-2 transform -translate-x-1/2 -translate-y-1/2 h-[180px] w-[180px] overflow-hidden -rotate-[19.5deg]"
-	>
-		<div
-			class="absolute bottom-0 left-1/2 -translate-x-1/2 bg-lime-400 w-full border-b-4 border-black"
-			class:z-20={yesProportion > noProportion}
-			class:z-40={yesProportion <= noProportion}
-			style={`height: ${yesPercentageDisplay}`}
-		></div>
-		<div
-			class="absolute bottom-0 left-1/2 -translate-x-1/2 bg-red-300 w-full"
-			class:z-20={noProportion > yesProportion}
-			class:z-40={noProportion < yesProportion}
-			style={`height: ${noPercentageDisplay}`}
-		></div>
-	</div>
+<Container color={noProportion > yesProportion ? 'quinary' : 'tertiary'}>
+	<svelte:fragment slot="title">Voting Results</svelte:fragment>
 
-	<div class="block z-10">
-		<IconVotingResults />
-	</div>
-</div>
+	<div class="p-12">
+		<div class="flex items-center justify-center relative">
+			<div
+				class="absolute rounded-full top-1/2 left-1/2 mt-2 transform -translate-x-1/2 -translate-y-1/2 h-[180px] w-[180px] overflow-hidden -rotate-[19.5deg]"
+			>
+				<div
+					class="absolute bottom-0 left-1/2 -translate-x-1/2 bg-lime-400 w-full border-b-4 border-black"
+					class:z-20={yesProportion > noProportion}
+					class:z-40={yesProportion <= noProportion}
+					style={`height: ${yesPercentageDisplay}`}
+				></div>
+				<div
+					class="absolute bottom-0 left-1/2 -translate-x-1/2 bg-red-300 w-full"
+					class:z-20={noProportion > yesProportion}
+					class:z-40={noProportion < yesProportion}
+					style={`height: ${noPercentageDisplay}`}
+				></div>
+			</div>
 
-<div class="flex gap-4 mb-8 md:mb-4">
-	<div
-		class="bg-black border-2 border-black flex items-center justify-between py-1 px-1 gap-2 rounded-lg min-w-[160px]"
-	>
-		<div class="h-4 w-4 rounded-full bg-lime-400 ml-2"></div>
-		<span class="text-white pr-6">Yes</span>
-		<output class="text-white pr-2">{yesPercentage}</output>
-	</div>
-
-	<div
-		class="bg-black border-2 border-black flex items-center justify-between py-1 px-1 gap-2 rounded-lg min-w-[160px]"
-	>
-		<div class="flex items-center p-2 rounded-lg gap-2 mr-1">
-			<div class="h-4 w-4 rounded-full bg-red-300"></div>
-			<span class="pr-5 text-white">No</span>
+			<div class="block z-10">
+				<IconVotingResults />
+			</div>
 		</div>
-		<output class="text-white pr-2">{noPercentage}</output>
+
+		<div class="flex justify-center gap-4 my-8 my:mb-4">
+			<div
+				class="bg-black border-2 border-black flex items-center justify-between py-1 px-1 gap-2 rounded-lg min-w-[160px]"
+			>
+				<div class="h-4 w-4 rounded-full bg-lime-400 ml-2"></div>
+				<span class="text-white pr-6">Yes</span>
+				<output class="text-white pr-2">{yesPercentage}</output>
+			</div>
+
+			<div
+				class="bg-black border-2 border-black flex items-center justify-between py-1 px-1 gap-2 rounded-lg min-w-[160px]"
+			>
+				<div class="flex items-center p-2 rounded-lg gap-2 mr-1">
+					<div class="h-4 w-4 rounded-full bg-red-300"></div>
+					<span class="pr-5 text-white">No</span>
+				</div>
+				<output class="text-white pr-2">{noPercentage}</output>
+			</div>
+		</div>
 	</div>
-</div>
+</Container>

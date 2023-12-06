@@ -18,9 +18,7 @@
 		<div class="md:grid lg:block xl:grid grid-cols-[1fr,auto] items-center gap-16">
 			<ProposalInfo />
 
-			<div class="flex flex-col items-center">
-				<ProposalResults />
-			</div>
+			<ProposalResults />
 
 			<ProposalExternalLinks />
 

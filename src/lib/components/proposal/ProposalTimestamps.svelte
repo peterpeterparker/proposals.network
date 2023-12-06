@@ -21,7 +21,7 @@
 	$: failedTimestampSeconds = $store?.proposal?.failedTimestampSeconds;
 </script>
 
-<Container color="tertiary">
+<Container color="quaternary">
 	<svelte:fragment slot="title">Timestamps</svelte:fragment>
 
 	<ProposalInfoRow
