@@ -19,7 +19,7 @@
 	$: proposal = $store?.proposal?.proposal;
 
 	let url: string | undefined;
-	$: url = proposal?.title;
+	$: url = proposal?.url;
 </script>
 
 <Container color="secondary">
