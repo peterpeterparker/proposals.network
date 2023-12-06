@@ -1,3 +1,5 @@
+import {nonNullish} from "@dfinity/utils";
+
 /**
  * Shortens the text from the middle. Ex: "12345678901234567890" -> "1234567...5678901"
  * @param text
@@ -34,3 +36,41 @@ export const formatCurrency = (value: bigint | number): string =>
 		maximumFractionDigits: 0,
 		maximumSignificantDigits: 7
 	}).format(value);
+
+/**
+ * Default format: 0.150123 -> "15.012%"
+ */
+export const formatPercentage = (
+	value: number,
+	options?: { minFraction: number; maxFraction: number }
+) => {
+	const { minFraction = 3, maxFraction = 3 } = options || {};
+	return `${formatNumber(value * 100, { minFraction, maxFraction })}%`;
+};
+
+/**
+ * Default format: 123456.789 -> "123'456.79"
+ */
+export const formatNumber = (
+	value: number,
+	options?: {
+		minFraction: number;
+		maxFraction: number;
+		maximumSignificantDigits?: number;
+	}
+): string => {
+	const {
+		minFraction = 2,
+		maxFraction = 2,
+		maximumSignificantDigits,
+	} = options || {};
+
+	return new Intl.NumberFormat("fr-FR", {
+		minimumFractionDigits: minFraction,
+		maximumFractionDigits: maxFraction,
+		...(nonNullish(maximumSignificantDigits) && { maximumSignificantDigits }),
+	})
+		.format(value)
+		.replace(/\s/g, "’")
+		.replace(",", ".");
+};

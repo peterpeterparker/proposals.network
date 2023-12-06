@@ -52,8 +52,8 @@
 				<th class="w-1/12">ID</th>
 				<th class="max-w-lg">Title</th>
 				<th>Topic</th>
-				<th>Rewards</th>
 				<th>Status</th>
+				<th>Yes</th>
 				<th>Expiration</th>
 				<th></th>
 			</tr>

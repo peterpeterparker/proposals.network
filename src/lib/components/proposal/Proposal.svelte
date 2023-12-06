@@ -3,7 +3,13 @@
 </script>
 
 <SplitPane>
-	<svelte:fragment slot="aside">TODO</svelte:fragment>
+	<svelte:fragment slot="aside">
+
+		Stuffs
+
+		Prev - Next
+
+	</svelte:fragment>
 
 	TODO too
 </SplitPane>

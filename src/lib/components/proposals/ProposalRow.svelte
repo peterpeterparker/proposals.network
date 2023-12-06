@@ -8,6 +8,7 @@
 	import { keyOf } from '$lib/utils/utils';
 	import ProposalCountdown from '$lib/components/proposals/ProposalCountdown.svelte';
 	import ProposalView from '$lib/components/proposals/ProposalView.svelte';
+	import ProposalResults from "$lib/components/proposals/ProposalResults.svelte";
 
 	export let proposalInfo: ProposalInfo;
 
@@ -28,8 +29,8 @@
 	<ProposalLink {id} />
 	<td class="max-w-lg">{title} sadklmasdklmasdklmasdlkmasdlkmasdlkamsdlkamsdalkmasdlkmasdlkmasdlkams</td>
 	<td>{keyOf({ obj: en.topics, key: Topic[topic] })}</td>
-	<td>{keyOf({ obj: en.rewards, key: ProposalRewardStatus[rewardStatus] })}</td>
 	<td>{keyOf({ obj: en.status, key: ProposalStatus[status] })}</td>
+	<td><ProposalResults {proposalInfo} /></td>
 	<td><ProposalCountdown {deadlineTimestampSeconds} /> </td>
 	<ProposalView {id} />
 </tr>

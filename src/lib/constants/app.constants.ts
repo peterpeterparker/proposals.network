@@ -18,3 +18,5 @@ export const HOST = nonNullish(II_CANISTER_ID) ? 'http://127.0.0.1:8000/' : 'htt
 
 export const USER_PAGINATION = 5;
 export const NETWORK_PAGINATION = 10;
+
+export const E8S_PER_ICP = 100_000_000;
