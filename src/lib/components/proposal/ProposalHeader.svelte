@@ -19,8 +19,8 @@
 	$: title = proposal?.title;
 </script>
 
-<h1 class="font-bold capitalize text-4xl mb-12">
-	Proposal <span class="text-2xl">{nonNullish(id) ? ` #${id}` : ''}</span>
+<h1 class="font-bold capitalize mb-12 text-6xl">
+	Proposal <span class="text-4xl">{nonNullish(id) ? ` #${id}` : ''}</span>
 </h1>
 
 {#if nonNullish(title)}
