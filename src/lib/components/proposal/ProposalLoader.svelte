@@ -39,10 +39,20 @@
 
 		try {
 			const newProposalInfo = await getProposal({ proposalId: BigInt($routeProposalId) });
+
+			if (isNullish(newProposalInfo)) {
+				toasts.error({
+					msg: { text: `Proposal not found: ${$routeProposalId}` }
+				});
+
+				await back(false);
+				return;
+			}
+
 			proposalStore.set({ proposal: newProposalInfo });
 		} catch (err: unknown) {
 			toasts.error({
-				msg: { text: `Unexpected error while loading the network proposal: ${routeProposalId}` },
+				msg: { text: `Unexpected error while loading the network proposal: ${$routeProposalId}` },
 				err
 			});
 

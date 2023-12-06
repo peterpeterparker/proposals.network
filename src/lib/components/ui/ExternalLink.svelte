@@ -3,6 +3,7 @@
 
 	export let href: string;
 	export let ariaLabel = '';
+	export let underline: 'hover' | 'visible' = 'visible';
 </script>
 
 <a
@@ -11,7 +12,9 @@
 	target="_blank"
 	aria-label={ariaLabel}
 	title={ariaLabel}
-	class="inline-flex items-center gap-0.5 underline underline-offset-8"
+	class="inline-flex items-center gap-0.5 underline-offset-8"
+	class:underline={underline === 'visible'}
+	class:hover:underline={underline === 'hover'}
 >
 	<slot />
 

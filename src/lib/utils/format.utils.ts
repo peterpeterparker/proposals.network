@@ -1,4 +1,4 @@
-import {nonNullish} from "@dfinity/utils";
+import { nonNullish } from '@dfinity/utils';
 
 /**
  * Shortens the text from the middle. Ex: "12345678901234567890" -> "1234567...5678901"
@@ -59,18 +59,14 @@ export const formatNumber = (
 		maximumSignificantDigits?: number;
 	}
 ): string => {
-	const {
-		minFraction = 2,
-		maxFraction = 2,
-		maximumSignificantDigits,
-	} = options || {};
+	const { minFraction = 2, maxFraction = 2, maximumSignificantDigits } = options || {};
 
-	return new Intl.NumberFormat("fr-FR", {
+	return new Intl.NumberFormat('fr-FR', {
 		minimumFractionDigits: minFraction,
 		maximumFractionDigits: maxFraction,
-		...(nonNullish(maximumSignificantDigits) && { maximumSignificantDigits }),
+		...(nonNullish(maximumSignificantDigits) && { maximumSignificantDigits })
 	})
 		.format(value)
-		.replace(/\s/g, "’")
-		.replace(",", ".");
+		.replace(/\s/g, '’')
+		.replace(',', '.');
 };

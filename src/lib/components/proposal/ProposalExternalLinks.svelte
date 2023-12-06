@@ -1,0 +1,55 @@
+<script lang="ts">
+	import type { Option, NeuronId, Proposal } from '@dfinity/nns';
+	import { PROPOSAL_CONTEXT_KEY, type ProposalContext } from '$lib/types/proposal.context';
+	import type { ProposalInfo } from '@dfinity/nns';
+	import { getContext } from 'svelte';
+	import { nonNullish } from '@dfinity/utils';
+	import ProposalInfoRow from '$lib/components/proposal/ProposalInfoRow.svelte';
+	import { fade } from 'svelte/transition';
+	import ExternalLink from '$lib/components/ui/ExternalLink.svelte';
+	import ProposalTable from '$lib/components/proposal/ProposalTable.svelte';
+
+	const { store }: ProposalContext<ProposalInfo> =
+		getContext<ProposalContext<ProposalInfo>>(PROPOSAL_CONTEXT_KEY);
+
+	let proposer: Option<NeuronId>;
+	let proposal: Option<Proposal>;
+
+	$: proposer = $store?.proposal?.proposer;
+	$: proposal = $store?.proposal?.proposal;
+
+	let url: string | undefined;
+	$: url = proposal?.title;
+</script>
+
+<ProposalTable color="secondary">
+	<svelte:fragment slot="title">Links</svelte:fragment>
+
+	<ProposalInfoRow>
+		Proposer
+		<svelte:fragment slot="custom-value">
+			{#if nonNullish(proposer)}
+				<div in:fade>
+					<ExternalLink
+						underline="hover"
+						href={`https://dashboard.internetcomputer.org/neuron/${proposer}`}
+						ariaLabel="Open proposer on the ICP dashboard">{proposer}</ExternalLink
+					>
+				</div>
+			{/if}
+		</svelte:fragment>
+	</ProposalInfoRow>
+
+	<ProposalInfoRow>
+		URL
+		<svelte:fragment slot="custom-value">
+			{#if nonNullish(url)}
+				<div in:fade>
+					<ExternalLink underline="hover" href={url} ariaLabel="URL linked to the proposal"
+						>{url}</ExternalLink
+					>
+				</div>
+			{/if}
+		</svelte:fragment>
+	</ProposalInfoRow>
+</ProposalTable>

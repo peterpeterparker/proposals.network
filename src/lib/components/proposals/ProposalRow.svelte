@@ -26,9 +26,7 @@
 
 <tr>
 	<ProposalLink {id} />
-	<td class="max-w-lg"
-		>{title} sadklmasdklmasdklmasdlkmasdlkmasdlkamsdlkamsdalkmasdlkmasdlkmasdlkams</td
-	>
+	<td class="max-w-lg">{title}</td>
 	<td>{keyOf({ obj: en.topics, key: Topic[topic] })}</td>
 	<td>{keyOf({ obj: en.status, key: ProposalStatus[status] })}</td>
 	<td><ProposalYes {proposalInfo} /></td>
