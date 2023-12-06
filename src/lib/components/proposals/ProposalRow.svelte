@@ -8,7 +8,7 @@
 	import { keyOf } from '$lib/utils/utils';
 	import ProposalCountdown from '$lib/components/proposals/ProposalCountdown.svelte';
 	import ProposalView from '$lib/components/proposals/ProposalView.svelte';
-	import ProposalYes from "$lib/components/proposals/ProposalYes.svelte";
+	import ProposalYes from '$lib/components/proposals/ProposalYes.svelte';
 
 	export let proposalInfo: ProposalInfo;
 
@@ -26,7 +26,9 @@
 
 <tr>
 	<ProposalLink {id} />
-	<td class="max-w-lg">{title} sadklmasdklmasdklmasdlkmasdlkmasdlkamsdlkamsdalkmasdlkmasdlkmasdlkams</td>
+	<td class="max-w-lg"
+		>{title} sadklmasdklmasdklmasdlkmasdlkmasdlkamsdlkamsdalkmasdlkmasdlkmasdlkams</td
+	>
 	<td>{keyOf({ obj: en.topics, key: Topic[topic] })}</td>
 	<td>{keyOf({ obj: en.status, key: ProposalStatus[status] })}</td>
 	<td><ProposalYes {proposalInfo} /></td>

@@ -33,13 +33,13 @@
 		);
 
 		if (nonNullish(proposalInfo)) {
-            proposalStore.set({proposal: proposalInfo});
+			proposalStore.set({ proposal: proposalInfo });
 			return;
 		}
 
 		try {
 			const newProposalInfo = await getProposal({ proposalId: BigInt($routeProposalId) });
-            proposalStore.set({proposal: newProposalInfo});
+			proposalStore.set({ proposal: newProposalInfo });
 		} catch (err: unknown) {
 			toasts.error({
 				msg: { text: `Unexpected error while loading the network proposal: ${routeProposalId}` },

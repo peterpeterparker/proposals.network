@@ -1,6 +1,5 @@
 <script lang="ts">
-	export let table: HTMLDivElement | null;
-
+	export let table: HTMLDivElement | null = null;
 	export let color: 'primary' | 'secondary' = 'primary';
 </script>
 

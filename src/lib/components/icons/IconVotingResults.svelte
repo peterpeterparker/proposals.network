@@ -5,7 +5,14 @@
 	xmlns="http://www.w3.org/2000/svg"
 	xmlns:xlink="http://www.w3.org/1999/xlink"
 	xml:space="preserve"
-	><use id="voting-results" xlink:href="#_ImageVotingResults" x="0" y="13" width="523px" height="415px" /><defs
+	><use
+		id="voting-results"
+		xlink:href="#_ImageVotingResults"
+		x="0"
+		y="13"
+		width="523px"
+		height="415px"
+	/><defs
 		><image
 			id="_ImageVotingResults"
 			width="523px"
