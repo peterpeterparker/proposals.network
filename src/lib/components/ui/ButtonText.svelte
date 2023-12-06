@@ -4,6 +4,7 @@
 </script>
 
 <button
+	type="button"
 	class="px-2 border-2 hover:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
 	class:bg-cyan-300={active}
 	class:active:bg-cyan-200={active}

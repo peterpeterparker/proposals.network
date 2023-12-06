@@ -6,6 +6,7 @@
 	import ProposalHeader from '$lib/components/proposal/ProposalHeader.svelte';
 	import ProposalExternalLinks from '$lib/components/proposal/ProposalExternalLinks.svelte';
 	import ProposalTimestamps from '$lib/components/proposal/ProposalTimestamps.svelte';
+	import ProposalSummary from '$lib/components/proposal/ProposalSummary.svelte';
 </script>
 
 <SplitPane>
@@ -24,6 +25,8 @@
 			<ProposalExternalLinks />
 
 			<ProposalTimestamps />
+
+			<ProposalSummary />
 		</div>
 	</ProposalLoader>
 </SplitPane>

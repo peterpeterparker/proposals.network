@@ -1,28 +1,24 @@
 <script lang="ts">
-	import type { Option, Proposal } from '@dfinity/nns';
+	import HtmlMarkdown from '$lib/components/ui/HtmlMarkdown.svelte';
 	import { PROPOSAL_CONTEXT_KEY, type ProposalContext } from '$lib/types/proposal.context';
 	import type { ProposalInfo } from '@dfinity/nns';
 	import { getContext } from 'svelte';
-	import type { ProposalId } from '@dfinity/nns';
+	import type { Option, Proposal } from '@dfinity/nns';
 	import { nonNullish } from '@dfinity/utils';
+	import { fade } from 'svelte/transition';
 
 	const { store }: ProposalContext<ProposalInfo> =
 		getContext<ProposalContext<ProposalInfo>>(PROPOSAL_CONTEXT_KEY);
 
-	let id: Option<ProposalId>;
 	let proposal: Option<Proposal>;
-
-	$: id = $store?.proposal?.id;
 	$: proposal = $store?.proposal?.proposal;
 
-	let title: string | undefined;
-	$: title = proposal?.title;
+	let summary: string | undefined;
+	$: summary = proposal?.summary;
 </script>
 
-<h1 class="font-bold capitalize text-4xl mb-12">
-	Proposal <span class="text-2xl">{nonNullish(id) ? ` #${id}` : ''}</span>
-</h1>
-
-{#if nonNullish(title)}
-	<h2 class="text-2xl mb-8">{title}</h2>
+{#if nonNullish(summary)}
+	<div in:fade class="col-span-2">
+		<HtmlMarkdown content={summary} />
+	</div>
 {/if}
