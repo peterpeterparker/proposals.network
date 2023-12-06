@@ -5,7 +5,7 @@
 	import { isNullish, nonNullish } from '@dfinity/utils';
 	import ProposalInfoRow from '$lib/components/proposal/ProposalInfoRow.svelte';
 	import { secondsToDateTime } from '$lib/utils/date.utils';
-	import ProposalTable from '$lib/components/proposal/ProposalTable.svelte';
+	import Container from '$lib/components/ui/Container.svelte';
 
 	const { store }: ProposalContext<ProposalInfo> =
 		getContext<ProposalContext<ProposalInfo>>(PROPOSAL_CONTEXT_KEY);
@@ -21,7 +21,7 @@
 	$: failedTimestampSeconds = $store?.proposal?.failedTimestampSeconds;
 </script>
 
-<ProposalTable color="tertiary">
+<Container color="tertiary">
 	<svelte:fragment slot="title">Timestamps</svelte:fragment>
 
 	<ProposalInfoRow
@@ -43,4 +43,4 @@
 	{#if nonNullish(failedTimestampSeconds) && failedTimestampSeconds > 0n}
 		<ProposalInfoRow value={secondsToDateTime(failedTimestampSeconds)}>Failed</ProposalInfoRow>
 	{/if}
-</ProposalTable>
+</Container>

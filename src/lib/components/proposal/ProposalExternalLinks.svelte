@@ -7,7 +7,7 @@
 	import ProposalInfoRow from '$lib/components/proposal/ProposalInfoRow.svelte';
 	import { fade } from 'svelte/transition';
 	import ExternalLink from '$lib/components/ui/ExternalLink.svelte';
-	import ProposalTable from '$lib/components/proposal/ProposalTable.svelte';
+	import Container from '$lib/components/ui/Container.svelte';
 
 	const { store }: ProposalContext<ProposalInfo> =
 		getContext<ProposalContext<ProposalInfo>>(PROPOSAL_CONTEXT_KEY);
@@ -22,7 +22,7 @@
 	$: url = proposal?.title;
 </script>
 
-<ProposalTable color="secondary">
+<Container color="secondary">
 	<svelte:fragment slot="title">Links</svelte:fragment>
 
 	<ProposalInfoRow>
@@ -52,4 +52,4 @@
 			{/if}
 		</svelte:fragment>
 	</ProposalInfoRow>
-</ProposalTable>
+</Container>

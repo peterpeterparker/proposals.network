@@ -12,7 +12,7 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import type { ProposalEditableMetadata } from '$lib/types/juno';
 	import { getEditable } from '$lib/services/idb.services';
-	import SubmitReviewBlock from '$lib/components/submit/SubmitReviewBlock.svelte';
+	import Container from '$lib/components/ui/Container.svelte';
 	import { submitProposal } from '$lib/services/submit.services';
 	import { userStore } from '$lib/stores/user.store';
 
@@ -59,13 +59,13 @@
 		</p>
 
 		<div in:fade>
-			<SubmitReviewBlock>
-				<aside slot="actions">The proposal title</aside>
+			<Container>
+				<aside slot="title">The proposal title</aside>
 				<article class="p-2.5">{metadata?.title ?? ''}</article>
-			</SubmitReviewBlock>
+			</Container>
 
-			<SubmitReviewBlock>
-				<svelte:fragment slot="actions"
+			<Container>
+				<svelte:fragment slot="title"
 					><ButtonText active={display === 'html'} on:click={() => (display = 'html')}
 						>HTML</ButtonText
 					>
@@ -80,17 +80,17 @@
 						<div in:fade><Html text={markdown} /></div>
 					{/if}
 				</article>
-			</SubmitReviewBlock>
+			</Container>
 
-			<SubmitReviewBlock>
-				<aside slot="actions">An URL pointing to the forum</aside>
+			<Container>
+				<aside slot="title">An URL pointing to the forum</aside>
 				<article class="p-2.5">{metadata?.url ?? ''}</article>
-			</SubmitReviewBlock>
+			</Container>
 
-			<SubmitReviewBlock>
-				<aside slot="actions">Your motion text</aside>
+			<Container>
+				<aside slot="title">Your motion text</aside>
 				<article class="p-2.5">{metadata?.motionText ?? ''}</article>
-			</SubmitReviewBlock>
+			</Container>
 		</div>
 
 		<div class="flex gap-2">

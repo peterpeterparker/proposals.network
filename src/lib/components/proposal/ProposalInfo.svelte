@@ -14,7 +14,7 @@
 	import en from '$lib/i18n/en.governance.json';
 	import ProposalInfoRow from '$lib/components/proposal/ProposalInfoRow.svelte';
 	import { mapProposalType } from '$lib/utils/proposals.utils';
-	import ProposalTable from '$lib/components/proposal/ProposalTable.svelte';
+	import Container from '$lib/components/ui/Container.svelte';
 
 	const { store }: ProposalContext<ProposalInfo> =
 		getContext<ProposalContext<ProposalInfo>>(PROPOSAL_CONTEXT_KEY);
@@ -33,7 +33,7 @@
 	$: ({ type } = mapProposalType($store?.proposal?.proposal));
 </script>
 
-<ProposalTable>
+<Container>
 	<svelte:fragment slot="title">Details</svelte:fragment>
 
 	<ProposalInfoRow value={id}>ID</ProposalInfoRow>
@@ -59,4 +59,4 @@
 	>
 		Reward Status
 	</ProposalInfoRow>
-</ProposalTable>
+</Container>

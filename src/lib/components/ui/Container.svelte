@@ -12,12 +12,12 @@
 </script>
 
 <div
-	class="bg-white border-2 border-black lg:rounded-md overflow-hidden h-full mb-16 md:mb-0 lg:mb-16 xl:mb-0"
+	class="tiptap focus:outline-none bg-white border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)] lg:rounded-md overflow-hidden mb-8 h-full"
 >
 	<aside
-		class="border-b-2 border-black p-2"
-		class:bg-cyan-200={primary}
-		class:bg-violet-200={secondary}
+		class="flex flex-wrap gap-2 items-center border-b-2 border-black p-2"
+		class:bg-cyan-200={secondary}
+		class:bg-violet-200={primary}
 		class:bg-lime-200={tertiary}
 	>
 		<slot name="title" />
