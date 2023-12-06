@@ -9,3 +9,12 @@ export const routeKey: Readable<string | undefined | null> = derived(
 		}
 	]) => key
 );
+
+export const routeProposalId: Readable<string | undefined | null> = derived(
+	[page],
+	([
+		 {
+			 data: { id }
+		 }
+	 ]) => id
+);

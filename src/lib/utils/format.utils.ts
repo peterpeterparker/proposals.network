@@ -43,7 +43,7 @@ export const formatCurrency = (value: bigint | number): string =>
 export const formatPercentage = (
 	value: number,
 	options?: { minFraction: number; maxFraction: number }
-) => {
+): string => {
 	const { minFraction = 3, maxFraction = 3 } = options || {};
 	return `${formatNumber(value * 100, { minFraction, maxFraction })}%`;
 };
