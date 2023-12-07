@@ -40,7 +40,7 @@
 
 {#if nonNullish(neuronId) && nonNullish(content)}
 	<form on:submit|preventDefault={onSubmit}>
-		<h1 class="font-bold capitalize text-4xl mb-12">
+		<h1 class="font-bold capitalize text-4xl md:text-6xl mb-12">
 			Make sure everything looks good before submitting!
 		</h1>
 

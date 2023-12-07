@@ -6,7 +6,7 @@
 	export let proposalId: bigint | undefined;
 </script>
 
-<h1 class="font-bold capitalize text-4xl mb-12 inline-flex items-center gap-2">
+<h1 class="font-bold capitalize text-4xl md:text-6xl mb-12 inline-flex items-center gap-2">
 	Hooray! <IconCelebration />
 </h1>
 

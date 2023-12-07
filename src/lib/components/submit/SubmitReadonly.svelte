@@ -19,7 +19,7 @@
 	});
 </script>
 
-<h1 class="font-bold capitalize text-4xl mb-12">Proposal submitted</h1>
+<h1 class="font-bold capitalize text-4xl md:text-6xl mb-12">Proposal submitted</h1>
 
 {#if status === 'loading'}
 	<SpinnerText>Hold tight, loading metadata...</SpinnerText>

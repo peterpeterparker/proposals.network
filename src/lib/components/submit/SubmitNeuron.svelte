@@ -30,7 +30,7 @@
 </script>
 
 {#if status !== 'error'}
-	<h1 class="font-bold capitalize text-4xl mb-12">Only Neurons can submit proposals</h1>
+	<h1 class="font-bold capitalize text-4xl md:text-6xl mb-12">Only Neurons can submit proposals</h1>
 
 	<h2 class="text-2xl mb-8">
 		Neurons with at least 10 ICP and a 6-month dissolve delay can submit motion proposals. So the

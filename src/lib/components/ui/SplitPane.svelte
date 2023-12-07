@@ -6,7 +6,7 @@
 	</aside>
 
 	<div
-		class="w-full lg:w-[calc(100%-300px)] lg:ml-[300px] px-4 lg:px-16 pt-9 lg:pt-36 pb-36 h-full"
+		class="w-full lg:w-[calc(100%-300px)] lg:ml-[300px] px-4 lg:px-16 pt-9 lg:pt-32 pb-32 h-full"
 	>
 		<slot />
 	</div>

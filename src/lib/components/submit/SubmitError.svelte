@@ -1,4 +1,4 @@
-<h1 class="font-bold capitalize text-4xl mb-12">Oops!</h1>
+<h1 class="font-bold capitalize text-4xl md:text-6xl mb-12">Oops!</h1>
 
 <h2 class="text-2xl mb-8">It looks like something didn't go as planned.</h2>
 

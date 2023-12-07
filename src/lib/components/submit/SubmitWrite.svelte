@@ -15,7 +15,7 @@
 	const next = () => dispatch('pnwrkNext');
 </script>
 
-<h1 class="font-bold capitalize text-4xl mb-12">Craft Your Proposal</h1>
+<h1 class="font-bold capitalize text-4xl md:text-6xl mb-12">Craft Your Proposal</h1>
 
 <h2 class="text-2xl mb-6">
 	To submit a proposal, you need both a summary (explaining what it's all about) and motion text
