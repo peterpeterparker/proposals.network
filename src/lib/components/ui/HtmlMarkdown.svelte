@@ -17,7 +17,6 @@
 	let display: 'html' | 'markdown' = 'html';
 
 	export const load = async () => {
-		console.log("lOAd")
 		html = nonNullish(content) ? await markdownToHTML(content) : undefined;
 		markdown = content?.replaceAll('\n', '<br/>');
 	};
