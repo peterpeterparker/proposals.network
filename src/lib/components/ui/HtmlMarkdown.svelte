@@ -8,17 +8,25 @@
 	import { markdownToHTML } from '$lib/utils/markdown.utils';
 	import { fade } from 'svelte/transition';
 	import EditorContent from '$lib/components/ui/EditorContent.svelte';
+	import type { Editor } from '@tiptap/core';
 
 	export let content: Markdown | undefined;
+
+	let editor: Editor | undefined = undefined;
 
 	let html: string | undefined;
 	let markdown: string | undefined;
 
 	let display: 'html' | 'markdown' = 'html';
 
-	export const load = async () => {
+	const load = async () => {
 		html = nonNullish(content) ? await markdownToHTML(content) : undefined;
 		markdown = content?.replaceAll('\n', '<br/>');
+	};
+
+	export const reload = async () => {
+		await load();
+		editor?.commands.setContent(content);
 	};
 
 	onMount(load);
@@ -34,7 +42,7 @@
 	{#if display === 'html'}
 		<div in:fade>
 			{#if nonNullish(html)}
-				<EditorContent content={html} editable={false} />
+				<EditorContent content={html} editable={false} bind:editor />
 			{/if}
 		</div>
 	{:else}
