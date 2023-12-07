@@ -43,7 +43,7 @@
 	<ProposalInfoRow>
 		URL
 		<svelte:fragment slot="custom-value">
-			{#if nonNullish(url)}
+			{#if nonNullish(url) && url !== ""}
 				<div in:fade class="max-w-[60%]">
 					<ExternalLink underline="hover" href={url} ariaLabel="URL linked to the proposal"
 						>{url}</ExternalLink
