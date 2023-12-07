@@ -15,7 +15,7 @@
 
 	<div class="w-full h-full relative flex items-center justify-center flex-col pt-24">
 		<h1 class="text-center px-2 md:max-w-[70vw] xl:max-w-[50vw] text-5xl sm:text-7xl">
-			Browse and submit proposals on ICP.
+			Browse and submit proposals on ICP
 		</h1>
 
 		<button class="animate-bounce pt-16" on:click={scroll} aria-label="Continue">

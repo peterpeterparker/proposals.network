@@ -43,7 +43,7 @@
 		use:onIntersectionTitle
 		on:pnwrkIntersecting={onTitleIntersection}
 	>
-		Network.
+		Network
 	</h2>
 
 	<TableContainer rows={$proposalsICPStore?.length} color="secondary">

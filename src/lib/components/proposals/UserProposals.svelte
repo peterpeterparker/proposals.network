@@ -33,7 +33,7 @@
 </script>
 
 <Section>
-	<h2 class="text-6xl md:text-7xl mb-12 tracking-tight font-bold mx-4">Your proposals.</h2>
+	<h2 class="text-6xl md:text-7xl mb-12 tracking-tight font-bold mx-4">Your proposals</h2>
 
 	<TableContainer rows={$userProposalsICPStore?.items.length}>
 		<thead>
