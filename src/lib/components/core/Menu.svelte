@@ -40,7 +40,7 @@
 							<a href="/">Browse</a>
 						</div>
 						<div class="hover:underline hover:underline-offset-8 mb-4">
-							<a href="/submit">Submit</a>
+							<a href="/submit">Submit a new proposal</a>
 						</div>
 					</div>
 					<div class="pb-12">

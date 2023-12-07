@@ -3,7 +3,7 @@
 	import { nonNullish } from '@dfinity/utils';
 	import { loadUserProposals } from '$lib/services/loader-stores.services';
 	import { last } from '$lib/utils/utils';
-	import Paginator from "$lib/components/ui/Paginator.svelte";
+	import Paginator from '$lib/components/ui/Paginator.svelte';
 
 	let previousStartAfter: string | undefined;
 	let startAfter: string | undefined;

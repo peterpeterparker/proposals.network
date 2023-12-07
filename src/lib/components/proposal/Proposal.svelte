@@ -7,10 +7,10 @@
 	import ProposalLinks from '$lib/components/proposal/ProposalLinks.svelte';
 	import ProposalTimestamps from '$lib/components/proposal/ProposalTimestamps.svelte';
 	import ProposalSummary from '$lib/components/proposal/ProposalSummary.svelte';
-	import ProposalAside from "$lib/components/proposal/ProposalNavigation.svelte";
+	import ProposalAside from '$lib/components/proposal/ProposalNavigation.svelte';
 </script>
 
-<SplitPane>
+<SplitPane col="reverse">
 	<ProposalAside slot="aside" />
 
 	<ProposalLoader>

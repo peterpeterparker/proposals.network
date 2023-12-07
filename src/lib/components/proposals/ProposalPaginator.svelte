@@ -4,7 +4,7 @@
 	import { proposalsICPStore } from '$lib/derived/proposals.derived';
 	import { loadProposals } from '$lib/services/loader-stores.services';
 	import type { ProposalId } from '@dfinity/nns';
-	import Paginator from "$lib/components/ui/Paginator.svelte";
+	import Paginator from '$lib/components/ui/Paginator.svelte';
 
 	let previousBeforeProposal: ProposalId | undefined;
 	let beforeProposal: ProposalId | undefined;
