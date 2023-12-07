@@ -48,9 +48,7 @@
 			<Button color="quaternary" fullWidth on:click={share}>Share</Button>
 
 			<a
-				href={`https://nns.internetcomputer.org/proposal/?u=${
-					GOVERNANCE_CANISTER_ID ?? ''
-				}&proposal=${id}`}
+				href={`https://nns.internetcomputer.org/proposal/?proposal=${id}`}
 				rel="noreferrer noopener"
 				target="_blank"
 			>
