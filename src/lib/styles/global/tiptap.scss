@@ -18,19 +18,22 @@
 		margin: 0 0 2rem;
 	}
 
-	blockquote,
 	h2,
 	h3,
 	dl,
 	dd,
 	h4,
 	h5,
-	h6,
+	h6 {
+		margin: 0 0 1rem;
+	}
+
+	blockquote,
 	hr,
 	figure,
 	p,
 	pre {
-		margin: 0 0 1rem;
+		margin: 0 0 2rem;
 	}
 
 	a {
@@ -39,7 +42,8 @@
 
 	ul,
 	ol {
-		padding: 0 2rem;
+		padding: 0 1rem;
+		margin: 0 0 2rem;
 	}
 
 	ul {
