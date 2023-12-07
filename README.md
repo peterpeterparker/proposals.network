@@ -1,28 +1,34 @@
-# proposals.network
+<div align="center" style="display:flex;flex-direction:column;">
+  <a href="https://proposals.network/">
+    <img src="https://raw.githubusercontent.com/peterpeterparker/proposals.network/main/static/images/meta-share.jpg?token=GHSAT0AAAAAABY4CYLCV5SCHTCK3PK65XD6ZLRZHTQ" width="100%" alt="Proposals.network social banner" role="presentation"/>
+  </a>
 
-WIP
+  <br/>
+  <br/>
 
-## NNS local canisters
+[![GitHub release](https://img.shields.io/github/release/peterpeterparker/proposals.network/all?logo=GitHub&style=flat-square&color=7888ff)](https://github.com/peterpeterparker/proposals.network/releases/latest)
+[![Follow on Twitter](https://img.shields.io/twitter/follow/daviddalbusco?label=Follow&style=social)](https://twitter.com/daviddalbusco)
 
-Backend canisters:
-nns-registry rwlgt-iiaaa-aaaaa-aaaaa-cai
-nns-governance rrkah-fqaaa-aaaaa-aaaaq-cai
-nns-ledger ryjl3-tyaaa-aaaaa-aaaba-cai
-nns-root r7inp-6aaaa-aaaaa-aaabq-cai
-nns-cycles-minting rkp4c-7iaaa-aaaaa-aaaca-cai
-nns-lifeline rno2w-sqaaa-aaaaa-aaacq-cai
-nns-genesis-token renrk-eyaaa-aaaaa-aaada-cai
-nns-identity rdmx6-jaaaa-aaaaa-aaadq-cai
-nns-ui qoctq-giaaa-aaaaa-aaaea-cai
-nns-sns-wasm qaa6y-5yaaa-aaaaa-aaafa-cai
-nns-ic-ckbtc-minter qjdve-lqaaa-aaaaa-aaaeq-cai
+</div>
 
-Frontend canisters:
-internet_identity http://qhbym-qaaaa-aaaaa-aaafq-cai.localhost:8080/
-nns-dapp http://qsgjb-riaaa-aaaaa-aaaga-cai.localhost:8080/
+## Proposals.network
 
-NeuronID: 7140188146658685712
+[Proposals.network] Proposals.Network is your gateway to shaping the future of the [Internet Computer](https://internetcomputer.org) (ICP). 🚀 Submit proposals and browse those that matter most to the ICP community.
+
+### Links & Resources
+
+Here are some useful links:
+
+- Check out the [HACKING](HACKING.md) document for local development tips.
+- Checkout [Juno](https://juno.build) for the easiest way to get started building on Web3. 
+- Have questions, comments, or feedback? Feel free to open an issue or reach out on [X/Twitter](https://twitter.com/daviddalbusco).
 
 ## Design
 
-This dapp's design uses the color palette and few components of the nice [Neo-Brutalism UI](https://neo-brutalism-ui-library.vercel.app/) component library.
+This dapp's design is inspired by the color palette and features from the nice [Neo-Brutalism UI](https://neo-brutalism-ui-library.vercel.app/) component library.
+
+### Contact
+
+Find me on X/Twitter at [@daviddalbusco](https://twitter.com/daviddalbusco) or on Juno's [Discord](https://discord.juno.build).
+
+[proposals.network]: https://proposals.network
