@@ -24,7 +24,7 @@
 	Sometimes, it's cool to jump right into a specific proposal.
 </p>
 
-<div class="flex gap-1 mt-2 max-w-full px-2 lg:px-4 pb-4">
+<div class="flex gap-1 mt-2 max-w-full px-2 lg:px-4 pb-6">
 	<InputInline
 		bind:value={proposalId}
 		placeholder="Open proposal with ID"
