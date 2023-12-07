@@ -28,9 +28,9 @@
 	class:bg-cyan-200={primary}
 	class:hover:bg-cyan-300={primary}
 	class:active:bg-cyan-400={primary}
-	class:bg-violet-200={secondary}
-	class:hover:bg-violet-300={secondary}
-	class:active:bg-violet-400={secondary}
+	class:bg-violet-100={secondary}
+	class:hover:bg-violet-200={secondary}
+	class:active:bg-violet-300={secondary}
 	class:bg-lime-200={tertiary}
 	class:hover:bg-lime-300={tertiary}
 	class:active:bg-lime-400={tertiary}

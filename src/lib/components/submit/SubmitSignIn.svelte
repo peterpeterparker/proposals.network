@@ -4,7 +4,7 @@
 	import { signIn } from '$lib/services/auth.services';
 </script>
 
-<h1 class="font-bold capitalize text-4xl md:text-6xl mb-12">Getting Started</h1>
+<h1 class="font-bold capitalize text-6xl mb-12">Getting Started</h1>
 
 <h2 class="text-2xl mb-6">
 	Let's face it, command line tools sucks! But fear not, I've got you covered. Submit motion
