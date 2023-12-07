@@ -36,6 +36,6 @@
 			{/if}
 		</div>
 	{:else}
-		<div in:fade><Html text={markdown} /></div>
+		<div in:fade class="my-8 mx-5"><Html text={markdown} /></div>
 	{/if}
 </Container>
