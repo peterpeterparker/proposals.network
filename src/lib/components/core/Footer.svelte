@@ -13,7 +13,7 @@
 			aria-label="Built with Juno"
 		>
 			<IconJuno />
-			Build with Juno
+			Crafted with Juno
 		</a>
 	</div>
 	<div>
