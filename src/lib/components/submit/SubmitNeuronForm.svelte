@@ -17,6 +17,7 @@
 
 	const dispatch = createEventDispatcher();
 	const next = () => dispatch('pnwrkNext');
+	const back = () => dispatch('pnwrkBack');
 
 	const onSubmit = async () => {
 		const { result } = await setNeuron({
@@ -43,5 +44,9 @@
 		<Input placeholder="Neuron ID" bind:value={neuronId} disabled={$isBusy} />
 	</div>
 
-	<Button color="secondary" type="submit" disabled={$isBusy || disabled}>Save and continue</Button>
+	<div class="flex gap-2">
+		<Button color="quaternary" type="button" disabled={$isBusy} on:click={back}>Back</Button>
+		<Button color="secondary" type="submit" disabled={$isBusy || disabled}>Save and continue</Button
+		>
+	</div>
 </form>

@@ -49,7 +49,7 @@
 				</div>
 			{:else}
 				<div in:blur>
-					<SubmitNeuronForm {neuron} on:pnwrkNext />
+					<SubmitNeuronForm {neuron} on:pnwrkNext on:pnwrkBack={() => (step = 'hotkey')} />
 				</div>
 			{/if}
 		</div>
