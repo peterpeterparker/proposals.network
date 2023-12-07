@@ -16,10 +16,9 @@
 	</aside>
 
 	<div
-		class="w-full lg:w-[calc(100%-300px)] lg:ml-[300px] px-4 lg:px-16 pt-9 lg:pt-32 h-full"
+		class="w-full lg:w-[calc(100%-300px)] lg:ml-[300px] px-4 lg:px-16 pt-32 h-full"
 		class:pb-32={col === 'forward'}
 		class:lg:pb-32={col === 'reverse'}
-		class:pt-32={col === 'reverse'}
 	>
 		<slot />
 	</div>
