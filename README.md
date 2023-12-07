@@ -20,7 +20,7 @@
 Here are some useful links:
 
 - Check out the [HACKING](HACKING.md) document for local development tips.
-- Checkout [Juno](https://juno.build) for the easiest way to get started building on Web3. 
+- Checkout [Juno](https://juno.build) for the easiest way to get started building on Web3.
 - Have questions, comments, or feedback? Feel free to open an issue or reach out on [X/Twitter](https://twitter.com/daviddalbusco).
 
 ## Design
