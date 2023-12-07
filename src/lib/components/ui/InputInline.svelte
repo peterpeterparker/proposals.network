@@ -10,4 +10,5 @@
 	{placeholder}
 	{disabled}
 	class:opacity-20={disabled}
+	on:keypress
 />

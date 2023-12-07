@@ -12,6 +12,7 @@
 	import { isNullish } from '@dfinity/utils';
 	import ProposalRow from '$lib/components/proposals/ProposalRow.svelte';
 	import ProposalPaginator from '$lib/components/proposals/ProposalPaginator.svelte';
+	import ProposalOpen from '$lib/components/proposals/ProposalOpen.svelte';
 
 	let intersecting = false;
 	export const onTitleIntersection = ($event: Event) => {
@@ -39,7 +40,7 @@
 
 <Section color="secondary">
 	<h2
-		class="text-6xl md:text-7xl mb-12 tracking-tight font-bold mx-4"
+		class="text-6xl md:text-7xl mb-12 tracking-tight font-bold lg:mx-4"
 		use:onIntersectionTitle
 		on:pnwrkIntersecting={onTitleIntersection}
 	>
@@ -77,4 +78,6 @@
 	</TableContainer>
 
 	<ProposalPaginator />
+
+	<ProposalOpen />
 </Section>
