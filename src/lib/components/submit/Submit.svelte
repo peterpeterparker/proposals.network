@@ -64,7 +64,12 @@
 		{:else if step === 'neuron'}
 			<SubmitNeuron on:pnwrkNext={() => (step = 'review')} bind:neuronId />
 		{:else if step === 'review'}
-			<SubmitReview {neuronId} on:pnwrkNext={() => (step = 'submitted')} on:pnwrkDone={done} />
+			<SubmitReview
+				{neuronId}
+				on:pnwrkNext={() => (step = 'submitted')}
+				on:pnwrkEdit={() => (step = 'write')}
+				on:pnwrkDone={done}
+			/>
 		{:else if step === 'submitted'}
 			<SubmitDone {proposalId} />
 		{:else if step === 'readonly'}
