@@ -124,5 +124,28 @@
 				font-weight: 700;
 			}
 		}
+
+		table {
+			@screen lg {
+				table-layout: auto;
+			}
+
+			th {
+				@apply bg-orange-200;
+			}
+
+			th,
+			td {
+				@apply p-2;
+				height: inherit;
+
+				p {
+					margin: 0;
+				}
+
+				@apply border-2;
+				@apply border-black;
+			}
+		}
 	}
 }
