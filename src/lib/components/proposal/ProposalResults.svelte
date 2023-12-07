@@ -49,9 +49,9 @@
 	<svelte:fragment slot="title">Voting Results</svelte:fragment>
 
 	<div class="p-12">
-		<div class="flex items-center justify-center relative">
+		<div class="items-center justify-center relative hidden sm:flex">
 			<div
-				class="absolute rounded-full top-1/2 left-1/2 mt-2 transform -translate-x-1/2 -translate-y-1/2 h-[180px] w-[180px] overflow-hidden -rotate-[19.5deg]"
+				class="absolute rounded-full top-1/2 left-1/2 mt-2 transform -translate-x-1/2 -translate-y-1/2 h-[165px] w-[188px] overflow-hidden -rotate-[19.5deg]"
 			>
 				<div
 					class="absolute bottom-0 left-1/2 -translate-x-1/2 bg-lime-400 w-full border-b-4 border-black"
@@ -72,12 +72,14 @@
 			</div>
 		</div>
 
-		<div class="flex justify-center gap-4 mt-8">
+		<div class="flex flex-col sm:flex-row justify-center gap-4 sm:mt-8">
 			<div
 				class="bg-black border-2 border-black flex items-center justify-between py-1 px-1 gap-2 rounded-lg min-w-[160px]"
 			>
-				<div class="h-4 w-4 rounded-full bg-lime-400 ml-2"></div>
-				<span class="text-white pr-6">Yes</span>
+				<div class="flex items-center p-2 rounded-lg gap-2 mr-1">
+					<div class="h-4 w-4 rounded-full bg-lime-400"></div>
+					<span class="pr-5 text-white">Yes</span>
+				</div>
 				<output class="text-white pr-2">{yesPercentage}</output>
 			</div>
 
