@@ -3,7 +3,8 @@
 table {
 	width: 100%;
 	overflow: hidden;
-	border-collapse: collapse;
+	border-collapse: separate;
+	border-spacing: 0;
 	table-layout: auto;
 
 	@screen lg {
@@ -48,10 +49,16 @@ table {
 		@apply bg-white;
 	}
 
-	th,
-	tr:not(:last-of-type) {
+	th {
 		@apply border-b-2;
 		@apply border-black;
+	}
+
+	tr:not(:last-of-type) {
+		td {
+			@apply border-b-2;
+			@apply border-black;
+		}
 	}
 }
 
