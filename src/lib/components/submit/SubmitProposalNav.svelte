@@ -12,5 +12,5 @@
 
 <p class="leading-relaxed mb-4">
 	You can either return to the <a href="/" class="underline underline-offset-8">home page</a> or
-	open the proposal to vote in <ExternalLink href={nnsDappUrl}>NNS dapp</ExternalLink>.
+	open the proposal to vote in <ExternalLink href={nnsDappUrl} underline="visible">NNS dapp</ExternalLink>.
 </p>

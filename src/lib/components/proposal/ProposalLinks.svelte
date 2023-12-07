@@ -29,7 +29,7 @@
 		Proposer
 		<svelte:fragment slot="custom-value">
 			{#if nonNullish(proposer)}
-				<div in:fade>
+				<div in:fade class="inline-block truncate max-w-[60%]">
 					<ExternalLink
 						underline="hover"
 						href={`https://dashboard.internetcomputer.org/neuron/${proposer}`}
@@ -44,7 +44,7 @@
 		URL
 		<svelte:fragment slot="custom-value">
 			{#if nonNullish(url)}
-				<div in:fade>
+				<div in:fade class="max-w-[60%]">
 					<ExternalLink underline="hover" href={url} ariaLabel="URL linked to the proposal"
 						>{url}</ExternalLink
 					>

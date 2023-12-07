@@ -4,7 +4,7 @@
 	import ProposalLoader from '$lib/components/proposal/ProposalLoader.svelte';
 	import ProposalInfo from '$lib/components/proposal/ProposalInfo.svelte';
 	import ProposalHeader from '$lib/components/proposal/ProposalHeader.svelte';
-	import ProposalExternalLinks from '$lib/components/proposal/ProposalExternalLinks.svelte';
+	import ProposalLinks from '$lib/components/proposal/ProposalLinks.svelte';
 	import ProposalTimestamps from '$lib/components/proposal/ProposalTimestamps.svelte';
 	import ProposalSummary from '$lib/components/proposal/ProposalSummary.svelte';
 </script>
@@ -20,7 +20,7 @@
 
 			<ProposalResults />
 
-			<ProposalExternalLinks />
+			<ProposalLinks />
 
 			<ProposalTimestamps />
 
