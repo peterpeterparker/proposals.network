@@ -7,6 +7,7 @@
 	import { nonNullish } from '@dfinity/utils';
 	import { markdownToHTML } from '$lib/utils/markdown.utils';
 	import { fade } from 'svelte/transition';
+	import EditorContent from '$lib/components/ui/EditorContent.svelte';
 
 	export let content: Markdown | undefined;
 
@@ -30,7 +31,11 @@
 	>
 	<article class="py-8 px-5">
 		{#if display === 'html'}
-			<div in:fade><Html text={html} /></div>
+			<div in:fade>
+				{#if nonNullish(html)}
+					<EditorContent content={html} editable={false} />
+				{/if}
+			</div>
 		{:else}
 			<div in:fade><Html text={markdown} /></div>
 		{/if}

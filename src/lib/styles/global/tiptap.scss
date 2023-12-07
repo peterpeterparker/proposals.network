@@ -56,3 +56,69 @@
 		border-width: 1px;
 	}
 }
+
+@layer base {
+	.tiptap {
+		pre {
+			font-family: 'JetBrains Mono', monospace;
+
+			code {
+				color: inherit;
+				padding: 0;
+				background: none;
+			}
+
+			.hljs-comment,
+			.hljs-quote {
+				@apply text-gray-600;
+			}
+
+			.hljs-variable,
+			.hljs-template-variable,
+			.hljs-attribute,
+			.hljs-tag,
+			.hljs-name,
+			.hljs-regexp,
+			.hljs-link,
+			.hljs-name,
+			.hljs-selector-id,
+			.hljs-selector-class {
+				@apply text-red-300;
+			}
+
+			.hljs-number,
+			.hljs-meta,
+			.hljs-built_in,
+			.hljs-builtin-name,
+			.hljs-literal,
+			.hljs-type,
+			.hljs-params {
+				@apply text-orange-200;
+			}
+
+			.hljs-string,
+			.hljs-symbol,
+			.hljs-bullet {
+				@apply text-lime-200;
+			}
+
+			.hljs-title,
+			.hljs-section {
+				@apply text-yellow-200;
+			}
+
+			.hljs-keyword,
+			.hljs-selector-tag {
+				@apply text-cyan-200;
+			}
+
+			.hljs-emphasis {
+				font-style: italic;
+			}
+
+			.hljs-strong {
+				font-weight: 700;
+			}
+		}
+	}
+}
