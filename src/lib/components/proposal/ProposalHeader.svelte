@@ -24,5 +24,5 @@
 </h1>
 
 {#if nonNullish(title)}
-	<h2 class="text-2xl mb-8">{title}</h2>
+	<h2 class="text-2xl mb-12">{title}</h2>
 {/if}

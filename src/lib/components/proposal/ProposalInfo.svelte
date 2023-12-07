@@ -1,11 +1,5 @@
 <script lang="ts">
-	import {
-		type Option,
-		type ProposalId,
-		ProposalRewardStatus,
-		ProposalStatus,
-		Topic
-	} from '@dfinity/nns';
+	import { ProposalRewardStatus, ProposalStatus, Topic } from '@dfinity/nns';
 	import { PROPOSAL_CONTEXT_KEY, type ProposalContext } from '$lib/types/proposal.context';
 	import type { ProposalInfo } from '@dfinity/nns';
 	import { getContext } from 'svelte';
@@ -19,12 +13,10 @@
 	const { store }: ProposalContext<ProposalInfo> =
 		getContext<ProposalContext<ProposalInfo>>(PROPOSAL_CONTEXT_KEY);
 
-	let id: Option<ProposalId>;
 	let topic: Topic | undefined;
 	let status: ProposalStatus | undefined;
 	let rewardStatus: ProposalRewardStatus | undefined;
 
-	$: id = $store?.proposal?.id;
 	$: topic = $store?.proposal?.topic;
 	$: status = $store?.proposal?.status;
 	$: rewardStatus = $store?.proposal?.rewardStatus;
@@ -35,8 +27,6 @@
 
 <Container>
 	<svelte:fragment slot="title">Details</svelte:fragment>
-
-	<ProposalInfoRow value={id}>ID</ProposalInfoRow>
 
 	<ProposalInfoRow value={type}>Type</ProposalInfoRow>
 

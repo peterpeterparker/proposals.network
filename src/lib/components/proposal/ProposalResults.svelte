@@ -72,7 +72,7 @@
 			</div>
 		</div>
 
-		<div class="flex justify-center gap-4 my-8 my:mb-4">
+		<div class="flex justify-center gap-4 mt-8">
 			<div
 				class="bg-black border-2 border-black flex items-center justify-between py-1 px-1 gap-2 rounded-lg min-w-[160px]"
 			>
