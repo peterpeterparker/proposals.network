@@ -29,15 +29,13 @@
 			>Markdown</ButtonText
 		></svelte:fragment
 	>
-	<article class="py-8 px-5">
-		{#if display === 'html'}
-			<div in:fade>
-				{#if nonNullish(html)}
-					<EditorContent content={html} editable={false} />
-				{/if}
-			</div>
-		{:else}
-			<div in:fade><Html text={markdown} /></div>
-		{/if}
-	</article>
+	{#if display === 'html'}
+		<div in:fade>
+			{#if nonNullish(html)}
+				<EditorContent content={html} editable={false} />
+			{/if}
+		</div>
+	{:else}
+		<div in:fade><Html text={markdown} /></div>
+	{/if}
 </Container>

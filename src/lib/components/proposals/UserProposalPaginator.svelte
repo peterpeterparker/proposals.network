@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { userProposalsICPStore } from '$lib/derived/user-proposals.derived';
 	import { nonNullish } from '@dfinity/utils';
-	import IconNavigateNext from '$lib/components/icons/IconNavigateNext.svelte';
-	import ButtonIcon from '$lib/components/ui/ButtonIcon.svelte';
 	import { loadUserProposals } from '$lib/services/loader-stores.services';
 	import { last } from '$lib/utils/utils';
+	import Paginator from "$lib/components/ui/Paginator.svelte";
 
 	let previousStartAfter: string | undefined;
 	let startAfter: string | undefined;
@@ -35,12 +34,5 @@
 </script>
 
 {#if nonNullish($userProposalsICPStore)}
-	<nav class="w-full flex justify-center p-4">
-		<ButtonIcon disabled={!displayPrev} on:click={prev} ariaLabel="Previous page of data"
-			><IconNavigateNext navigate="previous" /></ButtonIcon
-		>
-		<ButtonIcon disabled={!displayNext} on:click={next} ariaLabel="Next page of data"
-			><IconNavigateNext /></ButtonIcon
-		>
-	</nav>
+	<Paginator {displayPrev} {displayNext} on:pnwrkPrevious={prev} on:pnwrkNext={next} />
 {/if}

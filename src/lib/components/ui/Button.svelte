@@ -2,6 +2,7 @@
 	export let color: 'primary' | 'secondary' | 'tertiary' | 'quaternary' = 'primary';
 	export let disabled = false;
 	export let type: 'submit' | 'button' | undefined = undefined;
+	export let fullWidth = false;
 
 	let primary: boolean;
 	$: primary = color === 'primary';
@@ -22,6 +23,8 @@
 	{type}
 	{disabled}
 	class="flex items-center gap-2 border-black border-2 transition-all rounded-none h-12 px-5 hover:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+	class:w-full={fullWidth}
+	class:justify-center={fullWidth}
 	class:bg-cyan-200={primary}
 	class:hover:bg-cyan-300={primary}
 	class:active:bg-cyan-400={primary}

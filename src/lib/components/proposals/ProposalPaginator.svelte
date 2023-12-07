@@ -1,11 +1,10 @@
 <script lang="ts">
 	import { nonNullish } from '@dfinity/utils';
-	import IconNavigateNext from '$lib/components/icons/IconNavigateNext.svelte';
-	import ButtonIcon from '$lib/components/ui/ButtonIcon.svelte';
 	import { last } from '$lib/utils/utils';
 	import { proposalsICPStore } from '$lib/derived/proposals.derived';
 	import { loadProposals } from '$lib/services/loader-stores.services';
 	import type { ProposalId } from '@dfinity/nns';
+	import Paginator from "$lib/components/ui/Paginator.svelte";
 
 	let previousBeforeProposal: ProposalId | undefined;
 	let beforeProposal: ProposalId | undefined;
@@ -34,12 +33,5 @@
 </script>
 
 {#if nonNullish($proposalsICPStore)}
-	<nav class="w-full flex justify-center p-4">
-		<ButtonIcon disabled={!displayPrev} on:click={prev} ariaLabel="Previous page of data"
-			><IconNavigateNext navigate="previous" /></ButtonIcon
-		>
-		<ButtonIcon disabled={!displayNext} on:click={next} ariaLabel="Next page of data"
-			><IconNavigateNext /></ButtonIcon
-		>
-	</nav>
+	<Paginator {displayPrev} {displayNext} on:pnwrkPrevious={prev} on:pnwrkNext={next} />
 {/if}

@@ -7,10 +7,11 @@
 	import ProposalLinks from '$lib/components/proposal/ProposalLinks.svelte';
 	import ProposalTimestamps from '$lib/components/proposal/ProposalTimestamps.svelte';
 	import ProposalSummary from '$lib/components/proposal/ProposalSummary.svelte';
+	import ProposalAside from "$lib/components/proposal/ProposalNavigation.svelte";
 </script>
 
 <SplitPane>
-	<svelte:fragment slot="aside">Stuffs Prev - Next - Share - Vote link</svelte:fragment>
+	<ProposalAside slot="aside" />
 
 	<ProposalLoader>
 		<ProposalHeader />

@@ -3,6 +3,7 @@
 	import { userInitialized, userNotSignedIn, userSignedIn } from '$lib/derived/user.derived';
 	import { isNullish, nonNullish } from '@dfinity/utils';
 	import { userStore } from '$lib/stores/user.store';
+	import Aside from '$lib/components/ui/Aside.svelte';
 
 	export let step: undefined | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly';
 
@@ -57,9 +58,9 @@
 					  : 'pending'))();
 </script>
 
-<span class="hidden lg:inline-block text-lg font-bold mb-6">Submit a proposal</span>
+<Aside>
+	<svelte:fragment slot="title">Submit a proposal</svelte:fragment>
 
-<ul class="flex lg:flex-col gap-3 lg:gap-1 lg:pb-16">
 	<Step status={signInStatus}>
 		<svelte:fragment slot="step">1</svelte:fragment>
 		Sign-in
@@ -84,4 +85,4 @@
 		<svelte:fragment slot="step">5</svelte:fragment>
 		Done
 	</Step>
-</ul>
+</Aside>

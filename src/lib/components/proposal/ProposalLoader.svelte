@@ -42,7 +42,7 @@
 
 			if (isNullish(newProposalInfo)) {
 				toasts.error({
-					msg: { text: `Proposal not found: ${$routeProposalId}` }
+					msg: { text: `Proposal not found: ${$routeProposalId}`, duration: 2000 }
 				});
 
 				await back(false);
