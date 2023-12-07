@@ -16,10 +16,13 @@
 
 	let display: 'html' | 'markdown' = 'html';
 
-	onMount(async () => {
+	export const load = async () => {
+		console.log("lOAd")
 		html = nonNullish(content) ? await markdownToHTML(content) : undefined;
 		markdown = content?.replaceAll('\n', '<br/>');
-	});
+	};
+
+	onMount(load);
 </script>
 
 <Container>
