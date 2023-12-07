@@ -4,7 +4,7 @@
 
 	const scroll = () => {
 		const element = document.getElementById('your-proposals-actions');
-		element.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+		element?.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
 	};
 </script>
 
