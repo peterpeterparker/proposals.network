@@ -16,11 +16,11 @@
 	$: disabled = isNullish(neuronId) || neuronId === '';
 
 	const dispatch = createEventDispatcher();
-	const next = () => dispatch('pnwrkNext');
+	const next = (neuron: Doc<Neuron> | undefined) => dispatch('pnwrkNext', neuron);
 	const back = () => dispatch('pnwrkBack');
 
 	const onSubmit = async () => {
-		const { result } = await setNeuron({
+		const { result, neuron: createdNeuron } = await setNeuron({
 			user: $userStore,
 			neuron,
 			neuronId
@@ -30,7 +30,7 @@
 			return;
 		}
 
-		next();
+		next(createdNeuron);
 	};
 </script>
 

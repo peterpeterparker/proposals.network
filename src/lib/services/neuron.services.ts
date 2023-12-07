@@ -42,12 +42,12 @@ export const setNeuron = async ({
 	user: UserOption;
 	neuron: Doc<Neuron> | undefined;
 	neuronId: string;
-}): Promise<{ result: 'ok' | 'error' }> => {
+}): Promise<{ result: 'ok' | 'error'; neuron: Doc<Neuron> | undefined }> => {
 	if (isNullish(user)) {
 		toasts.error({
 			msg: { text: 'You are not signed in.' }
 		});
-		return { result: 'error' };
+		return { result: 'error', neuron: undefined };
 	}
 
 	if (isNullish(GOVERNANCE_CANISTER_ID)) {
@@ -56,7 +56,7 @@ export const setNeuron = async ({
 				text: 'The ICP governance canister ID is not set, therefore the neuron metadata cannot be saved.'
 			}
 		});
-		return { result: 'error' };
+		return { result: 'error', neuron: undefined };
 	}
 
 	busy.start();
@@ -74,7 +74,7 @@ export const setNeuron = async ({
 	};
 
 	try {
-		await setDoc<Neuron>({
+		const docNeuron = await setDoc<Neuron>({
 			collection: 'neuron',
 			doc: {
 				key,
@@ -83,13 +83,13 @@ export const setNeuron = async ({
 			}
 		});
 
-		return { result: 'ok' };
+		return { result: 'ok', neuron: docNeuron };
 	} catch (err: unknown) {
 		toasts.error({
 			msg: { text: 'Something went wrong while setting your neuron metadata.' },
 			err
 		});
-		return { result: 'error' };
+		return { result: 'error', neuron: undefined };
 	} finally {
 		busy.stop();
 	}

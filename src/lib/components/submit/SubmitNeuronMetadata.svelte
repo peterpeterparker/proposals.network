@@ -7,7 +7,7 @@
 	export let neuronId: bigint | undefined;
 
 	const dispatch = createEventDispatcher();
-	const next = () => dispatch('pnwrkNext');
+	const review = () => dispatch('pnwrkReview');
 </script>
 
 <p class="leading-relaxed mb-4">
@@ -18,7 +18,7 @@
 	step and proceed to the review.
 </p>
 
-<Button color="secondary" on:click={next}>Review</Button>
+<Button color="secondary" on:click={review}>Review</Button>
 
 <p class="leading-relaxed text-sm mt-8 mb-4 italic">
 	Please note that editing this data is currently not supported but, I welcome contributions via

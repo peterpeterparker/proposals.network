@@ -42,7 +42,7 @@
 	{:else}
 		<div in:fade>
 			{#if nonNullish(neuron) && nonNullish(neuronId)}
-				<SubmitNeuronMetadata {neuronId} on:pnwrkNext />
+				<SubmitNeuronMetadata {neuronId} on:pnwrkReview />
 			{:else if step === 'hotkey'}
 				<div in:blur>
 					<SubmitNeuronHotkey on:click={() => (step = 'neuron_id')} />

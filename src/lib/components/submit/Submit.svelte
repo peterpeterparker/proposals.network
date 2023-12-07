@@ -15,6 +15,9 @@
 	import SubmitDone from '$lib/components/submit/SubmitDone.svelte';
 	import SubmitReadonly from '$lib/components/submit/SubmitReadonly.svelte';
 	import SplitPane from '$lib/components/ui/SplitPane.svelte';
+	import type { Doc } from '@junobuild/core-peer';
+	import type { Neuron } from '$lib/types/juno';
+	import { firstNeuronId } from '$lib/utils/juno.utils';
 
 	let step: undefined | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly' = undefined;
 	let neuronId: bigint | undefined;
@@ -49,6 +52,11 @@
 		proposalId = detail;
 		step = 'submitted';
 	};
+
+	const review = ({ detail }: CustomEvent<Doc<Neuron> | undefined>) => {
+		neuronId = firstNeuronId(detail);
+		step = 'review';
+	};
 </script>
 
 <SplitPane>
@@ -62,7 +70,7 @@
 		{:else if step === 'write'}
 			<SubmitWrite on:pnwrkNext={() => (step = 'neuron')} />
 		{:else if step === 'neuron'}
-			<SubmitNeuron on:pnwrkNext={() => (step = 'review')} bind:neuronId />
+			<SubmitNeuron on:pnwrkNext={review} on:pnwrkReview={() => (step = 'review')} bind:neuronId />
 		{:else if step === 'review'}
 			<SubmitReview
 				{neuronId}
