@@ -71,17 +71,19 @@
 		</tbody>
 	</TableContainer>
 
-	{#if $userProposalsICPStore === null}
-		<div in:fade class="lg:mx-4 my-4">
-			<Button on:click={signIn} color="quaternary">
-				<IconICMonochrome /> Continue with Internet Identity
-			</Button>
-		</div>
-	{:else if $userProposalsICPStore?.items_length === 0n}
-		<div in:fade class="lg:mx-4 my-4">
-			<SubmitLink />
-		</div>
-	{:else}
-		<UserProposalPaginator />
-	{/if}
+	<div id="your-proposals-actions">
+		{#if $userProposalsICPStore === null}
+			<div in:fade class="lg:mx-4 my-4">
+				<Button on:click={signIn} color="quaternary">
+					<IconICMonochrome /> Continue with Internet Identity
+				</Button>
+			</div>
+		{:else if $userProposalsICPStore?.items_length === 0n}
+			<div in:fade class="lg:mx-4 my-4">
+				<SubmitLink />
+			</div>
+		{:else}
+			<UserProposalPaginator />
+		{/if}
+	</div>
 </Section>

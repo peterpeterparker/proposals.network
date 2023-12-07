@@ -1,7 +1,11 @@
 <script lang="ts">
-	import IconChevronRight from '$lib/components/icons/IconChevronRight.svelte';
-	import InputInline from '$lib/components/ui/InputInline.svelte';
 	import HeroAnimation from '$lib/components/core/HeroAnimation.svelte';
+	import IconDoubleArrow from '$lib/components/icons/IconDoubleArrow.svelte';
+
+	const scroll = () => {
+		const element = document.getElementById('your-proposals-actions');
+		element.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+	};
 </script>
 
 <section
@@ -9,19 +13,13 @@
 >
 	<HeroAnimation />
 
-	<div class="w-full h-full relative flex items-center justify-center flex-col">
-		<h1 class="text-center px-2 md:max-w-[70vw] xl:max-w-[50vw]">
+	<div class="w-full h-full relative flex items-center justify-center flex-col pt-24">
+		<h1 class="text-center px-2 md:max-w-[70vw] xl:max-w-[50vw] text-5xl sm:text-7xl">
 			Browse and submit proposals on ICP.
 		</h1>
 
-		<div class="flex gap-1 mt-8 max-w-full px-8">
-			<InputInline placeholder="Proposal ID" />
-			<button
-				class="h-12 border-black border-2 p-2.5 bg-[#A6FAFF] hover:bg-[#79F7FF] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:bg-[#00E1EF]"
-				aria-label="Open the detail of the proposal specified by its ID"
-			>
-				<IconChevronRight />
-			</button>
-		</div>
+		<button class="animate-bounce pt-16" on:click={scroll} aria-label="Continue">
+			<IconDoubleArrow />
+		</button>
 	</div>
 </section>
