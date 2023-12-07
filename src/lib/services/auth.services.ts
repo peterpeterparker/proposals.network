@@ -1,4 +1,5 @@
 import { clearAgents } from '$lib/api/agent.api';
+import { AUTH_MAX_TIME_TO_LIVE } from '$lib/constants/app.constants';
 import { clear } from '$lib/services/idb.services';
 import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
@@ -14,7 +15,9 @@ export const signIn = async (): Promise<{
 	busy.show();
 
 	try {
-		await junoSignIn();
+		await junoSignIn({
+			maxTimeToLive: AUTH_MAX_TIME_TO_LIVE
+		});
 
 		// We clean previous messages in case user was signed out automatically before sign-in again.
 		toasts.clean();
