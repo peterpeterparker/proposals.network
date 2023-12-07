@@ -13,7 +13,8 @@
 
 ## Proposals.network
 
-[Proposals.network] Proposals.Network is your gateway to shaping the future of the [Internet Computer](https://internetcomputer.org) (ICP). 🚀 Submit proposals and browse those that matter most to the ICP community.
+[Proposals.network] Proposals.Network is your gateway to shaping the future of the [Internet Computer](https://internetcomputer.org) (ICP). 🚀
+Submit proposals and browse those that matter most to the ICP community.
 
 ### Links & Resources
 
