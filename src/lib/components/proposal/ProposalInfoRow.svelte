@@ -6,7 +6,7 @@
 </script>
 
 <div class="flex justify-between py-3 px-2 gap-1">
-	<span><slot />:</span>
+	<span class="font-semibold"><slot />:</span>
 	{#if nonNullish(value)}
 		<span class="inline-block truncate max-w-full" in:fade>{value}</span>
 	{/if}

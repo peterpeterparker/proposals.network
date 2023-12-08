@@ -145,6 +145,7 @@
 		color: var(--label-color);
 
 		@apply mr-1;
+		@apply font-semibold;
 	}
 
 	.arrow {
@@ -191,82 +192,55 @@
 
 	/* value types */
 	.bracket {
-		@apply text-gray-400;
-
 		&:hover {
 			@apply bg-gray-400;
-			@apply text-black;
 		}
 	}
 
 	.value {
-		@apply text-violet-200;
-
 		&:hover {
 			@apply bg-violet-200;
-			@apply text-white;
 		}
 	}
 
 	.value.string {
-		@apply text-pink-200;
-
 		&:hover {
 			@apply bg-pink-200;
-			@apply text-white;
 		}
 	}
 
 	.value.number {
-		@apply text-lime-200;
-
 		&:hover {
 			@apply bg-lime-200;
-			@apply text-black;
 		}
 	}
 	.value.null {
-		@apply text-gray-600;
-
 		&:hover {
 			@apply bg-gray-600;
-			@apply text-black;
 		}
 	}
 
 	.value.principal {
-		@apply text-red-200;
-
 		&:hover {
 			@apply bg-red-200;
-			@apply text-white;
 		}
 	}
 
 	.value.hash {
-		@apply text-cyan-200;
-
 		&:hover {
 			@apply bg-cyan-200;
-			@apply text-black;
 		}
 	}
 
 	.value.bigint {
-		@apply text-lime-200;
-
 		&:hover {
 			@apply bg-lime-200;
-			@apply text-black;
 		}
 	}
 
 	.value.boolean {
-		@apply text-violet-200;
-
 		&:hover {
 			@apply bg-violet-200;
-			@apply text-white;
 		}
 	}
 </style>
