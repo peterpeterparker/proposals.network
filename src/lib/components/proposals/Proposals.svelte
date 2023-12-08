@@ -50,12 +50,12 @@
 	<TableContainer rows={$proposalsICPStore?.length} color="secondary">
 		<thead>
 			<tr>
-				<th class="w-1/12">ID</th>
-				<th class="max-w-lg">Title</th>
+				<th class="md:w-[140px]">ID</th>
+				<th class="md:w-[30%]">Title</th>
 				<th>Topic</th>
 				<th>Status</th>
 				<th>Yes</th>
-				<th>Expiration</th>
+				<th class="xl:w-[200px]">Expiration</th>
 				<th></th>
 			</tr>
 		</thead>
