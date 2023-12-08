@@ -26,7 +26,7 @@
 
 	export const reload = async () => {
 		await load();
-		editor?.commands.setContent(content ?? "");
+		editor?.commands.setContent(content ?? '');
 	};
 
 	onMount(load);

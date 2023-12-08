@@ -8,6 +8,7 @@
 	import ProposalTimestamps from '$lib/components/proposal/ProposalTimestamps.svelte';
 	import ProposalSummary from '$lib/components/proposal/ProposalSummary.svelte';
 	import ProposalAside from '$lib/components/proposal/ProposalNavigation.svelte';
+	import ProposalAction from '$lib/components/proposal/ProposalAction.svelte';
 </script>
 
 <SplitPane col="reverse">
@@ -26,6 +27,8 @@
 			<ProposalTimestamps />
 
 			<ProposalSummary />
+
+			<ProposalAction />
 		</div>
 	</ProposalLoader>
 </SplitPane>

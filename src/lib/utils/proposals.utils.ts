@@ -67,3 +67,12 @@ export const getNnsFunctionKey = (proposal: Proposal | undefined): string | unde
 
 export const proposalFirstActionKey = (proposal: Proposal | undefined): string | undefined =>
 	Object.keys(proposal?.action ?? {})[0];
+
+export const proposalActionData = (proposal: Proposal): unknown | undefined => {
+	const key = proposalFirstActionKey(proposal);
+	if (key === undefined) {
+		return {};
+	}
+
+	return (proposal.action as { [key: string]: unknown })?.[key];
+};
