@@ -6,7 +6,6 @@
 	import type { Option, Proposal } from '@dfinity/nns';
 	import { nonNullish } from '@dfinity/utils';
 	import { fade } from 'svelte/transition';
-	import { beforeNavigate } from '$app/navigation';
 
 	const { store }: ProposalContext<ProposalInfo> =
 		getContext<ProposalContext<ProposalInfo>>(PROPOSAL_CONTEXT_KEY);
@@ -17,21 +16,8 @@
 	let summary: string | undefined;
 	$: summary = proposal?.summary;
 
-	// Reload html/markdown on navigation
-	let navigating = false;
-	beforeNavigate(() => (navigating = true));
-
 	let cmp: HtmlMarkdown;
-	$: navigating,
-		(async () => {
-			if (!navigating) {
-				return;
-			}
-
-			navigating = false;
-
-			await cmp?.reload();
-		})();
+	$: summary, (async () => await cmp?.reload())();
 </script>
 
 {#if nonNullish(summary)}
