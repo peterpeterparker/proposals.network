@@ -125,7 +125,7 @@
 	.root ~ span {
 		/* first arrow extra space */
 		@apply pl-2;
-		@apply ml-2;
+		@apply ml-4;
 	}
 
 	ul {
