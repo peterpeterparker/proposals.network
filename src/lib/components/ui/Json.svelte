@@ -125,6 +125,7 @@
 	.root ~ span {
 		/* first arrow extra space */
 		@apply pl-2;
+		@apply ml-2;
 	}
 
 	ul {
@@ -174,7 +175,7 @@
 			top: 0;
 			/* Move left to compensate for the padding of the ul */
 			/* Move down to componsate for the gap between li */
-			transform: translate(calc(-1 * 0.375rem), calc(0.8 * 0.25rem));
+			transform: translate(-1rem, calc(0.8 * 0.25rem));
 		}
 		&.expanded::before {
 			content: '▼';
