@@ -13,6 +13,7 @@
 	import ProposalRow from '$lib/components/proposals/ProposalRow.svelte';
 	import ProposalPaginator from '$lib/components/proposals/ProposalPaginator.svelte';
 	import ProposalOpen from '$lib/components/proposals/ProposalOpen.svelte';
+	import GovernanceSelector from "$lib/components/core/GovernanceSelector.svelte";
 
 	let intersecting = false;
 	export const onTitleIntersection = ($event: Event) => {
@@ -36,6 +37,8 @@
 	};
 
 	$: intersecting, (async () => load())();
+
+
 </script>
 
 <Section color="secondary">
@@ -46,6 +49,10 @@
 	>
 		Network
 	</h2>
+
+	<div class="lg:mx-4 mb-4">
+		<GovernanceSelector />
+	</div>
 
 	<TableContainer rows={$proposalsICPStore?.length} color="secondary">
 		<thead>
