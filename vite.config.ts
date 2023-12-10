@@ -1,6 +1,7 @@
 import inject from '@rollup/plugin-inject';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { readFileSync } from 'fs';
+import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -16,6 +17,11 @@ const readCanisterIds = ({ prefix }: { prefix?: string }): Record<string, string
 	const canisterIdsJsonFile = ['ic', 'staging'].includes(network)
 		? join(process.cwd(), 'canister_ids.json')
 		: join(process.cwd(), '.dfx', 'local', 'canister_ids.json');
+
+	if (!existsSync(canisterIdsJsonFile)) {
+		console.warn(`Canister ID file ${canisterIdsJsonFile} does not exist.`);
+		return {};
+	}
 
 	try {
 		type Details = {
