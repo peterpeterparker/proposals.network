@@ -23,3 +23,7 @@ package/
 .env
 
 static/workers
+
+# snses
+src/lib/data/**/*
+static/snses/**/*
