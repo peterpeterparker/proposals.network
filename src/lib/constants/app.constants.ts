@@ -4,6 +4,8 @@ export const APP_VERSION = import.meta.env.VITE_APP_VERSION;
 
 export const LOCAL = import.meta.env.VITE_DFX_NETWORK === 'local';
 
+export const DISABLE_ANALYTICS = import.meta.env.VITE_JUNO_DISABLE_ANALYTICS === true;
+
 export const SATELLITE_ID: string | null | undefined = import.meta.env
 	.VITE_SATELLITE_CANISTER_ID as string | null | undefined;
 
