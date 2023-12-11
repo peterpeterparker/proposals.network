@@ -21,7 +21,7 @@
 		<slot />
 	</select>
 
-	<div class="absolute top-[50%] -translate-y-1/2 left-0 p-2 pointer-events-none">
+	<div class="absolute top-[50%] -translate-y-1/2 left-0 p-2 pointer-events-none max-w-[48px]">
 		<slot name="logo" />
 	</div>
 
