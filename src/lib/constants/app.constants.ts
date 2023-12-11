@@ -1,3 +1,4 @@
+import type { GovernanceId } from '$lib/types/governance';
 import { nonNullish } from '@dfinity/utils';
 
 export const APP_VERSION = import.meta.env.VITE_APP_VERSION;
@@ -9,8 +10,8 @@ export const DISABLE_ANALYTICS = import.meta.env.VITE_JUNO_DISABLE_ANALYTICS ===
 export const SATELLITE_ID: string | null | undefined = import.meta.env
 	.VITE_SATELLITE_CANISTER_ID as string | null | undefined;
 
-export const GOVERNANCE_CANISTER_ID: string | null | undefined = import.meta.env
-	.VITE_NNS_GOVERNANCE_CANISTER_ID as string | null | undefined;
+export const GOVERNANCE_CANISTER_ID: GovernanceId | null | undefined = import.meta.env
+	.VITE_NNS_GOVERNANCE_CANISTER_ID as GovernanceId | null | undefined;
 
 export const II_CANISTER_ID: string | null | undefined = LOCAL
 	? (import.meta.env.VITE_INTERNET_IDENTITY_CANISTER_ID as string | null | undefined)

@@ -2,7 +2,7 @@
 	import { isNullish } from '@dfinity/utils';
 	import IconChevronDown from '$lib/components/icons/IconChevronDown.svelte';
 
-	export let value: string | undefined = undefined;
+	export let value: string | null | undefined = undefined;
 	export let disabled = false;
 </script>
 

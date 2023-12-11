@@ -18,3 +18,12 @@ export const routeProposalId: Readable<string | undefined | null> = derived(
 		}
 	]) => id
 );
+
+export const routeGovernanceId: Readable<string | undefined | null> = derived(
+	[page],
+	([
+		{
+			data: { g }
+		}
+	]) => g
+);

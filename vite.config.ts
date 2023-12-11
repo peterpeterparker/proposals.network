@@ -13,7 +13,7 @@ const { version } = JSON.parse(json);
 
 const network = process.env.NODE_ENV === 'development' ? 'local' : 'ic';
 
-const disableAnalytics = process.env.JUNO_ANALYTICS === "disabled";
+const disableAnalytics = process.env.JUNO_ANALYTICS === 'disabled';
 
 const readCanisterIds = ({ prefix }: { prefix?: string }): Record<string, string> => {
 	const canisterIdsJsonFile = ['ic', 'staging'].includes(network)
