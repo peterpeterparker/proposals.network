@@ -3,7 +3,7 @@
 	import Img from '$lib/components/ui/Img.svelte';
 	import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
 	import { nonNullish } from '@dfinity/utils';
-	import { snsesStore } from '$lib/stores/snses.store';
+	import { sortedSnsesStore } from '$lib/derived/snses.derived';
 
 	let governanceId: string | undefined = GOVERNANCE_CANISTER_ID;
 
@@ -21,7 +21,7 @@
 		<option value={GOVERNANCE_CANISTER_ID}>Internet Computer</option>
 	{/if}
 
-	{#each $snsesStore as sns}
+	{#each $sortedSnsesStore as sns}
 		<option value={sns.canister_ids.governance_canister_id}>{sns.meta.name ?? ''}</option>
 	{/each}
 
