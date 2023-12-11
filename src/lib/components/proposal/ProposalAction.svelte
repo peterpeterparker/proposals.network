@@ -32,7 +32,7 @@
 		<Container color="quaternary">
 			<svelte:fragment slot="title">{actionKey}</svelte:fragment>
 			<div class="py-3 px-2">
-				<Json {json} slot="custom-value" />
+				<Json {json} />
 			</div>
 		</Container>
 	</div>
