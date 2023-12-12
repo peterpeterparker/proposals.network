@@ -1,4 +1,4 @@
-import type { RouteParams } from '$lib/utils/nav.utils';
+import type { RouteParams } from '$lib/types/nav';
 import { loadRouteParams } from '$lib/utils/nav.utils';
 import type { LoadEvent } from '@sveltejs/kit';
 import type { PageLoad } from './$types';

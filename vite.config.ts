@@ -13,6 +13,8 @@ const { version } = JSON.parse(json);
 
 const network = process.env.NODE_ENV === 'development' ? 'local' : 'ic';
 
+const disableAnalytics = process.env.JUNO_ANALYTICS === 'disabled';
+
 const readCanisterIds = ({ prefix }: { prefix?: string }): Record<string, string> => {
 	const canisterIdsJsonFile = ['ic', 'staging'].includes(network)
 		? join(process.cwd(), 'canister_ids.json')
@@ -165,7 +167,8 @@ export default defineConfig((): UserConfig => {
 				DFX_NETWORK: network
 			},
 			'import.meta.env.VITE_APP_VERSION': JSON.stringify(version),
-			'import.meta.env.VITE_DFX_NETWORK': JSON.stringify(network)
+			'import.meta.env.VITE_DFX_NETWORK': JSON.stringify(network),
+			'import.meta.env.VITE_JUNO_DISABLE_ANALYTICS': JSON.stringify(disableAnalytics)
 		}
 	};
 });

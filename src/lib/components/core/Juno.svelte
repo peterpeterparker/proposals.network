@@ -7,7 +7,7 @@
 	import { junoEnvironment } from '$lib/utils/juno.utils';
 	import { toasts } from '$lib/stores/toasts.store';
 	import { initOrbiter } from '@junobuild/analytics';
-	import { LOCAL, SATELLITE_ID } from '$lib/constants/app.constants';
+	import { DISABLE_ANALYTICS, LOCAL, SATELLITE_ID } from '$lib/constants/app.constants';
 
 	let unsubscribe: (() => void) | undefined = undefined;
 
@@ -30,7 +30,7 @@
 					auth: true
 				}
 			}),
-			...(LOCAL
+			...(DISABLE_ANALYTICS || LOCAL
 				? []
 				: [
 						initOrbiter({

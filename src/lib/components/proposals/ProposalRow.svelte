@@ -1,35 +1,28 @@
 <script lang="ts">
-	import type { ProposalId, ProposalInfo } from '@dfinity/nns';
-	import type { Option } from '@dfinity/nns';
+	import type { ProposalId } from '@dfinity/nns';
 	import ProposalLink from '$lib/components/proposals/ProposalLink.svelte';
-	import type { Proposal } from '@dfinity/nns';
-	import { ProposalStatus, Topic } from '@dfinity/nns';
-	import en from '$lib/i18n/en.governance.json';
-	import { keyOf } from '$lib/utils/utils';
 	import ProposalCountdown from '$lib/components/proposals/ProposalCountdown.svelte';
 	import ProposalView from '$lib/components/proposals/ProposalView.svelte';
 	import ProposalYes from '$lib/components/proposals/ProposalYes.svelte';
+	import type { Proposal } from '$lib/types/governance';
 
-	export let proposalInfo: ProposalInfo;
+	export let proposal: Proposal;
 
-	let id: Option<ProposalId>;
-	let proposal: Option<Proposal>;
-	let topic: Topic;
-	let status: ProposalStatus;
-	let deadlineTimestampSeconds: Option<bigint>;
+	let id: ProposalId | undefined;
+	let type: string | undefined;
+	let status: string;
+	let deadlineTimestampSeconds: bigint | undefined;
+	let title: string | undefined;
 
-	$: ({ id, proposal, topic, status, deadlineTimestampSeconds } = proposalInfo);
-
-	let title: string;
-	$: title = proposal?.title ?? '';
+	$: ({ id, type, status, deadlineTimestampSeconds, title } = proposal);
 </script>
 
 <tr>
 	<ProposalLink {id} />
-	<td class="truncate">{title}</td>
-	<td>{keyOf({ obj: en.topics, key: Topic[topic] })}</td>
-	<td>{keyOf({ obj: en.status, key: ProposalStatus[status] })}</td>
-	<td><ProposalYes {proposalInfo} /></td>
+	<td class="truncate">{title ?? ''}</td>
+	<td>{type ?? ''}</td>
+	<td>{status ?? ''}</td>
+	<td><ProposalYes {proposal} /></td>
 	<td><ProposalCountdown {deadlineTimestampSeconds} /> </td>
 	<ProposalView {id} />
 </tr>

@@ -185,5 +185,34 @@
 		"BitcoinSetConfig": "A proposal to set the configuration of the underlying Bitcoin Canister that powers the Bitcoin API. The configuration includes whether or not the Bitcoin Canister should sync new blocks from the network, whether the API is enabled, the fees to charge, etc.",
 		"UpdateElectedHostosVersions": "A proposal to update currently elected HostOS versions, by electing a new version, and/or unelecting multiple unused versions. The version to elect (often identified by the hash of the installation image) is added to the registry. By itself, this proposal does not effect any upgrade. The specified versions to unelect are removed from the registry. This ensures that the HostOS cannot upgrade to these versions anymore.",
 		"UpdateNodesHostosVersion": "Update the HostOS version running on a given list of nodes. The proposal changes the HostOS version that is used on the specified nodes. The version must be contained in the list of HostOS versions."
+	},
+	"sns_status": {
+		"0": "Unknown",
+		"1": "Open",
+		"2": "Rejected",
+		"3": "Adopted",
+		"4": "Executed",
+		"5": "Failed"
+	},
+	"sns_rewards_status": {
+		"0": "Unknown",
+		"1": "Accepting Votes",
+		"2": "Ready to Settle",
+		"3": "Settled"
+	},
+	"sns_action": {
+		"0": "Unspecified",
+		"1": "Motion",
+		"2": "Manage Nervous System Parameters",
+		"3": "Upgrade Sns Controlled Canister",
+		"4": "Add Generic Nervous System Function",
+		"5": "Remove Generic Nervous SystemF unction",
+		"6": "Execute Generic Nervous System Function",
+		"7": "Upgrade Sns To Next Version",
+		"8": "Manage Sns Metadata",
+		"9": "Transfer Sns Treasury Funds",
+		"10": "Register Dapp Canisters",
+		"11": "Deregister Dapp Canisters",
+		"12": "Mint Sns Tokens"
 	}
 }

@@ -1,10 +1,25 @@
 import { browser } from '$app/environment';
 import { goto } from '$app/navigation';
+import type { GovernanceId } from '$lib/types/governance';
+import type { RouteParams } from '$lib/types/nav';
+import { isNullish } from '@dfinity/utils';
 import type { LoadEvent, Page } from '@sveltejs/kit';
 
 export const isRouteSubmit = ({ route: { id } }: Page): boolean => id === '/(split)/submit';
 
 export const submitUrl = (key: string): string => `/submit/?key=${key}`;
+
+export const replaceGovernanceParamUrl = (governanceId: GovernanceId | undefined | null) => {
+	const url = new URL(window.location.href);
+
+	if (isNullish(governanceId)) {
+		url.searchParams.delete('g');
+	} else {
+		url.searchParams.set('g', governanceId);
+	}
+
+	window.history.replaceState({}, '', url);
+};
 
 export const back = async (pop: boolean) => {
 	if (!pop) {
@@ -13,12 +28,6 @@ export const back = async (pop: boolean) => {
 	}
 
 	history.back();
-};
-
-export type RouteParams = {
-	key: string | null | undefined;
-	id: string | null | undefined;
-	g: string | null | undefined;
 };
 
 export const loadRouteParams = ($event: LoadEvent): RouteParams => {

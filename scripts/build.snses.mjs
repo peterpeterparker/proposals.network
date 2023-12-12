@@ -8,7 +8,7 @@ const AGGREGATOR_CANISTER_VERSION = 'v1';
 const AGGREGATOR_URL = `${SNS_AGGREGATOR_CANISTER_URL}/${AGGREGATOR_CANISTER_VERSION}/sns`;
 
 const DATA_FOLDER = join(process.cwd(), 'src', 'lib', 'data');
-const STATIC_FOLDER = join(process.cwd(), 'static', 'snses');
+const STATIC_FOLDER = join(process.cwd(), 'static', 'logo', 'snses');
 
 if (!existsSync(DATA_FOLDER)) {
 	mkdirSync(DATA_FOLDER, { recursive: true });
@@ -43,12 +43,13 @@ const querySnsAggregator = async (page = 0) => {
 };
 
 const saveLogos = async (snses) => {
-	const logos = snses.map(({ canister_ids: { root_canister_id } }) => ({
+	const logos = snses.map(({ canister_ids: { root_canister_id, governance_canister_id } }) => ({
 		logoUrl: `${AGGREGATOR_URL}/root/${root_canister_id}/logo.png`,
-		rootCanisterId: root_canister_id
+		rootCanisterId: root_canister_id,
+		governanceCanisterId: governance_canister_id
 	}));
 
-	const downloadLogo = async ({ logoUrl, rootCanisterId }) => {
+	const downloadLogo = async ({ logoUrl, governanceCanisterId }) => {
 		const response = await fetch(logoUrl);
 
 		if (!response.ok) {
@@ -58,7 +59,7 @@ const saveLogos = async (snses) => {
 		const blob = await response.blob();
 
 		writeFileSync(
-			join(STATIC_FOLDER, `${rootCanisterId}.png`),
+			join(STATIC_FOLDER, `${governanceCanisterId}.png`),
 			Buffer.from(await blob.arrayBuffer())
 		);
 	};

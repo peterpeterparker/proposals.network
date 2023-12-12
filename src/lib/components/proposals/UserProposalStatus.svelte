@@ -2,7 +2,7 @@
 	import SkeletonText from '$lib/components/ui/SkeletonText.svelte';
 	import { isNullish, nonNullish } from '@dfinity/utils';
 	import { onMount } from 'svelte';
-	import { getProposal } from '$lib/api/proposal.api';
+	import { getProposal } from '$lib/api/icp-proposal.api';
 	import { ProposalStatus } from '@dfinity/nns';
 	import { fade } from 'svelte/transition';
 

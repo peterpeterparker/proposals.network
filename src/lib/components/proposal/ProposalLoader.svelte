@@ -1,10 +1,8 @@
 <script lang="ts">
-	import type { ProposalInfo } from '@dfinity/nns';
 	import { isNullish, nonNullish } from '@dfinity/utils';
 	import { routeProposalId } from '$lib/derived/nav.derived';
 	import { back } from '$lib/utils/nav.utils';
-	import { proposalsICPStore } from '$lib/derived/proposals.derived';
-	import { getProposal } from '$lib/api/proposal.api';
+	import { selectedProposalsStore } from '$lib/derived/proposals.derived';
 	import { toasts } from '$lib/stores/toasts.store';
 	import SpinnerScreen from '$lib/components/ui/SpinnerScreen.svelte';
 	import { blur } from 'svelte/transition';
@@ -12,12 +10,14 @@
 	import { setContext } from 'svelte';
 	import type { ProposalContext, ProposalStoreData } from '$lib/types/proposal.context';
 	import { PROPOSAL_CONTEXT_KEY } from '$lib/types/proposal.context';
+	import { getProposal } from '$lib/services/proposal.services';
+	import { governanceIdStore, governanceTypeStore } from '$lib/derived/governance.derived';
 
-	const proposalStore = writable<ProposalStoreData<ProposalInfo>>(undefined);
+	const proposalStore = writable<ProposalStoreData>(undefined);
 
 	const reset = () => proposalStore.set(null);
 
-	setContext<ProposalContext<ProposalInfo>>(PROPOSAL_CONTEXT_KEY, {
+	setContext<ProposalContext>(PROPOSAL_CONTEXT_KEY, {
 		store: proposalStore,
 		reset
 	});
@@ -28,7 +28,7 @@
 			return;
 		}
 
-		const proposalInfo = $proposalsICPStore?.find(
+		const proposalInfo = $selectedProposalsStore?.find(
 			({ id }) => nonNullish(id) && `${id}` === $routeProposalId
 		);
 
@@ -38,9 +38,13 @@
 		}
 
 		try {
-			const newProposalInfo = await getProposal({ proposalId: BigInt($routeProposalId) });
+			const newProposal = await getProposal({
+				proposalId: BigInt($routeProposalId),
+				governanceCanisterId: $governanceIdStore,
+				type: $governanceTypeStore
+			});
 
-			if (isNullish(newProposalInfo)) {
+			if (isNullish(newProposal)) {
 				toasts.error({
 					msg: { text: `Proposal not found: ${$routeProposalId}`, duration: 2000 }
 				});
@@ -49,7 +53,7 @@
 				return;
 			}
 
-			proposalStore.set({ proposal: newProposalInfo });
+			proposalStore.set({ proposal: newProposal });
 		} catch (err: unknown) {
 			toasts.error({
 				msg: { text: `Unexpected error while loading the network proposal: ${$routeProposalId}` },

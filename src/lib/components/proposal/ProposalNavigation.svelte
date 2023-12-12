@@ -8,6 +8,8 @@
 	import IconArrowOutward from '$lib/components/icons/IconArrowOutward.svelte';
 	import { canShare, copyText, shareText } from '$lib/utils/share.utils';
 	import { toasts } from '$lib/stores/toasts.store';
+	import { nonNullish } from '@dfinity/utils';
+	import { rootCanisterIdStore } from '$lib/derived/sns.derived';
 
 	let id: number;
 	$: id = Number($routeProposalId ?? '0');
@@ -38,6 +40,11 @@
 			duration: 2000
 		});
 	};
+
+	let voteUrl: string;
+	$: voteUrl = `https://nns.internetcomputer.org/proposal/?proposal=${id}${
+		nonNullish($rootCanisterIdStore) ? `&u=${$rootCanisterIdStore}` : ''
+	}`;
 </script>
 
 <Aside>
@@ -47,11 +54,7 @@
 		<div class="flex lg:flex-col gap-1">
 			<Button color="quaternary" fullWidth on:click={share}>Share</Button>
 
-			<a
-				href={`https://nns.internetcomputer.org/proposal/?proposal=${id}`}
-				rel="noreferrer noopener"
-				target="_blank"
-			>
+			<a href={voteUrl} rel="noreferrer noopener" target="_blank">
 				<Button color="secondary" fullWidth>Vote <IconArrowOutward /></Button>
 			</a>
 		</div>
