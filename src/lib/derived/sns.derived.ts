@@ -2,7 +2,7 @@ import { governanceSnsIdStore } from '$lib/derived/governance.derived';
 import { snsesStore } from '$lib/stores/snses.store';
 import { derived, type Readable } from 'svelte/store';
 
-export const rootIdStore: Readable<string | undefined | null> = derived(
+export const rootCanisterIdStore: Readable<string | undefined | null> = derived(
 	[governanceSnsIdStore, snsesStore],
 	([$governanceSnsIdStore, $snsesStore]) =>
 		$snsesStore.find(
