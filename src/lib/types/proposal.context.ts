@@ -1,13 +1,14 @@
 import type { Writable } from 'svelte/store';
+import type {Proposal} from "$lib/types/governance";
 
-export interface ProposalStore<T> {
-	proposal: T | undefined;
+export interface ProposalStore {
+	proposal: Proposal | undefined;
 }
 
-export type ProposalStoreData<T> = ProposalStore<T> | undefined | null;
+export type ProposalStoreData = ProposalStore | undefined | null;
 
-export interface ProposalContext<T> {
-	store: Writable<ProposalStoreData<T>>;
+export interface ProposalContext {
+	store: Writable<ProposalStoreData>;
 	reset: () => void;
 }
 

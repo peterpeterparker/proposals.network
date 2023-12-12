@@ -28,3 +28,20 @@ export const listSnsProposals = async ({
 		certified: false
 	});
 };
+
+export const getProposal = async ({
+	proposalId,
+	governanceCanisterId
+}: {
+	proposalId: ProposalId;
+	governanceCanisterId: GovernanceId;
+}): Promise<ProposalData | undefined> => {
+	const agent = await getAgent({ identity: new AnonymousIdentity() });
+
+	const { getProposal } = SnsGovernanceCanister.create({
+		agent,
+		canisterId: Principal.fromText(governanceCanisterId)
+	});
+
+	return getProposal({ proposalId: { id: proposalId }, certified: false });
+};

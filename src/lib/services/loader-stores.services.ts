@@ -115,7 +115,7 @@ const load = async <T, D>({
 	if (isNullish(governanceCanisterId)) {
 		toasts.error({
 			msg: {
-				text: 'The ICP governance canister ID is not set, therefore not proposals can be fetched.'
+				text: 'The governance canister ID is not set, therefore not proposals can be fetched.'
 			}
 		});
 		return { success: false };
