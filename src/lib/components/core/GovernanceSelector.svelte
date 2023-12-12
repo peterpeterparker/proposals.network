@@ -31,5 +31,5 @@
 		<option value={sns.canister_ids.governance_canister_id}>{sns.meta.name ?? ''}</option>
 	{/each}
 
-	<Img src={logoSrc} width="100%" slot="logo" />
+	<Img src={logoSrc} width="48px" slot="logo" />
 </InputSelect>
