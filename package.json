@@ -16,7 +16,7 @@
 		"build:csp": "node scripts/build.csp.mjs",
 		"build:post-process": "npm run build:csp",
 		"build:snses": "node scripts/build.snses.mjs",
-		"build": "tsc --noEmit && vite build && npm run build:post-process",
+		"build": "npm run build:snses && tsc --noEmit && vite build && npm run build:post-process",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
