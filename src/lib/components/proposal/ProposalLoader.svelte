@@ -3,8 +3,8 @@
 	import { isNullish, nonNullish } from '@dfinity/utils';
 	import { routeProposalId } from '$lib/derived/nav.derived';
 	import { back } from '$lib/utils/nav.utils';
-	import { proposalsICPStore } from '$lib/derived/proposals.derived';
-	import { getProposal } from '$lib/api/proposal.api';
+	import { selectedProposalsStore } from '$lib/derived/proposals.derived';
+	import { getProposal } from '$lib/api/icp-proposal.api';
 	import { toasts } from '$lib/stores/toasts.store';
 	import SpinnerScreen from '$lib/components/ui/SpinnerScreen.svelte';
 	import { blur } from 'svelte/transition';
@@ -28,7 +28,7 @@
 			return;
 		}
 
-		const proposalInfo = $proposalsICPStore?.find(
+		const proposalInfo = $selectedProposalsStore?.find(
 			({ id }) => nonNullish(id) && `${id}` === $routeProposalId
 		);
 

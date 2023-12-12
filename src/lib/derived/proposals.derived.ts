@@ -1,20 +1,20 @@
-import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
+import { governanceIdStore } from '$lib/derived/governance.derived';
 import { proposalsStore } from '$lib/stores/proposals.store';
-import type { ProposalInfo } from '@dfinity/nns';
+import type { Proposal } from '$lib/types/governance';
 import { isNullish } from '@dfinity/utils';
 import { derived, type Readable } from 'svelte/store';
 
-export const proposalsICPStore: Readable<ProposalInfo[] | undefined | null> = derived(
-	proposalsStore,
-	(data) => {
-		if (isNullish(data)) {
-			return data;
+export const selectedProposalsStore: Readable<Proposal[] | undefined | null> = derived(
+	[proposalsStore, governanceIdStore],
+	([$proposalsStore, $governanceIdStore]) => {
+		if (isNullish($proposalsStore)) {
+			return $proposalsStore;
 		}
 
-		if (isNullish(GOVERNANCE_CANISTER_ID)) {
+		if (isNullish($governanceIdStore)) {
 			return undefined;
 		}
 
-		return data[GOVERNANCE_CANISTER_ID];
+		return $proposalsStore[$governanceIdStore];
 	}
 );

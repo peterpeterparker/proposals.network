@@ -16,7 +16,7 @@ import { Principal } from '@dfinity/principal';
 import { assertNonNullish } from '@dfinity/utils';
 import { unsafeIdentity } from '@junobuild/core-peer';
 
-export const listProposals = async (
+export const listIcpProposals = async (
 	beforeProposal: ProposalId | undefined
 ): Promise<ListProposalsResponse> => {
 	assertNonNullish(GOVERNANCE_CANISTER_ID, 'The ICP governance canister ID is not set.');
@@ -31,7 +31,7 @@ export const listProposals = async (
 	return listProposals({
 		request: {
 			limit: NETWORK_PAGINATION,
-			beforeProposal: beforeProposal,
+			beforeProposal,
 			excludeTopic: [Topic.Unspecified],
 			includeRewardStatus: enumsExclude({
 				obj: ProposalRewardStatus as unknown as ProposalRewardStatus,

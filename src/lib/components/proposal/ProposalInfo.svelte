@@ -7,7 +7,7 @@
 	import { keyOf } from '$lib/utils/utils';
 	import en from '$lib/i18n/en.governance.json';
 	import ProposalInfoRow from '$lib/components/proposal/ProposalInfoRow.svelte';
-	import { mapProposalType } from '$lib/utils/proposals.utils';
+	import { mapProposalType } from '$lib/utils/icp-proposals.utils';
 	import Container from '$lib/components/ui/Container.svelte';
 
 	const { store }: ProposalContext<ProposalInfo> =

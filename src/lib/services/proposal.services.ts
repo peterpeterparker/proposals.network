@@ -1,4 +1,4 @@
-import { makeProposal } from '$lib/api/proposal.api';
+import { makeProposal } from '$lib/api/icp-proposal.api';
 import { toasts } from '$lib/stores/toasts.store';
 import type { MakeProposalRequest, Motion } from '@dfinity/nns';
 

@@ -2,7 +2,7 @@
 	import { PROPOSAL_CONTEXT_KEY, type ProposalContext } from '$lib/types/proposal.context';
 	import type { Option, Proposal, ProposalInfo } from '@dfinity/nns';
 	import { getContext } from 'svelte';
-	import { proposalActionData, proposalFirstActionKey } from '$lib/utils/proposals.utils';
+	import { proposalActionData, proposalFirstActionKey } from '$lib/utils/icp-proposals.utils';
 	import { isNullish, nonNullish } from '@dfinity/utils';
 	import { fade } from 'svelte/transition';
 	import Container from '$lib/components/ui/Container.svelte';

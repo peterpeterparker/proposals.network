@@ -8,12 +8,14 @@
 		onIntersectionTitle
 	} from '$lib/directives/intersection.directives';
 	import { NETWORK_PAGINATION } from '$lib/constants/app.constants';
-	import { proposalsICPStore } from '$lib/derived/proposals.derived';
+	import { selectedProposalsStore } from '$lib/derived/proposals.derived';
 	import { isNullish } from '@dfinity/utils';
 	import ProposalRow from '$lib/components/proposals/ProposalRow.svelte';
 	import ProposalPaginator from '$lib/components/proposals/ProposalPaginator.svelte';
 	import ProposalOpen from '$lib/components/proposals/ProposalOpen.svelte';
 	import GovernanceSelector from '$lib/components/core/GovernanceSelector.svelte';
+	import { governanceIdStore, governanceTypeStore } from '$lib/derived/governance.derived';
+	import type { GovernanceCanisterId } from '$lib/types/core';
 
 	let intersecting = false;
 	export const onTitleIntersection = ($event: Event) => {
@@ -24,19 +26,23 @@
 		intersecting = i;
 	};
 
-	let fetchedOnce = false;
+	let fetchedGovernanceCanisterId: GovernanceCanisterId | undefined | null = undefined;
 
 	const load = async () => {
-		if (fetchedOnce) {
+		if (fetchedGovernanceCanisterId === $governanceIdStore) {
 			return;
 		}
 
-		fetchedOnce = true;
+		fetchedGovernanceCanisterId = $governanceIdStore;
 
-		await loadProposals({ beforeProposal: undefined });
+		await loadProposals({
+			beforeProposal: undefined,
+			governanceCanisterId: $governanceIdStore,
+			type: $governanceTypeStore
+		});
 	};
 
-	$: intersecting, (async () => load())();
+	$: intersecting, $governanceIdStore, (async () => load())();
 </script>
 
 <Section color="secondary">
@@ -52,31 +58,31 @@
 		<GovernanceSelector />
 	</div>
 
-	<TableContainer rows={$proposalsICPStore?.length} color="secondary">
+	<TableContainer rows={$selectedProposalsStore?.length} color="secondary">
 		<thead>
 			<tr>
 				<th class="md:w-[140px]">ID</th>
 				<th class="md:w-[30%]">Title</th>
-				<th>Topic</th>
+				<th class="md:w-[15%]">Type</th>
 				<th>Status</th>
 				<th>Yes</th>
-				<th class="xl:w-[200px]">Expiration</th>
+				<th class="xl:w-[180px]">Expiration</th>
 				<th></th>
 			</tr>
 		</thead>
 
 		<tbody>
-			{#if isNullish($proposalsICPStore)}
+			{#if isNullish($selectedProposalsStore)}
 				<SkeletonRows rows={NETWORK_PAGINATION} columns={8} />
-			{:else if $proposalsICPStore.length === 0}
+			{:else if $selectedProposalsStore.length === 0}
 				<tr>
 					<td colspan="7">
 						<span class="inline-block">No matching proposals found for now!</span>
 					</td>
 				</tr>
 			{:else}
-				{#each $proposalsICPStore as proposalInfo (proposalInfo.id)}
-					<ProposalRow {proposalInfo} />
+				{#each $selectedProposalsStore as proposal (proposal.id)}
+					<ProposalRow {proposal} />
 				{/each}
 			{/if}
 		</tbody>

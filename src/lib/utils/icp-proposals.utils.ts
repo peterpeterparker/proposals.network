@@ -1,7 +1,9 @@
 import en from '$lib/i18n/en.governance.json';
+import type { Proposal } from '$lib/types/governance';
 import { keyOf, keyOfOptional } from '$lib/utils/utils';
-import type { Proposal } from '@dfinity/nns';
-import { NnsFunction } from '@dfinity/nns';
+import { NnsFunction, ProposalStatus, Topic, type Proposal as ProposalNns } from '@dfinity/nns';
+import type { ProposalInfo } from '@dfinity/nns/dist/types/types/governance_converters';
+import { nonNullish } from '@dfinity/utils';
 
 export type ProposalInfoMap = {
 	type: string | undefined;
@@ -15,7 +17,7 @@ export type ProposalInfoMap = {
  * This outcome is called "the proposal type".
  */
 export const mapProposalType = (
-	proposal: Proposal | undefined
+	proposal: ProposalNns | undefined
 ): Pick<ProposalInfoMap, 'type' | 'typeDescription'> => {
 	const { actions, actions_description, nns_functions, nns_functions_description } = en;
 
@@ -47,7 +49,7 @@ export const mapProposalType = (
 		: NO_MATCH;
 };
 
-export const getNnsFunctionKey = (proposal: Proposal | undefined): string | undefined => {
+export const getNnsFunctionKey = (proposal: ProposalNns | undefined): string | undefined => {
 	const action = proposalFirstActionKey(proposal);
 
 	if (action !== 'ExecuteNnsFunction') {
@@ -65,10 +67,10 @@ export const getNnsFunctionKey = (proposal: Proposal | undefined): string | unde
 	return NnsFunction[nnsFunctionId];
 };
 
-export const proposalFirstActionKey = (proposal: Proposal | undefined): string | undefined =>
+export const proposalFirstActionKey = (proposal: ProposalNns | undefined): string | undefined =>
 	Object.keys(proposal?.action ?? {})[0];
 
-export const proposalActionData = (proposal: Proposal): unknown | undefined => {
+export const proposalActionData = (proposal: ProposalNns): unknown | undefined => {
 	const key = proposalFirstActionKey(proposal);
 	if (key === undefined) {
 		return {};
@@ -76,3 +78,24 @@ export const proposalActionData = (proposal: Proposal): unknown | undefined => {
 
 	return (proposal.action as { [key: string]: unknown })?.[key];
 };
+
+export const mapIcpProposal = ({
+	id,
+	deadlineTimestampSeconds,
+	proposal,
+	topic,
+	status,
+	latestTally
+}: ProposalInfo): Proposal => ({
+	id,
+	deadlineTimestampSeconds,
+	title: proposal?.title,
+	...mapProposalType(proposal),
+	topic: keyOf({ obj: en.topics, key: Topic[topic] }),
+	status: keyOf({ obj: en.status, key: ProposalStatus[status] }),
+	...(nonNullish(latestTally) && {
+		vote: {
+			...latestTally
+		}
+	})
+});

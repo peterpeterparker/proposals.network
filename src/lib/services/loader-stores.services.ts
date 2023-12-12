@@ -1,5 +1,7 @@
-import { listProposals } from '$lib/api/proposal.api';
+import { listIcpProposals } from '$lib/api/icp-proposal.api';
+import { listSnsProposals } from '$lib/api/sns-proposal.api';
 import { GOVERNANCE_CANISTER_ID, USER_PAGINATION } from '$lib/constants/app.constants';
+import { snsNsFunctionsStore } from '$lib/derived/snses.derived';
 import { proposalsStore, type ProposalsSetData } from '$lib/stores/proposals.store';
 import { toasts } from '$lib/stores/toasts.store';
 import { userProposalsStore, type UserProposalsSetData } from '$lib/stores/user-proposals.store';
@@ -7,6 +9,8 @@ import { userStore } from '$lib/stores/user.store';
 import type { GovernanceCanisterId } from '$lib/types/core';
 import type { ProposalMetadata } from '$lib/types/juno';
 import type { Store } from '$lib/types/store';
+import { mapIcpProposal } from '$lib/utils/icp-proposals.utils';
+import { mapSnsProposal } from '$lib/utils/sns-proposals.utils';
 import type { ProposalId } from '@dfinity/nns';
 import { isNullish } from '@dfinity/utils';
 import type { ListPaginate } from '@junobuild/core-peer';
@@ -17,6 +21,7 @@ export const loadUserProposals = ({
 	startAfter
 }: Pick<ListPaginate, 'startAfter'>): Promise<{ success: boolean }> =>
 	loadPrivate({
+		governanceCanisterId: GOVERNANCE_CANISTER_ID,
 		fn: async (governanceCanisterId: GovernanceCanisterId): Promise<UserProposalsSetData> => {
 			const proposals = await listDocs<ProposalMetadata>({
 				collection: 'metadata',
@@ -44,14 +49,34 @@ export const loadUserProposals = ({
 		errorLabel: 'Unexpected error while loading your proposals'
 	});
 
-export const loadProposals = ({ beforeProposal }: { beforeProposal: ProposalId | undefined }) =>
+export const loadProposals = ({
+	beforeProposal,
+	governanceCanisterId,
+	type
+}: {
+	beforeProposal: ProposalId | undefined;
+	governanceCanisterId: GovernanceCanisterId | undefined | null;
+	type: 'icp' | 'sns';
+}) =>
 	load({
+		governanceCanisterId,
 		fn: async (governanceCanisterId: GovernanceCanisterId): Promise<ProposalsSetData> => {
-			const { proposals } = await listProposals(beforeProposal);
+			if (type === 'sns') {
+				const proposals = await listSnsProposals({ beforeProposal, governanceCanisterId });
+
+				const nsFunctions = get(snsNsFunctionsStore);
+
+				return {
+					governanceCanisterId,
+					proposals: proposals.map((proposal) => mapSnsProposal({ proposal, nsFunctions }))
+				};
+			}
+
+			const { proposals } = await listIcpProposals(beforeProposal);
 
 			return {
 				governanceCanisterId,
-				proposals
+				proposals: proposals.map(mapIcpProposal)
 			};
 		},
 		store: proposalsStore,
@@ -59,6 +84,7 @@ export const loadProposals = ({ beforeProposal }: { beforeProposal: ProposalId |
 	});
 
 const loadPrivate = async <T, D>(params: {
+	governanceCanisterId: GovernanceCanisterId | undefined | null;
 	fn: (governanceCanisterId: GovernanceCanisterId) => Promise<D>;
 	store: Store<T, D>;
 	errorLabel: string;
@@ -76,15 +102,17 @@ const loadPrivate = async <T, D>(params: {
 };
 
 const load = async <T, D>({
+	governanceCanisterId,
 	fn,
 	store,
 	errorLabel
 }: {
+	governanceCanisterId: GovernanceCanisterId | undefined | null;
 	fn: (governanceCanisterId: GovernanceCanisterId) => Promise<D>;
 	store: Store<T, D>;
 	errorLabel: string;
 }): Promise<{ success: boolean }> => {
-	if (isNullish(GOVERNANCE_CANISTER_ID)) {
+	if (isNullish(governanceCanisterId)) {
 		toasts.error({
 			msg: {
 				text: 'The ICP governance canister ID is not set, therefore not proposals can be fetched.'
@@ -94,7 +122,7 @@ const load = async <T, D>({
 	}
 
 	try {
-		const data = await fn(GOVERNANCE_CANISTER_ID);
+		const data = await fn(governanceCanisterId);
 		store.set(data);
 	} catch (err: unknown) {
 		store.reset();

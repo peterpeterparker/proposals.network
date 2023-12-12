@@ -185,5 +185,13 @@
 		"BitcoinSetConfig": "A proposal to set the configuration of the underlying Bitcoin Canister that powers the Bitcoin API. The configuration includes whether or not the Bitcoin Canister should sync new blocks from the network, whether the API is enabled, the fees to charge, etc.",
 		"UpdateElectedHostosVersions": "A proposal to update currently elected HostOS versions, by electing a new version, and/or unelecting multiple unused versions. The version to elect (often identified by the hash of the installation image) is added to the registry. By itself, this proposal does not effect any upgrade. The specified versions to unelect are removed from the registry. This ensures that the HostOS cannot upgrade to these versions anymore.",
 		"UpdateNodesHostosVersion": "Update the HostOS version running on a given list of nodes. The proposal changes the HostOS version that is used on the specified nodes. The version must be contained in the list of HostOS versions."
+	},
+	"sns_status": {
+		"0": "Unknown",
+		"1": "Open",
+		"2": "Rejected",
+		"3": "Adopted",
+		"4": "Executed",
+		"5": "Failed"
 	}
 }
