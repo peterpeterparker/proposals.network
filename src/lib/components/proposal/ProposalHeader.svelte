@@ -6,8 +6,7 @@
 	import type { ProposalId } from '@dfinity/nns';
 	import { nonNullish } from '@dfinity/utils';
 
-	const { store }: ProposalContext =
-		getContext<ProposalContext>(PROPOSAL_CONTEXT_KEY);
+	const { store }: ProposalContext = getContext<ProposalContext>(PROPOSAL_CONTEXT_KEY);
 
 	let id: ProposalId | undefined;
 	let title: string | undefined;

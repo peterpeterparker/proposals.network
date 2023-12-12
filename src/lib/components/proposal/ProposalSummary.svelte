@@ -5,8 +5,7 @@
 	import { nonNullish } from '@dfinity/utils';
 	import { fade } from 'svelte/transition';
 
-	const { store }: ProposalContext =
-		getContext<ProposalContext>(PROPOSAL_CONTEXT_KEY);
+	const { store }: ProposalContext = getContext<ProposalContext>(PROPOSAL_CONTEXT_KEY);
 
 	let summary: string | undefined;
 	$: summary = $store?.proposal?.summary;

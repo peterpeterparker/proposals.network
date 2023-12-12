@@ -1,5 +1,5 @@
+import type { Proposal } from '$lib/types/governance';
 import type { Writable } from 'svelte/store';
-import type {Proposal} from "$lib/types/governance";
 
 export interface ProposalStore {
 	proposal: Proposal | undefined;

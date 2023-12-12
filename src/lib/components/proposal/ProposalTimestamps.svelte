@@ -6,8 +6,7 @@
 	import { secondsToDateTime } from '$lib/utils/date.utils';
 	import Container from '$lib/components/ui/Container.svelte';
 
-	const { store }: ProposalContext =
-		getContext<ProposalContext>(PROPOSAL_CONTEXT_KEY);
+	const { store }: ProposalContext = getContext<ProposalContext>(PROPOSAL_CONTEXT_KEY);
 
 	let proposalTimestampSeconds: bigint | undefined;
 	let decidedTimestampSeconds: bigint | undefined;

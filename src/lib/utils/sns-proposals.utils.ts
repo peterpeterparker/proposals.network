@@ -3,6 +3,7 @@ import en from '$lib/i18n/en.governance.json';
 import type { Proposal } from '$lib/types/governance';
 import type { CachedFunctionTypeDto, CachedNervousFunctionDto } from '$lib/types/sns-aggregator';
 import { nowInSeconds } from '$lib/utils/date.utils';
+import { keyOf } from '$lib/utils/utils';
 import { Vote } from '@dfinity/nns';
 import { Principal } from '@dfinity/principal';
 import {
@@ -225,8 +226,7 @@ export const mapSnsProposal = ({
 	} = proposalData;
 
 	const proposalInfo = fromNullable(proposal);
-	const actionData =
-		proposalInfo !== undefined ? fromNullable(proposalInfo.action) : undefined;
+	const actionData = proposalInfo !== undefined ? fromNullable(proposalInfo.action) : undefined;
 
 	const nsFunction = nsFunctions?.find(({ id }) => id === action);
 
@@ -267,6 +267,10 @@ export const mapSnsProposal = ({
 		rewardStatus: en.sns_rewards_status[rewardStatus],
 		...(nonNullish(latestTally) && {
 			latestTally
-		})
+		}),
+		action: {
+			key: keyOf({ obj: en.sns_action, key: `${action}` }),
+			data: actionData
+		}
 	};
 };
