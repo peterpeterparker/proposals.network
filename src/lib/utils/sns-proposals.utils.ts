@@ -240,6 +240,9 @@ export const mapSnsProposal = ({
 		? getSnsNeuronIdAsHexString(optionProposer)
 		: undefined;
 
+	// ExecuteGenericNervousSystemFunction currently not supported
+	const actionKey = keyOf({ obj: en.sns_action, key: `${action}` });
+
 	return {
 		id: fromNullable(id)?.id,
 		deadlineTimestampSeconds: fromNullable(reward_event_end_timestamp_seconds),
@@ -268,9 +271,11 @@ export const mapSnsProposal = ({
 		...(nonNullish(latestTally) && {
 			latestTally
 		}),
-		action: {
-			key: keyOf({ obj: en.sns_action, key: `${action}` }),
-			data: actionData
-		}
+		...(nonNullish(actionKey) && {
+			action: {
+				key: actionKey,
+				data: actionData
+			}
+		})
 	};
 };
