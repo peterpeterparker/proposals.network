@@ -1,7 +1,5 @@
 <script lang="ts">
-	import type { Option, Proposal } from '@dfinity/nns';
 	import { PROPOSAL_CONTEXT_KEY, type ProposalContext } from '$lib/types/proposal.context';
-	import type { ProposalInfo } from '@dfinity/nns';
 	import { getContext } from 'svelte';
 	import type { ProposalId } from '@dfinity/nns';
 	import { nonNullish } from '@dfinity/utils';

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { NeuronId } from '@dfinity/nns';
 	import { PROPOSAL_CONTEXT_KEY, type ProposalContext } from '$lib/types/proposal.context';
 	import { getContext } from 'svelte';
 	import { nonNullish } from '@dfinity/utils';
