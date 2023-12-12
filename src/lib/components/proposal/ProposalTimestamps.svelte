@@ -1,14 +1,13 @@
 <script lang="ts">
 	import { PROPOSAL_CONTEXT_KEY, type ProposalContext } from '$lib/types/proposal.context';
-	import type { ProposalInfo } from '@dfinity/nns';
 	import { getContext } from 'svelte';
 	import { isNullish, nonNullish } from '@dfinity/utils';
 	import ProposalInfoRow from '$lib/components/proposal/ProposalInfoRow.svelte';
 	import { secondsToDateTime } from '$lib/utils/date.utils';
 	import Container from '$lib/components/ui/Container.svelte';
 
-	const { store }: ProposalContext<ProposalInfo> =
-		getContext<ProposalContext<ProposalInfo>>(PROPOSAL_CONTEXT_KEY);
+	const { store }: ProposalContext =
+		getContext<ProposalContext>(PROPOSAL_CONTEXT_KEY);
 
 	let proposalTimestampSeconds: bigint | undefined;
 	let decidedTimestampSeconds: bigint | undefined;

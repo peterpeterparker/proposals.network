@@ -1,16 +1,19 @@
+import { SNS_NEURON_URL } from '$lib/constants/dashboard.constants';
 import en from '$lib/i18n/en.governance.json';
 import type { Proposal } from '$lib/types/governance';
 import type { CachedFunctionTypeDto, CachedNervousFunctionDto } from '$lib/types/sns-aggregator';
+import { nowInSeconds } from '$lib/utils/date.utils';
 import { Vote } from '@dfinity/nns';
 import { Principal } from '@dfinity/principal';
 import {
 	SnsProposalDecisionStatus,
+	SnsProposalRewardStatus,
 	type SnsFunctionType,
 	type SnsNervousSystemFunction,
 	type SnsPercentage,
 	type SnsProposalData
 } from '@dfinity/sns';
-import type { ProposalData } from '@dfinity/sns/dist/candid/sns_governance';
+import type { NeuronId, ProposalData } from '@dfinity/sns/dist/candid/sns_governance';
 import { fromNullable, isNullish, nonNullish, toNullable } from '@dfinity/utils';
 
 export const convertNervousFunction = ({
@@ -75,6 +78,39 @@ export const snsDecisionStatus = (proposal: SnsProposalData): SnsProposalDecisio
 	}
 
 	return SnsProposalDecisionStatus.PROPOSAL_DECISION_STATUS_REJECTED;
+};
+
+/**
+ * Returns the status of a proposal based on the data.
+ *
+ * Reference: https://github.com/dfinity/ic/blob/226ab04e0984367da356bbe27c90447863d33a27/rs/sns/governance/src/proposal.rs#L735
+ *
+ * @param {SnsProposalData} proposal
+ * @returns {SnsProposalRewardStatus}
+ */
+export const snsRewardStatus = ({
+	reward_event_round,
+	wait_for_quiet_state,
+	is_eligible_for_rewards
+}: SnsProposalData): SnsProposalRewardStatus => {
+	if (reward_event_round > BigInt(0)) {
+		return SnsProposalRewardStatus.PROPOSAL_REWARD_STATUS_SETTLED;
+	}
+
+	const now = nowInSeconds();
+	const deadline = fromNullable(wait_for_quiet_state)?.current_deadline_timestamp_seconds;
+	if (!deadline) {
+		// Reference: https://github.com/dfinity/ic/blob/226ab04e0984367da356bbe27c90447863d33a27/rs/sns/governance/src/proposal.rs#L760
+		throw new Error('Proposal must have a wait_for_quiet_state.');
+	}
+	if (now < deadline) {
+		return SnsProposalRewardStatus.PROPOSAL_REWARD_STATUS_ACCEPT_VOTES;
+	}
+
+	if (is_eligible_for_rewards) {
+		return SnsProposalRewardStatus.PROPOSAL_REWARD_STATUS_READY_TO_SETTLE;
+	}
+	return SnsProposalRewardStatus.PROPOSAL_REWARD_STATUS_SETTLED;
 };
 
 /**
@@ -157,32 +193,80 @@ const majorityDecision = ({
 	}
 };
 
+const bytesToHexString = (bytes: number[]): string =>
+	bytes.reduce((str, byte) => `${str}${byte.toString(16).padStart(2, '0')}`, '');
+
+const subaccountToHexString = (subaccount: Uint8Array | number[]): string =>
+	bytesToHexString(Array.from(subaccount));
+
+const getSnsNeuronIdAsHexString = (neuronId: NeuronId | undefined): string =>
+	subaccountToHexString(neuronId?.id ?? new Uint8Array());
+
 export const mapSnsProposal = ({
 	proposal: proposalData,
-	nsFunctions
+	nsFunctions,
+	rootCanisterId
 }: {
 	proposal: ProposalData;
 	nsFunctions: SnsNervousSystemFunction[] | undefined;
+	rootCanisterId: string | undefined | null;
 }): Proposal => {
-	const { id, reward_event_end_timestamp_seconds, proposal, action, latest_tally } = proposalData;
+	const {
+		id,
+		reward_event_end_timestamp_seconds,
+		proposal,
+		action,
+		latest_tally,
+		proposer,
+		proposal_creation_timestamp_seconds: proposalTimestampSeconds,
+		decided_timestamp_seconds: decidedTimestampSeconds,
+		executed_timestamp_seconds: executedTimestampSeconds,
+		failed_timestamp_seconds: failedTimestampSeconds
+	} = proposalData;
+
+	const proposalInfo = fromNullable(proposal);
+	const actionData =
+		proposalInfo !== undefined ? fromNullable(proposalInfo.action) : undefined;
 
 	const nsFunction = nsFunctions?.find(({ id }) => id === action);
 
+	const rewardStatus = snsRewardStatus(proposalData);
 	const decisionStatus = snsDecisionStatus(proposalData);
 
 	const latestTally = fromNullable(latest_tally);
 
+	const optionProposer = fromNullable(proposer);
+	const proposerId = nonNullish(optionProposer)
+		? getSnsNeuronIdAsHexString(optionProposer)
+		: undefined;
+
 	return {
 		id: fromNullable(id)?.id,
 		deadlineTimestampSeconds: fromNullable(reward_event_end_timestamp_seconds),
+		proposalTimestampSeconds,
+		decidedTimestampSeconds,
+		executedTimestampSeconds,
+		failedTimestampSeconds,
 		title: fromNullable(proposal)?.title,
+		summary: fromNullable(proposal)?.summary,
+		url: fromNullable(proposal)?.url,
+		proposer: nonNullish(proposerId)
+			? {
+					id: proposerId,
+					url: nonNullish(rootCanisterId)
+						? SNS_NEURON_URL.replace('{rootCanisterId}', rootCanisterId).replace(
+								'{neuronId}',
+								proposerId
+						  )
+						: undefined
+			  }
+			: undefined,
 		type: nsFunction?.name,
 		typeDescription: nsFunction?.description[0],
 		status: en.sns_status[decisionStatus],
+		rewardStatus: en.sns_rewards_status[rewardStatus],
 		...(nonNullish(latestTally) && {
-			vote: {
-				...latestTally
-			}
+			latestTally
 		})
 	};
 };

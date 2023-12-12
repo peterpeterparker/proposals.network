@@ -2,14 +2,13 @@
 	import IconVotingResults from '$lib/components/icons/IconVotingResults.svelte';
 	import { getContext } from 'svelte';
 	import type { ProposalContext } from '$lib/types/proposal.context';
-	import type { ProposalInfo } from '@dfinity/nns';
 	import { PROPOSAL_CONTEXT_KEY } from '$lib/types/proposal.context';
 	import { E8S_PER_ICP } from '$lib/constants/app.constants';
 	import { formatPercentage } from '$lib/utils/format.utils';
 	import Container from '$lib/components/ui/Container.svelte';
 
-	const { store }: ProposalContext<ProposalInfo> =
-		getContext<ProposalContext<ProposalInfo>>(PROPOSAL_CONTEXT_KEY);
+	const { store }: ProposalContext =
+		getContext<ProposalContext>(PROPOSAL_CONTEXT_KEY);
 
 	let yes: number;
 	$: yes = Number($store?.proposal?.latestTally?.yes ?? 0) / E8S_PER_ICP;

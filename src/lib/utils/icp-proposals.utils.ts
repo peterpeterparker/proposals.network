@@ -1,7 +1,14 @@
+import { ICP_NEURON_URL } from '$lib/constants/dashboard.constants';
 import en from '$lib/i18n/en.governance.json';
 import type { Proposal } from '$lib/types/governance';
 import { keyOf, keyOfOptional } from '$lib/utils/utils';
-import { NnsFunction, ProposalStatus, Topic, type Proposal as ProposalNns } from '@dfinity/nns';
+import {
+	NnsFunction,
+	ProposalRewardStatus,
+	ProposalStatus,
+	Topic,
+	type Proposal as ProposalNns
+} from '@dfinity/nns';
 import type { ProposalInfo } from '@dfinity/nns/dist/types/types/governance_converters';
 import { nonNullish } from '@dfinity/utils';
 
@@ -82,20 +89,48 @@ export const proposalActionData = (proposal: ProposalNns): unknown | undefined =
 export const mapIcpProposal = ({
 	id,
 	deadlineTimestampSeconds,
+	proposalTimestampSeconds,
+	decidedTimestampSeconds,
+	executedTimestampSeconds,
+	failedTimestampSeconds,
 	proposal,
 	topic,
 	status,
-	latestTally
-}: ProposalInfo): Proposal => ({
-	id,
-	deadlineTimestampSeconds,
-	title: proposal?.title,
-	...mapProposalType(proposal),
-	topic: keyOf({ obj: en.topics, key: Topic[topic] }),
-	status: keyOf({ obj: en.status, key: ProposalStatus[status] }),
-	...(nonNullish(latestTally) && {
-		vote: {
-			...latestTally
-		}
-	})
-});
+	rewardStatus,
+	latestTally,
+	proposer
+}: ProposalInfo): Proposal => {
+	const actionKey = nonNullish(proposal) ? proposalFirstActionKey(proposal) : undefined;
+	const actionData = nonNullish(proposal) ? proposalActionData(proposal) : {};
+
+	return {
+		id,
+		deadlineTimestampSeconds,
+		proposalTimestampSeconds,
+		decidedTimestampSeconds,
+		executedTimestampSeconds,
+		failedTimestampSeconds,
+		title: proposal?.title,
+		summary: proposal?.summary,
+		url: proposal?.url,
+		proposer: nonNullish(proposer)
+			? {
+					id: proposer,
+					url: `${ICP_NEURON_URL}/${proposer}`
+			  }
+			: undefined,
+		...mapProposalType(proposal),
+		topic: keyOf({ obj: en.topics, key: Topic[topic] }),
+		status: keyOf({ obj: en.status, key: ProposalStatus[status] }),
+		rewardStatus: keyOf({ obj: en.rewards, key: ProposalRewardStatus[rewardStatus] }),
+		...(nonNullish(latestTally) && {
+			latestTally
+		}),
+		...(nonNullish(actionKey) && {
+			action: {
+				key: actionKey,
+				data: actionData
+			}
+		})
+	};
+};

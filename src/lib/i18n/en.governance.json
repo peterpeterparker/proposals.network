@@ -193,5 +193,11 @@
 		"3": "Adopted",
 		"4": "Executed",
 		"5": "Failed"
+	},
+	"sns_rewards_status": {
+		"0": "Unknown",
+		"1": "Accepting Votes",
+		"2": "Ready to Settle",
+		"3": "Settled"
 	}
 }

@@ -6,10 +6,10 @@
 	export let proposal: Proposal;
 
 	let yes: number;
-	$: yes = Number(proposal.vote.yes ?? 0) / E8S_PER_ICP;
+	$: yes = Number(proposal.latestTally.yes ?? 0) / E8S_PER_ICP;
 
 	let total: number;
-	$: total = Number(proposal.vote.total ?? 0) / E8S_PER_ICP;
+	$: total = Number(proposal.latestTally.total ?? 0) / E8S_PER_ICP;
 
 	let yesProportion: number;
 	$: yesProportion = total ? yes / total : 0;

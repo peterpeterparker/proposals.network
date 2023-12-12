@@ -6,17 +6,14 @@
 	import type { ProposalId } from '@dfinity/nns';
 	import { nonNullish } from '@dfinity/utils';
 
-	const { store }: ProposalContext<ProposalInfo> =
-		getContext<ProposalContext<ProposalInfo>>(PROPOSAL_CONTEXT_KEY);
+	const { store }: ProposalContext =
+		getContext<ProposalContext>(PROPOSAL_CONTEXT_KEY);
 
-	let id: Option<ProposalId>;
-	let proposal: Option<Proposal>;
+	let id: ProposalId | undefined;
+	let title: string | undefined;
 
 	$: id = $store?.proposal?.id;
-	$: proposal = $store?.proposal?.proposal;
-
-	let title: string | undefined;
-	$: title = proposal?.title;
+	$: title = $store?.proposal?.title;
 </script>
 
 <h1 class="font-bold capitalize mb-12 text-4xl md:text-6xl">

@@ -5,13 +5,34 @@ export type GovernanceId = string;
 
 export type Text = string;
 
-export type ProposalVote = Tally | SnsTally;
+export type ProposalTally = Tally | SnsTally;
 
-export type Proposal = Pick<ProposalInfo, 'id' | 'deadlineTimestampSeconds'> &
-	Pick<ProposalNns, 'title'> & {
+export interface Proposer {
+	id: string | bigint | undefined;
+	url?: string;
+}
+
+export interface Action {
+	key: string | undefined;
+	data: unknown;
+}
+
+export type Proposal = Pick<
+	ProposalInfo,
+	| 'id'
+	| 'deadlineTimestampSeconds'
+	| 'proposalTimestampSeconds'
+	| 'decidedTimestampSeconds'
+	| 'executedTimestampSeconds'
+	| 'failedTimestampSeconds'
+> &
+	Partial<Pick<ProposalNns, 'title' | 'summary' | 'url'>> & {
 		type: Text | undefined;
 		typeDescription: Text | undefined;
 		topic?: Text;
 		status: Text;
-		vote?: ProposalVote;
+		rewardStatus: Text;
+		latestTally?: ProposalTally;
+		proposer?: Proposer;
+		action?: Action;
 	};

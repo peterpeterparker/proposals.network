@@ -1,5 +1,6 @@
 import { getProposal as getProposalNns, makeProposal } from '$lib/api/icp-proposal.api';
 import { getProposal as getProposalSns } from '$lib/api/sns-proposal.api';
+import { rootIdStore } from '$lib/derived/sns.derived';
 import { snsNsFunctionsStore } from '$lib/derived/snses.derived';
 import { toasts } from '$lib/stores/toasts.store';
 import type { GovernanceCanisterId } from '$lib/types/core';
@@ -51,7 +52,11 @@ export const getProposal = async ({
 		const proposal = await getProposalSns({ proposalId, governanceCanisterId });
 
 		const nsFunctions = get(snsNsFunctionsStore);
-		return nonNullish(proposal) ? mapSnsProposal({ proposal, nsFunctions }) : undefined;
+		const rootCanisterId = get(rootIdStore);
+
+		return nonNullish(proposal)
+			? mapSnsProposal({ proposal, nsFunctions, rootCanisterId })
+			: undefined;
 	}
 
 	const proposal = await getProposalNns({ proposalId });

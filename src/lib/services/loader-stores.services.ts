@@ -1,6 +1,7 @@
 import { listIcpProposals } from '$lib/api/icp-proposal.api';
 import { listSnsProposals } from '$lib/api/sns-proposal.api';
 import { GOVERNANCE_CANISTER_ID, USER_PAGINATION } from '$lib/constants/app.constants';
+import { rootIdStore } from '$lib/derived/sns.derived';
 import { snsNsFunctionsStore } from '$lib/derived/snses.derived';
 import { proposalsStore, type ProposalsSetData } from '$lib/stores/proposals.store';
 import { toasts } from '$lib/stores/toasts.store';
@@ -65,10 +66,13 @@ export const loadProposals = ({
 				const proposals = await listSnsProposals({ beforeProposal, governanceCanisterId });
 
 				const nsFunctions = get(snsNsFunctionsStore);
+				const rootCanisterId = get(rootIdStore);
 
 				return {
 					governanceCanisterId,
-					proposals: proposals.map((proposal) => mapSnsProposal({ proposal, nsFunctions }))
+					proposals: proposals.map((proposal) =>
+						mapSnsProposal({ proposal, nsFunctions, rootCanisterId })
+					)
 				};
 			}
 
