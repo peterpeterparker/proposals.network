@@ -5,7 +5,7 @@
 	import { handleKeyPress } from '$lib/utils/keyboard.utils';
 	import { isNullish } from '@dfinity/utils';
 	import { goto } from '$app/navigation';
-	import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
+	import { governanceIdStore } from '$lib/derived/governance.derived';
 
 	let proposalId = '';
 
@@ -14,7 +14,7 @@
 			return;
 		}
 
-		await goto(`/proposal/?g=${GOVERNANCE_CANISTER_ID ?? ''}&id=${proposalId}`);
+		await goto(`/proposal/?g=${$governanceIdStore ?? ''}&id=${proposalId}`);
 	};
 </script>
 
