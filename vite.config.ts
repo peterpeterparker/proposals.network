@@ -96,8 +96,7 @@ const config: UserConfig = {
 	plugins: [
 		sveltekit(),
 		juno({
-			junolator: true,
-			profile: 'david'
+			junolator: true
 		})
 	],
 	build: {
