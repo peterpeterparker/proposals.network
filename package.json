@@ -76,6 +76,7 @@
 		"@dfinity/utils": "^1.1.0-next-2023-12-02",
 		"@junobuild/analytics": "^0.0.14",
 		"@junobuild/core-peer": "^0.0.3",
+		"@junobuild/vite-plugin": "^0.0.3",
 		"@tiptap/core": "^2.1.12",
 		"@tiptap/extension-code-block-lowlight": "^2.1.13",
 		"@tiptap/extension-highlight": "^2.1.12",

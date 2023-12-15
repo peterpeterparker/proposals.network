@@ -7,8 +7,17 @@ export const LOCAL = import.meta.env.VITE_DFX_NETWORK === 'local';
 
 export const DISABLE_ANALYTICS = import.meta.env.VITE_JUNO_DISABLE_ANALYTICS === true;
 
-export const SATELLITE_ID: string | null | undefined = import.meta.env
-	.VITE_SATELLITE_CANISTER_ID as string | null | undefined;
+export const SATELLITE_ID: string | null | undefined = import.meta.env.VITE_SATELLITE_ID as
+	| string
+	| null
+	| undefined;
+
+export const ORBITER_ID: string | null | undefined = import.meta.env.VITE_ORBITER_ID as
+	| string
+	| null
+	| undefined;
+
+console.log(SATELLITE_ID, ORBITER_ID);
 
 export const GOVERNANCE_CANISTER_ID: GovernanceId | null | undefined = import.meta.env
 	.VITE_NNS_GOVERNANCE_CANISTER_ID as GovernanceId | null | undefined;
