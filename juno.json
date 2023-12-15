@@ -2,5 +2,8 @@
 	"satellite": {
 		"satelliteId": "gz2uc-6yaaa-aaaal-adgyq-cai",
 		"source": "build"
+	},
+	"orbiter": {
+		"orbiterId": "3iier-sqaaa-aaaal-aczaa-cai"
 	}
 }

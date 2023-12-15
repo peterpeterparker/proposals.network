@@ -7,7 +7,7 @@
 	import { junoEnvironment } from '$lib/utils/juno.utils';
 	import { toasts } from '$lib/stores/toasts.store';
 	import { initOrbiter } from '@junobuild/analytics';
-	import { DISABLE_ANALYTICS, LOCAL, SATELLITE_ID } from '$lib/constants/app.constants';
+	import { DISABLE_ANALYTICS, LOCAL, ORBITER_ID, SATELLITE_ID } from '$lib/constants/app.constants';
 
 	let unsubscribe: (() => void) | undefined = undefined;
 
@@ -30,12 +30,12 @@
 					auth: true
 				}
 			}),
-			...(DISABLE_ANALYTICS || LOCAL
+			...(DISABLE_ANALYTICS || LOCAL || isNullish(ORBITER_ID)
 				? []
 				: [
 						initOrbiter({
 							satelliteId: SATELLITE_ID!,
-							orbiterId: '3iier-sqaaa-aaaal-aczaa-cai'
+							orbiterId: ORBITER_ID
 						})
 				  ])
 		]);
