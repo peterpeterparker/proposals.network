@@ -2,6 +2,7 @@
 	import { isHash, stringifyJson, isPrincipal } from '$lib/utils/json.utils';
 	import { handleKeyPress } from '$lib/utils/keyboard.utils';
 	import { nonNullish } from '@dfinity/utils';
+	import {sanitize} from "$lib/utils/html.utils";
 
 	export let json: unknown | undefined = undefined;
 	export let defaultExpandedLevel = Infinity;
@@ -124,7 +125,7 @@
 	<!-- key:value -->
 	<span data-tid={testId} class="key-value">
 		{#if valueType === 'base64Encoding'}
-			{@const src = JSON.parse(value).base64Encoding}
+			{@const src = sanitize(JSON.parse(value).base64Encoding)}
 
 			<span class="key" class:root>{keyLabel}</span><span class="value {valueType}" {title}>
 				<img {src} loading="lazy" alt={title} class="max-w-[24px] inline-block align-bottom" />
