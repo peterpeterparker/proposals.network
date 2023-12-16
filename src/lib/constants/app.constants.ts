@@ -17,8 +17,6 @@ export const ORBITER_ID: string | null | undefined = import.meta.env.VITE_ORBITE
 	| null
 	| undefined;
 
-console.log(SATELLITE_ID, ORBITER_ID);
-
 export const GOVERNANCE_CANISTER_ID: GovernanceId | null | undefined = import.meta.env
 	.VITE_NNS_GOVERNANCE_CANISTER_ID as GovernanceId | null | undefined;
 

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { isHash, stringifyJson, isPrincipal } from '$lib/utils/json.utils';
 	import { handleKeyPress } from '$lib/utils/keyboard.utils';
+	import { nonNullish } from '@dfinity/utils';
 
 	export let json: unknown | undefined = undefined;
 	export let defaultExpandedLevel = Infinity;
@@ -19,12 +20,21 @@
 		| 'hash'
 		| 'string'
 		| 'symbol'
+		| 'base64Encoding'
 		| 'undefined';
 
 	const getValueType = (value: unknown): ValueType => {
 		if (value === null) return 'null';
 		if (isPrincipal(value)) return 'principal';
 		if (Array.isArray(json) && isHash(json)) return 'hash';
+		if (
+			nonNullish(value) &&
+			typeof value === 'object' &&
+			!Array.isArray(value) &&
+			Object.keys(value as object)[0] === 'base64Encoding'
+		)
+			return 'base64Encoding';
+
 		return typeof value;
 	};
 
@@ -113,9 +123,16 @@
 {:else}
 	<!-- key:value -->
 	<span data-tid={testId} class="key-value">
-		<span class="key" class:root>{keyLabel}</span><span class="value {valueType}" {title}
-			>{value}</span
-		></span
+		{#if valueType === 'base64Encoding'}
+			{@const src = JSON.parse(value).base64Encoding}
+
+			<span class="key" class:root>{keyLabel}</span><span class="value {valueType}" {title}>
+				<img {src} loading="lazy" alt={title} class="max-w-[24px] inline-block align-bottom" />
+			</span>
+		{:else}
+			<span class="key" class:root>{keyLabel}</span><span class="value {valueType}" {title}
+				>{value}</span
+			>{/if}</span
 	>
 {/if}
 
