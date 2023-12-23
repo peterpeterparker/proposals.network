@@ -6,7 +6,6 @@
 	import { sortedSnsesStore } from '$lib/derived/snses.derived';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
 	import { switchGovernance } from '$lib/utils/nav.utils';
-	import { invalidateAll } from '$app/navigation';
 
 	let governanceId = $governanceIdStore;
 
