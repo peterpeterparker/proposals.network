@@ -5,7 +5,7 @@
 	import { nonNullish } from '@dfinity/utils';
 	import { sortedSnsesStore } from '$lib/derived/snses.derived';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
-	import { replaceGovernanceParamUrl } from '$lib/utils/nav.utils';
+	import { switchGovernance } from '$lib/utils/nav.utils';
 	import { invalidateAll } from '$app/navigation';
 
 	let governanceId = $governanceIdStore;
@@ -17,8 +17,7 @@
 			: 'logo/icp.svg';
 
 	const onChange = async () => {
-		replaceGovernanceParamUrl(governanceId);
-		await invalidateAll();
+		await switchGovernance(governanceId);
 	};
 </script>
 

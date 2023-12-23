@@ -9,7 +9,7 @@ export const isRouteSubmit = ({ route: { id } }: Page): boolean => id === '/(spl
 
 export const submitUrl = (key: string): string => `/submit/?key=${key}`;
 
-export const replaceGovernanceParamUrl = (governanceId: GovernanceId | undefined | null) => {
+export const switchGovernance = async (governanceId: GovernanceId | undefined | null) => {
 	const url = new URL(window.location.href);
 
 	if (isNullish(governanceId)) {
@@ -18,7 +18,11 @@ export const replaceGovernanceParamUrl = (governanceId: GovernanceId | undefined
 		url.searchParams.set('g', governanceId);
 	}
 
-	window.history.replaceState({}, '', url);
+	await goto(url, {
+		replaceState: true,
+		noScroll: true,
+		keepFocus: true
+	});
 };
 
 export const back = async (pop: boolean) => {
