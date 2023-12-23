@@ -2,7 +2,7 @@
 	import { isHash, stringifyJson, isPrincipal } from '$lib/utils/json.utils';
 	import { handleKeyPress } from '$lib/utils/keyboard.utils';
 	import { nonNullish } from '@dfinity/utils';
-	import {sanitize} from "$lib/utils/html.utils";
+	import { sanitize } from '$lib/utils/html.utils';
 
 	export let json: unknown | undefined = undefined;
 	export let defaultExpandedLevel = Infinity;
