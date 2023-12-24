@@ -3,13 +3,13 @@
 	import Aside from '$lib/components/ui/Aside.svelte';
 	import Paginator from '$lib/components/ui/Paginator.svelte';
 	import { routeProposalId } from '$lib/derived/nav.derived';
-	import { goto } from '$app/navigation';
 	import IconArrowOutward from '$lib/components/icons/IconArrowOutward.svelte';
 	import { canShare, copyText, shareText } from '$lib/utils/share.utils';
 	import { toasts } from '$lib/stores/toasts.store';
 	import { nonNullish } from '@dfinity/utils';
 	import { rootCanisterIdStore } from '$lib/derived/sns.derived';
-	import { governanceIdStore } from '$lib/derived/governance.derived';
+	import { proposalUrl } from '$lib/utils/nav.utils';
+	import { goto } from '$app/navigation';
 
 	let id: number;
 	$: id = Number($routeProposalId ?? '0');
@@ -20,9 +20,9 @@
 	let displayNext: boolean;
 	$: displayNext = id > 1;
 
-	const prev = async () => await goto(`/proposal/?g=${$governanceIdStore ?? ''}&id=${id + 1}`);
+	const prev = async () => await goto(proposalUrl(id + 1));
 
-	const next = async () => await goto(`/proposal/?g=${$governanceIdStore ?? ''}&id=${id - 1}`);
+	const next = async () => await goto(proposalUrl(id - 1));
 
 	const share = async () => {
 		const url = window.location.href;

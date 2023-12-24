@@ -2,12 +2,12 @@
 	import ButtonCell from '$lib/components/ui/ButtonCell.svelte';
 	import type { Option, ProposalId } from '@dfinity/nns';
 	import { isNullish } from '@dfinity/utils';
-	import { governanceIdStore } from '$lib/derived/governance.derived';
+	import { proposalUrl } from '$lib/utils/nav.utils';
 
 	export let id: Option<ProposalId>;
 
 	let href: string;
-	$: href = `/proposal/?g=${$governanceIdStore ?? ''}&id=${id ?? ''}`;
+	$: href = proposalUrl(id ?? '');
 </script>
 
 <td>

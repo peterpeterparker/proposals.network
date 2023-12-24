@@ -1,13 +1,20 @@
 import { browser } from '$app/environment';
 import { goto } from '$app/navigation';
+import { governanceIdStore } from '$lib/derived/governance.derived';
 import type { GovernanceId } from '$lib/types/governance';
 import type { RouteParams } from '$lib/types/nav';
 import { isNullish } from '@dfinity/utils';
 import type { LoadEvent, Page } from '@sveltejs/kit';
+import { get } from 'svelte/store';
 
 export const isRouteSubmit = ({ route: { id } }: Page): boolean => id === '/(split)/submit';
 
 export const submitUrl = (key: string): string => `/submit/?key=${key}`;
+
+export const proposalUrl = (id: string | number): string => {
+	const $governanceIdStore = get(governanceIdStore);
+	return `/proposal/?g=${$governanceIdStore ?? ''}&id=${id}`;
+};
 
 export const switchGovernance = async (governanceId: GovernanceId | undefined | null) => {
 	const url = new URL(window.location.href);
