@@ -3,6 +3,15 @@ import type { SnsTally } from '@dfinity/sns';
 
 export type GovernanceId = string;
 
+export type GovernanceType = 'icp' | 'sns';
+
+export interface Governance {
+	id: GovernanceId;
+	name: string;
+	logo: string;
+	type: GovernanceType;
+}
+
 export type Text = string;
 
 export type ProposalTally = Tally | SnsTally;

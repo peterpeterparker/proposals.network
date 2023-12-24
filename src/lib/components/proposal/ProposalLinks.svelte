@@ -6,16 +6,20 @@
 	import { fade } from 'svelte/transition';
 	import ExternalLink from '$lib/components/ui/ExternalLink.svelte';
 	import Container from '$lib/components/ui/Container.svelte';
+	import ProposalVoteUrl from '$lib/components/proposal/ProposalVoteUrl.svelte';
+	import IconArrowOutward from '$lib/components/icons/IconArrowOutward.svelte';
 
 	const { store }: ProposalContext = getContext<ProposalContext>(PROPOSAL_CONTEXT_KEY);
 
 	let proposerId: string | bigint | undefined;
 	let proposerUrl: string | bigint | undefined;
 	let url: string | undefined;
+	let id: bigint | undefined;
 
 	$: proposerId = $store?.proposal?.proposer?.id;
 	$: proposerUrl = $store?.proposal?.proposer?.url;
 	$: url = $store?.proposal?.url;
+	$: id = $store?.proposal?.id;
 </script>
 
 <Container color="secondary">
@@ -53,5 +57,16 @@
 				</svelte:fragment>
 			</ProposalInfoRow>
 		</div>
+	{/if}
+
+	{#if nonNullish(id)}
+		<ProposalInfoRow>
+			Vote
+			<ProposalVoteUrl slot="custom-value" {id}>
+				<span class="inline-flex gap-1.5 items-center hover:underline"
+					>NNS dapp / {id} <IconArrowOutward /></span
+				>
+			</ProposalVoteUrl>
+		</ProposalInfoRow>
 	{/if}
 </Container>

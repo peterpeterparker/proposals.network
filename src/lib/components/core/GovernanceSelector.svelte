@@ -3,21 +3,16 @@
 	import Img from '$lib/components/ui/Img.svelte';
 	import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
 	import { nonNullish } from '@dfinity/utils';
-	import { sortedSnsesStore } from '$lib/derived/snses.derived';
-	import { governanceIdStore } from '$lib/derived/governance.derived';
+	import { sortedSnsesStore } from '$lib/derived/sns.derived';
+	import { governanceIdStore, governanceStore } from '$lib/derived/governance.derived';
 	import { switchGovernance } from '$lib/utils/nav.utils';
 
 	let governanceId = $governanceIdStore;
 
 	let logoSrc: string;
-	$: logoSrc =
-		nonNullish($governanceIdStore) && $governanceIdStore !== GOVERNANCE_CANISTER_ID
-			? `logo/snses/${governanceId}.png`
-			: 'logo/icp.svg';
+	$: logoSrc = $governanceStore?.logo ?? 'logo/icp.svg';
 
-	const onChange = async () => {
-		await switchGovernance(governanceId);
-	};
+	const onChange = async () => await switchGovernance(governanceId);
 </script>
 
 <InputSelect bind:value={governanceId} on:change={onChange}>

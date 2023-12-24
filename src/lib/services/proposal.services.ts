@@ -1,7 +1,6 @@
 import { getProposal as getProposalNns, makeProposal } from '$lib/api/icp-proposal.api';
 import { getProposal as getProposalSns } from '$lib/api/sns-proposal.api';
-import { rootCanisterIdStore } from '$lib/derived/sns.derived';
-import { snsNsFunctionsStore } from '$lib/derived/snses.derived';
+import { rootCanisterIdStore, snsNsFunctionsStore } from '$lib/derived/sns.derived';
 import { toasts } from '$lib/stores/toasts.store';
 import type { GovernanceCanisterId } from '$lib/types/core';
 import type { Proposal } from '$lib/types/governance';

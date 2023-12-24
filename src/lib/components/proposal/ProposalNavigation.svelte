@@ -7,9 +7,9 @@
 	import { canShare, copyText, shareText } from '$lib/utils/share.utils';
 	import { toasts } from '$lib/stores/toasts.store';
 	import { nonNullish } from '@dfinity/utils';
-	import { rootCanisterIdStore } from '$lib/derived/sns.derived';
 	import { proposalUrl } from '$lib/utils/nav.utils';
 	import { goto } from '$app/navigation';
+	import ProposalVoteUrl from '$lib/components/proposal/ProposalVoteUrl.svelte';
 
 	let id: number;
 	$: id = Number($routeProposalId ?? '0');
@@ -40,23 +40,22 @@
 			duration: 2000
 		});
 	};
-
-	let voteUrl: string;
-	$: voteUrl = `https://nns.internetcomputer.org/proposal/?proposal=${id}${
-		nonNullish($rootCanisterIdStore) ? `&u=${$rootCanisterIdStore}` : ''
-	}`;
 </script>
 
 <Aside>
-	<svelte:fragment slot="title">Take Action</svelte:fragment>
+	<svelte:fragment slot="title"
+		>Take Action on proposal{nonNullish($routeProposalId)
+			? ` #${$routeProposalId}`
+			: ''}</svelte:fragment
+	>
 
 	<div class="flex flex-col">
 		<div class="flex lg:flex-col gap-1">
 			<Button color="quaternary" fullWidth on:click={share}>Share</Button>
 
-			<a href={voteUrl} rel="noreferrer noopener" target="_blank">
+			<ProposalVoteUrl {id}>
 				<Button color="secondary" fullWidth>Vote <IconArrowOutward /></Button>
-			</a>
+			</ProposalVoteUrl>
 		</div>
 
 		<div>

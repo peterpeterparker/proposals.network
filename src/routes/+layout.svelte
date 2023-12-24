@@ -6,6 +6,7 @@
 	import { userStore } from '$lib/stores/user.store';
 	import { browser } from '$app/environment';
 	import { onNavigate } from '$app/navigation';
+	import { layoutTitleStore } from '$lib/stores/layout.store';
 
 	// To improve the UX while the app is loading on mainnet we display a spinner which is attached statically in the index.html files.
 	// Once the authentication has been initialized we know most JavaScript resources has been loaded and therefore we can hide the spinner, the loading information.
@@ -35,6 +36,10 @@
 		});
 	});
 </script>
+
+<svelte:head>
+	<title>{$layoutTitleStore}</title>
+</svelte:head>
 
 <Juno>
 	<Worker>

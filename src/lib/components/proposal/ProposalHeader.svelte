@@ -1,22 +1,21 @@
 <script lang="ts">
 	import { PROPOSAL_CONTEXT_KEY, type ProposalContext } from '$lib/types/proposal.context';
 	import { getContext } from 'svelte';
-	import type { ProposalId } from '@dfinity/nns';
-	import { nonNullish } from '@dfinity/utils';
 
 	const { store }: ProposalContext = getContext<ProposalContext>(PROPOSAL_CONTEXT_KEY);
 
-	let id: ProposalId | undefined;
 	let title: string | undefined;
-
-	$: id = $store?.proposal?.id;
 	$: title = $store?.proposal?.title;
 </script>
 
-<h1 class="font-bold capitalize mb-12 text-4xl md:text-6xl">
-	Proposal <span class="text-4xl">{nonNullish(id) ? ` #${id}` : ''}</span>
+<h1 class="font-bold capitalize mb-12 text-5xl lg:text-7xl break-all">
+	{title ?? 'Proposal'}
 </h1>
 
-{#if nonNullish(title)}
-	<h2 class="text-2xl mb-12">{title}</h2>
-{/if}
+<style lang="scss">
+	@use '../../styles/mixins/text';
+
+	h1 {
+		@include text.clamp(4);
+	}
+</style>

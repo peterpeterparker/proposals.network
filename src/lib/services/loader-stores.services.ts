@@ -1,8 +1,7 @@
 import { listIcpProposals } from '$lib/api/icp-proposal.api';
 import { listSnsProposals } from '$lib/api/sns-proposal.api';
 import { GOVERNANCE_CANISTER_ID, USER_PAGINATION } from '$lib/constants/app.constants';
-import { rootCanisterIdStore } from '$lib/derived/sns.derived';
-import { snsNsFunctionsStore } from '$lib/derived/snses.derived';
+import { rootCanisterIdStore, snsNsFunctionsStore } from '$lib/derived/sns.derived';
 import { proposalsStore, type ProposalsSetData } from '$lib/stores/proposals.store';
 import { toasts } from '$lib/stores/toasts.store';
 import { userProposalsStore, type UserProposalsSetData } from '$lib/stores/user-proposals.store';

@@ -4,6 +4,9 @@
 	import ProposalInfoRow from '$lib/components/proposal/ProposalInfoRow.svelte';
 	import Container from '$lib/components/ui/Container.svelte';
 	import { nonNullish } from '@dfinity/utils';
+	import Img from '$lib/components/ui/Img.svelte';
+	import { governanceStore } from '$lib/derived/governance.derived';
+	import { fade } from 'svelte/transition';
 
 	const { store }: ProposalContext = getContext<ProposalContext>(PROPOSAL_CONTEXT_KEY);
 
@@ -20,6 +23,17 @@
 
 <Container>
 	<svelte:fragment slot="title">Details</svelte:fragment>
+
+	<ProposalInfoRow>
+		Governance
+		<svelte:fragment slot="custom-value">
+			{#if nonNullish($governanceStore)}
+				<span class="inline-flex gap-1" in:fade
+					><Img src={$governanceStore?.logo} width="24px" /> {$governanceStore.name}</span
+				>
+			{/if}
+		</svelte:fragment>
+	</ProposalInfoRow>
 
 	<ProposalInfoRow value={type}>Type</ProposalInfoRow>
 
