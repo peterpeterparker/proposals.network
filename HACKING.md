@@ -41,7 +41,7 @@ Deploy Internet Identity and a Satellite:
 2. Open [dfx.json](./dfx.json).
 3. Find `8000` and replace it with `8080`.
 4. Restart the emulator.
-5. Run `dfx nns install` to install all the NNS canisters.
+5. Run `dfx nns install` to install all the NNS canisters. (on `error: unrecognized subcommand 'nns'`, the command to install the extension is `dfx extension install nns`).
 6. Stop the server.
 7. Open [dfx.json](./dfx.json).
 8. Find `8080` and replace with `8000`.
