@@ -6,7 +6,7 @@
 	export let disabled = false;
 </script>
 
-<div class="relative w-96" class:opacity-20={disabled}>
+<div class="relative w-fit md:w-96" class:opacity-20={disabled}>
 	<select
 		bind:value
 		on:change

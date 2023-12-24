@@ -18,13 +18,13 @@
 	};
 </script>
 
-<h2 class="mt-16 mb-6 px-2 lg:px-4 text-4xl">Access a proposal</h2>
+<h2 class="mt-16 mb-6 lg:px-4 text-4xl">Access a proposal</h2>
 
-<p class="leading-relaxed mb-4 px-2 lg:px-4">
+<p class="leading-relaxed mb-4 lg:px-4">
 	Sometimes, it's cool to jump right into a specific proposal.
 </p>
 
-<div class="flex gap-1 mt-2 max-w-full px-2 lg:px-4 pb-6">
+<div class="flex gap-1 mt-2 max-w-full lg:px-4 pb-6">
 	<InputInline
 		bind:value={proposalId}
 		placeholder="Open proposal with ID"
