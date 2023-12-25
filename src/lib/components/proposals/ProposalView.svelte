@@ -8,7 +8,7 @@
 	export let id: Option<ProposalId>;
 
 	let href: string;
-	$: href = proposalUrl({ id: id ?? '', governanceId: $governanceIdStore });
+	$: href = proposalUrl({ id: `${id ?? ''}`, governanceId: $governanceIdStore });
 </script>
 
 <td>
