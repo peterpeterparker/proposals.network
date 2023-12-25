@@ -1,4 +1,4 @@
-import type { GovernanceId } from '$lib/types/governance';
+import type { OptionGovernanceId } from '$lib/types/governance';
 import { nonNullish } from '@dfinity/utils';
 
 export const APP_VERSION = import.meta.env.VITE_APP_VERSION;
@@ -17,8 +17,8 @@ export const ORBITER_ID: string | null | undefined = import.meta.env.VITE_ORBITE
 	| null
 	| undefined;
 
-export const GOVERNANCE_CANISTER_ID: GovernanceId | null | undefined = import.meta.env
-	.VITE_NNS_GOVERNANCE_CANISTER_ID as GovernanceId | null | undefined;
+export const GOVERNANCE_CANISTER_ID: OptionGovernanceId = import.meta.env
+	.VITE_NNS_GOVERNANCE_CANISTER_ID as OptionGovernanceId;
 
 export const II_CANISTER_ID: string | null | undefined = LOCAL
 	? (import.meta.env.VITE_INTERNET_IDENTITY_CANISTER_ID as string | null | undefined)

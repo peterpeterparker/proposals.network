@@ -1,12 +1,13 @@
 import { listIcpProposals } from '$lib/api/icp-proposal.api';
 import { listSnsProposals } from '$lib/api/sns-proposal.api';
-import { GOVERNANCE_CANISTER_ID, USER_PAGINATION } from '$lib/constants/app.constants';
+import { USER_PAGINATION } from '$lib/constants/app.constants';
 import { rootCanisterIdStore, snsNsFunctionsStore } from '$lib/derived/sns.derived';
 import { proposalsStore, type ProposalsSetData } from '$lib/stores/proposals.store';
 import { toasts } from '$lib/stores/toasts.store';
 import { userProposalsStore, type UserProposalsSetData } from '$lib/stores/user-proposals.store';
 import { userStore } from '$lib/stores/user.store';
 import type { GovernanceCanisterId } from '$lib/types/core';
+import type { OptionGovernanceId } from '$lib/types/governance';
 import type { ProposalMetadata } from '$lib/types/juno';
 import type { Store } from '$lib/types/store';
 import { mapIcpProposal } from '$lib/utils/icp-proposals.utils';
@@ -18,10 +19,13 @@ import { listDocs } from '@junobuild/core-peer';
 import { get } from 'svelte/store';
 
 export const loadUserProposals = ({
-	startAfter
-}: Pick<ListPaginate, 'startAfter'>): Promise<{ success: boolean }> =>
+	startAfter,
+	governanceId
+}: Pick<ListPaginate, 'startAfter'> & { governanceId: OptionGovernanceId }): Promise<{
+	success: boolean;
+}> =>
 	loadPrivate({
-		governanceCanisterId: GOVERNANCE_CANISTER_ID,
+		governanceCanisterId: governanceId,
 		fn: async (governanceCanisterId: GovernanceCanisterId): Promise<UserProposalsSetData> => {
 			const proposals = await listDocs<ProposalMetadata>({
 				collection: 'metadata',

@@ -1,4 +1,5 @@
 import { page } from '$app/stores';
+import type { OptionGovernanceId } from '$lib/types/governance';
 import { derived, type Readable } from 'svelte/store';
 
 export const routeKey: Readable<string | undefined | null> = derived(
@@ -19,7 +20,7 @@ export const routeProposalId: Readable<string | undefined | null> = derived(
 	]) => id
 );
 
-export const routeGovernanceId: Readable<string | undefined | null> = derived(
+export const routeGovernanceId: Readable<OptionGovernanceId> = derived(
 	[page],
 	([
 		{

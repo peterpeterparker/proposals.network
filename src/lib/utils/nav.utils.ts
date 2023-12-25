@@ -1,6 +1,6 @@
 import { browser } from '$app/environment';
 import { goto } from '$app/navigation';
-import type { GovernanceId } from '$lib/types/governance';
+import type { OptionGovernanceId } from '$lib/types/governance';
 import type { RouteParams } from '$lib/types/nav';
 import { isNullish, nonNullish } from '@dfinity/utils';
 import type { LoadEvent } from '@sveltejs/kit';
@@ -24,7 +24,7 @@ export const proposalUrl = ({
 	`/proposal/?${governanceParam({ governanceId, separator: true })}id=${id}`;
 
 export interface GovernanceIdParam {
-	governanceId: GovernanceId | undefined | null;
+	governanceId: OptionGovernanceId;
 	separator: boolean;
 }
 
@@ -33,7 +33,7 @@ const governanceParam = ({ governanceId, separator }: GovernanceIdParam): string
 	return defined ? `g=${governanceId}${separator ? '&' : ''}` : '';
 };
 
-export const switchGovernance = async (governanceId: GovernanceId | undefined | null) => {
+export const switchGovernance = async (governanceId: OptionGovernanceId) => {
 	const url = new URL(window.location.href);
 
 	if (isNullish(governanceId)) {
