@@ -6,6 +6,7 @@
 	import { isNullish } from '@dfinity/utils';
 	import { goto } from '$app/navigation';
 	import { proposalUrl } from '$lib/utils/nav.utils';
+	import { governanceIdStore } from '$lib/derived/governance.derived';
 
 	let proposalId = '';
 
@@ -14,7 +15,7 @@
 			return;
 		}
 
-		await goto(proposalUrl(proposalId));
+		await goto(proposalUrl({ id: proposalId, governanceId: $governanceIdStore }));
 	};
 </script>
 
