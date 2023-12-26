@@ -6,7 +6,6 @@
 	import { userStore } from '$lib/stores/user.store';
 	import { loadUserProposals } from '$lib/services/loader-stores.services';
 	import { userProposalsStore } from '$lib/stores/user-proposals.store';
-	import { userGovernanceProposalsStore } from '$lib/derived/user-proposals.derived';
 	import UserProposalRow from '$lib/components/proposals/UserProposalRow.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import { signIn } from '$lib/services/auth.services';
@@ -36,7 +35,7 @@
 <Section>
 	<h2 class="text-6xl md:text-7xl mb-12 tracking-tight font-bold lg:mx-4">Your proposals</h2>
 
-	<TableContainer rows={$userGovernanceProposalsStore?.items.length}>
+	<TableContainer rows={$userProposalsStore?.items.length}>
 		<thead>
 			<tr>
 				<th class="w-2/12">Key</th>
@@ -49,15 +48,15 @@
 		</thead>
 
 		<tbody>
-			{#if $userGovernanceProposalsStore === undefined}
+			{#if $userProposalsStore === undefined}
 				<SkeletonRows rows={USER_PAGINATION} columns={7} />
-			{:else if $userGovernanceProposalsStore === null}
+			{:else if $userProposalsStore === null}
 				<tr>
 					<td colspan="6">
 						<span class="inline-block">Sign-in to submit your own proposals.</span>
 					</td>
 				</tr>
-			{:else if $userGovernanceProposalsStore.items_length === 0n}
+			{:else if $userProposalsStore.items_length === 0n}
 				<tr>
 					<td colspan="6">
 						<span class="inline-block"
@@ -66,7 +65,7 @@
 					</td>
 				</tr>
 			{:else}
-				{#each $userGovernanceProposalsStore.items as doc (doc.key)}
+				{#each $userProposalsStore.items as doc (doc.key)}
 					<UserProposalRow {doc} />
 				{/each}
 			{/if}
@@ -74,13 +73,13 @@
 	</TableContainer>
 
 	<div id="your-proposals-actions">
-		{#if $userGovernanceProposalsStore === null}
+		{#if $userProposalsStore === null}
 			<div in:fade class="lg:mx-4 my-4">
 				<Button on:click={signIn} color="quaternary">
 					<IconICMonochrome /> Continue with Internet Identity
 				</Button>
 			</div>
-		{:else if $userGovernanceProposalsStore?.items_length === 0n}
+		{:else if $userProposalsStore?.items_length === 0n}
 			<div in:fade class="lg:mx-4 my-4">
 				<SubmitLink />
 			</div>

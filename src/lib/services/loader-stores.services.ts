@@ -26,13 +26,14 @@ export const loadUserProposals = ({
 }> =>
 	loadPrivate({
 		governanceCanisterId: governanceId,
-		fn: async (governanceCanisterId: GovernanceCanisterId): Promise<UserProposalsSetData> => {
+		fn: async (_governanceCanisterId: GovernanceCanisterId): Promise<UserProposalsSetData> => {
 			const proposals = await listDocs<ProposalMetadata>({
 				collection: 'metadata',
 				filter: {
-					matcher: {
-						description: governanceCanisterId
-					},
+					// TODO: to be used the day we want to display the user proposals per governance as well
+					// matcher: {
+					// 	description: governanceCanisterId
+					// },
 					order: {
 						desc: true,
 						field: 'created_at'
@@ -45,7 +46,6 @@ export const loadUserProposals = ({
 			});
 
 			return {
-				governanceCanisterId,
 				proposals
 			};
 		},

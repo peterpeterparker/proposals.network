@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { userGovernanceProposalsStore } from '$lib/derived/user-proposals.derived';
 	import { nonNullish } from '@dfinity/utils';
 	import { loadUserProposals } from '$lib/services/loader-stores.services';
 	import { last } from '$lib/utils/utils';
 	import Paginator from '$lib/components/ui/Paginator.svelte';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
+	import { userProposalsStore } from '$lib/stores/user-proposals.store';
 
 	let previousStartAfter: string | undefined;
 	let startAfter: string | undefined;
@@ -21,21 +21,20 @@
 
 	const next = async () => {
 		previousStartAfter = startAfter;
-		startAfter = last($userGovernanceProposalsStore?.items ?? [])?.key;
+		startAfter = last($userProposalsStore?.items ?? [])?.key;
 
 		await search();
 	};
 
 	let displayPrev: boolean;
-	$: displayPrev = ($userGovernanceProposalsStore?.items_page ?? 0n) > 0n;
+	$: displayPrev = ($userProposalsStore?.items_page ?? 0n) > 0n;
 
 	let displayNext: boolean;
 	$: displayNext =
-		nonNullish($userGovernanceProposalsStore) &&
-		($userGovernanceProposalsStore.matches_pages ?? 0n) >
-			($userGovernanceProposalsStore.items_page ?? 0n) + 1n;
+		nonNullish($userProposalsStore) &&
+		($userProposalsStore.matches_pages ?? 0n) > ($userProposalsStore.items_page ?? 0n) + 1n;
 </script>
 
-{#if nonNullish($userGovernanceProposalsStore)}
+{#if nonNullish($userProposalsStore)}
 	<Paginator {displayPrev} {displayNext} on:pnwrkPrevious={prev} on:pnwrkNext={next} />
 {/if}
