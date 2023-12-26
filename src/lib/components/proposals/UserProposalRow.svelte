@@ -25,5 +25,5 @@
 	<ProposalLink id={proposalId} />
 	<td class="max-w-lg truncate">{title ?? ''}</td>
 	<UserProposalStatus {proposalId} />
-	<UserProposalView {key} />
+	<UserProposalView {doc} />
 </tr>
