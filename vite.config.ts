@@ -170,7 +170,7 @@ const config: UserConfig = {
 		}
 	},
 	worker: {
-		plugins: [sveltekit()],
+		plugins: () => [sveltekit()],
 		format: 'es'
 	}
 };

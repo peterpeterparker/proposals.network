@@ -43,8 +43,9 @@
 		"@junobuild/vite-plugin": "^0.0.4",
 		"@playwright/test": "^1.40.0",
 		"@rollup/plugin-inject": "^5.0.5",
-		"@sveltejs/adapter-static": "^2.0.3",
-		"@sveltejs/kit": "^1.27.6",
+		"@sveltejs/adapter-static": "^3.0.1",
+		"@sveltejs/kit": "^2.0.6",
+		"@sveltejs/vite-plugin-svelte": "^3.0.1",
 		"@types/dom-view-transitions": "^1.0.4",
 		"@types/dompurify": "^3.0.5",
 		"@types/node": "^20.9.3",
@@ -67,8 +68,8 @@
 		"tailwindcss": "^3.3.5",
 		"tslib": "^2.6.2",
 		"typescript": "^5.2.2",
-		"vite": "^4.5.1",
-		"vitest": "^0.34.6"
+		"vite": "^5.0.10",
+		"vitest": "^1.1.0"
 	},
 	"dependencies": {
 		"@dfinity/ledger-icp": "^2.0.0-next-2023-12-02",
