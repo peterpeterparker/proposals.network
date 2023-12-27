@@ -22,12 +22,13 @@
 		$snsStore,
 		(() => {
 			if (nonNullish($snsStore)) {
-				amount = nonNullish($governanceStore?.token)
-					? TokenAmountV2.fromUlps({
-							amount: BigInt(neuronMinimumStake),
-							token: $governanceStore.token
-						})
-					: undefined;
+				amount =
+					$governanceStore?.token !== undefined
+						? TokenAmountV2.fromUlps({
+								amount: BigInt(neuronMinimumStake),
+								token: $governanceStore.token
+							})
+						: undefined;
 
 				return;
 			}
