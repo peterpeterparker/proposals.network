@@ -29,6 +29,8 @@
 		governanceSnses: $governanceSnsesStore
 	});
 
+	$: console.log(governanceId);
+
 	let title: string | undefined;
 	let proposalId: bigint | undefined;
 

@@ -26,6 +26,8 @@
 				type: $governanceTypeStore
 			});
 
+			console.log(proposal);
+
 			if (isNullish(proposal)) {
 				return;
 			}
