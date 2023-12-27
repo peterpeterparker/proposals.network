@@ -25,5 +25,7 @@ export const firstNeuronId = ({
 		return undefined;
 	}
 
-	return neuron?.data[governanceId]?.[0];
+	const neuronId = neuron?.data[governanceId]?.[0];
+
+	return nonNullish(neuronId) ? `${neuronId}` : undefined;
 };

@@ -18,4 +18,4 @@ export type ProposalMetadata = {
 
 export type ProposalMetadataDoc = Doc<ProposalMetadata>;
 
-export type Neuron = Record<GovernanceCanisterId, string[]>;
+export type Neuron = Record<GovernanceCanisterId, (string | bigint)[]>;
