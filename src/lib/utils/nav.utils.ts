@@ -20,7 +20,7 @@ export const userProposalUrl = ({
 export const proposalUrl = ({
 	id,
 	governanceId
-}: { id: string | number } & Pick<GovernanceIdParam, 'governanceId'>): string =>
+}: { id: string | number | bigint } & Pick<GovernanceIdParam, 'governanceId'>): string =>
 	`/proposal/?${governanceParam({ governanceId, separator: true })}id=${id}`;
 
 export interface GovernanceIdParam {
