@@ -196,10 +196,10 @@
 			transform: translate(-1rem, calc(0.8 * 0.25rem));
 		}
 		&.expanded::before {
-			content: '▼';
+			content: '\25BC';
 		}
 		&.collapsed::before {
-			content: '▶';
+			content: '\25B6';
 		}
 	}
 
