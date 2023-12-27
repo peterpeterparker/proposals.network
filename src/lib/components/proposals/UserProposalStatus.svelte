@@ -2,9 +2,9 @@
 	import SkeletonText from '$lib/components/ui/SkeletonText.svelte';
 	import { isNullish, nonNullish } from '@dfinity/utils';
 	import { onMount } from 'svelte';
-	import { getProposal } from '$lib/api/icp-proposal.api';
-	import { ProposalStatus } from '@dfinity/nns';
 	import { fade } from 'svelte/transition';
+	import { getProposal } from '$lib/services/proposal.services';
+	import { governanceIdStore, governanceTypeStore } from '$lib/derived/governance.derived';
 
 	export let proposalId: bigint | undefined;
 
@@ -18,13 +18,17 @@
 		}
 
 		try {
-			const proposal = await getProposal({ proposalId });
+			const proposal = await getProposal({
+				proposalId,
+				governanceId: $governanceIdStore,
+				type: $governanceTypeStore
+			});
 
 			if (isNullish(proposal)) {
 				return;
 			}
 
-			status = ProposalStatus[proposal.status];
+			status = proposal.status;
 		} catch (err: unknown) {
 			console.error(err);
 		} finally {
