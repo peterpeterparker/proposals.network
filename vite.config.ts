@@ -106,10 +106,23 @@ const config: UserConfig = {
 				manualChunks: (id) => {
 					const folder = dirname(id);
 
-					const lazy = ['@dfinity/nns', '@dfinity/nns-proto'];
+					const lazy = [
+						'@dfinity/nns',
+						'@tiptap',
+						'highlight.js',
+						'prosemirror',
+						'lowlight',
+						'markdown-it',
+						'marked',
+						'tiptap-markdown'
+					];
+
+					const unused = [
+						'@dfinity/nns-proto',
+					]
 
 					if (
-						['@sveltejs', 'svelte', ...lazy].find((lib) => folder.includes(lib)) === undefined &&
+						['@sveltejs', 'svelte', ...lazy, ...unused].find((lib) => folder.includes(lib)) === undefined &&
 						folder.includes('node_modules')
 					) {
 						return 'vendor';
@@ -117,9 +130,17 @@ const config: UserConfig = {
 
 					if (
 						lazy.find((lib) => folder.includes(lib)) !== undefined &&
+						unused.find((lib) => folder.includes(lib)) === undefined &&
 						folder.includes('node_modules')
 					) {
 						return 'lazy';
+					}
+
+					if (
+						unused.find((lib) => folder.includes(lib)) !== undefined &&
+						folder.includes('node_modules')
+					) {
+						return 'unused';
 					}
 
 					return 'index';
@@ -149,7 +170,7 @@ const config: UserConfig = {
 		}
 	},
 	worker: {
-		plugins: [sveltekit()],
+		plugins: () => [sveltekit()],
 		format: 'es'
 	}
 };
