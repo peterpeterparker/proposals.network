@@ -23,10 +23,8 @@
 			const proposal = await getProposal({
 				proposalId,
 				governanceId: governance.id,
-				type: $governanceTypeStore
+				type: governance.type
 			});
-
-			console.log(proposal);
 
 			if (isNullish(proposal)) {
 				return;
