@@ -13,6 +13,8 @@
 	import SubmitNeuronMetadata from '$lib/components/submit/SubmitNeuronMetadata.svelte';
 	import { firstNeuronId } from '$lib/utils/juno.utils';
 	import SubmitError from '$lib/components/submit/SubmitError.svelte';
+	import { governanceIdStore } from '$lib/derived/governance.derived';
+	import SubmitNeuronRequirements from '$lib/components/submit/SubmitNeuronRequirements.svelte';
 
 	export let neuronId: bigint | undefined;
 
@@ -24,7 +26,7 @@
 	onMount(async () => {
 		const { result, neuron: n } = await getNeuron($userStore);
 		neuron = n;
-		neuronId = firstNeuronId(neuron);
+		neuronId = firstNeuronId({ neuron, governanceId: $governanceIdStore });
 		status = result;
 	});
 </script>
@@ -32,10 +34,7 @@
 {#if status !== 'error'}
 	<h1 class="font-bold capitalize text-4xl md:text-6xl mb-12">Only Neurons can submit proposals</h1>
 
-	<h2 class="text-2xl mb-8">
-		Neurons with at least 10 ICP and a 6-month dissolve delay can submit motion proposals. So the
-		next step is to add a hotkey to your neuron that meets these criteria.
-	</h2>
+	<SubmitNeuronRequirements />
 
 	{#if status === 'loading'}
 		<SpinnerText>Hold tight, loading neuron metadata...</SpinnerText>

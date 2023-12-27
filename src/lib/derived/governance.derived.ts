@@ -42,3 +42,11 @@ export const governanceStore: Readable<Governance | undefined> = derived(
 			governanceSnses: $governanceSnsesStore
 		})
 );
+
+export const snsStore: Readable<CachedSnsDto | undefined> = derived(
+	[governanceStore, governanceSnsesStore],
+	([$governanceStore, $governanceSnsesStore]) =>
+		nonNullish($governanceStore?.id) && $governanceStore?.type === 'sns'
+			? $governanceSnsesStore[$governanceStore.id]
+			: undefined
+);

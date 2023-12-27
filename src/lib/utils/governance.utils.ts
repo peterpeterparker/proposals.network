@@ -1,7 +1,8 @@
 import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
 import type { Governance, GovernanceId, OptionGovernanceId } from '$lib/types/governance';
 import type { CachedSnsDto } from '$lib/types/sns-aggregator';
-import { nonNullish } from '@dfinity/utils';
+import { mapOptionalToken } from '$lib/utils/icrc-tokens.utils';
+import { ICPToken, nonNullish } from '@dfinity/utils';
 
 export const findGovernance = ({
 	governanceId,
@@ -11,11 +12,17 @@ export const findGovernance = ({
 	governanceSnses: Record<GovernanceId, CachedSnsDto>;
 }): Governance | undefined => {
 	if (nonNullish(governanceId) && nonNullish(governanceSnses[governanceId])) {
+		const {
+			meta: { name },
+			icrc1_metadata
+		} = governanceSnses[governanceId];
+
 		return {
 			id: governanceId,
-			name: governanceSnses[governanceId].meta.name ?? '',
+			name: name ?? '',
 			type: 'sns' as const,
-			logo: `logo/snses/${governanceId}.png`
+			logo: `logo/snses/${governanceId}.png`,
+			token: mapOptionalToken(icrc1_metadata)
 		};
 	}
 
@@ -24,7 +31,8 @@ export const findGovernance = ({
 			id: GOVERNANCE_CANISTER_ID,
 			name: 'Internet Computer',
 			type: 'icp' as const,
-			logo: 'logo/icp.svg'
+			logo: 'logo/icp.svg',
+			token: ICPToken
 		};
 	}
 

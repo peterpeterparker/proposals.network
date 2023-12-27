@@ -117,12 +117,11 @@ const config: UserConfig = {
 						'tiptap-markdown'
 					];
 
-					const unused = [
-						'@dfinity/nns-proto',
-					]
+					const unused = ['@dfinity/nns-proto'];
 
 					if (
-						['@sveltejs', 'svelte', ...lazy, ...unused].find((lib) => folder.includes(lib)) === undefined &&
+						['@sveltejs', 'svelte', ...lazy, ...unused].find((lib) => folder.includes(lib)) ===
+							undefined &&
 						folder.includes('node_modules')
 					) {
 						return 'vendor';

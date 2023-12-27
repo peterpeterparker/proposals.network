@@ -52,7 +52,7 @@ export const mapProposalType = (
 		? {
 				type: keyOf({ obj: actions, key: action }),
 				typeDescription: keyOf({ obj: actions_description, key: action })
-		  }
+			}
 		: NO_MATCH;
 };
 
@@ -117,7 +117,7 @@ export const mapIcpProposal = ({
 			? {
 					id: proposer,
 					url: `${ICP_NEURON_URL}/${proposer}`
-			  }
+				}
 			: undefined,
 		...mapProposalType(proposal),
 		topic: keyOf({ obj: en.topics, key: Topic[topic] }),

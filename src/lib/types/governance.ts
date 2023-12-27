@@ -1,6 +1,7 @@
 import type { GovernanceCanisterId } from '$lib/types/core';
 import type { ProposalInfo, Proposal as ProposalNns, Tally } from '@dfinity/nns';
 import type { SnsTally } from '@dfinity/sns';
+import type { Token } from '@dfinity/utils';
 
 export type GovernanceId = GovernanceCanisterId;
 export type OptionGovernanceId = GovernanceCanisterId | undefined | null;
@@ -12,6 +13,7 @@ export interface Governance {
 	name: string;
 	logo: string;
 	type: GovernanceType;
+	token?: Token;
 }
 
 export type Text = string;

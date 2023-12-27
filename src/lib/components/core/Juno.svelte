@@ -37,7 +37,7 @@
 							satelliteId: SATELLITE_ID!,
 							orbiterId: ORBITER_ID
 						})
-				  ])
+					])
 		]);
 
 		displayAndCleanLogoutMsg();

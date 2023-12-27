@@ -18,11 +18,11 @@
 				? $userSignedIn
 					? 'done'
 					: $userNotSignedIn
-					  ? 'active'
-					  : 'pending'
+						? 'active'
+						: 'pending'
 				: isNullish(step)
-				  ? 'pending'
-				  : 'done';
+					? 'pending'
+					: 'done';
 	};
 
 	$: step, $userStore, initSignInStatus();
@@ -34,10 +34,10 @@
 				(isNullish(step) && $userSignedIn) || step === 'write'
 					? 'active'
 					: signInStatus === 'active'
-					  ? 'pending'
-					  : $userSignedIn
-					    ? 'done'
-					    : 'pending'))();
+						? 'pending'
+						: $userSignedIn
+							? 'done'
+							: 'pending'))();
 
 	$: step,
 		(() =>
@@ -45,8 +45,8 @@
 				step === 'neuron'
 					? 'active'
 					: nonNullish(step) && ['review', 'submitted'].includes(step)
-					  ? 'done'
-					  : 'pending'))();
+						? 'done'
+						: 'pending'))();
 
 	$: step,
 		(() =>
@@ -54,8 +54,8 @@
 				step === 'review'
 					? 'active'
 					: nonNullish(step) && ['submitted', 'readonly'].includes(step)
-					  ? 'done'
-					  : 'pending'))();
+						? 'done'
+						: 'pending'))();
 </script>
 
 <Aside>
