@@ -18,6 +18,7 @@
 	import type { Doc } from '@junobuild/core-peer';
 	import type { Neuron } from '$lib/types/juno';
 	import { firstNeuronId } from '$lib/utils/juno.utils';
+	import { governanceIdStore } from '$lib/derived/governance.derived';
 
 	let step: undefined | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly' = undefined;
 	let neuronId: bigint | undefined;
@@ -53,8 +54,8 @@
 		step = 'submitted';
 	};
 
-	const review = ({ detail }: CustomEvent<Doc<Neuron> | undefined>) => {
-		neuronId = firstNeuronId(detail);
+	const review = ({ detail: neuron }: CustomEvent<Doc<Neuron> | undefined>) => {
+		neuronId = firstNeuronId({ neuron, governanceId: $governanceIdStore });
 		step = 'review';
 	};
 </script>

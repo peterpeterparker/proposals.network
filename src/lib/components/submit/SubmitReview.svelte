@@ -13,6 +13,7 @@
 	import { submitProposal } from '$lib/services/submit.services';
 	import { userStore } from '$lib/stores/user.store';
 	import HtmlMarkdown from '$lib/components/ui/HtmlMarkdown.svelte';
+	import { governanceStore } from '$lib/derived/governance.derived';
 
 	export let neuronId: bigint | undefined;
 
@@ -26,7 +27,11 @@
 	const dispatch = createEventDispatcher();
 
 	const onSubmit = async () => {
-		const { result, proposalId } = await submitProposal({ user: $userStore, neuronId });
+		const { result, proposalId } = await submitProposal({
+			user: $userStore,
+			neuronId,
+			governance: $governanceStore
+		});
 
 		if (result === 'error') {
 			return;

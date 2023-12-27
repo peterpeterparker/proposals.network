@@ -10,6 +10,7 @@
 	import { proposalUrl } from '$lib/utils/nav.utils';
 	import { goto } from '$app/navigation';
 	import ProposalVoteUrl from '$lib/components/proposal/ProposalVoteUrl.svelte';
+	import { governanceIdStore } from '$lib/derived/governance.derived';
 
 	let id: number;
 	$: id = Number($routeProposalId ?? '0');
@@ -20,9 +21,11 @@
 	let displayNext: boolean;
 	$: displayNext = id > 1;
 
-	const prev = async () => await goto(proposalUrl(id + 1));
+	const prev = async () =>
+		await goto(proposalUrl({ id: id + 1, governanceId: $governanceIdStore }));
 
-	const next = async () => await goto(proposalUrl(id - 1));
+	const next = async () =>
+		await goto(proposalUrl({ id: id - 1, governanceId: $governanceIdStore }));
 
 	const share = async () => {
 		const url = window.location.href;

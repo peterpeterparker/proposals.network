@@ -4,6 +4,7 @@
 	import UserProposalView from '$lib/components/proposals/UserProposalView.svelte';
 	import UserProposalStatus from '$lib/components/proposals/UserProposalStatus.svelte';
 	import ProposalLink from '$lib/components/proposals/ProposalLink.svelte';
+	import UserProposalGovernance from '$lib/components/proposals/UserProposalGovernance.svelte';
 
 	export let doc: ProposalMetadataDoc;
 
@@ -20,8 +21,9 @@
 
 <tr>
 	<UserProposalLink {key} />
+	<UserProposalGovernance {doc} />
 	<ProposalLink id={proposalId} />
 	<td class="max-w-lg truncate">{title ?? ''}</td>
 	<UserProposalStatus {proposalId} />
-	<UserProposalView {key} />
+	<UserProposalView {doc} />
 </tr>

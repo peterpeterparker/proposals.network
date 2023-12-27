@@ -1,17 +1,12 @@
-import type { GovernanceCanisterId } from '$lib/types/core';
 import type { ProposalMetadataDoc } from '$lib/types/juno';
 import type { Store } from '$lib/types/store';
 import { nonNullish } from '@dfinity/utils';
 import type { ListResults } from '@junobuild/core-peer';
 import { writable } from 'svelte/store';
 
-export type UserProposalsData =
-	| Record<GovernanceCanisterId, ListResults<ProposalMetadataDoc>>
-	| undefined
-	| null;
+export type UserProposalsData = ListResults<ProposalMetadataDoc> | undefined | null;
 
 export type UserProposalsSetData = {
-	governanceCanisterId: GovernanceCanisterId;
 	proposals: ListResults<ProposalMetadataDoc>;
 };
 
@@ -23,10 +18,10 @@ const initUserProposalsStore = (): UserProposalsStore => {
 	const { subscribe, set, update } = writable<UserProposalsData>(INITIAL);
 
 	return {
-		set: ({ governanceCanisterId, proposals }: UserProposalsSetData) =>
+		set: ({ proposals }: UserProposalsSetData) =>
 			update((state) => ({
 				...(nonNullish(state) && state),
-				[governanceCanisterId]: proposals
+				...proposals
 			})),
 		reset: () => set(null),
 		subscribe

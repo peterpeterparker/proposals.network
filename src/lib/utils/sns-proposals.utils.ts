@@ -260,9 +260,9 @@ export const mapSnsProposal = ({
 						? SNS_NEURON_URL.replace('{rootCanisterId}', rootCanisterId).replace(
 								'{neuronId}',
 								proposerId
-						  )
+							)
 						: undefined
-			  }
+				}
 			: undefined,
 		type: nsFunction?.name,
 		typeDescription: nsFunction?.description[0],

@@ -43,6 +43,44 @@ export type CachedNervousFunctionDto = {
 	function_type: CachedFunctionTypeDto | null;
 };
 
+export interface CachedDefaultFollowees {
+	followees: bigint[];
+}
+
+export interface CachedNeuronPermissions {
+	permissions: number[];
+}
+
+export interface ChachedVotingRewardsParameters {
+	final_reward_rate_basis_points: number;
+	initial_reward_rate_basis_points: number;
+	reward_rate_transition_duration_seconds: number;
+	round_duration_seconds: number;
+}
+
+export interface CachedNervousSystemParameters {
+	default_followees: CachedDefaultFollowees;
+	max_dissolve_delay_seconds: number;
+	max_dissolve_delay_bonus_percentage: number;
+	max_followees_per_function: number;
+	neuron_claimer_permissions: CachedNeuronPermissions;
+	neuron_minimum_stake_e8s: number;
+	max_neuron_age_for_age_bonus: number;
+	initial_voting_period_seconds: number;
+	neuron_minimum_dissolve_delay_to_vote_seconds: number;
+	reject_cost_e8s: number;
+	max_proposals_to_keep_per_action: number;
+	wait_for_quiet_deadline_increase_seconds: number;
+	max_number_of_neurons: number;
+	transaction_fee_e8s: number;
+	max_number_of_proposals_with_ballots: number;
+	max_age_bonus_percentage: number;
+	neuron_grantable_permissions: CachedNeuronPermissions;
+	voting_rewards_parameters: ChachedVotingRewardsParameters;
+	maturity_modulation_disabled: boolean | null;
+	max_number_of_principals_per_neuron: number;
+}
+
 type CachedCountriesDto = {
 	iso_codes: string[];
 };
@@ -166,10 +204,13 @@ export declare enum IcrcMetadataResponseEntries {
 	LOGO = 'icrc1:logo'
 }
 
+export type CachedSnsTokenMetadataDtoNat = { Nat: number[] };
+export type CachedSnsTokenMetadataDtoText = { Text: string };
+
 // Export for testing purposes
 export type CachedSnsTokenMetadataDto = (
-	| (string | { Nat: number[] })[]
-	| (string | { Text: string })[]
+	| (string | CachedSnsTokenMetadataDtoNat)[]
+	| (string | CachedSnsTokenMetadataDtoText)[]
 )[];
 
 // Export for testing purposes
@@ -182,6 +223,7 @@ export type CachedSnsDto = {
 		functions: CachedNervousFunctionDto[];
 		reserved_ids: number[];
 	};
+	nervous_system_parameters: CachedNervousSystemParameters;
 	// @deprecated
 	swap_state: {
 		swap: CachedSnsSwapDto;

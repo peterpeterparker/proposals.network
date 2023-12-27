@@ -1,4 +1,5 @@
-import { GOVERNANCE_CANISTER_ID, II_CANISTER_ID, SATELLITE_ID } from '$lib/constants/app.constants';
+import { II_CANISTER_ID, SATELLITE_ID } from '$lib/constants/app.constants';
+import type { OptionGovernanceId } from '$lib/types/governance';
 import type { Neuron } from '$lib/types/juno';
 import { isNullish, nonNullish } from '@dfinity/utils';
 import type { Doc, Environment } from '@junobuild/core-peer';
@@ -11,12 +12,18 @@ export const junoEnvironment = ():
 		: {
 				satelliteId: SATELLITE_ID,
 				...(nonNullish(II_CANISTER_ID) && { localIdentityCanisterId: II_CANISTER_ID })
-		  };
+			};
 
-export const firstNeuronId = (neuron: Doc<Neuron> | undefined): bigint | undefined => {
-	if (isNullish(GOVERNANCE_CANISTER_ID)) {
+export const firstNeuronId = ({
+	neuron,
+	governanceId
+}: {
+	neuron: Doc<Neuron> | undefined;
+	governanceId: OptionGovernanceId;
+}): bigint | undefined => {
+	if (isNullish(governanceId)) {
 		return undefined;
 	}
 
-	return neuron?.data[GOVERNANCE_CANISTER_ID][0];
+	return neuron?.data[governanceId]?.[0];
 };

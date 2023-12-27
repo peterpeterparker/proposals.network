@@ -8,6 +8,7 @@
 	import { userStore } from '$lib/stores/user.store';
 	import { createEventDispatcher } from 'svelte';
 	import { isBusy } from '$lib/derived/busy.derived';
+	import { governanceIdStore } from '$lib/derived/governance.derived';
 
 	export let neuron: Doc<Neuron> | undefined;
 	let neuronId = '';
@@ -23,7 +24,8 @@
 		const { result, neuron: createdNeuron } = await setNeuron({
 			user: $userStore,
 			neuron,
-			neuronId
+			neuronId,
+			governanceId: $governanceIdStore
 		});
 
 		if (result === 'error') {

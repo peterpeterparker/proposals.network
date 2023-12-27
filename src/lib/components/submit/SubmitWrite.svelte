@@ -23,24 +23,6 @@
 	discussion.
 </h2>
 
-<p class="leading-relaxed text-sm mt-4 mb-8 italic">
-	Currently, only motion proposals for the <strong>Network Nervous System (NNS)</strong> are
-	supported. However, if you wish to expand the dApp to include more types, please
-	<a
-		href="https://twitter.com/daviddalbusco"
-		target="_blank"
-		class="underline underline-offset-2"
-		rel="noopener noreferrer nofollow">reach out</a
-	>
-	or send a pull request on the
-	<a
-		href="https://github.com/peterpeterparker/proposals.network"
-		target="_blank"
-		class="underline underline-offset-2"
-		rel="noopener noreferrer nofollow">GitHub repository</a
-	>.
-</p>
-
 <SubmitWriteEdit {metadata} {content} />
 
 <SubmitContinue on:click={next} />

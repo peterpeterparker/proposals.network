@@ -40,7 +40,7 @@
 		try {
 			const newProposal = await getProposal({
 				proposalId: BigInt($routeProposalId),
-				governanceCanisterId: $governanceIdStore,
+				governanceId: $governanceIdStore,
 				type: $governanceTypeStore
 			});
 

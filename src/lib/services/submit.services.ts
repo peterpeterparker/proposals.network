@@ -131,10 +131,11 @@ const updateUrl = async (proposalKey: string) => {
 
 export const submitProposal = async ({
 	user,
-	neuronId
+	neuronId,
+	governance
 }: {
 	user: UserOption;
-} & Partial<Pick<MotionProposalParams, 'neuronId'>>): Promise<{
+} & Partial<Pick<MotionProposalParams, 'neuronId' | 'governance'>>): Promise<{
 	result: 'ok' | 'error';
 	proposalId?: bigint | undefined;
 }> => {
@@ -187,7 +188,8 @@ export const submitProposal = async ({
 			url,
 			motionText,
 			summary: content,
-			neuronId
+			neuronId,
+			governance
 		});
 
 		if (result === 'error') {

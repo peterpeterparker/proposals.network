@@ -1,11 +1,18 @@
 import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
+import { routeGovernanceId } from '$lib/derived/nav.derived';
 import { snsIdStore, sortedSnsesStore } from '$lib/derived/sns.derived';
-import type { Governance, GovernanceId, GovernanceType } from '$lib/types/governance';
+import type {
+	Governance,
+	GovernanceId,
+	GovernanceType,
+	OptionGovernanceId
+} from '$lib/types/governance';
 import type { CachedSnsDto } from '$lib/types/sns-aggregator';
+import { findGovernance } from '$lib/utils/governance.utils';
 import { nonNullish } from '@dfinity/utils';
 import { derived, type Readable } from 'svelte/store';
 
-export const governanceIdStore: Readable<GovernanceId | undefined | null> = derived(
+export const governanceIdStore: Readable<OptionGovernanceId> = derived(
 	[snsIdStore],
 	([$snsIdStore]) => (nonNullish($snsIdStore) ? $snsIdStore : GOVERNANCE_CANISTER_ID)
 );
@@ -28,26 +35,18 @@ export const governanceSnsesStore: Readable<Record<GovernanceId, CachedSnsDto>> 
 );
 
 export const governanceStore: Readable<Governance | undefined> = derived(
-	[snsIdStore, governanceSnsesStore],
-	([$snsIdStore, $governanceSnsesStore]) => {
-		if (nonNullish($snsIdStore) && nonNullish($governanceSnsesStore[$snsIdStore])) {
-			return {
-				id: $snsIdStore,
-				name: $governanceSnsesStore[$snsIdStore].meta.name ?? '',
-				type: 'sns' as const,
-				logo: `logo/snses/${$snsIdStore}.png`
-			};
-		}
+	[routeGovernanceId, governanceSnsesStore],
+	([$routeGovernanceId, $governanceSnsesStore]) =>
+		findGovernance({
+			governanceId: $routeGovernanceId,
+			governanceSnses: $governanceSnsesStore
+		})
+);
 
-		if (nonNullish(GOVERNANCE_CANISTER_ID)) {
-			return {
-				id: GOVERNANCE_CANISTER_ID,
-				name: 'Internet Computer',
-				type: 'icp' as const,
-				logo: 'logo/icp.svg'
-			};
-		}
-
-		return undefined;
-	}
+export const snsStore: Readable<CachedSnsDto | undefined> = derived(
+	[governanceStore, governanceSnsesStore],
+	([$governanceStore, $governanceSnsesStore]) =>
+		nonNullish($governanceStore?.id) && $governanceStore?.type === 'sns'
+			? $governanceSnsesStore[$governanceStore.id]
+			: undefined
 );

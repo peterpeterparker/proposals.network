@@ -2,17 +2,19 @@
 	import { userStore } from '$lib/stores/user.store';
 	import type { ProposalWorker } from '$lib/services/worker.services';
 	import { initWorker } from '$lib/services/worker.services';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { junoEnvironment } from '$lib/utils/juno.utils';
 	import { isNullish } from '@dfinity/utils';
-	import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
 	import { toasts } from '$lib/stores/toasts.store';
+	import { governanceIdStore } from '$lib/derived/governance.derived';
+	import { page } from '$app/stores';
 
 	let worker: ProposalWorker | undefined;
 
 	onMount(async () => (worker = await initWorker()));
 
 	$: worker,
+		$governanceIdStore,
 		$userStore,
 		(() => {
 			const env = junoEnvironment();
@@ -24,19 +26,27 @@
 				return;
 			}
 
-			if (isNullish(GOVERNANCE_CANISTER_ID)) {
+			if (isNullish($governanceIdStore)) {
 				toasts.error({
-					msg: { text: 'No governance canister ID defined.' }
+					msg: { text: 'No governance ID defined.' }
 				});
 				return;
 			}
 
-			worker?.sync({
+			worker?.stop();
+
+			if (isNullish($userStore)) {
+				return;
+			}
+
+			worker?.start({
 				user: $userStore,
-				governanceId: GOVERNANCE_CANISTER_ID,
+				governanceId: $governanceIdStore,
 				...env
 			});
 		})();
+
+	onDestroy(() => worker?.stop());
 </script>
 
 <slot />

@@ -1,22 +1,39 @@
 import { browser } from '$app/environment';
 import { goto } from '$app/navigation';
-import { governanceIdStore } from '$lib/derived/governance.derived';
-import type { GovernanceId } from '$lib/types/governance';
+import type { OptionGovernanceId } from '$lib/types/governance';
 import type { RouteParams } from '$lib/types/nav';
-import { isNullish } from '@dfinity/utils';
-import type { LoadEvent, Page } from '@sveltejs/kit';
-import { get } from 'svelte/store';
+import { isNullish, nonNullish } from '@dfinity/utils';
+import type { LoadEvent } from '@sveltejs/kit';
 
-export const isRouteSubmit = ({ route: { id } }: Page): boolean => id === '/(split)/submit';
+export const homeUrl = (param: Pick<GovernanceIdParam, 'governanceId'>): string =>
+	`/?${governanceParam({ ...param, separator: false })}`;
 
-export const submitUrl = (key: string): string => `/submit/?key=${key}`;
+export const submitUrl = (param: Pick<GovernanceIdParam, 'governanceId'>): string =>
+	`/submit/?${governanceParam({ ...param, separator: false })}`;
 
-export const proposalUrl = (id: string | number): string => {
-	const $governanceIdStore = get(governanceIdStore);
-	return `/proposal/?g=${$governanceIdStore ?? ''}&id=${id}`;
+export const userProposalUrl = ({
+	key,
+	governanceId
+}: { key: string } & Pick<GovernanceIdParam, 'governanceId'>): string =>
+	`/submit/?${governanceParam({ governanceId, separator: true })}key=${key}`;
+
+export const proposalUrl = ({
+	id,
+	governanceId
+}: { id: string | number } & Pick<GovernanceIdParam, 'governanceId'>): string =>
+	`/proposal/?${governanceParam({ governanceId, separator: true })}id=${id}`;
+
+export interface GovernanceIdParam {
+	governanceId: OptionGovernanceId;
+	separator: boolean;
+}
+
+const governanceParam = ({ governanceId, separator }: GovernanceIdParam): string => {
+	const defined = nonNullish(governanceId) && governanceId !== '';
+	return defined ? `g=${governanceId}${separator ? '&' : ''}` : '';
 };
 
-export const switchGovernance = async (governanceId: GovernanceId | undefined | null) => {
+export const switchGovernance = async (governanceId: OptionGovernanceId) => {
 	const url = new URL(window.location.href);
 
 	if (isNullish(governanceId)) {

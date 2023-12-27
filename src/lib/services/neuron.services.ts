@@ -1,6 +1,6 @@
-import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
 import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
+import type { OptionGovernanceId } from '$lib/types/governance';
 import type { Neuron } from '$lib/types/juno';
 import type { UserOption } from '$lib/types/user';
 import { isNullish, nonNullish } from '@dfinity/utils';
@@ -37,11 +37,13 @@ export const getNeuron = async (
 export const setNeuron = async ({
 	user,
 	neuron,
-	neuronId
+	neuronId,
+	governanceId
 }: {
 	user: UserOption;
 	neuron: Doc<Neuron> | undefined;
 	neuronId: string;
+	governanceId: OptionGovernanceId;
 }): Promise<{ result: 'ok' | 'error'; neuron: Doc<Neuron> | undefined }> => {
 	if (isNullish(user)) {
 		toasts.error({
@@ -50,10 +52,10 @@ export const setNeuron = async ({
 		return { result: 'error', neuron: undefined };
 	}
 
-	if (isNullish(GOVERNANCE_CANISTER_ID)) {
+	if (isNullish(governanceId)) {
 		toasts.error({
 			msg: {
-				text: 'The ICP governance canister ID is not set, therefore the neuron metadata cannot be saved.'
+				text: 'The canister ID of the governance is not set, therefore the neuron metadata cannot be saved.'
 			}
 		});
 		return { result: 'error', neuron: undefined };
@@ -67,10 +69,7 @@ export const setNeuron = async ({
 
 	const updateData: Neuron = {
 		...(nonNullish(neuron) && neuron.data),
-		[GOVERNANCE_CANISTER_ID]: [
-			...(neuron?.data[GOVERNANCE_CANISTER_ID].filter((nId) => id !== nId) ?? []),
-			id
-		]
+		[governanceId]: [...(neuron?.data[governanceId]?.filter((nId) => id !== nId) ?? []), id]
 	};
 
 	try {

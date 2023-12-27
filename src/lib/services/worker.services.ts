@@ -4,10 +4,10 @@ import type {
 	PostMessageDataRequest,
 	PostMessageDataResponse
 } from '$lib/types/post-message';
-import { nonNullish } from '@dfinity/utils';
 
 export interface ProposalWorker {
-	sync: (data: PostMessageDataRequest) => void;
+	start: (data: PostMessageDataRequest) => void;
+	stop: () => void;
 }
 
 export const initWorker = async (): Promise<ProposalWorker> => {
@@ -28,14 +28,18 @@ export const initWorker = async (): Promise<ProposalWorker> => {
 	};
 
 	return {
-		sync: ({ user, ...rest }: PostMessageDataRequest) => {
+		start: ({ user, ...rest }: PostMessageDataRequest) => {
 			worker.postMessage({
-				msg: nonNullish(user) ? 'start' : 'stop',
+				msg: 'start',
 				data: {
 					user,
 					...rest
 				}
 			});
-		}
+		},
+		stop: () =>
+			worker.postMessage({
+				msg: 'stop'
+			})
 	};
 };

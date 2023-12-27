@@ -4,6 +4,7 @@ import type { Doc } from '@junobuild/core-peer';
 
 export type ProposalContent = Markdown;
 export type ProposalKey = string;
+export type ProposalDescription = GovernanceCanisterId;
 
 export interface ProposalEditableMetadata {
 	title?: string;
