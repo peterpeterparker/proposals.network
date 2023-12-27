@@ -7,7 +7,6 @@
 	import { isNullish } from '@dfinity/utils';
 	import { toasts } from '$lib/stores/toasts.store';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
-	import { page } from '$app/stores';
 
 	let worker: ProposalWorker | undefined;
 
