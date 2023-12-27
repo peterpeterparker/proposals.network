@@ -1,9 +1,14 @@
-import { getProposal as getProposalNns, makeProposal } from '$lib/api/icp-proposal.api';
-import { getProposal as getProposalSns } from '$lib/api/sns-proposal.api';
+import {
+	getProposal as getProposalNns,
+	makeProposal as makeProposalICP
+} from '$lib/api/icp-proposal.api';
+import {
+	getProposal as getProposalSns,
+	makeProposal as makeProposalSns
+} from '$lib/api/sns-proposal.api';
 import { rootCanisterIdStore, snsNsFunctionsStore } from '$lib/derived/sns.derived';
 import { toasts } from '$lib/stores/toasts.store';
-import type { GovernanceCanisterId } from '$lib/types/core';
-import type { Proposal } from '$lib/types/governance';
+import type { Governance, OptionGovernanceId, Proposal } from '$lib/types/governance';
 import { mapIcpProposal } from '$lib/utils/icp-proposals.utils';
 import { mapSnsProposal } from '$lib/utils/sns-proposals.utils';
 import type { MakeProposalRequest, Motion, ProposalId } from '@dfinity/nns';
@@ -12,16 +17,26 @@ import { get } from 'svelte/store';
 
 export type MotionProposalParams = Omit<MakeProposalRequest, 'action' | 'title'> & {
 	title: string;
+	governance: Governance | undefined;
 } & Motion;
 
-export const submitMotionProposal = async (
-	params: MotionProposalParams
-): Promise<{
+export const submitMotionProposal = async ({
+	governance,
+	...rest
+}: MotionProposalParams): Promise<{
 	result: 'ok' | 'error';
 	proposalId: bigint | undefined;
 }> => {
+	assertNonNullish(
+		governance,
+		'The governance details are not set, therefore no proposal can be submitted.'
+	);
+
 	try {
-		const proposalId = await makeProposal(params);
+		const proposalId =
+			governance.type === 'icp'
+				? await makeProposalICP({ ...rest })
+				: await makeProposalSns({ ...rest, governanceId: governance.id });
 
 		return { result: 'ok', proposalId };
 	} catch (err: unknown) {
@@ -34,21 +49,21 @@ export const submitMotionProposal = async (
 };
 
 export const getProposal = async ({
-	governanceCanisterId,
+	governanceId,
 	type,
 	proposalId
 }: {
-	governanceCanisterId: GovernanceCanisterId | undefined | null;
+	governanceId: OptionGovernanceId;
 	type: 'icp' | 'sns';
 	proposalId: ProposalId;
 }): Promise<Proposal | undefined> => {
 	assertNonNullish(
-		governanceCanisterId,
+		governanceId,
 		'The governance canister ID is not set, therefore no proposal can be loaded.'
 	);
 
 	if (type === 'sns') {
-		const proposal = await getProposalSns({ proposalId, governanceCanisterId });
+		const proposal = await getProposalSns({ proposalId, governanceCanisterId: governanceId });
 
 		const nsFunctions = get(snsNsFunctionsStore);
 		const rootCanisterId = get(rootCanisterIdStore);

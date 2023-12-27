@@ -65,7 +65,7 @@ export const getProposal = async ({
 };
 
 export const makeProposal = async (
-	params: MotionProposalParams
+	params: Omit<MotionProposalParams, 'governance'>
 ): Promise<ProposalId | undefined> => {
 	assertNonNullish(GOVERNANCE_CANISTER_ID, 'The ICP governance canister ID is not set.');
 
@@ -83,7 +83,7 @@ export const makeProposal = async (
 const makeMotionProposalRequest = ({
 	motionText,
 	...rest
-}: MotionProposalParams): MakeProposalRequest => ({
+}: Omit<MotionProposalParams, 'governance'>): MakeProposalRequest => ({
 	action: {
 		Motion: {
 			motionText
