@@ -21,7 +21,7 @@
 	import { governanceIdStore } from '$lib/derived/governance.derived';
 
 	let step: undefined | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly' = undefined;
-	let neuronId: bigint | undefined;
+	let neuronId: string | undefined;
 	let proposalId: bigint | undefined;
 
 	const init = async () => {

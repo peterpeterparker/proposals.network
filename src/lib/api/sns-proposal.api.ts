@@ -8,7 +8,7 @@ import type { ProposalId } from '@dfinity/nns';
 import { Principal } from '@dfinity/principal';
 import { SnsGovernanceCanister, type SnsManageNeuron, type SnsNeuronId } from '@dfinity/sns';
 import type { ProposalData } from '@dfinity/sns/dist/candid/sns_governance';
-import { bigIntToUint8Array, fromNullable, nonNullish } from '@dfinity/utils';
+import { fromNullable, hexStringToUint8Array, nonNullish } from '@dfinity/utils';
 import { unsafeIdentity } from '@junobuild/core-peer';
 
 export const listSnsProposals = async ({
@@ -79,7 +79,7 @@ export const makeProposal = async ({
 
 	const toMakeProposalRequest = (): SnsManageNeuron =>
 		toManageNeuronCommand({
-			neuronId: { id: bigIntToUint8Array(neuronId) },
+			neuronId: { id: hexStringToUint8Array(neuronId) },
 			command: {
 				MakeProposal: {
 					url,

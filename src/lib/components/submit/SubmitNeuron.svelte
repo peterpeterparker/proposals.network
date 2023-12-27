@@ -16,7 +16,7 @@
 	import { governanceIdStore } from '$lib/derived/governance.derived';
 	import SubmitNeuronRequirements from '$lib/components/submit/SubmitNeuronRequirements.svelte';
 
-	export let neuronId: bigint | undefined;
+	export let neuronId: string | undefined;
 
 	let step: 'hotkey' | 'neuron_id' = 'hotkey';
 

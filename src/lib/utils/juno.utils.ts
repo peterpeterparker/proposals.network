@@ -20,7 +20,7 @@ export const firstNeuronId = ({
 }: {
 	neuron: Doc<Neuron> | undefined;
 	governanceId: OptionGovernanceId;
-}): bigint | undefined => {
+}): string | undefined => {
 	if (isNullish(governanceId)) {
 		return undefined;
 	}

@@ -82,6 +82,7 @@ export const makeProposal = async (
 
 const makeMotionProposalRequest = ({
 	motionText,
+	neuronId,
 	...rest
 }: Omit<MotionProposalParams, 'governance'>): MakeProposalRequest => ({
 	action: {
@@ -89,5 +90,6 @@ const makeMotionProposalRequest = ({
 			motionText
 		}
 	},
+	neuronId: BigInt(neuronId),
 	...rest
 });

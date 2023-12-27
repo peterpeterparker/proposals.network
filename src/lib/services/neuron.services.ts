@@ -65,11 +65,12 @@ export const setNeuron = async ({
 
 	const { key } = user;
 
-	const id = BigInt(neuronId);
-
 	const updateData: Neuron = {
 		...(nonNullish(neuron) && neuron.data),
-		[governanceId]: [...(neuron?.data[governanceId]?.filter((nId) => id !== nId) ?? []), id]
+		[governanceId]: [
+			...(neuron?.data[governanceId]?.filter((nId) => neuronId !== nId) ?? []),
+			neuronId
+		]
 	};
 
 	try {

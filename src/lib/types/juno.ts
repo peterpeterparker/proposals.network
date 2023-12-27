@@ -1,5 +1,4 @@
 import type { GovernanceCanisterId, Markdown } from '$lib/types/core';
-import type { NeuronId } from '@dfinity/nns';
 import type { Doc } from '@junobuild/core-peer';
 
 export type ProposalContent = Markdown;
@@ -19,4 +18,4 @@ export type ProposalMetadata = {
 
 export type ProposalMetadataDoc = Doc<ProposalMetadata>;
 
-export type Neuron = Record<GovernanceCanisterId, NeuronId[]>;
+export type Neuron = Record<GovernanceCanisterId, string[]>;

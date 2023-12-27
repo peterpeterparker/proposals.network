@@ -15,7 +15,7 @@
 	import HtmlMarkdown from '$lib/components/ui/HtmlMarkdown.svelte';
 	import { governanceStore } from '$lib/derived/governance.derived';
 
-	export let neuronId: bigint | undefined;
+	export let neuronId: string | undefined;
 
 	let metadata: ProposalEditableMetadata | undefined;
 	let content: ProposalContent | undefined;

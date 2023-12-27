@@ -4,7 +4,7 @@
 	import Copy from '$lib/components/ui/Copy.svelte';
 	import { createEventDispatcher } from 'svelte';
 
-	export let neuronId: bigint | undefined;
+	export let neuronId: string | undefined;
 
 	const dispatch = createEventDispatcher();
 	const review = () => dispatch('pnwrkReview');
