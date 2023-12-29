@@ -97,7 +97,11 @@
 										<IconLogout />
 									</ButtonIcon>
 								{:else}
-									<ButtonIcon disabled={false} on:click={signIn} ariaLabel="Sign-in">
+									<ButtonIcon
+										disabled={false}
+										on:click={async () => await signIn()}
+										ariaLabel="Sign-in"
+									>
 										<IconLogin />
 									</ButtonIcon>
 								{/if}

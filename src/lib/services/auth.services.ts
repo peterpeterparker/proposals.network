@@ -6,9 +6,16 @@ import { toasts } from '$lib/stores/toasts.store';
 import type { ToastLevel, ToastMsg } from '$lib/types/toast';
 import { replaceHistory } from '$lib/utils/route.utils';
 import { isNullish } from '@dfinity/utils';
-import { signIn as junoSignIn, signOut as junoSignOut } from '@junobuild/core-peer';
+import {
+	InternetIdentityProvider,
+	NFIDProvider,
+	signIn as junoSignIn,
+	signOut as junoSignOut
+} from '@junobuild/core-peer';
 
-export const signIn = async (): Promise<{
+export const signIn = async (
+	provider?: 'ic0.app' | 'nfid'
+): Promise<{
 	success: 'ok' | 'cancelled' | 'error';
 	err?: unknown;
 }> => {
@@ -16,7 +23,18 @@ export const signIn = async (): Promise<{
 
 	try {
 		await junoSignIn({
-			maxTimeToLive: AUTH_MAX_TIME_TO_LIVE
+			maxTimeToLive: AUTH_MAX_TIME_TO_LIVE,
+			...(provider === 'ic0.app' && {
+				provider: new InternetIdentityProvider({
+					domain: 'ic0.app'
+				})
+			}),
+			...(provider === 'nfid' && {
+				provider: new NFIDProvider({
+					appName: 'proposals.network',
+					logoUrl: 'https://proposals.network/favicons/icon-192x192.png'
+				})
+			})
 		});
 
 		// We clean previous messages in case user was signed out automatically before sign-in again.

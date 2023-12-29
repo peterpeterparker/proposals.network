@@ -2,6 +2,8 @@
 	import { createEventDispatcher } from 'svelte';
 	import { handleKeyPress } from '$lib/utils/keyboard.utils';
 
+	export let transparent = false;
+
 	const dispatch = createEventDispatcher();
 	const close = () => dispatch('pnwrkClose');
 </script>
@@ -11,6 +13,6 @@
 	on:click|stopPropagation={close}
 	on:keypress={($event) => handleKeyPress({ $event, callback: close })}
 	on:click
-	class="fixed inset-0 bg-gray-800 opacity-80"
+	class={`fixed inset-0 ${transparent ? '' : 'bg-gray-800 opacity-80 backdrop-blur-sm'}`}
 	tabindex="-1"
 ></div>
