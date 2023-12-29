@@ -7,14 +7,12 @@
 	import { loadUserProposals } from '$lib/services/loader-stores.services';
 	import { userProposalsStore } from '$lib/stores/user-proposals.store';
 	import UserProposalRow from '$lib/components/proposals/UserProposalRow.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
-	import { signIn } from '$lib/services/auth.services';
-	import IconICMonochrome from '$lib/components/icons/IconICMonochrome.svelte';
 	import SubmitLink from '$lib/components/submit/SubmitLink.svelte';
 	import UserProposalPaginator from '$lib/components/proposals/UserProposalPaginator.svelte';
 	import { fade } from 'svelte/transition';
 	import { USER_PAGINATION } from '$lib/constants/app.constants';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
+	import SignIn from '$lib/components/core/SignIn.svelte';
 
 	const load = async () => {
 		if ($userNotInitialized) {
@@ -75,9 +73,7 @@
 	<div id="your-proposals-actions">
 		{#if $userProposalsStore === null}
 			<div in:fade class="lg:mx-4 my-4">
-				<Button on:click={signIn} color="quaternary">
-					<IconICMonochrome /> Continue with Internet Identity
-				</Button>
+				<SignIn color="quaternary" />
 			</div>
 		{:else if $userProposalsStore?.items_length === 0n}
 			<div in:fade class="lg:mx-4 my-4">

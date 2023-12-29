@@ -1,7 +1,5 @@
-<script>
-	import Button from '$lib/components/ui/Button.svelte';
-	import IconICMonochrome from '$lib/components/icons/IconICMonochrome.svelte';
-	import { signIn } from '$lib/services/auth.services';
+<script lang="ts">
+	import SignIn from '$lib/components/core/SignIn.svelte';
 </script>
 
 <h1 class="font-bold capitalize text-6xl mb-12">Getting Started</h1>
@@ -17,6 +15,4 @@
 	anyway.
 </p>
 
-<Button color="secondary" on:click={signIn}>
-	<IconICMonochrome /> Continue with Internet Identity
-</Button>
+<SignIn />
