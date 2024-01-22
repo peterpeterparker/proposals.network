@@ -16,8 +16,6 @@ export const ORBITER_ID: string | null | undefined = DEV
 	? undefined
 	: '3iier-sqaaa-aaaal-aczaa-cai';
 
-console.log(DEV, DISABLE_ANALYTICS, SATELLITE_ID, ORBITER_ID);
-
 export const GOVERNANCE_CANISTER_ID: OptionGovernanceId = import.meta.env
 	.VITE_NNS_GOVERNANCE_CANISTER_ID as OptionGovernanceId;
 

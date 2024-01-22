@@ -21,8 +21,6 @@
 	onMount(async () => {
 		const env = junoEnvironment();
 
-		console.log(env);
-
 		if (isNullish(env)) {
 			toasts.error({
 				msg: { text: 'Juno not initialized. Satellite ID is undefined or null.' }

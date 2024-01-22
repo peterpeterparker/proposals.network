@@ -107,8 +107,6 @@ export class WorkerSync {
 				...(nonNullish(container) && { container })
 			};
 
-			console.log('here', satellite);
-
 			await this.syncData({
 				satellite,
 				governanceId
