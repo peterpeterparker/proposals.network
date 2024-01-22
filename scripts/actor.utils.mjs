@@ -5,9 +5,9 @@ import { satellite } from './satellite.utils.mjs';
 const { HttpAgent, Actor } = pkgAgent;
 
 export const getActor = async () => {
-	const { identity, satelliteId } = satellite;
+	const { identity, satelliteId, container: host } = satellite;
 
-	const agent = new HttpAgent({ identity, fetch, host: 'http://127.0.0.1:8000/' });
+	const agent = new HttpAgent({ identity, fetch, host });
 	await agent.fetchRootKey();
 
 	return Actor.createActor(idlFactory, {

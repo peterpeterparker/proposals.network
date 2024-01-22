@@ -5,7 +5,7 @@ import type { Environment } from '@junobuild/core-peer';
 export type PostMessageDataRequest = {
 	user: UserOption;
 	governanceId: string;
-} & Pick<Environment, 'satelliteId' | 'localIdentityCanisterId'>;
+} & Pick<Environment, 'satelliteId' | 'container'>;
 export type PostMessageDataResponse = { workerId: keyof WizardBusyData };
 
 export type PostMessageRequest = 'start' | 'stop' | 'busy' | 'idle';

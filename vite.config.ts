@@ -1,4 +1,3 @@
-import juno from '@junobuild/vite-plugin';
 import inject from '@rollup/plugin-inject';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { readFileSync } from 'fs';
@@ -93,12 +92,7 @@ const dfxCanisterIds = ({ prefix }: { prefix?: string }): Record<string, string>
 };
 
 const config: UserConfig = {
-	plugins: [
-		sveltekit(),
-		juno({
-			junolator: true
-		})
-	],
+	plugins: [sveltekit()],
 	build: {
 		target: 'es2020',
 		rollupOptions: {
