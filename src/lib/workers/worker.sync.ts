@@ -99,13 +99,15 @@ export class WorkerSync {
 		});
 
 		try {
-			const { governanceId, localIdentityCanisterId, ...rest } = data;
+			const { governanceId, container, ...rest } = data;
 
 			const satellite = {
 				identity: await unsafeIdentity(),
 				...rest,
-				...(nonNullish(localIdentityCanisterId) && { env: 'dev' as const })
+				...(nonNullish(container) && { container })
 			};
+
+			console.log('here', satellite);
 
 			await this.syncData({
 				satellite,

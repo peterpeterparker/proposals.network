@@ -8,5 +8,5 @@ export const satellite = {
 	satelliteId: process.env.CANISTER_ID_satellite,
 	fetch,
 	identity: initIdentity(),
-	env: 'dev'
+	container: 'http://localhost:8080'
 };

@@ -7,12 +7,21 @@
 	import { junoEnvironment } from '$lib/utils/juno.utils';
 	import { toasts } from '$lib/stores/toasts.store';
 	import { initOrbiter } from '@junobuild/analytics';
-	import { DISABLE_ANALYTICS, LOCAL, ORBITER_ID, SATELLITE_ID } from '$lib/constants/app.constants';
+	import {
+		DEV,
+		DISABLE_ANALYTICS,
+		HOST,
+		LOCAL,
+		ORBITER_ID,
+		SATELLITE_ID
+	} from '$lib/constants/app.constants';
 
 	let unsubscribe: (() => void) | undefined = undefined;
 
 	onMount(async () => {
 		const env = junoEnvironment();
+
+		console.log(env);
 
 		if (isNullish(env)) {
 			toasts.error({
@@ -35,7 +44,8 @@
 				: [
 						initOrbiter({
 							satelliteId: SATELLITE_ID!,
-							orbiterId: ORBITER_ID
+							orbiterId: ORBITER_ID,
+							...(DEV && { container: HOST })
 						})
 					])
 		]);

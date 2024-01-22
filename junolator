@@ -15,14 +15,6 @@ deploy () {
   echo -e "* Satellite: ${SAT}         *"
   echo -e "* Internet identity: ${II} *"
   echo -e "**************************************************"
-  echo -e ""
-  echo -e "Your JS initialization code:"
-  echo -e ""
-  echo -e "await initJuno({"
-  echo -e "  satelliteId: \"${SAT}\","
-  echo -e "  localIdentityCanisterId: \"${II}\","
-  echo -e "});"
-  echo -e ""
 }
 
 init() {

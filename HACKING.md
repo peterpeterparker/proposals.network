@@ -23,10 +23,10 @@ cd proposals.network
 npm ci
 ```
 
-Start the emulator from the root directory:
+Start dfx v0.15.2 from the root directory:
 
 ```bash
-./junolator start
+dfx start
 ```
 
 Deploy Internet Identity and a Satellite:
@@ -35,23 +35,27 @@ Deploy Internet Identity and a Satellite:
 ./junolator deploy
 ```
 
-**Here comes trouble**: At this point, you are good to go except that you need the NNS governance canister. You can install that canister by running `dfx nns install`. Unfortunately, I build stuff using dfx on port `:8000`, however, this command requires port `:8080`. So basically, you're going to have to stop/start the server and change manually the port in the dfx config. That sucks, I know.
+Proceed with the configuration of the Satellite datastore:
 
-1. Stop the emulator.
-2. Open [dfx.json](./dfx.json).
-3. Find `8000` and replace it with `8080`.
-4. Restart the emulator.
-5. Run `dfx nns install` to install all the NNS canisters. (on `error: unrecognized subcommand 'nns'`, the command to install the extension is `dfx extension install nns`).
-6. Stop the server.
-7. Open [dfx.json](./dfx.json).
-8. Find `8080` and replace with `8000`.
-9. Restart the emulator.
+```
+./junolator config
+```
 
-Note: You will need to perform the same mumbo jumbo if you want to create a neuron locally in the NNS DApp, as you would need one in the dapp to terminate the submission workflow.
+At this point, you are good to go except that you need the NNS governance canister.
 
-Oh, and by the way, I suggest writing down the list of canisters and URLs printed out by the dfx command. There is no way to print it again later on, so if you don't, you might never figure out where the NNS DApp is deployed locally.
+Run following command to install all the NNS canisters.
 
-**Back to things that work**: Now that you've sorted that out, start the local development server of SvelteKit
+```
+dfx nns install
+```
+
+If the command throws an error `error: unrecognized subcommand 'nns'`, it means the extension is not yet installed for dfx.
+To install it run `dfx extension install nns`.
+
+I suggest writing down the list of canisters and URLs printed out by the latest dfx command.
+There is no way to print it again later on, so if you don't do so, you might never figure out where the NNS DApp is deployed locally.
+
+Now that you've sorted the installation out, start the local development server of SvelteKit
 
 ```bash
 npm run dev
