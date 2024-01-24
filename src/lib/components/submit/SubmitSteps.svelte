@@ -5,9 +5,10 @@
 	import { userStore } from '$lib/stores/user.store';
 	import Aside from '$lib/components/ui/Aside.svelte';
 
-	export let step: undefined | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly';
+	export let step: undefined | 'select' | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly';
 
 	let signInStatus: 'pending' | 'active' | 'done';
+	let selectStatus: 'pending' | 'active' | 'done';
 	let writeStatus: 'pending' | 'active' | 'done';
 	let neuronStatus: 'pending' | 'active' | 'done';
 	let reviewStatus: 'pending' | 'active' | 'done';
@@ -30,14 +31,23 @@
 	$: step,
 		$userStore,
 		(() =>
-			(writeStatus =
-				(isNullish(step) && $userSignedIn) || step === 'write'
+			(selectStatus =
+				(isNullish(step) && $userSignedIn) || step === 'select'
 					? 'active'
 					: signInStatus === 'active'
 						? 'pending'
 						: $userSignedIn
 							? 'done'
 							: 'pending'))();
+	
+	$: step,
+		(() =>
+			(writeStatus =
+				step === 'write'
+					? 'active'
+					: nonNullish(step) && ['review', 'submitted'].includes(step)
+						? 'done'
+						: 'pending'))();
 
 	$: step,
 		(() =>
@@ -66,23 +76,28 @@
 		Sign-in
 	</Step>
 
-	<Step status={writeStatus}>
+	<Step status={selectStatus}>
 		<svelte:fragment slot="step">2</svelte:fragment>
+		Select
+	</Step>
+
+	<Step status={writeStatus}>
+		<svelte:fragment slot="step">3</svelte:fragment>
 		Write
 	</Step>
 
 	<Step status={neuronStatus}>
-		<svelte:fragment slot="step">3</svelte:fragment>
+		<svelte:fragment slot="step">4</svelte:fragment>
 		Neuron
 	</Step>
 
 	<Step status={reviewStatus}>
-		<svelte:fragment slot="step">4</svelte:fragment>
+		<svelte:fragment slot="step">5</svelte:fragment>
 		Review
 	</Step>
 
 	<Step status={step === 'submitted' || step === 'readonly' ? 'active' : 'pending'}>
-		<svelte:fragment slot="step">5</svelte:fragment>
+		<svelte:fragment slot="step">6</svelte:fragment>
 		Done
 	</Step>
 </Aside>
