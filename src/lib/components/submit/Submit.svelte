@@ -21,8 +21,10 @@
 	import { firstNeuronId } from '$lib/utils/juno.utils';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
 
+
 	let step: undefined | 'select' | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly' = undefined;
 	let neuronId: string | undefined;
+	let proposalType: string | undefined;
 	let proposalId: bigint | undefined;
 
 	const init = async () => {
@@ -59,6 +61,11 @@
 		neuronId = firstNeuronId({ neuron, governanceId: $governanceIdStore });
 		step = 'review';
 	};
+
+	const typeSelected = ({ detail }: CustomEvent<string | undefined>) => {
+		proposalType = detail;
+		step = 'write';
+	}; 
 </script>
 
 <SplitPane>
@@ -70,9 +77,9 @@
 		{#if $userNotSignedIn}
 			<SubmitSignIn />
 		{:else if step === 'select'}
-			<SubmitSelect on:pnwrkNext={() => (step = 'write')} />
+			<SubmitSelect on:pnwrkNext={typeSelected} on:pnwrkSelect={() => (step = 'write')} bind:proposalType />
 		{:else if step === 'write'}
-			<SubmitWrite on:pnwrkNext={() => (step = 'neuron')} />
+			<SubmitWrite {proposalType} on:pnwrkNext={() => (step = 'neuron')} />
 		{:else if step === 'neuron'}
 			<SubmitNeuron on:pnwrkNext={review} on:pnwrkReview={() => (step = 'review')} bind:neuronId />
 		{:else if step === 'review'}

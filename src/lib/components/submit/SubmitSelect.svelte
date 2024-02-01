@@ -1,11 +1,15 @@
-<script>
+<script lang="ts">
     import ExternalLink from '$lib/components/ui/ExternalLink.svelte';
     import ProposalSelector from '$lib/components/proposals/ProposalSelector.svelte';
 	import SubmitContinue from '$lib/components/submit/SubmitContinue.svelte';
 	import { createEventDispatcher, onMount } from 'svelte';
 
+    export let proposalType: string | undefined;
+
     const dispatch = createEventDispatcher();
-	const next = () => dispatch('pnwrkNext');
+    const select = () => dispatch('pnwrkSelect', { proposalType });
+
+    $: console.log(proposalType);
 </script>
 
 <h1 class="mb-12 text-6xl font-bold capitalize">Select Proposal Type</h1>
@@ -19,12 +23,12 @@
   
 <div class="flex-container">
     <div class="mb-4">
-        <ProposalSelector />
+        <ProposalSelector bind:proposalType />
     </div>
   
     <div class="mb-4">
         <!-- <Button color="secondary" type="submit">Save and continue</Button> -->
-        <SubmitContinue on:click={next} />
+        <SubmitContinue on:click={select} />
     </div>
 </div>
   

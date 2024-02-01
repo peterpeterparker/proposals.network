@@ -1,11 +1,18 @@
 <script lang="ts">
-	import InputSelect from '$lib/components/ui/InputSelect.svelte';
+    import InputSelect from '$lib/components/ui/InputSelect.svelte';
 
-    let proposalType;
+    export let proposalType: string | undefined;
+
+    const proposalOptions = [
+        { value: 'option1', label: 'Motion proposal' },
+        { value: 'option2', label: 'Add new node provider proposal' },
+    ];
+
 </script>
 
 <InputSelect bind:value={proposalType}>
     <div slot="placeholder">Select an option...</div>
-    <option value="option1">Motion proposal</option>
-    <option value="option2">Add new node provider proposal</option>
+    {#each proposalOptions as option (option.value)}
+        <option value={option.value}>{option.label}</option>
+    {/each}
 </InputSelect>
