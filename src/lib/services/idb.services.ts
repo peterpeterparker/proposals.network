@@ -1,5 +1,6 @@
 import { browser } from '$app/environment';
 import type {
+	AddNodeProviderEditableMetadata,
 	ProposalContent,
 	ProposalEditableMetadata,
 	ProposalKey,
@@ -63,6 +64,15 @@ export const setContent = (content: ProposalContent): Promise<void> =>
 	);
 
 export const setMetadata = (metadata: ProposalEditableMetadata): Promise<void> =>
+	setMany(
+		[
+			[KEY_LAST_METADATA_CHANGE, Date.now()],
+			[KEY_PROPOSAL_METADATA, metadata]
+		],
+		proposalsStore
+	);
+
+export const setAddNodeProviderMetadata = (metadata: AddNodeProviderEditableMetadata): Promise<void> =>
 	setMany(
 		[
 			[KEY_LAST_METADATA_CHANGE, Date.now()],

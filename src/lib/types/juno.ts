@@ -16,6 +16,12 @@ export type ProposalMetadata = {
 	proposalId?: bigint;
 } & ProposalEditableMetadata;
 
+export interface AddNodeProviderEditableMetadata {
+	title?: string;
+	summary?: string;
+	nodeProviderPid?: string;
+}
+
 export type ProposalMetadataDoc = Doc<ProposalMetadata>;
 
 export type Neuron = Record<GovernanceCanisterId, (string | bigint)[]>;

@@ -2,6 +2,7 @@
     import SubmitContinue from '$lib/components/submit/SubmitContinue.svelte';
     import { createEventDispatcher} from 'svelte';
 	import SubmitMotion from '$lib/components/submit/SubmitMotion.svelte';
+	import SubmitAddNodeProvider from '$lib/components/submit/SubmitAddNodeProvider.svelte';
 
     export let proposalType: string | undefined;
 
@@ -13,9 +14,11 @@
     $: console.log(proposalType);
 </script>
 
-<h1 class="mb-12 text-4xl font-bold capitalize md:text-6xl">Craft Your Proposal</h1>
-
-<SubmitMotion />
+{#if proposalType === 'option1'}
+    <SubmitMotion />
+{:else if proposalType === 'option2'}
+    <SubmitAddNodeProvider />
+{/if}
 
 <SubmitContinue on:click={next} />
 

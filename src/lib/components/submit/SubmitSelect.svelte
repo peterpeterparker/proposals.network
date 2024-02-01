@@ -2,14 +2,12 @@
     import ExternalLink from '$lib/components/ui/ExternalLink.svelte';
     import ProposalSelector from '$lib/components/proposals/ProposalSelector.svelte';
 	import SubmitContinue from '$lib/components/submit/SubmitContinue.svelte';
-	import { createEventDispatcher, onMount } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
 
     export let proposalType: string | undefined;
 
     const dispatch = createEventDispatcher();
     const select = () => dispatch('pnwrkSelect', { proposalType });
-
-    $: console.log(proposalType);
 </script>
 
 <h1 class="mb-12 text-6xl font-bold capitalize">Select Proposal Type</h1>
@@ -27,7 +25,6 @@
     </div>
   
     <div class="mb-4">
-        <!-- <Button color="secondary" type="submit">Save and continue</Button> -->
         <SubmitContinue on:click={select} />
     </div>
 </div>

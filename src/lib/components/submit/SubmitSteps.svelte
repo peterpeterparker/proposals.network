@@ -45,9 +45,9 @@
 			(writeStatus =
 				step === 'write'
 					? 'active'
-					: nonNullish(step) && ['review', 'submitted'].includes(step)
-						? 'done'
-						: 'pending'))();
+					: nonNullish(step) && selectStatus !== 'done'
+						? 'pending'
+						: 'done'))();
 
 	$: step,
 		(() =>
