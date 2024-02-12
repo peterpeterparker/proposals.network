@@ -6,12 +6,8 @@
 
     export let proposalType: string | undefined;
 
-    console.log("Proposal Type: " + proposalType);
-
     const dispatch = createEventDispatcher();
     const next = () => dispatch('pnwrkNext');
-
-    $: console.log(proposalType);
 </script>
 
 {#if proposalType === 'Motion'}
