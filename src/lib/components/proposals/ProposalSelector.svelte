@@ -1,12 +1,15 @@
 <script lang="ts">
     import InputSelect from '$lib/components/ui/InputSelect.svelte';
 
-    export let proposalType: string | undefined;
+    // These types correspond with IC Proposal Documentation (https://wiki.internetcomputer.org/wiki/Network_Nervous_System#Proposals)
+    type ProposalType = 'Motion' | 'AddOrRemoveNodeProvider';
+
+    export let proposalType: ProposalType | undefined;
 
     const proposalOptions = [
         { value: undefined, label: 'Select an option...' }, 
-        { value: 'option1', label: 'Motion proposal' },
-        { value: 'option2', label: 'Add new node provider proposal' },
+        { value: 'Motion' as ProposalType, label: 'Motion proposal' },
+        { value: 'AddOrRemoveNodeProvider' as ProposalType, label: 'Add new node provider proposal' },
     ];
 </script>
 
@@ -15,4 +18,3 @@
         <option value={option.value}>{option.label}</option>
     {/each}
 </InputSelect>
-

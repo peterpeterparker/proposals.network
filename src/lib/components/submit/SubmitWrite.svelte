@@ -14,9 +14,9 @@
     $: console.log(proposalType);
 </script>
 
-{#if proposalType === 'option1'}
+{#if proposalType === 'Motion'}
     <SubmitMotion />
-{:else if proposalType === 'option2'}
+{:else if proposalType === 'AddOrRemoveNodeProvider'}
     <SubmitAddNodeProvider />
 {/if}
 
