@@ -20,11 +20,13 @@
 	import type { Neuron } from '$lib/types/juno';
 	import { firstNeuronId } from '$lib/utils/juno.utils';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
+    import ProposalType from '$lib/components/proposals/ProposalSelector.svelte';
+
 
 
 	let step: undefined | 'select' | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly' = undefined;
 	let neuronId: string | undefined;
-	let proposalType: string | undefined;
+	let proposalType: ProposalType | undefined;
 	let proposalId: bigint | undefined;
 
 	const init = async () => {
@@ -61,11 +63,6 @@
 		neuronId = firstNeuronId({ neuron, governanceId: $governanceIdStore });
 		step = 'review';
 	};
-
-	const typeSelected = ({ detail }: CustomEvent<string | undefined>) => {
-		proposalType = detail;
-		step = 'write';
-	}; 
 </script>
 
 <SplitPane>
@@ -77,7 +74,7 @@
 		{#if $userNotSignedIn}
 			<SubmitSignIn />
 		{:else if step === 'select'}
-			<SubmitSelect on:pnwrkNext={typeSelected} on:pnwrkSelect={() => (step = 'write')} bind:proposalType />
+			<SubmitSelect bind:proposalType on:pnwrkNext={() => (step = 'write')} />
 		{:else if step === 'write'}
 			<SubmitWrite {proposalType} on:pnwrkNext={() => (step = 'neuron')} />
 		{:else if step === 'neuron'}
