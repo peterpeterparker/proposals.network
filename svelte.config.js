@@ -18,12 +18,6 @@ const config = {
 		})
 	},
 
-	vitePlugin: {
-		inspector: {
-		  inspector: true,
-		},
-	},
-
 	serviceWorker: {
 		register: false
 	},
