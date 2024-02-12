@@ -47,7 +47,9 @@
 					? 'active'
 					: nonNullish(step) && selectStatus !== 'done'
 						? 'pending'
-						: 'done'))();
+						: signInStatus === 'done' && $userSignedIn
+							? 'done'
+							: 'pending'))();
 
 	$: step,
 		(() =>
