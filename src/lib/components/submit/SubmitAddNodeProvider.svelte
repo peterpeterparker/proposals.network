@@ -1,51 +1,9 @@
 <script lang="ts">
 	import Input from '$lib/components/ui/Input.svelte';
-	import { setAddNodeProviderMetadata } from '$lib/services/idb.services';
-	import { debounce } from '@dfinity/utils';
-	import type { AddNodeProviderEditableMetadata } from '$lib/types/juno';
-
-	export let metadata: AddNodeProviderEditableMetadata | undefined;
 
 	let title = '';
 	let summary = '';
 	let nodeProviderPid = '';
-
-	const init = () => {
-		title = metadata?.title ?? '';
-		summary = metadata?.summary ?? '';
-		nodeProviderPid = metadata?.nodeProviderPid ?? '';
-	};
-
-	$: metadata, init();
-
-	const save = async () => {
-		if (nodeProviderPid === '' && title === '' && summary === '') {
-			return;
-		}
-
-		if (nodeProviderPid === metadata?.nodeProviderPid && title === metadata?.title && summary === metadata?.summary) {
-			return;
-		}
-
-		await setAddNodeProviderMetadata({
-			...(title !== '' && { title }),
-			...(summary !== '' && { summary: summary }),
-			...(nodeProviderPid !== '' && { nodeProviderPid: nodeProviderPid })
-		});
-	};
-
-	const debounceSave = debounce(save);
-
-	$: nodeProviderPid,
-		title,
-		summary,
-		(() => {
-			if (nodeProviderPid === '' && title === '' && summary === '') {
-				return;
-			}
-
-			debounceSave();
-		})();
 </script>
 
 <h1 class="mb-12 text-4xl font-bold capitalize md:text-6xl">Register Your Node Provider Principal</h1>
