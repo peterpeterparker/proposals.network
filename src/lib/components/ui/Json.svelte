@@ -40,7 +40,7 @@
 	};
 
 	let valueType: ValueType;
-	let value: unknown;
+	let value: string;
 	let keyLabel: string;
 	let children: [string, unknown][];
 	let hasChildren: boolean;
@@ -53,7 +53,7 @@
 	$: {
 		valueType = getValueType(json);
 		isExpandable = valueType === 'object';
-		value = isExpandable ? json : stringifyJson(json);
+		value = (isExpandable ? json : stringifyJson(json)) as string;
 		keyLabel = `${_key}${_key.length > 0 ? ': ' : ''}`;
 		children = isExpandable ? Object.entries(json as object) : [];
 		hasChildren = children.length > 0;
