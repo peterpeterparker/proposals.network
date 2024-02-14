@@ -11,7 +11,7 @@
     const next = () => dispatch('pnwrkNext');
 </script>
 
-<h1 class="mb-12 text-4xl font-bold capitalize md:text-6xl">Select Proposal Type</h1>
+<h1 class="mb-12 text-4xl font-bold capitalize md:text-6xl">Select Proposal Action</h1>
 
 <style>
     .flex-container {
