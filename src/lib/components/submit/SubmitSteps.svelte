@@ -39,7 +39,7 @@
 						: $userSignedIn
 							? 'done'
 							: 'pending'))();
-	
+
 	$: step,
 		(() =>
 			(writeStatus =

@@ -20,11 +20,10 @@
 	import type { Neuron } from '$lib/types/juno';
 	import { firstNeuronId } from '$lib/utils/juno.utils';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
-    import type { ProposalAction } from '$lib/types/governance';
+	import type { ProposalAction } from '$lib/types/governance';
 
-
-
-	let step: undefined | 'select' | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly' = undefined;
+	let step: undefined | 'select' | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly' =
+		undefined;
 	let neuronId: string | undefined;
 	let proposalAction: ProposalAction | undefined;
 	let proposalId: bigint | undefined;
