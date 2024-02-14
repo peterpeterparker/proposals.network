@@ -47,6 +47,7 @@
 			return;
 		}
 
+		// TODO: select step should only appear if governance canister is NNS.
 		step = 'select';
 	};
 
