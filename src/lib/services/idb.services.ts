@@ -1,5 +1,6 @@
 import { browser } from '$app/environment';
 import type {
+	AddNodeProviderEditableMetadata,
 	ProposalContent,
 	ProposalEditableMetadata,
 	ProposalKey,

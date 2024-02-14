@@ -12,7 +12,7 @@ import type { Governance, OptionGovernanceId, Proposal } from '$lib/types/govern
 import { mapIcpProposal } from '$lib/utils/icp-proposals.utils';
 import { mapSnsProposal } from '$lib/utils/sns-proposals.utils';
 import type { MakeProposalRequest, Motion, ProposalId } from '@dfinity/nns';
-import { assertNonNullish, nonNullish } from '@dfinity/utils';
+import { assertNonNullish, nonNullish, isNullish } from '@dfinity/utils';
 import { get } from 'svelte/store';
 
 export type MotionProposalParams = Omit<MakeProposalRequest, 'action' | 'title' | 'neuronId'> & {
@@ -77,3 +77,4 @@ export const getProposal = async ({
 	const proposal = await getProposalNns({ proposalId });
 	return nonNullish(proposal) ? mapIcpProposal(proposal) : undefined;
 };
+

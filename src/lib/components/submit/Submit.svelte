@@ -4,6 +4,7 @@
 	import { userNotSignedIn } from '$lib/derived/user.derived';
 	import SubmitSignIn from '$lib/components/submit/SubmitSignIn.svelte';
 	import SubmitWrite from '$lib/components/submit/SubmitWrite.svelte';
+	import SubmitSelect from '$lib/components/submit/SubmitSelect.svelte';
 	import { routeKey } from '$lib/derived/nav.derived';
 	import { userStore } from '$lib/stores/user.store';
 	import { initUserProposal } from '$lib/services/submit.services';
@@ -19,9 +20,13 @@
 	import type { Neuron } from '$lib/types/juno';
 	import { firstNeuronId } from '$lib/utils/juno.utils';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
+    import type { ProposalAction } from '$lib/types/governance';
 
-	let step: undefined | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly' = undefined;
+
+
+	let step: undefined | 'select' | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly' = undefined;
 	let neuronId: string | undefined;
+	let proposalAction: ProposalAction | undefined;
 	let proposalId: bigint | undefined;
 
 	const init = async () => {
@@ -42,7 +47,8 @@
 			return;
 		}
 
-		step = 'write';
+		// TODO: select step should only appear if governance canister is NNS.
+		step = 'select';
 	};
 
 	$: $userStore, $routeKey, (async () => await init())();
@@ -68,8 +74,10 @@
 	<UserInitializedGuard>
 		{#if $userNotSignedIn}
 			<SubmitSignIn />
+		{:else if step === 'select'}
+			<SubmitSelect bind:proposalAction on:pnwrkNext={() => (step = 'write')} />
 		{:else if step === 'write'}
-			<SubmitWrite on:pnwrkNext={() => (step = 'neuron')} />
+			<SubmitWrite {proposalAction} on:pnwrkNext={() => (step = 'neuron')} />
 		{:else if step === 'neuron'}
 			<SubmitNeuron on:pnwrkNext={review} on:pnwrkReview={() => (step = 'review')} bind:neuronId />
 		{:else if step === 'review'}
