@@ -1,19 +1,17 @@
 <script lang="ts">
     import InputSelect from '$lib/components/ui/InputSelect.svelte';
+    import type { ProposalAction } from '$lib/types/governance';
 
-    // These types correspond with IC Proposal Documentation (https://wiki.internetcomputer.org/wiki/Network_Nervous_System#Proposals)
-    export type ProposalType = 'Motion' | 'AddOrRemoveNodeProvider';
-
-    export let proposalType: ProposalType | undefined;
+    export let proposalAction: ProposalAction | undefined;
 
     const proposalOptions = [
         { value: undefined, label: 'Select an option...' }, 
-        { value: 'Motion' as ProposalType, label: 'Motion proposal' },
-        { value: 'AddOrRemoveNodeProvider' as ProposalType, label: 'Add new node provider proposal' },
+        { value: 'Motion' as ProposalAction, label: 'Motion proposal' },
+        { value: 'AddOrRemoveNodeProvider' as ProposalAction, label: 'Add new node provider proposal' },
     ];
 </script>
 
-<InputSelect bind:value={proposalType}>
+<InputSelect bind:value={proposalAction}>
     {#each proposalOptions as option (option.value)}
         <option value={option.value}>{option.label}</option>
     {/each}

@@ -4,15 +4,15 @@
 	import SubmitMotion from '$lib/components/submit/SubmitMotion.svelte';
 	import SubmitAddNodeProvider from '$lib/components/submit/SubmitAddNodeProvider.svelte';
 
-    export let proposalType: string | undefined;
+    export let proposalAction: string | undefined;
 
     const dispatch = createEventDispatcher();
     const next = () => dispatch('pnwrkNext');
 </script>
 
-{#if proposalType === 'Motion'}
+{#if proposalAction === 'Motion'}
     <SubmitMotion />
-{:else if proposalType === 'AddOrRemoveNodeProvider'}
+{:else if proposalAction === 'AddOrRemoveNodeProvider'}
     <SubmitAddNodeProvider />
 {/if}
 

@@ -20,13 +20,13 @@
 	import type { Neuron } from '$lib/types/juno';
 	import { firstNeuronId } from '$lib/utils/juno.utils';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
-    import ProposalType from '$lib/components/proposals/ProposalSelector.svelte';
+    import type { ProposalAction } from '$lib/types/governance';
 
 
 
 	let step: undefined | 'select' | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly' = undefined;
 	let neuronId: string | undefined;
-	let proposalType: ProposalType | undefined;
+	let proposalAction: ProposalAction | undefined;
 	let proposalId: bigint | undefined;
 
 	const init = async () => {
@@ -74,9 +74,9 @@
 		{#if $userNotSignedIn}
 			<SubmitSignIn />
 		{:else if step === 'select'}
-			<SubmitSelect bind:proposalType on:pnwrkNext={() => (step = 'write')} />
+			<SubmitSelect bind:proposalAction on:pnwrkNext={() => (step = 'write')} />
 		{:else if step === 'write'}
-			<SubmitWrite {proposalType} on:pnwrkNext={() => (step = 'neuron')} />
+			<SubmitWrite {proposalAction} on:pnwrkNext={() => (step = 'neuron')} />
 		{:else if step === 'neuron'}
 			<SubmitNeuron on:pnwrkNext={review} on:pnwrkReview={() => (step = 'review')} bind:neuronId />
 		{:else if step === 'review'}

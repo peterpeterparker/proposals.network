@@ -1,11 +1,11 @@
 <script lang="ts">
     import ExternalLink from '$lib/components/ui/ExternalLink.svelte';
-    import ProposalType from '$lib/components/proposals/ProposalSelector.svelte';
     import ProposalSelector from '$lib/components/proposals/ProposalSelector.svelte';
 	import SubmitContinue from '$lib/components/submit/SubmitContinue.svelte';
     import { createEventDispatcher} from 'svelte';
+    import type { ProposalAction } from '$lib/types/governance';
 
-    export let proposalType: ProposalType | undefined;
+    export let proposalAction: ProposalAction | undefined;
     
     const dispatch = createEventDispatcher();
     const next = () => dispatch('pnwrkNext');
@@ -21,7 +21,7 @@
 </style>
 
 <div class="mb-4 flex-container">
-    <ProposalSelector bind:proposalType />
+    <ProposalSelector bind:proposalAction={proposalAction} />
     <SubmitContinue on:click={next} />
 </div>
   
