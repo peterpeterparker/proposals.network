@@ -9,17 +9,17 @@
 
 	const dispatch = createEventDispatcher();
 	const next = () => {
-        if (proposalAction !== undefined) {
-            dispatch('pnwrkNext');
-        }
-    };
+		if (proposalAction !== undefined) {
+			dispatch('pnwrkNext');
+		}
+	};
 </script>
 
 <h1 class="mb-12 text-4xl font-bold capitalize md:text-6xl">Select Proposal Action</h1>
 
 <div class="flex flex-row mb-4 gap-x-4">
 	<ProposalSelector bind:proposalAction />
-    <SubmitContinue on:click={next} />
+	<SubmitContinue on:click={next} />
 </div>
 
 <p class="mb-4 leading-relaxed">
