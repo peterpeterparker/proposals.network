@@ -1,11 +1,17 @@
 <script lang="ts">
 	import Step from '$lib/components/ui/Step.svelte';
+	import { derived } from 'svelte/store';
 	import { userInitialized, userNotSignedIn, userSignedIn } from '$lib/derived/user.derived';
 	import { isNullish, nonNullish } from '@dfinity/utils';
 	import { userStore } from '$lib/stores/user.store';
 	import Aside from '$lib/components/ui/Aside.svelte';
+	import { governanceIdStore } from '$lib/derived/governance.derived';
+	import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
 
 	export let step: undefined | 'select' | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly';
+
+	const showSelect = derived(governanceIdStore, ($governanceIdStore) => $governanceIdStore === GOVERNANCE_CANISTER_ID);
+
 
 	let signInStatus: 'pending' | 'active' | 'done';
 	let selectStatus: 'pending' | 'active' | 'done';
@@ -78,28 +84,50 @@
 		Sign-in
 	</Step>
 
-	<Step status={selectStatus}>
-		<svelte:fragment slot="step">2</svelte:fragment>
-		Select
-	</Step>
+	{#if $showSelect}
+		<Step status={selectStatus}>
+			<svelte:fragment slot="step">2</svelte:fragment>
+			Select
+		</Step>
 
-	<Step status={writeStatus}>
-		<svelte:fragment slot="step">3</svelte:fragment>
-		Write
-	</Step>
+		<Step status={writeStatus}>
+			<svelte:fragment slot="step">3</svelte:fragment>
+			Write
+		</Step>
+	
+		<Step status={neuronStatus}>
+			<svelte:fragment slot="step">4</svelte:fragment>
+			Neuron
+		</Step>
+	
+		<Step status={reviewStatus}>
+			<svelte:fragment slot="step">5</svelte:fragment>
+			Review
+		</Step>
+	
+		<Step status={step === 'submitted' || step === 'readonly' ? 'active' : 'pending'}>
+			<svelte:fragment slot="step">6</svelte:fragment>
+			Done
+		</Step>
+	{:else}
+		<Step status={writeStatus}>
+			<svelte:fragment slot="step">2</svelte:fragment>
+			Write
+		</Step>
 
-	<Step status={neuronStatus}>
-		<svelte:fragment slot="step">4</svelte:fragment>
-		Neuron
-	</Step>
+		<Step status={neuronStatus}>
+			<svelte:fragment slot="step">3</svelte:fragment>
+			Neuron
+		</Step>
 
-	<Step status={reviewStatus}>
-		<svelte:fragment slot="step">5</svelte:fragment>
-		Review
-	</Step>
+		<Step status={reviewStatus}>
+			<svelte:fragment slot="step">4</svelte:fragment>
+			Review
+		</Step>
 
-	<Step status={step === 'submitted' || step === 'readonly' ? 'active' : 'pending'}>
-		<svelte:fragment slot="step">6</svelte:fragment>
-		Done
-	</Step>
+		<Step status={step === 'submitted' || step === 'readonly' ? 'active' : 'pending'}>
+			<svelte:fragment slot="step">5</svelte:fragment>
+			Done
+		</Step>
+	{/if}
 </Aside>
