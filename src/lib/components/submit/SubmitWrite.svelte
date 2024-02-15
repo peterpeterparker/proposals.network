@@ -21,6 +21,8 @@
 	<SubmitMotion {metadata} {content} />
 {:else if proposalAction === 'AddOrRemoveNodeProvider'}
 	<SubmitAddNodeProvider />
+{:else}
+	<SubmitMotion {metadata} {content} />
 {/if}
 
 <SubmitContinue on:click={next} />
