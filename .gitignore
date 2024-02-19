@@ -24,8 +24,4 @@ package/
 
 static/workers
 
-# snses
-src/lib/data/**/*
-static/logo/snses/**/*
-
 nns_canisters_ids.md
