@@ -21,7 +21,6 @@
 	import { firstNeuronId } from '$lib/utils/juno.utils';
 	import { governanceIdStore, governanceTypeStore } from '$lib/derived/governance.derived';
 	import type { ProposalAction } from '$lib/types/governance';
-	import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
 
 	let step: undefined | 'select' | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly' =
 		undefined;
