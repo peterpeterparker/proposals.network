@@ -19,7 +19,7 @@
 	import type { Doc } from '@junobuild/core-peer';
 	import type { Neuron } from '$lib/types/juno';
 	import { firstNeuronId } from '$lib/utils/juno.utils';
-	import { governanceIdStore } from '$lib/derived/governance.derived';
+	import { governanceIdStore, governanceTypeStore } from '$lib/derived/governance.derived';
 	import type { ProposalAction } from '$lib/types/governance';
 	import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
 
@@ -28,7 +28,6 @@
 	let neuronId: string | undefined;
 	let proposalAction: ProposalAction | undefined;
 	let proposalId: bigint | undefined;
-	let governanceId = $governanceIdStore;
 
 	const init = async () => {
 		const { result } = await initUserProposal({ user: $userStore, routeKey: $routeKey });
@@ -48,11 +47,7 @@
 			return;
 		}
 
-		if (governanceId === GOVERNANCE_CANISTER_ID) {
-			step = 'select';
-		} else {
-			step = 'write';
-		}
+		step = $governanceTypeStore === 'icp' ? 'select' : 'write';
 	};
 
 	$: $userStore, $routeKey, (async () => await init())();

@@ -5,15 +5,12 @@
 	import { isNullish, nonNullish } from '@dfinity/utils';
 	import { userStore } from '$lib/stores/user.store';
 	import Aside from '$lib/components/ui/Aside.svelte';
-	import { governanceIdStore } from '$lib/derived/governance.derived';
-	import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
+	import { governanceTypeStore } from '$lib/derived/governance.derived';
 
 	export let step: undefined | 'select' | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly';
 
-	const showSelect = derived(
-		governanceIdStore,
-		($governanceIdStore) => $governanceIdStore === GOVERNANCE_CANISTER_ID
-	);
+	let showSelect: boolean;
+	$: showSelect = $governanceTypeStore === 'icp';
 
 	let signInStatus: 'pending' | 'active' | 'done';
 	let selectStatus: 'pending' | 'active' | 'done';
@@ -86,7 +83,7 @@
 		Sign-in
 	</Step>
 
-	{#if $showSelect}
+	{#if showSelect}
 		<Step status={selectStatus}>
 			<svelte:fragment slot="step">2</svelte:fragment>
 			Select
