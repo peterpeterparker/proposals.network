@@ -17,9 +17,7 @@
 	const next = () => dispatch('pnwrkNext');
 </script>
 
-{#if proposalAction === 'Motion'}
-	<SubmitMotion {metadata} {content} />
-{:else if proposalAction === 'AddOrRemoveNodeProvider'}
+{#if proposalAction === 'AddOrRemoveNodeProvider'}
 	<SubmitAddNodeProvider />
 {:else}
 	<SubmitMotion {metadata} {content} />
