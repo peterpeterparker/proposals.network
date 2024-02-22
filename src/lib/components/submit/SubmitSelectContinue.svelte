@@ -3,7 +3,6 @@
 	import type { ProposalAction } from '$lib/types/governance';
 	import { isNullish } from '@dfinity/utils';
 
-
 	export let proposalAction: ProposalAction | undefined;
 </script>
 
