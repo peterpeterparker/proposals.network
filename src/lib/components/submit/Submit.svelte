@@ -19,7 +19,7 @@
 	import type { Doc } from '@junobuild/core-peer';
 	import type { Neuron } from '$lib/types/juno';
 	import { firstNeuronId } from '$lib/utils/juno.utils';
-	import { governanceIdStore } from '$lib/derived/governance.derived';
+	import { governanceIdStore, governanceTypeStore } from '$lib/derived/governance.derived';
 	import type { ProposalAction } from '$lib/types/governance';
 
 	let step: undefined | 'select' | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly' =
@@ -46,8 +46,8 @@
 			return;
 		}
 
-		// TODO: select step should only appear if governance canister is NNS.
-		step = 'select';
+		// TODO: asign this outside of init function as governanceTypeStore is not always derived yet
+		step = $governanceTypeStore === 'icp' ? 'select' : 'write';
 	};
 
 	$: $userStore, $routeKey, (async () => await init())();

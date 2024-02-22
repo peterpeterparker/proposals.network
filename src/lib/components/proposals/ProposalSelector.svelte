@@ -4,7 +4,6 @@
 
 	export let proposalAction: ProposalAction | undefined;
 
-	// TODO: User should not be able to select the undefined value, but should be visible if no value selected.
 	const proposalOptions = [
 		{ value: undefined, label: 'Select an option...' },
 		{ value: 'Motion' as ProposalAction, label: 'Motion proposal' },
@@ -14,6 +13,6 @@
 
 <InputSelect bind:value={proposalAction}>
 	{#each proposalOptions as option (option.value)}
-		<option value={option.value}>{option.label}</option>
+		<option disabled={option.value === undefined} value={option.value}>{option.label}</option>
 	{/each}
 </InputSelect>
