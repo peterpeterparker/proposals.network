@@ -46,6 +46,7 @@
 			return;
 		}
 
+		// TODO: asign this outside of init function as governanceTypeStore is not always derived yet
 		step = $governanceTypeStore === 'icp' ? 'select' : 'write';
 	};
 
