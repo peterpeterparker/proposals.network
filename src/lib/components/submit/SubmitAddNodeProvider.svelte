@@ -1,9 +1,52 @@
 <script lang="ts">
 	import Input from '$lib/components/ui/Input.svelte';
+	import { setMetadata } from '$lib/services/idb.services';
+	import { debounce } from '@dfinity/utils';
+	import type { ProposalEditableMetadata } from '$lib/types/juno';
+
+	export let metadata: ProposalEditableMetadata | undefined;
 
 	let title = '';
 	let summary = '';
-	let nodeProviderPid = '';
+	let nodeProviderId = '';
+
+	const init = () => {
+		title = metadata?.title ?? '';
+		summary = metadata?.summary ?? '';
+		nodeProviderId = metadata?.nodeProviderId ?? '';
+	};
+
+	$: metadata, init();
+
+	const save = async () => {
+		if (nodeProviderId === '' && title === '' && summary === '') {
+			return;
+		}
+
+		if (nodeProviderId === metadata?.nodeProviderId && title === metadata?.title && summary === metadata?.summary) {
+			return;
+		}
+
+		await setMetadata({
+			...(title !== '' && { title }),
+			...(summary !== '' && { summary }),
+			...(nodeProviderId !== '' && { nodeProviderId })
+		});
+	};
+
+	const debounceSave = debounce(save);
+
+	$: nodeProviderId,
+		title,
+		summary,
+		(() => {
+			if (nodeProviderId === '' && title === '' && summary === '') {
+				return;
+			}
+
+			debounceSave();
+		})();
+
 </script>
 
 <h1 class="mb-12 text-4xl font-bold capitalize md:text-6xl">
@@ -24,6 +67,6 @@
 
 <Input
 	placeholder="Node Provider Principal ID"
-	bind:value={nodeProviderPid}
-	pinPlaceholder={nodeProviderPid !== ''}
+	bind:value={nodeProviderId}
+	pinPlaceholder={nodeProviderId !== ''}
 />

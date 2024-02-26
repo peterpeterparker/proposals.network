@@ -88,8 +88,8 @@ export const initUserProposal = async ({
 		}
 
 		const { data, ...metadata } = docMetadata;
-		const { title, url, motionText } = data;
-		const editableMetadata = { title, url, motionText };
+		const { title, url, motionText, summary, nodeProviderId } = data;
+		const editableMetadata = { title, url, motionText, summary, nodeProviderId };
 
 		const { data: jsonContent, ...content } = docContent;
 
