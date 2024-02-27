@@ -18,7 +18,7 @@
 </script>
 
 {#if proposalAction === 'AddOrRemoveNodeProvider'}
-	<SubmitAddNodeProvider {metadata}/>
+	<SubmitAddNodeProvider {metadata} />
 {:else}
 	<SubmitMotion {metadata} {content} />
 {/if}
