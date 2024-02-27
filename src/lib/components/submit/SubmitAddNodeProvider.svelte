@@ -6,6 +6,8 @@
 
 	export let metadata: ProposalEditableMetadata | undefined;
 
+	// TODO: make the fields more fine grained and then construct the proposal according to a template behind the scenes
+
 	let title = '';
 	let summary = '';
 	let nodeProviderId = '';
