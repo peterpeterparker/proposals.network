@@ -9,6 +9,8 @@ export interface ProposalEditableMetadata {
 	title?: string;
 	url?: string;
 	motionText?: string;
+	summary?: string;
+	nodeProviderId?: string;
 }
 
 export type ProposalMetadata = {
