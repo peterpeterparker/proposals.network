@@ -8,6 +8,8 @@
 
 	// TODO: make the fields more fine grained and then construct the proposal according to a template behind the scenes
 
+	// TODO: refactor the code below to make data saving more generic
+
 	let title = '';
 	let summary = '';
 	let nodeProviderId = '';
