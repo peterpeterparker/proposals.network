@@ -80,8 +80,4 @@
 
 		background: transparent;
 	}
-
-	.close {
-		align-self: flex-end;
-	}
 </style>
