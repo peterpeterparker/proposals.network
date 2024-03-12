@@ -9,7 +9,7 @@
 
 	let metadata: ProposalEditableMetadata | undefined;
 	export let proposalAction: ProposalAction | undefined;
-	
+
 	const dispatch = createEventDispatcher();
 	const next = () => dispatch('pnwrkNext');
 

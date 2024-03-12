@@ -1,13 +1,13 @@
 <script lang="ts">
 	import InputSelect from '$lib/components/ui/InputSelect.svelte';
 	import type { ProposalAction } from '$lib/types/governance';
-  import { setMetadata } from '$lib/services/idb.services';
+	import { setMetadata } from '$lib/services/idb.services';
 	import { debounce } from '@dfinity/utils';
 	import type { ProposalEditableMetadata } from '$lib/types/juno';
 
 	export let metadata: ProposalEditableMetadata | undefined;
 	export let proposalAction: ProposalAction | undefined;
-  let isProposalActionSet = false;
+	let isProposalActionSet = false;
 
 	const init = () => {
 		proposalAction = metadata?.proposalAction ?? undefined;
@@ -25,18 +25,18 @@
 		}
 
 		await setMetadata({
-			...(proposalAction !== undefined && { proposalAction }),
+			...(proposalAction !== undefined && { proposalAction })
 		});
 	};
 
 	const debounceSave = debounce(save);
 
-	$:	proposalAction,
+	$: proposalAction,
 		(() => {
 			if (proposalAction === undefined) {
 				return;
 			}
-      isProposalActionSet = true;
+			isProposalActionSet = true;
 			debounceSave();
 		})();
 
