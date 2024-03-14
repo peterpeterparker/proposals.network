@@ -20,12 +20,21 @@
 	import type { Neuron } from '$lib/types/juno';
 	import { firstNeuronId } from '$lib/utils/juno.utils';
 	import { governanceIdStore, governanceTypeStore } from '$lib/derived/governance.derived';
-	import type { ProposalAction } from '$lib/types/governance';
+	import { writable } from 'svelte/store';
+	import {
+		SUBMIT_CONTEXT_KEY,
+		type SubmitContext,
+		type SubmitStoreData
+	} from '$lib/types/submit.context';
+	import { setContext } from 'svelte';
+	import { getEditable } from '$lib/services/idb.services';
+	import { isNullish } from '@dfinity/utils';
 
 	let step: undefined | 'select' | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly' =
 		undefined;
+
+	// TODO: move neuronId and proposalId to context
 	let neuronId: string | undefined;
-	let proposalAction: ProposalAction | undefined;
 	let proposalId: bigint | undefined;
 
 	const init = async () => {
@@ -63,6 +72,32 @@
 		neuronId = firstNeuronId({ neuron, governanceId: $governanceIdStore });
 		step = 'review';
 	};
+
+	/**
+	 * Metadata context
+	 */
+
+	const metadataStore = writable<SubmitStoreData>(undefined);
+
+	const loadMetadata = async () => {
+		if (isNullish(step) || !['select', 'write', 'readonly'].includes(step)) {
+			return;
+		}
+
+		const [metadata, _] = await getEditable();
+		metadataStore.set({
+			metadata
+		});
+	};
+
+	const reload = async () => await loadMetadata();
+
+	$: step, (async () => await loadMetadata())();
+
+	setContext<SubmitContext>(SUBMIT_CONTEXT_KEY, {
+		store: metadataStore,
+		reload
+	});
 </script>
 
 <SplitPane>
@@ -74,9 +109,9 @@
 		{#if $userNotSignedIn}
 			<SubmitSignIn />
 		{:else if step === 'select'}
-			<SubmitSelect bind:proposalAction on:pnwrkNext={() => (step = 'write')} />
+			<SubmitSelect on:pnwrkNext={() => (step = 'write')} />
 		{:else if step === 'write'}
-			<SubmitWrite {proposalAction} on:pnwrkNext={() => (step = 'neuron')} />
+			<SubmitWrite on:pnwrkNext={() => (step = 'neuron')} />
 		{:else if step === 'neuron'}
 			<SubmitNeuron on:pnwrkNext={review} on:pnwrkReview={() => (step = 'review')} bind:neuronId />
 		{:else if step === 'review'}

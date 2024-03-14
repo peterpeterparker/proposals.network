@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { isNullish, nonNullish } from '@dfinity/utils';
+	import { isNullish } from '@dfinity/utils';
 	import IconChevronDown from '$lib/components/icons/IconChevronDown.svelte';
 
 	export let value: string | null | undefined = undefined;
