@@ -1,4 +1,5 @@
 import type { GovernanceCanisterId, Markdown } from '$lib/types/core';
+import type { ProposalAction } from '$lib/types/governance';
 import type { Doc } from '@junobuild/core-peer';
 
 export type ProposalContent = Markdown;
@@ -11,6 +12,7 @@ export interface ProposalEditableMetadata {
 	motionText?: string;
 	summary?: string;
 	nodeProviderId?: string;
+	proposalAction?: ProposalAction;
 }
 
 export type ProposalMetadata = {
