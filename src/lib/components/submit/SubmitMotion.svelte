@@ -1,10 +1,5 @@
 <script lang="ts">
-	import type { ProposalContent } from '$lib/types/juno';
-	import type { ProposalEditableMetadata } from '$lib/types/juno';
 	import SubmitWriteEdit from '$lib/components/submit/SubmitWriteEdit.svelte';
-
-	export let metadata: ProposalEditableMetadata | undefined;
-	export let content: ProposalContent | undefined;
 </script>
 
 <h1 class="mb-12 text-4xl font-bold capitalize md:text-6xl">Craft Your Proposal</h1>
@@ -15,4 +10,4 @@
 	discussion.
 </h2>
 
-<SubmitWriteEdit {metadata} {content} />
+<SubmitWriteEdit />

@@ -2,25 +2,26 @@
 	import Input from '$lib/components/ui/Input.svelte';
 	import { setMetadata } from '$lib/services/idb.services';
 	import { debounce } from '@dfinity/utils';
-	import type { ProposalEditableMetadata } from '$lib/types/juno';
-
-	export let metadata: ProposalEditableMetadata | undefined;
+	import { METADATA_CONTEXT_KEY, type MetadataContext } from '$lib/types/metadata.context';
+	import { getContext } from 'svelte';
 
 	// TODO: make the fields more fine grained and then construct the proposal according to a template behind the scenes
 
 	// TODO: refactor the code below to make data saving more generic
+
+	const { store, reload }: MetadataContext = getContext<MetadataContext>(METADATA_CONTEXT_KEY);
 
 	let title = '';
 	let summary = '';
 	let nodeProviderId = '';
 
 	const init = () => {
-		title = metadata?.title ?? '';
-		summary = metadata?.summary ?? '';
-		nodeProviderId = metadata?.nodeProviderId ?? '';
+		title = $store?.metadata?.title ?? '';
+		summary = $store?.metadata?.summary ?? '';
+		nodeProviderId = $store?.metadata?.nodeProviderId ?? '';
 	};
 
-	$: metadata, init();
+	$: $store, init();
 
 	const save = async () => {
 		if (nodeProviderId === '' && title === '' && summary === '') {
@@ -28,18 +29,21 @@
 		}
 
 		if (
-			nodeProviderId === metadata?.nodeProviderId &&
-			title === metadata?.title &&
-			summary === metadata?.summary
+			nodeProviderId === $store?.metadata?.nodeProviderId &&
+			title === $store?.metadata?.title &&
+			summary === $store?.metadata?.summary
 		) {
 			return;
 		}
 
 		await setMetadata({
+			...($store?.metadata ?? {}),
 			...(title !== '' && { title }),
 			...(summary !== '' && { summary }),
 			...(nodeProviderId !== '' && { nodeProviderId })
 		});
+
+		await reload();
 	};
 
 	const debounceSave = debounce(save);

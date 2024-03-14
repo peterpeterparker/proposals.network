@@ -1,9 +1,12 @@
 <script lang="ts">
 	import Button from '$lib/components/ui/Button.svelte';
-	import type { ProposalAction } from '$lib/types/governance';
 	import { isNullish } from '@dfinity/utils';
+	import { METADATA_CONTEXT_KEY, type MetadataContext } from '$lib/types/metadata.context';
+	import { getContext } from 'svelte';
 
-	export let proposalAction: ProposalAction | undefined;
+	const { store }: MetadataContext = getContext<MetadataContext>(METADATA_CONTEXT_KEY);
 </script>
 
-<Button color="tertiary" disabled={isNullish(proposalAction)} on:click>Continue</Button>
+<Button color="tertiary" disabled={isNullish($store?.metadata?.proposalAction)} on:click
+	>Continue</Button
+>

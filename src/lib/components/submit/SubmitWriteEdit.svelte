@@ -1,40 +1,52 @@
 <script lang="ts">
 	import Input from '$lib/components/ui/Input.svelte';
-	import { setContent, setMetadata } from '$lib/services/idb.services';
+	import { getEditable, setContent, setMetadata } from '$lib/services/idb.services';
 	import { debounce, nonNullish } from '@dfinity/utils';
-	import type { ProposalEditableMetadata } from '$lib/types/juno';
 	import type { ProposalContent } from '$lib/types/juno';
 	import Editor from '$lib/components/ui/Editor.svelte';
+	import { METADATA_CONTEXT_KEY, type MetadataContext } from '$lib/types/metadata.context';
+	import { getContext } from 'svelte';
 
-	export let metadata: ProposalEditableMetadata | undefined;
-	export let content: ProposalContent | undefined;
+	const { store, reload }: MetadataContext = getContext<MetadataContext>(METADATA_CONTEXT_KEY);
+
+	let content: ProposalContent | undefined;
 
 	let title = '';
 	let url = '';
 	let motionText = '';
 
-	const init = () => {
-		title = metadata?.title ?? '';
-		url = metadata?.url ?? '';
-		motionText = metadata?.motionText ?? '';
+	const init = async () => {
+		title = $store?.metadata?.title ?? '';
+		url = $store?.metadata?.url ?? '';
+		motionText = $store?.metadata?.motionText ?? '';
+
+		const [_, existingContent] = await getEditable();
+		content = existingContent;
 	};
 
-	$: metadata, init();
+	$: $store, (async () => await init())();
 
 	const save = async () => {
 		if (motionText === '' && title === '' && url === '') {
 			return;
 		}
 
-		if (motionText === metadata?.motionText && title === metadata?.title && url === metadata?.url) {
+		if (
+			motionText === $store?.metadata?.motionText &&
+			title === $store?.metadata?.title &&
+			url === $store?.metadata?.url
+		) {
 			return;
 		}
 
 		await setMetadata({
+			...($store?.metadata ?? {}),
 			...(title !== '' && { title }),
 			...(url !== '' && { url }),
 			...(motionText !== '' && { motionText })
 		});
+
+		await reload();
 	};
 
 	const debounceSave = debounce(save);
