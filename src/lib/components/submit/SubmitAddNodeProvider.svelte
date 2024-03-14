@@ -58,17 +58,20 @@
 
 			debounceSave();
 		})();
+
+	// TODO: summary should probably be a textarea and review placeholder
 </script>
 
 <h1 class="mb-12 text-4xl font-bold capitalize md:text-6xl">
 	Register Your Node Provider Principal
 </h1>
 
-<Input
-	placeholder="Register a node provider 'NODE_PROVIDER_NAME'"
-	bind:value={title}
-	pinPlaceholder={title !== ''}
-/>
+<h2 class="mb-6 text-2xl">
+	To submit a proposal for adding a new node provider, you need to provide a name, an announcement,
+	and a principal ID.
+</h2>
+
+<Input placeholder="Provider's name" bind:value={title} pinPlaceholder={title !== ''} />
 
 <Input
 	placeholder="Register a node provider 'NODE_PROVIDER_NAME', in line with the announcement and discussion at <https://forum.dfinity.org/t/...>. The self-declaration documentation is available at <https://wiki.internetcomputer.org/wiki/...> with SHA256 hash <SHA256>."
@@ -77,7 +80,7 @@
 />
 
 <Input
-	placeholder="Node Provider Principal ID"
+	placeholder="The Principal ID of the Provider"
 	bind:value={nodeProviderId}
 	pinPlaceholder={nodeProviderId !== ''}
 />
