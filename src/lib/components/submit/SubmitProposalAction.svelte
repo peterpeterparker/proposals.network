@@ -32,14 +32,14 @@
 	};
 
 	const proposalOptions = [
-		{ value: 'Motion' as ProposalAction, label: 'Motion proposal' },
-		{ value: 'AddOrRemoveNodeProvider' as ProposalAction, label: 'Add new node provider proposal' }
+		{ value: 'Motion' as ProposalAction, label: 'Motion' },
+		{ value: 'AddOrRemoveNodeProvider' as ProposalAction, label: 'Add a new node provider' }
 	];
 </script>
 
 <InputSelect bind:value={proposalAction} on:change={save}>
 	{#if isNullish(proposalAction)}
-		<option value={undefined}>Select an option...</option>
+		<option value={undefined}>Select a type...</option>
 	{/if}
 
 	{#each proposalOptions as option (option.value)}
