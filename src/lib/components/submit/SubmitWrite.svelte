@@ -3,9 +3,9 @@
 	import { createEventDispatcher, getContext } from 'svelte';
 	import SubmitMotion from '$lib/components/submit/SubmitMotion.svelte';
 	import SubmitAddNodeProvider from '$lib/components/submit/SubmitAddNodeProvider.svelte';
-	import { METADATA_CONTEXT_KEY, type MetadataContext } from '$lib/types/metadata.context';
+	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 
-	const { store }: MetadataContext = getContext<MetadataContext>(METADATA_CONTEXT_KEY);
+	const { store }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
 	const dispatch = createEventDispatcher();
 	const next = () => dispatch('pnwrkNext');

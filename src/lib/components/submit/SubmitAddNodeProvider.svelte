@@ -2,14 +2,14 @@
 	import Input from '$lib/components/ui/Input.svelte';
 	import { setMetadata } from '$lib/services/idb.services';
 	import { debounce } from '@dfinity/utils';
-	import { METADATA_CONTEXT_KEY, type MetadataContext } from '$lib/types/metadata.context';
+	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import { getContext } from 'svelte';
 
 	// TODO: make the fields more fine grained and then construct the proposal according to a template behind the scenes
 
 	// TODO: refactor the code below to make data saving more generic
 
-	const { store, reload }: MetadataContext = getContext<MetadataContext>(METADATA_CONTEXT_KEY);
+	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
 	let title = '';
 	let summary = '';

@@ -22,10 +22,10 @@
 	import { governanceIdStore, governanceTypeStore } from '$lib/derived/governance.derived';
 	import { writable } from 'svelte/store';
 	import {
-		METADATA_CONTEXT_KEY,
-		type MetadataContext,
-		type MetadataStoreData
-	} from '$lib/types/metadata.context';
+		SUBMIT_CONTEXT_KEY,
+		type SubmitContext,
+		type SubmitStoreData
+	} from '$lib/types/submit.context';
 	import { setContext } from 'svelte';
 	import { getEditable } from '$lib/services/idb.services';
 	import { isNullish } from '@dfinity/utils';
@@ -77,7 +77,7 @@
 	 * Metadata context
 	 */
 
-	const metadataStore = writable<MetadataStoreData>(undefined);
+	const metadataStore = writable<SubmitStoreData>(undefined);
 
 	const loadMetadata = async () => {
 		if (isNullish(step) || !['select', 'write', 'readonly'].includes(step)) {
@@ -94,7 +94,7 @@
 
 	$: step, (async () => await loadMetadata())();
 
-	setContext<MetadataContext>(METADATA_CONTEXT_KEY, {
+	setContext<SubmitContext>(SUBMIT_CONTEXT_KEY, {
 		store: metadataStore,
 		reload
 	});

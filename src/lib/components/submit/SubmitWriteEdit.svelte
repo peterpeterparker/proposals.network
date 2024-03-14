@@ -4,10 +4,10 @@
 	import { debounce, nonNullish } from '@dfinity/utils';
 	import type { ProposalContent } from '$lib/types/juno';
 	import Editor from '$lib/components/ui/Editor.svelte';
-	import { METADATA_CONTEXT_KEY, type MetadataContext } from '$lib/types/metadata.context';
+	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import { getContext } from 'svelte';
 
-	const { store, reload }: MetadataContext = getContext<MetadataContext>(METADATA_CONTEXT_KEY);
+	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
 	let content: ProposalContent | undefined;
 

@@ -4,11 +4,11 @@
 	import { setMetadata } from '$lib/services/idb.services';
 	import { isNullish, nonNullish } from '@dfinity/utils';
 	import { getContext } from 'svelte';
-	import { METADATA_CONTEXT_KEY, type MetadataContext } from '$lib/types/metadata.context';
+	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 
 	let proposalAction: ProposalAction | undefined;
 
-	const { store, reload }: MetadataContext = getContext<MetadataContext>(METADATA_CONTEXT_KEY);
+	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
 	const init = () => (proposalAction = $store?.metadata?.proposalAction);
 
