@@ -2,20 +2,19 @@
 	import type { ProposalContent } from '$lib/types/juno';
 	import { createEventDispatcher, onMount } from 'svelte';
 	import { nonNullish } from '@dfinity/utils';
-	import { fade } from 'svelte/transition';
 	import SubmitError from '$lib/components/submit/SubmitError.svelte';
 	import Copy from '$lib/components/ui/Copy.svelte';
 	import { isBusy } from '$lib/derived/busy.derived';
 	import Button from '$lib/components/ui/Button.svelte';
 	import type { ProposalEditableMetadata } from '$lib/types/juno';
 	import { getEditable } from '$lib/services/idb.services';
-	import Container from '$lib/components/ui/Container.svelte';
 	import { submitProposal } from '$lib/services/submit.services';
 	import { userStore } from '$lib/stores/user.store';
-	import HtmlMarkdown from '$lib/components/ui/HtmlMarkdown.svelte';
 	import { governanceStore } from '$lib/derived/governance.derived';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import { getContext } from 'svelte';
+	import SubmitReviewAddNodeProvider from '$lib/components/submit/SubmitReviewAddNodeProvider.svelte';
+	import SubmitReviewMotion from '$lib/components/submit/SubmitReviewMotion.svelte';
 
 	export let neuronId: string | undefined;
 
@@ -48,64 +47,26 @@
 </script>
 
 {#if nonNullish(neuronId) && nonNullish(content)}
+	<h1 class="mb-12 text-4xl font-bold capitalize md:text-6xl">
+		Make sure everything looks good before submitting!
+	</h1>
+
+	<p class="mb-8 leading-relaxed">
+		Review your proposal for Neuron ID: <Copy value={`${neuronId}`} text="Neuron ID copied." />.
+	</p>
+
 	{#if $store?.metadata?.proposalAction === 'AddOrRemoveNodeProvider'}
-		<div in:fade>
-			<Container>
-				<aside slot="title">Provider's Name</aside>
-				<article class="p-2.5">{$store?.metadata?.title ?? ''}</article>
-			</Container>
-
-			<Container>
-				<aside slot="title">Summary</aside>
-				<article class="p-2.5">{$store?.metadata?.summary ?? ''}</article>
-			</Container>
-
-			<Container>
-				<aside slot="title">The principal ID of the provider</aside>
-				<article class="p-2.5">{$store?.metadata?.nodeProviderId ?? ''}</article>
-			</Container>
-		</div>
-
-		<div class="flex gap-2">
-				<Button color="quaternary" type="button" disabled={$isBusy} on:click={edit}>Edit</Button>
-				<Button color="tertiary" type="submit" disabled={$isBusy}>Submit</Button>
-		</div>
+		<SubmitReviewAddNodeProvider metadata={$store?.metadata} />
 	{:else}
 		<form on:submit|preventDefault={onSubmit}>
-			<h1 class="mb-12 text-4xl font-bold capitalize md:text-6xl">
-				Make sure everything looks good before submitting!
-			</h1>
-
-			<p class="mb-8 leading-relaxed">
-				Review your proposal for Neuron ID: <Copy value={`${neuronId}`} text="Neuron ID copied." />.
-			</p>
-
-			<div in:fade>
-				<Container>
-					<aside slot="title">The proposal title</aside>
-					<article class="p-2.5">{$store?.metadata?.title ?? ''}</article>
-				</Container>
-
-				<HtmlMarkdown {content} />
-
-				<Container>
-					<aside slot="title">An URL pointing to the forum</aside>
-					<article class="p-2.5">{$store?.metadata?.url ?? ''}</article>
-				</Container>
-
-				<Container>
-					<aside slot="title">Your motion text</aside>
-					<article class="p-2.5">{$store?.metadata?.motionText ?? ''}</article>
-				</Container>
-			</div>
-
-			<div class="flex gap-2">
-				<Button color="quaternary" type="button" disabled={$isBusy} on:click={edit}>Edit</Button>
-				<Button color="tertiary" type="submit" disabled={$isBusy}>Submit</Button>
-			</div>
+			<SubmitReviewMotion metadata={$store?.metadata} {content} />
 		</form>
 	{/if}
 
+	<div class="flex gap-2">
+		<Button color="quaternary" type="button" disabled={$isBusy} on:click={edit}>Edit</Button>
+		<Button color="tertiary" type="submit" disabled={$isBusy}>Submit</Button>
+	</div>
 {:else}
 	<SubmitError />
 {/if}
