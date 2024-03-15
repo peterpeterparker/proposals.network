@@ -59,7 +59,7 @@
 		<SubmitReviewAddNodeProvider metadata={$store?.metadata} />
 	{:else}
 		<form on:submit|preventDefault={onSubmit}>
-			<SubmitReviewMotion metadata={$store?.metadata} {content} />
+			<SubmitReviewMotion {metadata} {content} />
 		</form>
 	{/if}
 
