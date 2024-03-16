@@ -48,32 +48,30 @@
 </script>
 
 {#if nonNullish(neuronId) && nonNullish(content)}
-	<h1 class="mb-12 text-4xl font-bold capitalize md:text-6xl">
-		Make sure everything looks good before submitting!
-	</h1>
+	<form on:submit|preventDefault={onSubmit}>
+		<h1 class="font-bold capitalize text-4xl md:text-6xl mb-12">
+			Make sure everything looks good before submitting!
+		</h1>
 
-	<p class="mb-8 leading-relaxed">
-		Review your proposal for Neuron ID: <Copy value={`${neuronId}`} text="Neuron ID copied." />.
-	</p>
+		<p class="leading-relaxed mb-8">
+			Review your proposal for Neuron ID: <Copy value={`${neuronId}`} text="Neuron ID copied." />.
+		</p>
 
-	<!-- TODO: Use the context directly within the component instead of passing the metadata -->
+		<!-- TODO: Use the context directly within the component instead of passing the metadata -->
 
-	{#if $store?.metadata?.proposalAction === 'AddOrRemoveNodeProvider'}
-		<div transition:fade>
-			<SubmitReviewAddNodeProvider metadata={$store?.metadata} />
-		</div>
-	{:else}
-		<div transition:fade>
-			<form on:submit|preventDefault={onSubmit}>
+		<div in:fade>
+			{#if $store?.metadata?.proposalAction === 'AddOrRemoveNodeProvider'}
+				<SubmitReviewAddNodeProvider metadata={$store?.metadata} />
+			{:else}
 				<SubmitReviewMotion {metadata} {content} />
-			</form>
+			{/if}
 		</div>
-	{/if}
 
-	<div class="flex gap-2">
-		<Button color="quaternary" type="button" disabled={$isBusy} on:click={edit}>Edit</Button>
-		<Button color="tertiary" type="submit" disabled={$isBusy}>Submit</Button>
-	</div>
+		<div class="flex gap-2">
+			<Button color="quaternary" type="button" disabled={$isBusy} on:click={edit}>Edit</Button>
+			<Button color="tertiary" type="submit" disabled={$isBusy}>Submit</Button>
+		</div>
+	</form>
 {:else}
 	<SubmitError />
 {/if}
