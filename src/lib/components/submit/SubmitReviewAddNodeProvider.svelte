@@ -1,4 +1,3 @@
-<!-- ProviderDetails.svelte -->
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import Container from '$lib/components/ui/Container.svelte';

@@ -1,4 +1,3 @@
-<!-- ProposalDetails.svelte -->
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import Container from '$lib/components/ui/Container.svelte';
@@ -8,8 +7,6 @@
 
 	export let metadata: ProposalEditableMetadata | undefined;
 	export let content: ProposalContent | undefined;
-
-	// You can add any additional logic needed here
 </script>
 
 <div in:fade>

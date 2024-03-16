@@ -55,6 +55,7 @@
 		Review your proposal for Neuron ID: <Copy value={`${neuronId}`} text="Neuron ID copied." />.
 	</p>
 
+	<!-- TODO: Use the context directly within the component instead of passing the metadata -->
 	{#if $store?.metadata?.proposalAction === 'AddOrRemoveNodeProvider'}
 		<SubmitReviewAddNodeProvider metadata={$store?.metadata} />
 	{:else}
