@@ -1,21 +1,22 @@
 <script lang="ts">
 	import Container from '$lib/components/ui/Container.svelte';
-	import type { ProposalEditableMetadata } from '$lib/types/juno';
+	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
+	import { getContext } from 'svelte';
 
-	export let metadata: ProposalEditableMetadata | undefined;
+	const { store }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 </script>
 
 <Container>
 	<aside slot="title">Provider's Name</aside>
-	<article class="p-2.5">{metadata?.title ?? ''}</article>
+	<article class="p-2.5">{$store?.metadata?.title ?? ''}</article>
 </Container>
 
 <Container>
 	<aside slot="title">Summary</aside>
-	<article class="p-2.5">{metadata?.summary ?? ''}</article>
+	<article class="p-2.5">{$store?.metadata?.summary ?? ''}</article>
 </Container>
 
 <Container>
 	<aside slot="title">The principal ID of the provider</aside>
-	<article class="p-2.5">{metadata?.nodeProviderId ?? ''}</article>
+	<article class="p-2.5">{$store?.metadata?.nodeProviderId ?? ''}</article>
 </Container>

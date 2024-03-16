@@ -6,7 +6,6 @@
 	import Copy from '$lib/components/ui/Copy.svelte';
 	import { isBusy } from '$lib/derived/busy.derived';
 	import Button from '$lib/components/ui/Button.svelte';
-	import type { ProposalEditableMetadata } from '$lib/types/juno';
 	import { getEditable } from '$lib/services/idb.services';
 	import { submitProposal } from '$lib/services/submit.services';
 	import { userStore } from '$lib/stores/user.store';
@@ -21,11 +20,11 @@
 
 	const { store }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
-	let metadata: ProposalEditableMetadata | undefined;
 	let content: ProposalContent | undefined;
 
 	onMount(async () => {
-		[metadata, content] = await getEditable();
+		const [_, c] = await getEditable();
+		content = c;
 	});
 
 	const dispatch = createEventDispatcher();
@@ -57,13 +56,11 @@
 			Review your proposal for Neuron ID: <Copy value={`${neuronId}`} text="Neuron ID copied." />.
 		</p>
 
-		<!-- TODO: Use the context directly within the component instead of passing the metadata -->
-
 		<div in:fade>
 			{#if $store?.metadata?.proposalAction === 'AddOrRemoveNodeProvider'}
-				<SubmitReviewAddNodeProvider metadata={$store?.metadata} />
+				<SubmitReviewAddNodeProvider />
 			{:else}
-				<SubmitReviewMotion {metadata} {content} />
+				<SubmitReviewMotion {content} />
 			{/if}
 		</div>
 
