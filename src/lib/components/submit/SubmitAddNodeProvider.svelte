@@ -17,7 +17,7 @@
 
 	const init = () => {
 		nodeProviderName = $store?.metadata?.nodeProviderName ?? '';
-		url === $store?.metadata?.url
+		url = $store?.metadata?.url ?? '';
 		urlSelfDeclaration = $store?.metadata?.urlSelfDeclaration ?? '';
 		urlIdentityProof = $store?.metadata?.urlIdentityProof ?? '';
 		hashSelfDeclaration = $store?.metadata?.hashSelfDeclaration ?? '';
@@ -28,13 +28,15 @@
 	$: $store, init();
 
 	const save = async () => {
-		if (nodeProviderId === '' && 
-			nodeProviderName === '' && 
-			url === '' && 
-			urlSelfDeclaration === '' && 
+		if (
+			nodeProviderId === '' &&
+			nodeProviderName === '' &&
+			url === '' &&
+			urlSelfDeclaration === '' &&
 			urlIdentityProof === '' &&
 			hashSelfDeclaration === '' &&
-			hashIdentityProof === '') {
+			hashIdentityProof === ''
+		) {
 			return;
 		}
 
@@ -74,13 +76,15 @@
 		hashSelfDeclaration,
 		hashIdentityProof,
 		(() => {
-			if (nodeProviderId === '' && 
-				nodeProviderName === '' && 
+			if (
+				nodeProviderId === '' &&
+				nodeProviderName === '' &&
 				url === '' &&
-				urlSelfDeclaration === '' && 
+				urlSelfDeclaration === '' &&
 				urlIdentityProof === '' &&
 				hashSelfDeclaration === '' &&
-				hashIdentityProof === '') {
+				hashIdentityProof === ''
+			) {
 				return;
 			}
 
@@ -93,13 +97,15 @@
 </h1>
 
 <h2 class="mb-6 text-2xl">
-	To submit a proposal for adding a new node provider, you need to provide a name, a principal ID, an announcement, a URL and SHA256 hash of your self-declaration and proof of identity documents respectively.
+	To submit a proposal for adding a new node provider, you need to provide a name, a principal ID,
+	an announcement, a URL and SHA256 hash of your self-declaration and proof of identity documents
+	respectively.
 </h2>
 
-<Input 
-	placeholder="Node Provider name" 
-	bind:value={nodeProviderName} 
-	pinPlaceholder={nodeProviderName !== ''} 
+<Input
+	placeholder="Node Provider name"
+	bind:value={nodeProviderName}
+	pinPlaceholder={nodeProviderName !== ''}
 />
 
 <Input
