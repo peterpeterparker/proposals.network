@@ -11,6 +11,11 @@ export interface ProposalEditableMetadata {
 	url?: string;
 	motionText?: string;
 	summary?: string;
+	nodeProviderName: string;
+	urlSelfDeclaration: string;
+	urlIdentityProof: string;
+	hashSelfDeclaration: string;
+	hashIdentityProof: string;
 	nodeProviderId?: string;
 	proposalAction?: ProposalAction;
 }

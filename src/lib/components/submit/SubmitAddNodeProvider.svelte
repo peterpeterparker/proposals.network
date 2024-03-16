@@ -5,41 +5,59 @@
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import { getContext } from 'svelte';
 
-	// TODO: make the fields more fine grained and then construct the proposal according to a template behind the scenes
-
-	// TODO: refactor the code below to make data saving more generic
-
 	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
-	let title = '';
-	let summary = '';
+	let nodeProviderName = '';
+	let url = '';
+	let urlSelfDeclaration = '';
+	let urlIdentityProof = '';
+	let hashSelfDeclaration = '';
+	let hashIdentityProof = '';
 	let nodeProviderId = '';
 
 	const init = () => {
-		title = $store?.metadata?.title ?? '';
-		summary = $store?.metadata?.summary ?? '';
+		nodeProviderName = $store?.metadata?.nodeProviderName ?? '';
+		url === $store?.metadata?.url
+		urlSelfDeclaration = $store?.metadata?.urlSelfDeclaration ?? '';
+		urlIdentityProof = $store?.metadata?.urlIdentityProof ?? '';
+		hashSelfDeclaration = $store?.metadata?.hashSelfDeclaration ?? '';
+		hashIdentityProof = $store?.metadata?.hashIdentityProof ?? '';
 		nodeProviderId = $store?.metadata?.nodeProviderId ?? '';
 	};
 
 	$: $store, init();
 
 	const save = async () => {
-		if (nodeProviderId === '' && title === '' && summary === '') {
+		if (nodeProviderId === '' && 
+			nodeProviderName === '' && 
+			url === '' && 
+			urlSelfDeclaration === '' && 
+			urlIdentityProof === '' &&
+			hashSelfDeclaration === '' &&
+			hashIdentityProof === '') {
 			return;
 		}
 
 		if (
 			nodeProviderId === $store?.metadata?.nodeProviderId &&
-			title === $store?.metadata?.title &&
-			summary === $store?.metadata?.summary
+			nodeProviderName === $store?.metadata?.nodeProviderName &&
+			url === $store?.metadata?.url &&
+			urlSelfDeclaration === $store?.metadata?.urlSelfDeclaration &&
+			urlIdentityProof === $store?.metadata?.urlIdentityProof &&
+			hashSelfDeclaration === $store?.metadata?.hashSelfDeclaration &&
+			hashIdentityProof === $store?.metadata?.hashIdentityProof
 		) {
 			return;
 		}
 
 		await setMetadata({
 			...($store?.metadata ?? {}),
-			...(title !== '' && { title }),
-			...(summary !== '' && { summary }),
+			...(nodeProviderName !== '' && { nodeProviderName }),
+			...(url !== '' && { url }),
+			...(urlSelfDeclaration !== '' && { urlSelfDeclaration }),
+			...(urlIdentityProof !== '' && { urlIdentityProof }),
+			...(hashSelfDeclaration !== '' && { hashSelfDeclaration }),
+			...(hashIdentityProof !== '' && { hashIdentityProof }),
 			...(nodeProviderId !== '' && { nodeProviderId })
 		});
 
@@ -49,17 +67,25 @@
 	const debounceSave = debounce(save);
 
 	$: nodeProviderId,
-		title,
-		summary,
+		nodeProviderName,
+		url,
+		urlSelfDeclaration,
+		urlIdentityProof,
+		hashSelfDeclaration,
+		hashIdentityProof,
 		(() => {
-			if (nodeProviderId === '' && title === '' && summary === '') {
+			if (nodeProviderId === '' && 
+				nodeProviderName === '' && 
+				url === '' &&
+				urlSelfDeclaration === '' && 
+				urlIdentityProof === '' &&
+				hashSelfDeclaration === '' &&
+				hashIdentityProof === '') {
 				return;
 			}
 
 			debounceSave();
 		})();
-
-	// TODO: summary should probably be a textarea and review placeholder
 </script>
 
 <h1 class="mb-12 text-4xl font-bold capitalize md:text-6xl">
@@ -67,20 +93,47 @@
 </h1>
 
 <h2 class="mb-6 text-2xl">
-	To submit a proposal for adding a new node provider, you need to provide a name, an announcement,
-	and a principal ID.
+	To submit a proposal for adding a new node provider, you need to provide a name, a principal ID, an announcement, a URL and SHA256 hash of your self-declaration and proof of identity documents respectively.
 </h2>
 
-<Input placeholder="Provider's name" bind:value={title} pinPlaceholder={title !== ''} />
-
-<Input
-	placeholder="Register a node provider 'NODE_PROVIDER_NAME', in line with the announcement and discussion at <https://forum.dfinity.org/t/...>. The self-declaration documentation is available at <https://wiki.internetcomputer.org/wiki/...> with SHA256 hash <SHA256>."
-	bind:value={summary}
-	pinPlaceholder={summary !== ''}
+<Input 
+	placeholder="Node Provider name" 
+	bind:value={nodeProviderName} 
+	pinPlaceholder={nodeProviderName !== ''} 
 />
 
 <Input
-	placeholder="The Principal ID of the Provider"
+	placeholder="A URL to your forum announcement and discussion (https://forum.dfinity.org...)"
+	bind:value={url}
+	pinPlaceholder={url !== ''}
+/>
+
+<Input
+	placeholder="A URL to your self-declaration document (https://wiki.internetcomputer.org/wiki/...)"
+	bind:value={urlSelfDeclaration}
+	pinPlaceholder={urlSelfDeclaration !== ''}
+/>
+
+<Input
+	placeholder="SHA256 hash of your self-declaration document"
+	bind:value={hashSelfDeclaration}
+	pinPlaceholder={hashSelfDeclaration !== ''}
+/>
+
+<Input
+	placeholder="A URL to your proof of identity document (https://wiki.internetcomputer.org/wiki/...)"
+	bind:value={urlIdentityProof}
+	pinPlaceholder={urlIdentityProof !== ''}
+/>
+
+<Input
+	placeholder="SHA256 hash of your proof of identity document"
+	bind:value={hashIdentityProof}
+	pinPlaceholder={hashIdentityProof !== ''}
+/>
+
+<Input
+	placeholder="Node Provider Principal ID"
 	bind:value={nodeProviderId}
 	pinPlaceholder={nodeProviderId !== ''}
 />
