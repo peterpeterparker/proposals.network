@@ -97,9 +97,8 @@
 </h1>
 
 <h2 class="mb-6 text-2xl">
-	To submit a proposal for adding a new node provider, you need to provide a name, a principal ID,
-	an announcement, a URL and SHA256 hash of your self-declaration and proof of identity documents
-	respectively.
+	To add a new node provider, provide the name, principal ID, announcement, URL, and SHA256
+	hash of your self-declaration and proof of identity documents.
 </h2>
 
 <Input
