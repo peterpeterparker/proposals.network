@@ -57,15 +57,18 @@
 	</p>
 
 	<!-- TODO: Use the context directly within the component instead of passing the metadata -->
-	<div transition:fade>
-		{#if $store?.metadata?.proposalAction === 'AddOrRemoveNodeProvider'}
+
+	{#if $store?.metadata?.proposalAction === 'AddOrRemoveNodeProvider'}
+		<div transition:fade>
 			<SubmitReviewAddNodeProvider metadata={$store?.metadata} />
-		{:else}
+		</div>
+	{:else}
+		<div transition:fade>
 			<form on:submit|preventDefault={onSubmit}>
 				<SubmitReviewMotion {metadata} {content} />
 			</form>
-		{/if}
-	</div>
+		</div>
+	{/if}
 
 	<div class="flex gap-2">
 		<Button color="quaternary" type="button" disabled={$isBusy} on:click={edit}>Edit</Button>
