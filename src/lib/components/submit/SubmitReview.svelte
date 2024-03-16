@@ -15,6 +15,7 @@
 	import { getContext } from 'svelte';
 	import SubmitReviewAddNodeProvider from '$lib/components/submit/SubmitReviewAddNodeProvider.svelte';
 	import SubmitReviewMotion from '$lib/components/submit/SubmitReviewMotion.svelte';
+	import { fade } from 'svelte/transition';
 
 	export let neuronId: string | undefined;
 
@@ -56,6 +57,7 @@
 	</p>
 
 	<!-- TODO: Use the context directly within the component instead of passing the metadata -->
+	<div transition:fade>
 	{#if $store?.metadata?.proposalAction === 'AddOrRemoveNodeProvider'}
 		<SubmitReviewAddNodeProvider metadata={$store?.metadata} />
 	{:else}
@@ -63,7 +65,8 @@
 			<SubmitReviewMotion {metadata} {content} />
 		</form>
 	{/if}
-
+	</div>
+	
 	<div class="flex gap-2">
 		<Button color="quaternary" type="button" disabled={$isBusy} on:click={edit}>Edit</Button>
 		<Button color="tertiary" type="submit" disabled={$isBusy}>Submit</Button>
