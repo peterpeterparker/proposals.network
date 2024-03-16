@@ -8,12 +8,32 @@
 
 <Container>
 	<aside slot="title">Provider's Name</aside>
-	<article class="p-2.5">{$store?.metadata?.title ?? ''}</article>
+	<article class="p-2.5">{$store?.metadata?.nodeProviderName ?? ''}</article>
 </Container>
 
 <Container>
-	<aside slot="title">Summary</aside>
-	<article class="p-2.5">{$store?.metadata?.summary ?? ''}</article>
+	<aside slot="title">URL to your forum announcement and discussion</aside>
+	<article class="p-2.5">{$store?.metadata?.url ?? ''}</article>
+</Container>
+
+<Container>
+	<aside slot="title">URL to your self-declaration document</aside>
+	<article class="p-2.5">{$store?.metadata?.urlSelfDeclaration ?? ''}</article>
+</Container>
+
+<Container>
+	<aside slot="title">SHA256 hash of your self-declaration document</aside>
+	<article class="p-2.5">{$store?.metadata?.hashSelfDeclaration ?? ''}</article>
+</Container>
+
+<Container>
+	<aside slot="title">URL to your proof of identiy document</aside>
+	<article class="p-2.5">{$store?.metadata?.urlIdentityProof ?? ''}</article>
+</Container>
+
+<Container>
+	<aside slot="title">SHA256 hash of your proof of identity document</aside>
+	<article class="p-2.5">{$store?.metadata?.hashIdentityProof ?? ''}</article>
 </Container>
 
 <Container>
