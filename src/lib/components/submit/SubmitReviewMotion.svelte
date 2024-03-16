@@ -24,4 +24,3 @@
 	<aside slot="title">Your motion text</aside>
 	<article class="p-2.5">{metadata?.motionText ?? ''}</article>
 </Container>
-

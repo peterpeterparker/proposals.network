@@ -19,4 +19,3 @@
 	<aside slot="title">The principal ID of the provider</aside>
 	<article class="p-2.5">{metadata?.nodeProviderId ?? ''}</article>
 </Container>
-
