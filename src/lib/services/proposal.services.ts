@@ -1,10 +1,10 @@
 import {
 	getProposal as getProposalNns,
-	makeProposal as makeProposalICP
+	makeMotionProposal as makeMotionProposalICP
 } from '$lib/api/icp-proposal.api';
 import {
 	getProposal as getProposalSns,
-	makeProposal as makeProposalSns
+	makeProposal as makeMotionProposalSns
 } from '$lib/api/sns-proposal.api';
 import { rootCanisterIdStore, snsNsFunctionsStore } from '$lib/derived/sns.derived';
 import { toasts } from '$lib/stores/toasts.store';
@@ -38,8 +38,8 @@ export const submitMotionProposal = async ({
 	try {
 		const proposalId =
 			governance.type === 'icp'
-				? await makeProposalICP({ ...rest })
-				: await makeProposalSns({ ...rest, governanceId: governance.id });
+				? await makeMotionProposalICP({ ...rest })
+				: await makeMotionProposalSns({ ...rest, governanceId: governance.id });
 
 		return { result: 'ok', proposalId };
 	} catch (err: unknown) {
