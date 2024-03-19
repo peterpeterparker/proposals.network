@@ -64,9 +64,14 @@ export const getProposal = async ({
 	return getProposal({ proposalId, certified: false });
 };
 
-export const makeProposal = async (
+export const makeMotionProposal = async (
 	params: Omit<MotionProposalParams, 'governance'>
 ): Promise<ProposalId | undefined> => {
+	const request = makeMotionProposalRequest(params);
+	return makeProposal(request);
+};
+
+const makeProposal = async (request: MakeProposalRequest): Promise<ProposalId | undefined> => {
 	assertNonNullish(GOVERNANCE_CANISTER_ID, 'The ICP governance canister ID is not set.');
 
 	const agent = await getAgent({ identity: await unsafeIdentity() });
@@ -76,7 +81,6 @@ export const makeProposal = async (
 		canisterId: Principal.fromText(GOVERNANCE_CANISTER_ID)
 	});
 
-	const request = makeMotionProposalRequest(params);
 	return makeProposal(request);
 };
 
