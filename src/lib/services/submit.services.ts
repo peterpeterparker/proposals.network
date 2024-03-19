@@ -156,23 +156,25 @@ const updateUrl = async (proposalKey: string) => {
 	replaceHistory(url);
 };
 
+export interface SubmitProposalResult {
+	result: 'ok' | 'error';
+	proposalId?: bigint | undefined;
+}
+
 export const submitMotionProposal = async ({
 	neuronId,
 	governance,
 	...rest
 }: {
 	user: UserOption;
-} & Partial<Pick<ProposalParams, 'neuronId' | 'governance'>>): Promise<{
-	result: 'ok' | 'error';
-	proposalId?: bigint | undefined;
-}> => {
+} & Partial<Pick<ProposalParams, 'neuronId' | 'governance'>>): Promise<SubmitProposalResult> => {
 	const submit = async ({
 		metadata,
 		neuronId
-	}: { metadata: ProposalEditableMetadata } & Pick<ProposalParams, 'neuronId'>): Promise<{
-		result: 'ok' | 'error';
-		proposalId?: bigint | undefined;
-	}> => {
+	}: { metadata: ProposalEditableMetadata } & Pick<
+		ProposalParams,
+		'neuronId'
+	>): Promise<SubmitProposalResult> => {
 		const { title, url, motionText } = metadata;
 
 		if (isNullish(title) || isNullish(url) || isNullish(motionText)) {
@@ -216,14 +218,8 @@ const submitProposal = async ({
 	user: UserOption;
 	fn: (
 		params: { metadata: ProposalEditableMetadata } & Pick<ProposalParams, 'neuronId'>
-	) => Promise<{
-		result: 'ok' | 'error';
-		proposalId?: bigint | undefined;
-	}>;
-} & Partial<Pick<ProposalParams, 'neuronId'>>): Promise<{
-	result: 'ok' | 'error';
-	proposalId?: bigint | undefined;
-}> => {
+	) => Promise<SubmitProposalResult>;
+} & Partial<Pick<ProposalParams, 'neuronId'>>): Promise<SubmitProposalResult> => {
 	if (isNullish(user)) {
 		toasts.error({
 			msg: { text: 'You are not signed in.' }
