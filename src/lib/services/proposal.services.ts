@@ -15,11 +15,13 @@ import type { MakeProposalRequest, Motion, ProposalId } from '@dfinity/nns';
 import { assertNonNullish, nonNullish } from '@dfinity/utils';
 import { get } from 'svelte/store';
 
-export type MotionProposalParams = Omit<MakeProposalRequest, 'action' | 'title' | 'neuronId'> & {
+export type ProposalParams = Omit<MakeProposalRequest, 'action' | 'title' | 'neuronId'> & {
 	neuronId: string;
 	title: string;
 	governance: Governance | undefined;
-} & Motion;
+};
+
+export type MotionProposalParams = ProposalParams & Motion;
 
 export const submitMotionProposal = async ({
 	governance,
