@@ -30,16 +30,34 @@ export const submitMotionProposal = async ({
 	result: 'ok' | 'error';
 	proposalId: bigint | undefined;
 }> => {
+	const submit = async (governance: Governance): Promise<bigint | undefined> => {
+		return governance.type === 'icp'
+			? await makeMotionProposalICP({ ...rest })
+			: await makeMotionProposalSns({ ...rest, governanceId: governance.id });
+	};
+
+	return submitProposal({
+		governance,
+		fn: submit
+	});
+};
+
+const submitProposal = async ({
+	governance,
+	fn
+}: Pick<ProposalParams, 'governance'> & {
+	fn: (governance: Governance) => Promise<bigint | undefined>;
+}): Promise<{
+	result: 'ok' | 'error';
+	proposalId: bigint | undefined;
+}> => {
 	assertNonNullish(
 		governance,
 		'The governance details are not set, therefore no proposal can be submitted.'
 	);
 
 	try {
-		const proposalId =
-			governance.type === 'icp'
-				? await makeMotionProposalICP({ ...rest })
-				: await makeMotionProposalSns({ ...rest, governanceId: governance.id });
+		const proposalId = await fn(governance);
 
 		return { result: 'ok', proposalId };
 	} catch (err: unknown) {
