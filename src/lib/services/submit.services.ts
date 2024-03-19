@@ -8,7 +8,7 @@ import {
 } from '$lib/services/idb.services';
 import {
 	submitMotionProposal as submitMotionProposalApi,
-	type MotionProposalParams
+	type ProposalParams
 } from '$lib/services/proposal.services';
 import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
@@ -162,14 +162,14 @@ export const submitMotionProposal = async ({
 	...rest
 }: {
 	user: UserOption;
-} & Partial<Pick<MotionProposalParams, 'neuronId' | 'governance'>>): Promise<{
+} & Partial<Pick<ProposalParams, 'neuronId' | 'governance'>>): Promise<{
 	result: 'ok' | 'error';
 	proposalId?: bigint | undefined;
 }> => {
 	const submit = async ({
 		metadata,
 		neuronId
-	}: { metadata: ProposalEditableMetadata } & Pick<MotionProposalParams, 'neuronId'>): Promise<{
+	}: { metadata: ProposalEditableMetadata } & Pick<ProposalParams, 'neuronId'>): Promise<{
 		result: 'ok' | 'error';
 		proposalId?: bigint | undefined;
 	}> => {
@@ -215,12 +215,12 @@ const submitProposal = async ({
 }: {
 	user: UserOption;
 	fn: (
-		params: { metadata: ProposalEditableMetadata } & Pick<MotionProposalParams, 'neuronId'>
+		params: { metadata: ProposalEditableMetadata } & Pick<ProposalParams, 'neuronId'>
 	) => Promise<{
 		result: 'ok' | 'error';
 		proposalId?: bigint | undefined;
 	}>;
-} & Partial<Pick<MotionProposalParams, 'neuronId'>>): Promise<{
+} & Partial<Pick<ProposalParams, 'neuronId'>>): Promise<{
 	result: 'ok' | 'error';
 	proposalId?: bigint | undefined;
 }> => {
