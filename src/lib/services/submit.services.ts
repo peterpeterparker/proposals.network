@@ -6,7 +6,10 @@ import {
 	getEditable,
 	init
 } from '$lib/services/idb.services';
-import { submitMotionProposal, type MotionProposalParams } from '$lib/services/proposal.services';
+import {
+	submitMotionProposal as submitMotionProposalApi,
+	type MotionProposalParams
+} from '$lib/services/proposal.services';
 import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
 import type {
@@ -153,13 +156,71 @@ const updateUrl = async (proposalKey: string) => {
 	replaceHistory(url);
 };
 
-export const submitProposal = async ({
-	user,
+export const submitMotionProposal = async ({
 	neuronId,
-	governance
+	governance,
+	...rest
 }: {
 	user: UserOption;
 } & Partial<Pick<MotionProposalParams, 'neuronId' | 'governance'>>): Promise<{
+	result: 'ok' | 'error';
+	proposalId?: bigint | undefined;
+}> => {
+	const submit = async ({
+		metadata,
+		neuronId
+	}: { metadata: ProposalEditableMetadata } & Pick<MotionProposalParams, 'neuronId'>): Promise<{
+		result: 'ok' | 'error';
+		proposalId?: bigint | undefined;
+	}> => {
+		const { title, url, motionText } = metadata;
+
+		if (isNullish(title) || isNullish(url) || isNullish(motionText)) {
+			toasts.error({
+				msg: { text: 'No title, url or motion text to submit the proposal.' }
+			});
+			return { result: 'error' };
+		}
+
+		const [_, content] = await getEditable();
+
+		if (isNullish(content)) {
+			toasts.error({
+				msg: { text: 'No content to submit the proposal.' }
+			});
+			return { result: 'error' };
+		}
+
+		return submitMotionProposalApi({
+			title,
+			url,
+			motionText,
+			summary: content,
+			neuronId,
+			governance
+		});
+	};
+
+	return submitProposal({
+		neuronId,
+		fn: submit,
+		...rest
+	});
+};
+
+const submitProposal = async ({
+	user,
+	neuronId,
+	fn
+}: {
+	user: UserOption;
+	fn: (
+		params: { metadata: ProposalEditableMetadata } & Pick<MotionProposalParams, 'neuronId'>
+	) => Promise<{
+		result: 'ok' | 'error';
+		proposalId?: bigint | undefined;
+	}>;
+} & Partial<Pick<MotionProposalParams, 'neuronId'>>): Promise<{
 	result: 'ok' | 'error';
 	proposalId?: bigint | undefined;
 }> => {
@@ -182,7 +243,7 @@ export const submitProposal = async ({
 	try {
 		await assertTimestamps();
 
-		const [metadata, content] = await getEditable();
+		const [metadata] = await getEditable();
 
 		if (isNullish(metadata)) {
 			toasts.error({
@@ -191,30 +252,7 @@ export const submitProposal = async ({
 			return { result: 'error' };
 		}
 
-		const { title, url, motionText } = metadata;
-
-		if (isNullish(title) || isNullish(url) || isNullish(motionText)) {
-			toasts.error({
-				msg: { text: 'No title, url or motion text to submit the proposal.' }
-			});
-			return { result: 'error' };
-		}
-
-		if (isNullish(content)) {
-			toasts.error({
-				msg: { text: 'No content to submit the proposal.' }
-			});
-			return { result: 'error' };
-		}
-
-		const { result, proposalId } = await submitMotionProposal({
-			title,
-			url,
-			motionText,
-			summary: content,
-			neuronId,
-			governance
-		});
+		const { result, proposalId } = await fn({ metadata, neuronId });
 
 		if (result === 'error') {
 			return { result: 'error' };
