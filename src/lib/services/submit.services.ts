@@ -7,8 +7,8 @@ import {
 	init
 } from '$lib/services/idb.services';
 import {
-	submitMotionProposal as submitMotionProposalApi,
 	submitAddNodeProviderProposal as submitAddNodeProviderProposalApi,
+	submitMotionProposal as submitMotionProposalApi,
 	type ProposalParams
 } from '$lib/services/proposal.services';
 import { busy } from '$lib/stores/busy.store';

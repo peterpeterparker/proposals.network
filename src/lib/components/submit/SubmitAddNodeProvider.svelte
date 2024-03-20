@@ -7,7 +7,7 @@
 
 	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
-	let title = ''
+	let title = '';
 	let summary = '';
 	let nodeProviderName = '';
 	let url = '';
@@ -54,8 +54,21 @@
 			return;
 		}
 
-		title = "Add node provider: " + nodeProviderName;
-		summary = "Register a node provider" + nodeProviderName + " in line with the announcement and discussion at " + url + ". The self-declaration documentation is available at " + urlSelfDeclaration + " with SHA256 hash: " + hashSelfDeclaration + ". The proof of identity is available at " + urlIdentityProof + " with SHA256 hash: " + hashIdentityProof + "."
+		title = 'Add Node Provider: ' + nodeProviderName;
+		summary =
+			'Register a node provider' +
+			nodeProviderName +
+			' in line with the announcement and discussion at ' +
+			url +
+			'. The self-declaration documentation is available at ' +
+			urlSelfDeclaration +
+			' with SHA256 hash: ' +
+			hashSelfDeclaration +
+			'. The proof of identity is available at ' +
+			urlIdentityProof +
+			' with SHA256 hash: ' +
+			hashIdentityProof +
+			'.';
 
 		await setMetadata({
 			...($store?.metadata ?? {}),

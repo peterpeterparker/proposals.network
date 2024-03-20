@@ -1,6 +1,9 @@
 import { getAgent } from '$lib/api/agent.api';
 import { GOVERNANCE_CANISTER_ID, NETWORK_PAGINATION } from '$lib/constants/app.constants';
-import type { MotionProposalParams, AddNodeProviderProposalParams } from '$lib/services/proposal.services';
+import type {
+	AddNodeProviderProposalParams,
+	MotionProposalParams
+} from '$lib/services/proposal.services';
 import { enumsExclude } from '$lib/utils/enum.utils';
 import { AnonymousIdentity } from '@dfinity/agent';
 import type { ListProposalsResponse, ProposalInfo } from '@dfinity/nns';
@@ -104,7 +107,6 @@ const makeMotionProposalRequest = ({
 	neuronId: BigInt(neuronId),
 	...rest
 });
-
 
 const makeNodeProviderProposalRequest = ({
 	id,

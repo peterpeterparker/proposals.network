@@ -1,7 +1,7 @@
 import {
 	getProposal as getProposalNns,
-	makeMotionProposal as makeMotionProposalICP,
-	makeAddNodeProviderProposal
+	makeAddNodeProviderProposal,
+	makeMotionProposal as makeMotionProposalICP
 } from '$lib/api/icp-proposal.api';
 import {
 	getProposal as getProposalSns,
@@ -12,7 +12,7 @@ import { toasts } from '$lib/stores/toasts.store';
 import type { Governance, OptionGovernanceId, Proposal } from '$lib/types/governance';
 import { mapIcpProposal } from '$lib/utils/icp-proposals.utils';
 import { mapSnsProposal } from '$lib/utils/sns-proposals.utils';
-import type { MakeProposalRequest, Motion, ProposalId, AddOrRemoveNodeProvider, Change, NodeProvider } from '@dfinity/nns';
+import type { MakeProposalRequest, Motion, NodeProvider, ProposalId } from '@dfinity/nns';
 import { assertNonNullish, nonNullish } from '@dfinity/utils';
 import { get } from 'svelte/store';
 
@@ -52,8 +52,8 @@ export const submitAddNodeProviderProposal = async ({
 	result: 'ok' | 'error';
 	proposalId: bigint | undefined;
 }> => {
-	const submit = async (governance: Governance): Promise<bigint | undefined> => {
-		return  makeAddNodeProviderProposal({ ...rest })
+	const submit = async (): Promise<bigint | undefined> => {
+		return makeAddNodeProviderProposal({ ...rest });
 	};
 
 	return submitProposal({
