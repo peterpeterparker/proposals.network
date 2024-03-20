@@ -225,13 +225,11 @@ export const submitAddNodeProviderProposal = async ({
 		ProposalParams,
 		'neuronId'
 	>): Promise<SubmitProposalResult> => {
-		const { url, nodeProviderId } = metadata;
-		const summary = "Hard coded summary";
-		const title = "Hard coded title";
+		const { title, url, nodeProviderId, summary } = metadata;
 
-		if (isNullish(title) || isNullish(url) || isNullish(nodeProviderId)) {
+		if (isNullish(title) || isNullish(url) || isNullish(nodeProviderId) || isNullish(summary)) {
 			toasts.error({
-				msg: { text: 'No title, url or node provider ID to submit the proposal.' }
+				msg: { text: 'No title, url, node provider ID or summary to submit the proposal.' }
 			});
 			return { result: 'error' };
 		}
