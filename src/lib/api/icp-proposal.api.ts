@@ -1,6 +1,6 @@
 import { getAgent } from '$lib/api/agent.api';
 import { GOVERNANCE_CANISTER_ID, NETWORK_PAGINATION } from '$lib/constants/app.constants';
-import type { MotionProposalParams } from '$lib/services/proposal.services';
+import type { MotionProposalParams, AddNodeProviderProposalParams } from '$lib/services/proposal.services';
 import { enumsExclude } from '$lib/utils/enum.utils';
 import { AnonymousIdentity } from '@dfinity/agent';
 import type { ListProposalsResponse, ProposalInfo } from '@dfinity/nns';
@@ -71,6 +71,13 @@ export const makeMotionProposal = async (
 	return makeProposal(request);
 };
 
+export const makeAddNodeProviderProposal = async (
+	params: Omit<AddNodeProviderProposalParams, 'governance'>
+): Promise<ProposalId | undefined> => {
+	const request = makeNodeProviderProposalRequest(params);
+	return makeProposal(request);
+};
+
 const makeProposal = async (request: MakeProposalRequest): Promise<ProposalId | undefined> => {
 	assertNonNullish(GOVERNANCE_CANISTER_ID, 'The ICP governance canister ID is not set.');
 
@@ -92,6 +99,26 @@ const makeMotionProposalRequest = ({
 	action: {
 		Motion: {
 			motionText
+		}
+	},
+	neuronId: BigInt(neuronId),
+	...rest
+});
+
+
+const makeNodeProviderProposalRequest = ({
+	id,
+	neuronId,
+	...rest
+}: Omit<AddNodeProviderProposalParams, 'governance'>): MakeProposalRequest => ({
+	action: {
+		AddOrRemoveNodeProvider: {
+			change: {
+				ToAdd: {
+					id: id,
+					rewardAccount: undefined
+				}
+			}
 		}
 	},
 	neuronId: BigInt(neuronId),

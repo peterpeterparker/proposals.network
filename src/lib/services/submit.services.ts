@@ -8,6 +8,7 @@ import {
 } from '$lib/services/idb.services';
 import {
 	submitMotionProposal as submitMotionProposalApi,
+	submitAddNodeProviderProposal as submitAddNodeProviderProposalApi,
 	type ProposalParams
 } from '$lib/services/proposal.services';
 import { busy } from '$lib/stores/busy.store';
@@ -198,6 +199,58 @@ export const submitMotionProposal = async ({
 			url,
 			motionText,
 			summary: content,
+			neuronId,
+			governance
+		});
+	};
+
+	return submitProposal({
+		neuronId,
+		fn: submit,
+		...rest
+	});
+};
+
+export const submitAddNodeProviderProposal = async ({
+	neuronId,
+	governance,
+	...rest
+}: {
+	user: UserOption;
+} & Partial<Pick<ProposalParams, 'neuronId' | 'governance'>>): Promise<SubmitProposalResult> => {
+	const submit = async ({
+		metadata,
+		neuronId
+	}: { metadata: ProposalEditableMetadata } & Pick<
+		ProposalParams,
+		'neuronId'
+	>): Promise<SubmitProposalResult> => {
+		const { url, nodeProviderId } = metadata;
+		const summary = "Hard coded summary";
+		const title = "Hard coded title";
+
+		if (isNullish(title) || isNullish(url) || isNullish(nodeProviderId)) {
+			toasts.error({
+				msg: { text: 'No title, url or node provider ID to submit the proposal.' }
+			});
+			return { result: 'error' };
+		}
+
+		const [_, content] = await getEditable();
+
+		if (isNullish(content)) {
+			toasts.error({
+				msg: { text: 'No content to submit the proposal.' }
+			});
+			return { result: 'error' };
+		}
+
+		return submitAddNodeProviderProposalApi({
+			title,
+			url,
+			id: nodeProviderId,
+			rewardAccount: undefined,
+			summary,
 			neuronId,
 			governance
 		});

@@ -7,7 +7,7 @@
 	import { isBusy } from '$lib/derived/busy.derived';
 	import Button from '$lib/components/ui/Button.svelte';
 	import { getEditable } from '$lib/services/idb.services';
-	import { submitMotionProposal } from '$lib/services/submit.services';
+	import { submitMotionProposal, submitAddNodeProviderProposal } from '$lib/services/submit.services';
 	import { userStore } from '$lib/stores/user.store';
 	import { governanceStore } from '$lib/derived/governance.derived';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
@@ -30,6 +30,22 @@
 	const dispatch = createEventDispatcher();
 
 	const onSubmit = async () => {
+		if($store?.metadata?.proposalAction === 'AddOrRemoveNodeProvider'){
+			console.log("add np proposal flow");
+			const { result, proposalId } = await submitAddNodeProviderProposal({
+				user: $userStore,
+				neuronId,
+				governance: $governanceStore
+			});
+
+			if (result === 'error') {
+				return;
+			}
+
+			dispatch('pnwrkDone', proposalId);
+
+			return;
+		}
 		const { result, proposalId } = await submitMotionProposal({
 			user: $userStore,
 			neuronId,
@@ -48,11 +64,11 @@
 
 {#if nonNullish(neuronId) && nonNullish(content)}
 	<form on:submit|preventDefault={onSubmit}>
-		<h1 class="font-bold capitalize text-4xl md:text-6xl mb-12">
+		<h1 class="mb-12 text-4xl font-bold capitalize md:text-6xl">
 			Make sure everything looks good before submitting!
 		</h1>
 
-		<p class="leading-relaxed mb-8">
+		<p class="mb-8 leading-relaxed">
 			Review your proposal for Neuron ID: <Copy value={`${neuronId}`} text="Neuron ID copied." />.
 		</p>
 
