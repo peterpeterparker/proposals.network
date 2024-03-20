@@ -34,7 +34,6 @@
 
 	const onSubmit = async () => {
 		if ($store?.metadata?.proposalAction === 'AddOrRemoveNodeProvider') {
-			console.log('add np proposal flow');
 			const { result, proposalId } = await submitAddNodeProviderProposal({
 				user: $userStore,
 				neuronId,

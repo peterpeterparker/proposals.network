@@ -225,7 +225,23 @@ export const submitAddNodeProviderProposal = async ({
 		ProposalParams,
 		'neuronId'
 	>): Promise<SubmitProposalResult> => {
-		const { title, url, nodeProviderId, summary } = metadata;
+		const { url, nodeProviderId } = metadata;
+
+		const title = 'Add Node Provider: ' + metadata?.nodeProviderName;
+		const summary =
+			'Register a node provider' +
+			metadata?.nodeProviderName +
+			' in line with the announcement and discussion at ' +
+			metadata?.url +
+			'. \n\nThe self-declaration documentation is available at ' +
+			metadata?.urlSelfDeclaration +
+			' \nwith SHA256 hash: ' +
+			metadata?.hashSelfDeclaration +
+			'.\n\nThe proof of identity is available at ' +
+			metadata?.urlIdentityProof +
+			' \nwith SHA256 hash: ' +
+			metadata?.hashIdentityProof +
+			'.';
 
 		if (isNullish(title) || isNullish(url) || isNullish(nodeProviderId) || isNullish(summary)) {
 			toasts.error({
