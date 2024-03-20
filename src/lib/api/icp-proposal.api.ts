@@ -108,6 +108,7 @@ const makeMotionProposalRequest = ({
 
 const makeNodeProviderProposalRequest = ({
 	id,
+	rewardAccount,
 	neuronId,
 	...rest
 }: Omit<AddNodeProviderProposalParams, 'governance'>): MakeProposalRequest => ({
@@ -115,8 +116,8 @@ const makeNodeProviderProposalRequest = ({
 		AddOrRemoveNodeProvider: {
 			change: {
 				ToAdd: {
-					id: id,
-					rewardAccount: undefined
+					id,
+					rewardAccount
 				}
 			}
 		}
