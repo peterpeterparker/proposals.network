@@ -62,7 +62,7 @@
 			Make sure everything looks good before submitting!
 		</h1>
 
-		<p class="mb-8 leading-relaxed">
+		<p class="leading-relaxed mb-8">
 			Review your proposal for Neuron ID: <Copy value={`${neuronId}`} text="Neuron ID copied." />.
 		</p>
 

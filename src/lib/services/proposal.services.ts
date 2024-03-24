@@ -52,7 +52,7 @@ export const submitAddNodeProviderProposal = async ({
 	result: 'ok' | 'error';
 	proposalId: bigint | undefined;
 }> => {
-	const submit = async (): Promise<bigint | undefined> => {
+	const submit = (): Promise<bigint | undefined> => {
 		return makeAddNodeProviderProposal(rest);
 	};
 
