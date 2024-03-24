@@ -7,7 +7,10 @@
 	import { isBusy } from '$lib/derived/busy.derived';
 	import Button from '$lib/components/ui/Button.svelte';
 	import { getEditable } from '$lib/services/idb.services';
-	import { submitMotionProposal } from '$lib/services/submit.services';
+	import {
+		submitMotionProposal,
+		submitAddNodeProviderProposal
+	} from '$lib/services/submit.services';
 	import { userStore } from '$lib/stores/user.store';
 	import { governanceStore } from '$lib/derived/governance.derived';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
@@ -30,7 +33,12 @@
 	const dispatch = createEventDispatcher();
 
 	const onSubmit = async () => {
-		const { result, proposalId } = await submitMotionProposal({
+		const submitProposal =
+			$store?.metadata?.proposalAction === 'AddOrRemoveNodeProvider'
+				? submitAddNodeProviderProposal
+				: submitMotionProposal;
+
+		const { result, proposalId } = await submitProposal({
 			user: $userStore,
 			neuronId,
 			governance: $governanceStore

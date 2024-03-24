@@ -7,6 +7,7 @@ import {
 	init
 } from '$lib/services/idb.services';
 import {
+	submitAddNodeProviderProposal as submitAddNodeProviderProposalApi,
 	submitMotionProposal as submitMotionProposalApi,
 	type ProposalParams
 } from '$lib/services/proposal.services';
@@ -198,6 +199,50 @@ export const submitMotionProposal = async ({
 			url,
 			motionText,
 			summary: content,
+			neuronId,
+			governance
+		});
+	};
+
+	return submitProposal({
+		neuronId,
+		fn: submit,
+		...rest
+	});
+};
+
+export const submitAddNodeProviderProposal = async ({
+	neuronId,
+	governance,
+	...rest
+}: {
+	user: UserOption;
+} & Partial<Pick<ProposalParams, 'neuronId' | 'governance'>>): Promise<SubmitProposalResult> => {
+	const submit = async ({
+		metadata,
+		neuronId
+	}: { metadata: ProposalEditableMetadata } & Pick<
+		ProposalParams,
+		'neuronId'
+	>): Promise<SubmitProposalResult> => {
+		const { url, nodeProviderId } = metadata;
+
+		if (isNullish(url) || isNullish(nodeProviderId)) {
+			toasts.error({
+				msg: { text: 'No url or node provider ID to submit the proposal.' }
+			});
+			return { result: 'error' };
+		}
+
+		const title = `Add Node Provider: ${metadata?.nodeProviderName}`;
+		const summary = `Register a node provider ${metadata?.nodeProviderName} in line with the announcement and discussion at:\n\n ${metadata?.url}.\n\nThe self-declaration documentation is available at:\n\n${metadata?.urlSelfDeclaration} \n\nwith SHA256 hash:\n\n${metadata?.hashSelfDeclaration}.\n\nThe proof of identity is available at:\n\n${metadata?.urlIdentityProof} \n\nwith SHA256 hash:\n\n${metadata?.hashIdentityProof}.`;
+
+		return submitAddNodeProviderProposalApi({
+			title,
+			url,
+			id: nodeProviderId,
+			rewardAccount: undefined,
+			summary,
 			neuronId,
 			governance
 		});
