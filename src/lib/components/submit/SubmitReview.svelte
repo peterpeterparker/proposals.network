@@ -33,7 +33,10 @@
 	const dispatch = createEventDispatcher();
 
 	const onSubmit = async () => {
-		const submitProposal = $store?.metadata?.proposalAction === 'AddOrRemoveNodeProvider' ? submitAddNodeProviderProposal : submitMotionProposal;
+		const submitProposal =
+			$store?.metadata?.proposalAction === 'AddOrRemoveNodeProvider'
+				? submitAddNodeProviderProposal
+				: submitMotionProposal;
 
 		const { result, proposalId } = await submitProposal({
 			user: $userStore,
