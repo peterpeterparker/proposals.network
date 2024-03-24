@@ -33,22 +33,14 @@
 	const dispatch = createEventDispatcher();
 
 	const onSubmit = async () => {
+		let submitProposal;
 		if ($store?.metadata?.proposalAction === 'AddOrRemoveNodeProvider') {
-			const { result, proposalId } = await submitAddNodeProviderProposal({
-				user: $userStore,
-				neuronId,
-				governance: $governanceStore
-			});
-
-			if (result === 'error') {
-				return;
-			}
-
-			dispatch('pnwrkDone', proposalId);
-
-			return;
+			submitProposal = submitAddNodeProviderProposal;
+		} else {
+			submitProposal = submitMotionProposal;
 		}
-		const { result, proposalId } = await submitMotionProposal({
+
+		const { result, proposalId } = await submitProposal({
 			user: $userStore,
 			neuronId,
 			governance: $governanceStore
