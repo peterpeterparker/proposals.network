@@ -227,6 +227,13 @@ export const submitAddNodeProviderProposal = async ({
 	>): Promise<SubmitProposalResult> => {
 		const { url, nodeProviderId } = metadata;
 
+		if (isNullish(url) || isNullish(nodeProviderId)) {
+			toasts.error({
+				msg: { text: 'No url or node provider ID to submit the proposal.' }
+			});
+			return { result: 'error' };
+		}
+
 		const title = 'Add Node Provider: ' + metadata?.nodeProviderName;
 		const summary =
 			'Register a node provider' +
@@ -242,22 +249,6 @@ export const submitAddNodeProviderProposal = async ({
 			' \nwith SHA256 hash: ' +
 			metadata?.hashIdentityProof +
 			'.';
-
-		if (isNullish(title) || isNullish(url) || isNullish(nodeProviderId) || isNullish(summary)) {
-			toasts.error({
-				msg: { text: 'No title, url, node provider ID or summary to submit the proposal.' }
-			});
-			return { result: 'error' };
-		}
-
-		const [_, content] = await getEditable();
-
-		if (isNullish(content)) {
-			toasts.error({
-				msg: { text: 'No content to submit the proposal.' }
-			});
-			return { result: 'error' };
-		}
 
 		return submitAddNodeProviderProposalApi({
 			title,
