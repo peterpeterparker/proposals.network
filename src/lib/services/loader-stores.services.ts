@@ -66,7 +66,7 @@ export const loadProposals = ({
 		governanceCanisterId,
 		fn: async (governanceCanisterId: GovernanceCanisterId): Promise<ProposalsSetData> => {
 			if (type === 'sns') {
-				const proposals = await listSnsProposals({ beforeProposal, governanceCanisterId });
+				const { proposals } = await listSnsProposals({ beforeProposal, governanceCanisterId });
 
 				const nsFunctions = get(snsNsFunctionsStore);
 				const rootCanisterId = get(rootCanisterIdStore);
