@@ -20,13 +20,12 @@
 			return;
 		}
 
-		if(!submitAddNodeProvider.checkFields()){
+		if (!submitAddNodeProvider.checkFields()) {
 			return;
 		}
-		
+
 		dispatch('pnwrkNext');
 	};
-
 </script>
 
 {#if $store?.metadata?.proposalAction === 'AddOrRemoveNodeProvider'}

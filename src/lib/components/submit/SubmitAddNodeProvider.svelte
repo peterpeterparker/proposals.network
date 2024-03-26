@@ -6,7 +6,6 @@
 	import { getContext } from 'svelte';
 	import { toasts } from '$lib/stores/toasts.store';
 
-
 	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
 	let nodeProviderName = '';
@@ -115,14 +114,18 @@
 
 		if (!urlSelfDeclaration.startsWith(validUrlDomain)) {
 			toasts.error({
-				msg: { text: 'Invalid URL for self-declaration: make sure the url is from <https://wiki.internetcomputer.org/>' }
+				msg: {
+					text: 'Invalid URL for self-declaration: make sure the url is from <https://wiki.internetcomputer.org/>'
+				}
 			});
 			return false;
 		}
 
 		if (!urlIdentityProof.startsWith(validUrlDomain)) {
 			toasts.error({
-				msg: { text: 'Invalid URL for identity proof: make sure the url is from <https://wiki.internetcomputer.org/>' }
+				msg: {
+					text: 'Invalid URL for identity proof: make sure the url is from <https://wiki.internetcomputer.org/>'
+				}
 			});
 			return false;
 		}
