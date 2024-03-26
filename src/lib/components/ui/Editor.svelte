@@ -2,7 +2,6 @@
 	import type { Editor } from '@tiptap/core';
 	import EditorHeader from '$lib/components/ui/EditorHeader.svelte';
 	import type { Markdown } from '$lib/types/core';
-	import EditorBusy from '$lib/components/ui/EditorBusy.svelte';
 	import EditorContent from '$lib/components/ui/EditorContent.svelte';
 
 	export let content: Markdown;
@@ -10,8 +9,6 @@
 
 	let editor: Editor | undefined;
 </script>
-
-<EditorBusy />
 
 <div class="bg-white border-2 border-black lg:rounded-md overflow-hidden mb-8">
 	<EditorHeader {editor} />
