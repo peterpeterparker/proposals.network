@@ -15,16 +15,18 @@
 
 	const dispatch = createEventDispatcher();
 	const next = () => {
-		if ($store?.metadata?.proposalAction === 'AddOrRemoveNodeProvider') {
-			if (submitAddNodeProvider.checkFields()) {
-				dispatch('pnwrkNext');
-			} else {
-				console.log('Please fill in all input fields.');
-			}
-		} else {
+		if ($store?.metadata?.proposalAction !== 'AddOrRemoveNodeProvider') {
 			dispatch('pnwrkNext');
+			return;
 		}
+
+		if(!submitAddNodeProvider.checkFields()){
+			return;
+		}
+		
+		dispatch('pnwrkNext');
 	};
+
 </script>
 
 {#if $store?.metadata?.proposalAction === 'AddOrRemoveNodeProvider'}

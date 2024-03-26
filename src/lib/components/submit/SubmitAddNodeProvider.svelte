@@ -109,12 +109,15 @@
 			return false;
 		}
 
-		if (!urlSelfDeclaration.startsWith(validUrlDomain) || !urlIdentityProof.startsWith(validUrlDomain) ) {
+		if (
+			!urlSelfDeclaration.startsWith(validUrlDomain) ||
+			!urlIdentityProof.startsWith(validUrlDomain)
+		) {
 			console.log('Invalid URL for self-declaration');
 			return false;
 		}
 
-		if (!sha256Regex.test(hashSelfDeclaration) || !sha256Regex.test(hashIdentityProof)){
+		if (!sha256Regex.test(hashSelfDeclaration) || !sha256Regex.test(hashIdentityProof)) {
 			console.log('Invalid SHA256 hash');
 			return false;
 		}
