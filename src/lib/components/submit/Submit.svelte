@@ -40,7 +40,7 @@
 	let proposalId: bigint | undefined;
 
 	const init = async () => {
-		const { result } = await initUserProposal({ user: $userStore, routeKey: $routeKey });
+		const { result, metadata } = await initUserProposal({ user: $userStore, routeKey: $routeKey });
 
 		if (result === 'error') {
 			await goto('/', { replaceState: true });
@@ -60,8 +60,10 @@
 		// We need the imperative governance ID to initialize only once the first step.
 		const governanceQueryParam = $page.url.searchParams.get('g');
 
+		// The select step is displayed only on ICP/NNS and only if the user has not yet selected a type of proposal.
 		step =
-			isNullish(governanceQueryParam) || governanceQueryParam == GOVERNANCE_CANISTER_ID
+			(isNullish(governanceQueryParam) || governanceQueryParam == GOVERNANCE_CANISTER_ID) &&
+			isNullish(metadata?.proposalAction)
 				? 'select'
 				: 'write';
 	};
