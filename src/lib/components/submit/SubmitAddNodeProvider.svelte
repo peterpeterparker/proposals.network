@@ -90,6 +90,25 @@
 
 			debounceSave();
 		})();
+
+	export function checkFields(): boolean {
+		const fields = [
+			nodeProviderName,
+			url,
+			urlSelfDeclaration,
+			hashSelfDeclaration,
+			urlIdentityProof,
+			hashIdentityProof,
+			nodeProviderId
+		];
+
+		if (fields.some((field) => field === '')) {
+			console.log('fill in all fields');
+			return false;
+		}
+
+		return true;
+	}
 </script>
 
 <h1 class="mb-12 text-4xl font-bold capitalize md:text-6xl">
