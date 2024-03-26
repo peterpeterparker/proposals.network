@@ -4,6 +4,8 @@
 	import { debounce } from '@dfinity/utils';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import { getContext } from 'svelte';
+	import { toasts } from '$lib/stores/toasts.store';
+
 
 	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
@@ -105,20 +107,37 @@
 		];
 
 		if (fields.some((field) => field === '')) {
-			console.log('fill in all fields');
+			toasts.error({
+				msg: { text: 'Please fill in all fields' }
+			});
 			return false;
 		}
 
-		if (
-			!urlSelfDeclaration.startsWith(validUrlDomain) ||
-			!urlIdentityProof.startsWith(validUrlDomain)
-		) {
-			console.log('Invalid URL for self-declaration');
+		if (!urlSelfDeclaration.startsWith(validUrlDomain)) {
+			toasts.error({
+				msg: { text: 'Invalid URL for self-declaration: make sure the url is from <https://wiki.internetcomputer.org/>' }
+			});
 			return false;
 		}
 
-		if (!sha256Regex.test(hashSelfDeclaration) || !sha256Regex.test(hashIdentityProof)) {
-			console.log('Invalid SHA256 hash');
+		if (!urlIdentityProof.startsWith(validUrlDomain)) {
+			toasts.error({
+				msg: { text: 'Invalid URL for identity proof: make sure the url is from <https://wiki.internetcomputer.org/>' }
+			});
+			return false;
+		}
+
+		if (!sha256Regex.test(hashSelfDeclaration)) {
+			toasts.error({
+				msg: { text: 'Invalid hash for self-declaration: make sure this is a SHA256 hash' }
+			});
+			return false;
+		}
+
+		if (!sha256Regex.test(hashIdentityProof)) {
+			toasts.error({
+				msg: { text: 'Invalid hash for proof of identity: make sure this is a SHA256 hash' }
+			});
 			return false;
 		}
 
