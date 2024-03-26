@@ -92,6 +92,7 @@
 		})();
 
 	export function checkFields(): boolean {
+		const validUrlDomain = 'https://wiki.internetcomputer.org/';
 		const fields = [
 			nodeProviderName,
 			url,
@@ -104,6 +105,11 @@
 
 		if (fields.some((field) => field === '')) {
 			console.log('fill in all fields');
+			return false;
+		}
+
+		if (!urlSelfDeclaration.startsWith(validUrlDomain) || !urlIdentityProof.startsWith(validUrlDomain) ) {
+			console.log('Invalid URL for self-declaration');
 			return false;
 		}
 
