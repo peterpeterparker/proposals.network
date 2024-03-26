@@ -93,6 +93,7 @@
 
 	export function checkFields(): boolean {
 		const validUrlDomain = 'https://wiki.internetcomputer.org/';
+		const sha256Regex = /^[a-fA-F0-9]{64}$/;
 		const fields = [
 			nodeProviderName,
 			url,
@@ -110,6 +111,11 @@
 
 		if (!urlSelfDeclaration.startsWith(validUrlDomain) || !urlIdentityProof.startsWith(validUrlDomain) ) {
 			console.log('Invalid URL for self-declaration');
+			return false;
+		}
+
+		if (!sha256Regex.test(hashSelfDeclaration) || !sha256Regex.test(hashIdentityProof)){
+			console.log('Invalid SHA256 hash');
 			return false;
 		}
 
