@@ -6,19 +6,26 @@ export type ProposalContent = Markdown;
 export type ProposalKey = string;
 export type ProposalDescription = GovernanceCanisterId;
 
-export interface ProposalEditableMetadata {
-	title?: string;
-	url?: string;
-	motionText?: string;
-	summary?: string;
+export interface ProposalNodeProviderEditableMetadata {
 	nodeProviderName?: string;
 	urlSelfDeclaration?: string;
 	urlIdentityProof?: string;
 	hashSelfDeclaration?: string;
 	hashIdentityProof?: string;
 	nodeProviderId?: string;
-	proposalAction?: ProposalAction;
 }
+
+export interface ProposalMotionEditableMetadata {
+	title?: string;
+	motionText?: string;
+	summary?: string;
+}
+
+export type ProposalEditableMetadata = {
+	url?: string;
+	proposalAction?: ProposalAction;
+} & ProposalMotionEditableMetadata &
+	ProposalNodeProviderEditableMetadata;
 
 export type ProposalMetadata = {
 	status: 'draft' | 'submitted';
