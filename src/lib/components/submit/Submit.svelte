@@ -19,7 +19,7 @@
 	import type { Doc } from '@junobuild/core-peer';
 	import type { Neuron } from '$lib/types/juno';
 	import { firstNeuronId } from '$lib/utils/juno.utils';
-	import { governanceIdStore, governanceTypeStore } from '$lib/derived/governance.derived';
+	import { governanceIdStore } from '$lib/derived/governance.derived';
 	import { writable } from 'svelte/store';
 	import {
 		SUBMIT_CONTEXT_KEY,
@@ -29,6 +29,8 @@
 	import { setContext } from 'svelte';
 	import { getEditable } from '$lib/services/idb.services';
 	import { isNullish } from '@dfinity/utils';
+	import { page } from '$app/stores';
+	import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
 
 	let step: undefined | 'select' | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly' =
 		undefined;
@@ -55,8 +57,13 @@
 			return;
 		}
 
-		// TODO: asign this outside of init function as governanceTypeStore is not always derived yet
-		step = $governanceTypeStore === 'icp' ? 'select' : 'write';
+		// We need the imperative governance ID to initialize only once the first step.
+		const governanceQueryParam = $page.url.searchParams.get('g');
+
+		step =
+			isNullish(governanceQueryParam) || governanceQueryParam == GOVERNANCE_CANISTER_ID
+				? 'select'
+				: 'write';
 	};
 
 	$: $userStore, $routeKey, (async () => await init())();
