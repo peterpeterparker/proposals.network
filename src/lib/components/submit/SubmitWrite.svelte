@@ -6,7 +6,7 @@
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 
 	interface submitAddNodeProviderComponent extends SvelteComponent<object> {
-		checkFields(): boolean;
+		allFieldsValid(): boolean;
 	}
 
 	let submitAddNodeProvider: submitAddNodeProviderComponent;
@@ -20,7 +20,7 @@
 			return;
 		}
 
-		if (!submitAddNodeProvider.checkFields()) {
+		if (!submitAddNodeProvider.allFieldsValid()) {
 			return;
 		}
 

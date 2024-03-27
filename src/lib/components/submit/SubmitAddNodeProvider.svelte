@@ -4,6 +4,7 @@
 	import { debounce } from '@dfinity/utils';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import { getContext } from 'svelte';
+	import { checkFields } from '$lib/services/submit.services';
 	import { toasts } from '$lib/stores/toasts.store';
 
 	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
@@ -92,10 +93,8 @@
 			debounceSave();
 		})();
 
-	export function checkFields(): boolean {
-		const validUrlDomain = 'https://wiki.internetcomputer.org/';
-		const sha256Regex = /^[a-fA-F0-9]{64}$/;
-		const fields = [
+	export const allFieldsValid = (): boolean => {
+		return checkFields(
 			nodeProviderName,
 			url,
 			urlSelfDeclaration,
@@ -103,48 +102,7 @@
 			urlIdentityProof,
 			hashIdentityProof,
 			nodeProviderId
-		];
-
-		if (fields.some((field) => field === '')) {
-			toasts.error({
-				msg: { text: 'Please fill in all fields' }
-			});
-			return false;
-		}
-
-		if (!urlSelfDeclaration.startsWith(validUrlDomain)) {
-			toasts.error({
-				msg: {
-					text: 'Invalid URL for self-declaration: make sure the url is from <https://wiki.internetcomputer.org/>'
-				}
-			});
-			return false;
-		}
-
-		if (!urlIdentityProof.startsWith(validUrlDomain)) {
-			toasts.error({
-				msg: {
-					text: 'Invalid URL for identity proof: make sure the url is from <https://wiki.internetcomputer.org/>'
-				}
-			});
-			return false;
-		}
-
-		if (!sha256Regex.test(hashSelfDeclaration)) {
-			toasts.error({
-				msg: { text: 'Invalid hash for self-declaration: make sure this is a SHA256 hash' }
-			});
-			return false;
-		}
-
-		if (!sha256Regex.test(hashIdentityProof)) {
-			toasts.error({
-				msg: { text: 'Invalid hash for proof of identity: make sure this is a SHA256 hash' }
-			});
-			return false;
-		}
-
-		return true;
+		);
 	}
 </script>
 
