@@ -420,7 +420,6 @@ export const fieldsValid = (
 	}
 
 	if (!isSHA256(hashSelfDeclaration, hashIdentityProof)) {
-		toasts.error({ msg: { text: 'Invalid hash: make sure this is a SHA256 hash' } });
 		return false;
 	}
 
@@ -459,5 +458,19 @@ const urlsFromWiki = (urlSelfDeclaration: string, urlIdentityProof: string): boo
 
 const isSHA256 = (hashSelfDeclaration: string, hashIdentityProof: string): boolean => {
 	const sha256Regex = /^[a-fA-F0-9]{64}$/;
-	return sha256Regex.test(hashSelfDeclaration) && sha256Regex.test(hashIdentityProof);
+
+	try {
+		if (!sha256Regex.test(hashSelfDeclaration)) {
+			throw new Error(`Hash for Self Declaration document should be of type SHA256`);
+		}
+
+		if (!sha256Regex.test(hashIdentityProof)) {
+			throw new Error(`Hash for Proof of Identity document should be of type SHA256`);
+		}
+
+		return true;
+	} catch (err) {
+		toasts.error({ msg: { text: `Invalid URL` }, err });
+		return false;
+	}
 };
