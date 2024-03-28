@@ -21,7 +21,8 @@ import type {
 } from '$lib/types/juno';
 import type { UserOption } from '$lib/types/user';
 import { replaceHistory } from '$lib/utils/route.utils';
-import { isNullish } from '@dfinity/utils';
+import { assertSHA256, assertUrlsFromWiki } from '$lib/utils/submit.node-provider.utils';
+import { isNullish, notEmptyString } from '@dfinity/utils';
 import { getDoc, setDoc, type Doc } from '@junobuild/core-peer';
 import { nanoid } from 'nanoid';
 
@@ -391,15 +392,28 @@ const assertTimestamps = async () => {
 	}
 };
 
-export const fieldsValid = (
-	nodeProviderName: string,
-	url: string,
-	urlSelfDeclaration: string,
-	hashSelfDeclaration: string,
-	urlIdentityProof: string,
-	hashIdentityProof: string,
-	nodeProviderId: string
-): boolean => {
+export const assertAddNodeProviderMetadata = async (
+	metadata: ProposalEditableMetadata | undefined | null
+): Promise<{ valid: boolean }> => {
+	if (isNullish(metadata)) {
+		toasts.error({ msg: { text: 'No metadata have been edited.' } });
+		return { valid: false };
+	}
+
+	const {
+		nodeProviderName,
+		url,
+		urlSelfDeclaration,
+		hashSelfDeclaration,
+		urlIdentityProof,
+		hashIdentityProof,
+		nodeProviderId
+	} = metadata;
+
+	const allFieldsPresent = (...fields: (string | undefined)[]): boolean => {
+		return fields.every(notEmptyString);
+	};
+
 	if (
 		!allFieldsPresent(
 			nodeProviderName,
@@ -411,66 +425,36 @@ export const fieldsValid = (
 			nodeProviderId
 		)
 	) {
-		toasts.error({ msg: { text: 'Please fill in all fields' } });
-		return false;
+		toasts.error({
+			msg: { text: 'Please fill in all required fields to submit a new node provider.' }
+		});
+		return { valid: false };
 	}
 
-	if (!urlsFromWiki(urlSelfDeclaration, urlIdentityProof)) {
-		return false;
+	const { err, reason, valid } = assertUrlsFromWiki({
+		urlIdentityProof,
+		urlSelfDeclaration
+	});
+
+	if (!valid) {
+		toasts.error({
+			msg: { text: reason ?? 'Provided URLs are invalid.' },
+			err
+		});
+		return { valid: false };
 	}
 
-	if (!isSHA256(hashSelfDeclaration, hashIdentityProof)) {
-		return false;
+	const { reason: reasonSh256, valid: validSha256 } = assertSHA256({
+		hashIdentityProof,
+		hashSelfDeclaration
+	});
+
+	if (!validSha256) {
+		toasts.error({
+			msg: { text: reasonSh256 ?? 'Invalid Sha256 provided for the documents.' }
+		});
+		return { valid: false };
 	}
 
-	return true;
-};
-
-const allFieldsPresent = (...fields: (string | undefined)[]): boolean => {
-	return fields.every((field) => field !== '' && field !== undefined);
-};
-
-const urlsFromWiki = (urlSelfDeclaration: string, urlIdentityProof: string): boolean => {
-	const validUrl = 'wiki.internetcomputer.org';
-
-	try {
-		const selfDeclarationHostname = new URL(urlSelfDeclaration).hostname;
-		const identityProofHostname = new URL(urlIdentityProof).hostname;
-
-		if (selfDeclarationHostname !== validUrl) {
-			throw new Error(
-				`Expected URL for self-declaration to have hostname "${validUrl}", got "${selfDeclarationHostname}"`
-			);
-		}
-
-		if (identityProofHostname !== validUrl) {
-			throw new Error(
-				`Expected URL for identity proof to have hostname "${validUrl}", got "${identityProofHostname}"`
-			);
-		}
-
-		return true;
-	} catch (err) {
-		toasts.error({ msg: { text: `Invalid URL` }, err });
-		return false;
-	}
-};
-
-const isSHA256 = (hashSelfDeclaration: string, hashIdentityProof: string): boolean => {
-	const sha256Regex = /^[a-fA-F0-9]{64}$/;
-
-	try {
-		if (!sha256Regex.test(hashSelfDeclaration)) {
-			throw new Error(`Hash for Self Declaration document should be of type SHA256`);
-		}
-
-		if (!sha256Regex.test(hashIdentityProof)) {
-			throw new Error(`Hash for Proof of Identity document should be of type SHA256`);
-		}
-
-		return true;
-	} catch (err) {
-		toasts.error({ msg: { text: `Invalid URL` }, err });
-		return false;
-	}
+	return { valid: true };
 };
