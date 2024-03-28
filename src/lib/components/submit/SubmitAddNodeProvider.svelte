@@ -4,6 +4,7 @@
 	import { debounce } from '@dfinity/utils';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import { getContext } from 'svelte';
+	import { fieldsValid } from '$lib/services/submit.services';
 
 	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
@@ -90,6 +91,18 @@
 
 			debounceSave();
 		})();
+
+	export const allFieldsValid = (): boolean => {
+		return fieldsValid(
+			nodeProviderName,
+			url,
+			urlSelfDeclaration,
+			hashSelfDeclaration,
+			urlIdentityProof,
+			hashIdentityProof,
+			nodeProviderId
+		);
+	};
 </script>
 
 <h1 class="mb-12 text-4xl font-bold capitalize md:text-6xl">

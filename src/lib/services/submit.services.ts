@@ -390,3 +390,87 @@ const assertTimestamps = async () => {
 		);
 	}
 };
+
+export const fieldsValid = (
+	nodeProviderName: string,
+	url: string,
+	urlSelfDeclaration: string,
+	hashSelfDeclaration: string,
+	urlIdentityProof: string,
+	hashIdentityProof: string,
+	nodeProviderId: string
+): boolean => {
+	if (
+		!allFieldsPresent(
+			nodeProviderName,
+			url,
+			urlSelfDeclaration,
+			hashSelfDeclaration,
+			urlIdentityProof,
+			hashIdentityProof,
+			nodeProviderId
+		)
+	) {
+		toasts.error({ msg: { text: 'Please fill in all fields' } });
+		return false;
+	}
+
+	if (!urlsFromWiki(urlSelfDeclaration, urlIdentityProof)) {
+		return false;
+	}
+
+	if (!isSHA256(hashSelfDeclaration, hashIdentityProof)) {
+		return false;
+	}
+
+	return true;
+};
+
+const allFieldsPresent = (...fields: (string | undefined)[]): boolean => {
+	return fields.every((field) => field !== '' && field !== undefined);
+};
+
+const urlsFromWiki = (urlSelfDeclaration: string, urlIdentityProof: string): boolean => {
+	const validUrl = 'wiki.internetcomputer.org';
+
+	try {
+		const selfDeclarationHostname = new URL(urlSelfDeclaration).hostname;
+		const identityProofHostname = new URL(urlIdentityProof).hostname;
+
+		if (selfDeclarationHostname !== validUrl) {
+			throw new Error(
+				`Expected URL for self-declaration to have hostname "${validUrl}", got "${selfDeclarationHostname}"`
+			);
+		}
+
+		if (identityProofHostname !== validUrl) {
+			throw new Error(
+				`Expected URL for identity proof to have hostname "${validUrl}", got "${identityProofHostname}"`
+			);
+		}
+
+		return true;
+	} catch (err) {
+		toasts.error({ msg: { text: `Invalid URL` }, err });
+		return false;
+	}
+};
+
+const isSHA256 = (hashSelfDeclaration: string, hashIdentityProof: string): boolean => {
+	const sha256Regex = /^[a-fA-F0-9]{64}$/;
+
+	try {
+		if (!sha256Regex.test(hashSelfDeclaration)) {
+			throw new Error(`Hash for Self Declaration document should be of type SHA256`);
+		}
+
+		if (!sha256Regex.test(hashIdentityProof)) {
+			throw new Error(`Hash for Proof of Identity document should be of type SHA256`);
+		}
+
+		return true;
+	} catch (err) {
+		toasts.error({ msg: { text: `Invalid URL` }, err });
+		return false;
+	}
+};
