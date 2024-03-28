@@ -6,7 +6,11 @@ import {
 	getEditable,
 	init
 } from '$lib/services/idb.services';
-import { submitMotionProposal, type MotionProposalParams } from '$lib/services/proposal.services';
+import {
+	submitAddNodeProviderProposal as submitAddNodeProviderProposalApi,
+	submitMotionProposal as submitMotionProposalApi,
+	type ProposalParams
+} from '$lib/services/proposal.services';
 import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
 import type {
@@ -17,7 +21,8 @@ import type {
 } from '$lib/types/juno';
 import type { UserOption } from '$lib/types/user';
 import { replaceHistory } from '$lib/utils/route.utils';
-import { isNullish } from '@dfinity/utils';
+import { assertSHA256, assertUrlsFromWiki } from '$lib/utils/submit.node-provider.utils';
+import { isNullish, notEmptyString } from '@dfinity/utils';
 import { getDoc, setDoc, type Doc } from '@junobuild/core-peer';
 import { nanoid } from 'nanoid';
 
@@ -88,8 +93,32 @@ export const initUserProposal = async ({
 		}
 
 		const { data, ...metadata } = docMetadata;
-		const { title, url, motionText } = data;
-		const editableMetadata = { title, url, motionText };
+		const {
+			title,
+			url,
+			motionText,
+			summary,
+			nodeProviderId,
+			nodeProviderName,
+			urlIdentityProof,
+			urlSelfDeclaration,
+			hashIdentityProof,
+			hashSelfDeclaration,
+			proposalAction
+		} = data;
+		const editableMetadata = {
+			title,
+			url,
+			motionText,
+			summary,
+			nodeProviderName,
+			nodeProviderId,
+			urlIdentityProof,
+			urlSelfDeclaration,
+			hashIdentityProof,
+			hashSelfDeclaration,
+			proposalAction
+		};
 
 		const { data: jsonContent, ...content } = docContent;
 
@@ -129,16 +158,114 @@ const updateUrl = async (proposalKey: string) => {
 	replaceHistory(url);
 };
 
-export const submitProposal = async ({
-	user,
-	neuronId,
-	governance
-}: {
-	user: UserOption;
-} & Partial<Pick<MotionProposalParams, 'neuronId' | 'governance'>>): Promise<{
+export interface SubmitProposalResult {
 	result: 'ok' | 'error';
 	proposalId?: bigint | undefined;
-}> => {
+}
+
+export const submitMotionProposal = async ({
+	neuronId,
+	governance,
+	...rest
+}: {
+	user: UserOption;
+} & Partial<Pick<ProposalParams, 'neuronId' | 'governance'>>): Promise<SubmitProposalResult> => {
+	const submit = async ({
+		metadata,
+		neuronId
+	}: { metadata: ProposalEditableMetadata } & Pick<
+		ProposalParams,
+		'neuronId'
+	>): Promise<SubmitProposalResult> => {
+		const { title, url, motionText } = metadata;
+
+		if (isNullish(title) || isNullish(url) || isNullish(motionText)) {
+			toasts.error({
+				msg: { text: 'No title, url or motion text to submit the proposal.' }
+			});
+			return { result: 'error' };
+		}
+
+		const [_, content] = await getEditable();
+
+		if (isNullish(content)) {
+			toasts.error({
+				msg: { text: 'No content to submit the proposal.' }
+			});
+			return { result: 'error' };
+		}
+
+		return submitMotionProposalApi({
+			title,
+			url,
+			motionText,
+			summary: content,
+			neuronId,
+			governance
+		});
+	};
+
+	return submitProposal({
+		neuronId,
+		fn: submit,
+		...rest
+	});
+};
+
+export const submitAddNodeProviderProposal = async ({
+	neuronId,
+	governance,
+	...rest
+}: {
+	user: UserOption;
+} & Partial<Pick<ProposalParams, 'neuronId' | 'governance'>>): Promise<SubmitProposalResult> => {
+	const submit = async ({
+		metadata,
+		neuronId
+	}: { metadata: ProposalEditableMetadata } & Pick<
+		ProposalParams,
+		'neuronId'
+	>): Promise<SubmitProposalResult> => {
+		const { url, nodeProviderId } = metadata;
+
+		if (isNullish(url) || isNullish(nodeProviderId)) {
+			toasts.error({
+				msg: { text: 'No url or node provider ID to submit the proposal.' }
+			});
+			return { result: 'error' };
+		}
+
+		const title = `Add Node Provider: ${metadata?.nodeProviderName}`;
+		const summary = `Register a node provider ${metadata?.nodeProviderName} in line with the announcement and discussion at:\n\n ${metadata?.url}.\n\nThe self-declaration documentation is available at:\n\n${metadata?.urlSelfDeclaration} \n\nwith SHA256 hash:\n\n${metadata?.hashSelfDeclaration}.\n\nThe proof of identity is available at:\n\n${metadata?.urlIdentityProof} \n\nwith SHA256 hash:\n\n${metadata?.hashIdentityProof}.`;
+
+		return submitAddNodeProviderProposalApi({
+			title,
+			url,
+			id: nodeProviderId,
+			rewardAccount: undefined,
+			summary,
+			neuronId,
+			governance
+		});
+	};
+
+	return submitProposal({
+		neuronId,
+		fn: submit,
+		...rest
+	});
+};
+
+const submitProposal = async ({
+	user,
+	neuronId,
+	fn
+}: {
+	user: UserOption;
+	fn: (
+		params: { metadata: ProposalEditableMetadata } & Pick<ProposalParams, 'neuronId'>
+	) => Promise<SubmitProposalResult>;
+} & Partial<Pick<ProposalParams, 'neuronId'>>): Promise<SubmitProposalResult> => {
 	if (isNullish(user)) {
 		toasts.error({
 			msg: { text: 'You are not signed in.' }
@@ -158,7 +285,7 @@ export const submitProposal = async ({
 	try {
 		await assertTimestamps();
 
-		const [metadata, content] = await getEditable();
+		const [metadata] = await getEditable();
 
 		if (isNullish(metadata)) {
 			toasts.error({
@@ -167,30 +294,7 @@ export const submitProposal = async ({
 			return { result: 'error' };
 		}
 
-		const { title, url, motionText } = metadata;
-
-		if (isNullish(title) || isNullish(url) || isNullish(motionText)) {
-			toasts.error({
-				msg: { text: 'No title, url or motion text to submit the proposal.' }
-			});
-			return { result: 'error' };
-		}
-
-		if (isNullish(content)) {
-			toasts.error({
-				msg: { text: 'No content to submit the proposal.' }
-			});
-			return { result: 'error' };
-		}
-
-		const { result, proposalId } = await submitMotionProposal({
-			title,
-			url,
-			motionText,
-			summary: content,
-			neuronId,
-			governance
-		});
+		const { result, proposalId } = await fn({ metadata, neuronId });
 
 		if (result === 'error') {
 			return { result: 'error' };
@@ -286,4 +390,71 @@ const assertTimestamps = async () => {
 			'Timestamps are no synced, therefore the proposal cannot be submitted. Maybe you edited the proposal on another device. Try to reload and retry'
 		);
 	}
+};
+
+export const assertAddNodeProviderMetadata = async (
+	metadata: ProposalEditableMetadata | undefined | null
+): Promise<{ valid: boolean }> => {
+	if (isNullish(metadata)) {
+		toasts.error({ msg: { text: 'No metadata have been edited.' } });
+		return { valid: false };
+	}
+
+	const {
+		nodeProviderName,
+		url,
+		urlSelfDeclaration,
+		hashSelfDeclaration,
+		urlIdentityProof,
+		hashIdentityProof,
+		nodeProviderId
+	} = metadata;
+
+	const allFieldsPresent = (...fields: (string | undefined)[]): boolean => {
+		return fields.every(notEmptyString);
+	};
+
+	if (
+		!allFieldsPresent(
+			nodeProviderName,
+			url,
+			urlSelfDeclaration,
+			hashSelfDeclaration,
+			urlIdentityProof,
+			hashIdentityProof,
+			nodeProviderId
+		)
+	) {
+		toasts.error({
+			msg: { text: 'Please fill in all required fields to submit a new node provider.' }
+		});
+		return { valid: false };
+	}
+
+	const { err, reason, valid } = assertUrlsFromWiki({
+		urlIdentityProof,
+		urlSelfDeclaration
+	});
+
+	if (!valid) {
+		toasts.error({
+			msg: { text: reason ?? 'Provided URLs are invalid.' },
+			err
+		});
+		return { valid: false };
+	}
+
+	const { reason: reasonSh256, valid: validSha256 } = assertSHA256({
+		hashIdentityProof,
+		hashSelfDeclaration
+	});
+
+	if (!validSha256) {
+		toasts.error({
+			msg: { text: reasonSh256 ?? 'Invalid Sha256 provided for the documents.' }
+		});
+		return { valid: false };
+	}
+
+	return { valid: true };
 };
