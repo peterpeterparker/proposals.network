@@ -401,7 +401,7 @@ export const fieldsValid = (
 	nodeProviderId: string
 ): boolean => {
 	if (
-		!checkAllFieldsPresent(
+		!allFieldsPresent(
 			nodeProviderName,
 			url,
 			urlSelfDeclaration,
@@ -415,12 +415,11 @@ export const fieldsValid = (
 		return false;
 	}
 
-	if (!checkUrlsFromWiki(urlSelfDeclaration, urlIdentityProof)) {
-		toasts.error({ msg: { text: 'Invalid URL: make sure the URL is from the wiki' } });
+	if (!urlsFromWiki(urlSelfDeclaration, urlIdentityProof)) {
 		return false;
 	}
 
-	if (!checkHashesSHA256(hashSelfDeclaration, hashIdentityProof)) {
+	if (!isSHA256(hashSelfDeclaration, hashIdentityProof)) {
 		toasts.error({ msg: { text: 'Invalid hash: make sure this is a SHA256 hash' } });
 		return false;
 	}
@@ -428,19 +427,37 @@ export const fieldsValid = (
 	return true;
 };
 
-const validUrlDomain = 'https://wiki.internetcomputer.org/';
-const sha256Regex = /^[a-fA-F0-9]{64}$/;
-
-const checkAllFieldsPresent = (...fields: (string | undefined)[]): boolean => {
+const allFieldsPresent = (...fields: (string | undefined)[]): boolean => {
 	return fields.every((field) => field !== '' && field !== undefined);
 };
 
-const checkUrlsFromWiki = (urlSelfDeclaration: string, urlIdentityProof: string): boolean => {
-	return (
-		urlSelfDeclaration.startsWith(validUrlDomain) && urlIdentityProof.startsWith(validUrlDomain)
-	);
+const urlsFromWiki = (urlSelfDeclaration: string, urlIdentityProof: string): boolean => {
+	const validUrl = 'wiki.internetcomputer.org';
+
+	try {
+		const selfDeclarationHostname = new URL(urlSelfDeclaration).hostname;
+		const identityProofHostname = new URL(urlIdentityProof).hostname;
+
+		if (selfDeclarationHostname !== validUrl) {
+			throw new Error(
+				`Expected URL for self-declaration to have hostname "${validUrl}", got "${selfDeclarationHostname}"`
+			);
+		}
+
+		if (identityProofHostname !== validUrl) {
+			throw new Error(
+				`Expected URL for identity proof to have hostname "${validUrl}", got "${identityProofHostname}"`
+			);
+		}
+
+		return true;
+	} catch (err) {
+		toasts.error({ msg: { text: `Invalid URL` }, err });
+		return false;
+	}
 };
 
-const checkHashesSHA256 = (hashSelfDeclaration: string, hashIdentityProof: string): boolean => {
+const isSHA256 = (hashSelfDeclaration: string, hashIdentityProof: string): boolean => {
+	const sha256Regex = /^[a-fA-F0-9]{64}$/;
 	return sha256Regex.test(hashSelfDeclaration) && sha256Regex.test(hashIdentityProof);
 };
