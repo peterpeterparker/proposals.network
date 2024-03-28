@@ -1,27 +1,24 @@
 <script lang="ts">
 	import SubmitContinue from '$lib/components/submit/SubmitContinue.svelte';
-	import { createEventDispatcher, getContext, SvelteComponent } from 'svelte';
+	import { createEventDispatcher, getContext } from 'svelte';
 	import SubmitMotion from '$lib/components/submit/SubmitMotion.svelte';
 	import SubmitAddNodeProvider from '$lib/components/submit/SubmitAddNodeProvider.svelte';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import SubmitBusy from '$lib/components/submit/SubmitBusy.svelte';
-
-	interface submitAddNodeProviderComponent extends SvelteComponent<object> {
-		allFieldsValid(): boolean;
-	}
-
-	let submitAddNodeProvider: submitAddNodeProviderComponent;
+	import { assertAddNodeProviderMetadata } from '$lib/services/submit.services';
 
 	const { store }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
 	const dispatch = createEventDispatcher();
-	const next = () => {
+	const next = async () => {
 		if ($store?.metadata?.proposalAction !== 'AddOrRemoveNodeProvider') {
 			dispatch('pnwrkNext');
 			return;
 		}
 
-		if (!submitAddNodeProvider.allFieldsValid()) {
+		const { valid } = await assertAddNodeProviderMetadata($store.metadata);
+
+		if (!valid) {
 			return;
 		}
 
@@ -32,7 +29,7 @@
 <SubmitBusy />
 
 {#if $store?.metadata?.proposalAction === 'AddOrRemoveNodeProvider'}
-	<SubmitAddNodeProvider bind:this={submitAddNodeProvider} />
+	<SubmitAddNodeProvider />
 {:else}
 	<SubmitMotion />
 {/if}
