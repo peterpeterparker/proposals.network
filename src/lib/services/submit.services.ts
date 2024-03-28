@@ -24,7 +24,6 @@ import { replaceHistory } from '$lib/utils/route.utils';
 import { isNullish } from '@dfinity/utils';
 import { getDoc, setDoc, type Doc } from '@junobuild/core-peer';
 import { nanoid } from 'nanoid';
-import { fileURLToPath } from 'url';
 
 export const initUserProposal = async ({
 	user,
@@ -392,7 +391,7 @@ const assertTimestamps = async () => {
 	}
 };
 
-export const checkFields = (
+export const fieldsValid = (
 	nodeProviderName: string,
 	url: string,
 	urlSelfDeclaration: string,
@@ -400,58 +399,48 @@ export const checkFields = (
 	urlIdentityProof: string,
 	hashIdentityProof: string,
 	nodeProviderId: string
-  ): boolean => {
-	const validUrlDomain = 'https://wiki.internetcomputer.org/';
-	const sha256Regex = /^[a-fA-F0-9]{64}$/;
-	const fields = [
-	  nodeProviderName,
-	  url,
-	  urlSelfDeclaration,
-	  hashSelfDeclaration,
-	  urlIdentityProof,
-	  hashIdentityProof,
-	  nodeProviderId
-	];
-  
-	if (fields.some((field) => field === '' || field === undefined)) {
-	  toasts.error({
-		msg: { text: 'Please fill in all fields' }
-	  });
-	  return false;
+): boolean => {
+	if (
+		!checkAllFieldsPresent(
+			nodeProviderName,
+			url,
+			urlSelfDeclaration,
+			hashSelfDeclaration,
+			urlIdentityProof,
+			hashIdentityProof,
+			nodeProviderId
+		)
+	) {
+		toasts.error({ msg: { text: 'Please fill in all fields' } });
+		return false;
 	}
-  
-	if (!urlSelfDeclaration.startsWith(validUrlDomain)) {
-	  toasts.error({
-		msg: {
-		  text: 'Invalid URL for self-declaration: make sure the url is from <https://wiki.internetcomputer.org/>'
-		}
-	  });
-	  return false;
+
+	if (!checkUrlsFromWiki(urlSelfDeclaration, urlIdentityProof)) {
+		toasts.error({ msg: { text: 'Invalid URL: make sure the URL is from the wiki' } });
+		return false;
 	}
-  
-	if (!urlIdentityProof.startsWith(validUrlDomain)) {
-	  toasts.error({
-		msg: {
-		  text: 'Invalid URL for identity proof: make sure the url is from <https://wiki.internetcomputer.org/>'
-		}
-	  });
-	  return false;
+
+	if (!checkHashesSHA256(hashSelfDeclaration, hashIdentityProof)) {
+		toasts.error({ msg: { text: 'Invalid hash: make sure this is a SHA256 hash' } });
+		return false;
 	}
-  
-	if (!sha256Regex.test(hashSelfDeclaration)) {
-	  toasts.error({
-		msg: { text: 'Invalid hash for self-declaration: make sure this is a SHA256 hash' }
-	  });
-	  return false;
-	}
-  
-	if (!sha256Regex.test(hashIdentityProof)) {
-	  toasts.error({
-		msg: { text: 'Invalid hash for proof of identity: make sure this is a SHA256 hash' }
-	  });
-	  return false;
-	}
-  
+
 	return true;
-  };
-  
+};
+
+const validUrlDomain = 'https://wiki.internetcomputer.org/';
+const sha256Regex = /^[a-fA-F0-9]{64}$/;
+
+const checkAllFieldsPresent = (...fields: (string | undefined)[]): boolean => {
+	return fields.every((field) => field !== '' && field !== undefined);
+};
+
+const checkUrlsFromWiki = (urlSelfDeclaration: string, urlIdentityProof: string): boolean => {
+	return (
+		urlSelfDeclaration.startsWith(validUrlDomain) && urlIdentityProof.startsWith(validUrlDomain)
+	);
+};
+
+const checkHashesSHA256 = (hashSelfDeclaration: string, hashIdentityProof: string): boolean => {
+	return sha256Regex.test(hashSelfDeclaration) && sha256Regex.test(hashIdentityProof);
+};
