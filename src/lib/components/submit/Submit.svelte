@@ -4,6 +4,7 @@
 	import { userNotSignedIn } from '$lib/derived/user.derived';
 	import SubmitSignIn from '$lib/components/submit/SubmitSignIn.svelte';
 	import SubmitWrite from '$lib/components/submit/SubmitWrite.svelte';
+	import SubmitSelect from '$lib/components/submit/SubmitSelect.svelte';
 	import { routeKey } from '$lib/derived/nav.derived';
 	import { userStore } from '$lib/stores/user.store';
 	import { initUserProposal } from '$lib/services/submit.services';
@@ -19,13 +20,27 @@
 	import type { Neuron } from '$lib/types/juno';
 	import { firstNeuronId } from '$lib/utils/juno.utils';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
+	import { writable } from 'svelte/store';
+	import {
+		SUBMIT_CONTEXT_KEY,
+		type SubmitContext,
+		type SubmitStoreData
+	} from '$lib/types/submit.context';
+	import { setContext } from 'svelte';
+	import { getEditable } from '$lib/services/idb.services';
+	import { isNullish } from '@dfinity/utils';
+	import { page } from '$app/stores';
+	import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
 
-	let step: undefined | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly' = undefined;
+	let step: undefined | 'select' | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly' =
+		undefined;
+
+	// TODO: move neuronId and proposalId to context
 	let neuronId: string | undefined;
 	let proposalId: bigint | undefined;
 
 	const init = async () => {
-		const { result } = await initUserProposal({ user: $userStore, routeKey: $routeKey });
+		const { result, metadata } = await initUserProposal({ user: $userStore, routeKey: $routeKey });
 
 		if (result === 'error') {
 			await goto('/', { replaceState: true });
@@ -42,7 +57,15 @@
 			return;
 		}
 
-		step = 'write';
+		// We need the imperative governance ID to initialize only once the first step.
+		const governanceQueryParam = $page.url.searchParams.get('g');
+
+		// The select step is displayed only on ICP/NNS and only if the user has not yet selected a type of proposal.
+		step =
+			(isNullish(governanceQueryParam) || governanceQueryParam == GOVERNANCE_CANISTER_ID) &&
+			isNullish(metadata?.proposalAction)
+				? 'select'
+				: 'write';
 	};
 
 	$: $userStore, $routeKey, (async () => await init())();
@@ -58,6 +81,32 @@
 		neuronId = firstNeuronId({ neuron, governanceId: $governanceIdStore });
 		step = 'review';
 	};
+
+	/**
+	 * Metadata context
+	 */
+
+	const metadataStore = writable<SubmitStoreData>(undefined);
+
+	const loadMetadata = async () => {
+		if (isNullish(step) || !['select', 'write', 'readonly'].includes(step)) {
+			return;
+		}
+
+		const [metadata, _] = await getEditable();
+		metadataStore.set({
+			metadata
+		});
+	};
+
+	const reload = async () => await loadMetadata();
+
+	$: step, (async () => await loadMetadata())();
+
+	setContext<SubmitContext>(SUBMIT_CONTEXT_KEY, {
+		store: metadataStore,
+		reload
+	});
 </script>
 
 <SplitPane>
@@ -68,6 +117,8 @@
 	<UserInitializedGuard>
 		{#if $userNotSignedIn}
 			<SubmitSignIn />
+		{:else if step === 'select'}
+			<SubmitSelect on:pnwrkNext={() => (step = 'write')} />
 		{:else if step === 'write'}
 			<SubmitWrite on:pnwrkNext={() => (step = 'neuron')} />
 		{:else if step === 'neuron'}

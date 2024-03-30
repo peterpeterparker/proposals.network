@@ -4,10 +4,15 @@
 	import { isNullish, nonNullish } from '@dfinity/utils';
 	import { userStore } from '$lib/stores/user.store';
 	import Aside from '$lib/components/ui/Aside.svelte';
+	import { governanceTypeStore } from '$lib/derived/governance.derived';
 
-	export let step: undefined | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly';
+	export let step: undefined | 'select' | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly';
+
+	let showSelect: boolean;
+	$: showSelect = $governanceTypeStore === 'icp';
 
 	let signInStatus: 'pending' | 'active' | 'done';
+	let selectStatus: 'pending' | 'active' | 'done';
 	let writeStatus: 'pending' | 'active' | 'done';
 	let neuronStatus: 'pending' | 'active' | 'done';
 	let reviewStatus: 'pending' | 'active' | 'done';
@@ -30,12 +35,23 @@
 	$: step,
 		$userStore,
 		(() =>
-			(writeStatus =
-				(isNullish(step) && $userSignedIn) || step === 'write'
+			(selectStatus =
+				(isNullish(step) && $userSignedIn) || step === 'select'
 					? 'active'
 					: signInStatus === 'active'
 						? 'pending'
 						: $userSignedIn
+							? 'done'
+							: 'pending'))();
+
+	$: step,
+		(() =>
+			(writeStatus =
+				step === 'write'
+					? 'active'
+					: nonNullish(step) && selectStatus !== 'done'
+						? 'pending'
+						: signInStatus === 'done' && $userSignedIn
 							? 'done'
 							: 'pending'))();
 
@@ -66,23 +82,30 @@
 		Sign-in
 	</Step>
 
+	{#if showSelect}
+		<Step status={selectStatus}>
+			<svelte:fragment slot="step">2</svelte:fragment>
+			Select
+		</Step>
+	{/if}
+
 	<Step status={writeStatus}>
-		<svelte:fragment slot="step">2</svelte:fragment>
+		<svelte:fragment slot="step">{showSelect ? 3 : 2}</svelte:fragment>
 		Write
 	</Step>
 
 	<Step status={neuronStatus}>
-		<svelte:fragment slot="step">3</svelte:fragment>
+		<svelte:fragment slot="step">{showSelect ? 4 : 3}</svelte:fragment>
 		Neuron
 	</Step>
 
 	<Step status={reviewStatus}>
-		<svelte:fragment slot="step">4</svelte:fragment>
+		<svelte:fragment slot="step">{showSelect ? 5 : 4}</svelte:fragment>
 		Review
 	</Step>
 
 	<Step status={step === 'submitted' || step === 'readonly' ? 'active' : 'pending'}>
-		<svelte:fragment slot="step">5</svelte:fragment>
+		<svelte:fragment slot="step">{showSelect ? 6 : 5}</svelte:fragment>
 		Done
 	</Step>
 </Aside>

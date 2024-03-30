@@ -1,6 +1,9 @@
 import { getAgent } from '$lib/api/agent.api';
 import { GOVERNANCE_CANISTER_ID, NETWORK_PAGINATION } from '$lib/constants/app.constants';
-import type { MotionProposalParams } from '$lib/services/proposal.services';
+import type {
+	AddNodeProviderProposalParams,
+	MotionProposalParams
+} from '$lib/services/proposal.services';
 import { enumsExclude } from '$lib/utils/enum.utils';
 import { AnonymousIdentity } from '@dfinity/agent';
 import type { ListProposalsResponse, ProposalInfo } from '@dfinity/nns';
@@ -64,9 +67,21 @@ export const getProposal = async ({
 	return getProposal({ proposalId, certified: false });
 };
 
-export const makeProposal = async (
+export const makeMotionProposal = async (
 	params: Omit<MotionProposalParams, 'governance'>
 ): Promise<ProposalId | undefined> => {
+	const request = makeMotionProposalRequest(params);
+	return makeProposal(request);
+};
+
+export const makeAddNodeProviderProposal = async (
+	params: Omit<AddNodeProviderProposalParams, 'governance'>
+): Promise<ProposalId | undefined> => {
+	const request = makeNodeProviderProposalRequest(params);
+	return makeProposal(request);
+};
+
+const makeProposal = async (request: MakeProposalRequest): Promise<ProposalId | undefined> => {
 	assertNonNullish(GOVERNANCE_CANISTER_ID, 'The ICP governance canister ID is not set.');
 
 	const agent = await getAgent({ identity: await unsafeIdentity() });
@@ -76,7 +91,6 @@ export const makeProposal = async (
 		canisterId: Principal.fromText(GOVERNANCE_CANISTER_ID)
 	});
 
-	const request = makeMotionProposalRequest(params);
 	return makeProposal(request);
 };
 
@@ -88,6 +102,26 @@ const makeMotionProposalRequest = ({
 	action: {
 		Motion: {
 			motionText
+		}
+	},
+	neuronId: BigInt(neuronId),
+	...rest
+});
+
+const makeNodeProviderProposalRequest = ({
+	id,
+	rewardAccount,
+	neuronId,
+	...rest
+}: Omit<AddNodeProviderProposalParams, 'governance'>): MakeProposalRequest => ({
+	action: {
+		AddOrRemoveNodeProvider: {
+			change: {
+				ToAdd: {
+					id,
+					rewardAccount
+				}
+			}
 		}
 	},
 	neuronId: BigInt(neuronId),

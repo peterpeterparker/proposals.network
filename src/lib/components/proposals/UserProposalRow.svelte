@@ -30,16 +30,17 @@
 	});
 
 	let title: string | undefined;
+	let nodeProviderName: string | undefined;
 	let proposalId: bigint | undefined;
 
-	$: ({ title, proposalId } = data);
+	$: ({ title, nodeProviderName, proposalId } = data);
 </script>
 
 <tr>
 	<UserProposalLink {key} />
 	<UserProposalGovernance {governance} />
 	<ProposalLink id={proposalId} />
-	<td class="max-w-lg truncate">{title ?? ''}</td>
+	<td class="max-w-lg truncate">{title ?? nodeProviderName ?? ''}</td>
 	<UserProposalStatus {proposalId} {governance} />
 	<UserProposalView {doc} />
 </tr>
