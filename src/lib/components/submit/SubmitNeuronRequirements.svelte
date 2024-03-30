@@ -46,10 +46,10 @@
 		{amount?.token.symbol ?? '???'} and a {secondsToDuration({
 			seconds: BigInt(detailToVoteSeconds)
 		})}
-		dissolve delay can submit motion proposals. So the next step is to add a hotkey to your neuron that
-		meets these criteria.
+		dissolve delay can submit proposals. So the next step is to add a hotkey to your neuron that meets
+		these criteria.
 	{:else}
-		Neurons with at least 10 ICP and a 6-month dissolve delay can submit motion proposals. So the
-		next step is to add a hotkey to your neuron that meets these criteria.
+		Neurons with at least 10 ICP and a 6-month dissolve delay can submit proposals. So the next step
+		is to add a hotkey to your neuron that meets these criteria.
 	{/if}
 </h2>

@@ -5,8 +5,8 @@
 <h1 class="font-bold capitalize text-6xl mb-12">Getting Started</h1>
 
 <h2 class="text-2xl mb-6">
-	Let's face it, command line tools sucks! But fear not, I've got you covered. Submit motion
-	proposals for the Internet Computer's network nervous system using this user-friendly editor.
+	Let's face it, command line tools sucks! But fear not, I've got you covered. Submit proposals for
+	the Internet Computer's network nervous system using this user-friendly editor.
 </h2>
 
 <p class="leading-relaxed mb-4">
