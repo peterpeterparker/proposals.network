@@ -9,7 +9,7 @@
 
 <td>
 	{#if nonNullish(governance)}
-		<span class="inline-flex gap-1" in:fade
+		<span class="inline-flex gap-1 align-middle" in:fade
 			><Img src={governance?.logo} width="24px" />
 			<span class=" truncate">{governance.name}</span></span
 		>
