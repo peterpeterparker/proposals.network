@@ -24,7 +24,7 @@
 			}
 		},
 		"satellite": {
-			"candid": "https://raw.githubusercontent.com/buildwithjuno/juno/main/src/satellite/satellite.did",
+			"candid": "candid/satellite.did",
 			"type": "custom",
 			"wasm": "https://github.com/junobuild/juno/releases/download/v0.0.23/satellite-v0.0.13.wasm.gz",
 			"remote": {
