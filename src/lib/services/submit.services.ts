@@ -236,7 +236,7 @@ export const submitAddNodeProviderProposal = async ({
 		}
 
 		const title = `Add Node Provider: ${metadata?.nodeProviderName}`;
-		const summary = `Register a node provider ${metadata?.nodeProviderName} in line with the announcement and discussion at:\n\n ${metadata?.url}.\n\nThe self-declaration documentation is available at:\n\n${metadata?.urlSelfDeclaration} \n\nwith SHA256 hash:\n\n${metadata?.hashSelfDeclaration}.\n\nThe proof of identity is available at:\n\n${metadata?.urlIdentityProof} \n\nwith SHA256 hash:\n\n${metadata?.hashIdentityProof}.`;
+		const summary = `Register a node provider "**${metadata?.nodeProviderName}**", in line with the announcement and discussion at [${metadata?.url}](${metadata?.url}).\n\nThe self-declaration documentation is available at [${metadata?.urlSelfDeclaration}](${metadata?.urlSelfDeclaration}) with SHA256 hash \`${metadata?.hashSelfDeclaration}\`.\n\nThe proof of identity is available at [${metadata?.urlIdentityProof}](${metadata?.urlIdentityProof}) with SHA256 hash \`${metadata?.hashIdentityProof}\`.`;
 
 		return submitAddNodeProviderProposalApi({
 			title,
