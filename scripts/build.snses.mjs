@@ -80,11 +80,16 @@ export const findSnses = async () => {
 			}) => lifecycle === 3
 		);
 
+		// We trim the logos as we are using only Sns projects logo which we are downloading as separate PNGs.
+		// That was the JSON file also get smaller (Apr. 2024 - 135kb).
+		const filterIcrc1Metadata = (icrc1_metadata) =>
+			icrc1_metadata.filter(([key, value]) => key !== 'icrc1:logo');
+
 		// All Snses results in a 1.6 JSON data (Apr. 2024). By selecting only the few metadata we actually required, we can spare bytes in the bundle (JSON down to 1.1. Mb).
 		const filterSnsesData = snses.map(({ canister_ids, meta, icrc1_metadata, parameters }) => ({
 			canister_ids,
 			meta,
-			icrc1_metadata,
+			icrc1_metadata: filterIcrc1Metadata(icrc1_metadata),
 			parameters
 		}));
 
