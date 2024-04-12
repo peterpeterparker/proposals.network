@@ -38,6 +38,7 @@
 	},
 	"devDependencies": {
 		"@dfinity/identity-secp256k1": "^1.2.0",
+		"@junobuild/config": "^0.0.5",
 		"@playwright/test": "^1.43.0",
 		"@rollup/plugin-inject": "^5.0.5",
 		"@sveltejs/adapter-static": "^3.0.1",
