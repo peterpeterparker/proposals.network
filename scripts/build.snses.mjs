@@ -80,7 +80,15 @@ export const findSnses = async () => {
 			}) => lifecycle === 3
 		);
 
-		writeFileSync(join(DATA_FOLDER, 'snses.json'), JSON.stringify(snses));
+		// All Snses results in a 1.6 JSON data (Apr. 2024). By selecting only the few metadata we actually required, we can spare bytes in the bundle (JSON down to 1.1. Mb).
+		const filterSnsesData = snses.map(({ canister_ids, meta, icrc1_metadata, parameters }) => ({
+			canister_ids,
+			meta,
+			icrc1_metadata,
+			parameters
+		}));
+
+		writeFileSync(join(DATA_FOLDER, 'snses.json'), JSON.stringify(filterSnsesData));
 
 		await saveLogos(snses);
 	} catch (err) {
