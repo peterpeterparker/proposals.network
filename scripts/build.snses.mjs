@@ -86,12 +86,15 @@ export const findSnses = async () => {
 			icrc1_metadata.filter(([key, value]) => key !== 'icrc1:logo');
 
 		// All Snses results in a 1.6 JSON data (Apr. 2024). By selecting only the few metadata we actually required, we can spare bytes in the bundle (JSON down to 1.1. Mb).
-		const filterSnsesData = snses.map(({ canister_ids, meta, icrc1_metadata, parameters }) => ({
-			canister_ids,
-			meta,
-			icrc1_metadata: filterIcrc1Metadata(icrc1_metadata),
-			parameters
-		}));
+		const filterSnsesData = snses.map(
+			({ canister_ids, meta, icrc1_metadata, parameters, nervous_system_parameters }) => ({
+				canister_ids,
+				meta,
+				icrc1_metadata: filterIcrc1Metadata(icrc1_metadata),
+				nervous_system_parameters,
+				parameters
+			})
+		);
 
 		writeFileSync(join(DATA_FOLDER, 'snses.json'), JSON.stringify(filterSnsesData));
 
