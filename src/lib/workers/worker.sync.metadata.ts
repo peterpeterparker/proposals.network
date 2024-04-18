@@ -25,7 +25,7 @@ export const syncMetadata = async ({ satellite, governanceId }: WorkerSyncParams
 		collection: 'metadata',
 		doc: {
 			key,
-			description: governanceId,
+			description: docMetadata?.description ?? governanceId,
 			data: metadataData,
 			...(nonNullish(docMetadata) && { updated_at: docMetadata.updated_at })
 		}
