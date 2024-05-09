@@ -381,10 +381,10 @@ const assertTimestamps = async () => {
 	}
 
 	if (
-		isNullish(docMetadata.updated_at) ||
-		docMetadata.updated_at !== docMetadataIdb?.updated_at ||
-		isNullish(docContent.updated_at) ||
-		docContent.updated_at !== docContentIdb?.updated_at
+		isNullish(docMetadata.version) ||
+		docMetadata.version !== docMetadataIdb?.version ||
+		isNullish(docContent.version) ||
+		docContent.version !== docContentIdb?.version
 	) {
 		throw new Error(
 			'Timestamps are no synced, therefore the proposal cannot be submitted. Maybe you edited the proposal on another device. Try to reload and retry'

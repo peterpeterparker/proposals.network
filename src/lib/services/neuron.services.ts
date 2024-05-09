@@ -79,7 +79,7 @@ export const setNeuron = async ({
 			doc: {
 				key,
 				data: updateData,
-				...(nonNullish(neuron) && { updated_at: neuron.updated_at })
+				...(nonNullish(neuron) && { version: neuron.version })
 			}
 		});
 

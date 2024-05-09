@@ -27,7 +27,7 @@ export const syncMetadata = async ({ satellite, governanceId }: WorkerSyncParams
 			key,
 			description: docMetadata?.description ?? governanceId,
 			data: metadataData,
-			...(nonNullish(docMetadata) && { updated_at: docMetadata.updated_at })
+			...(nonNullish(docMetadata) && { version: docMetadata.version })
 		}
 	});
 
