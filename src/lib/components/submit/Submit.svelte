@@ -31,6 +31,7 @@
 	import { isNullish } from '@dfinity/utils';
 	import { page } from '$app/stores';
 	import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
+	import SubmitGovernance from '$lib/components/submit/SubmitGovernance.svelte';
 
 	let step: undefined | 'select' | 'write' | 'neuron' | 'review' | 'submitted' | 'readonly' =
 		undefined;
@@ -115,6 +116,8 @@
 	</svelte:fragment>
 
 	<UserInitializedGuard>
+		<SubmitGovernance />
+
 		{#if $userNotSignedIn}
 			<SubmitSignIn />
 		{:else if step === 'select'}
