@@ -87,11 +87,23 @@ export const findSnses = async () => {
 
 		// All Snses results in a 1.6 JSON data (Apr. 2024). By selecting only the few metadata we actually required, we can spare bytes in the bundle (JSON down to 1.1. Mb).
 		const filterSnsesData = snses.map(
-			({ canister_ids, meta, icrc1_metadata, parameters, nervous_system_parameters }) => ({
+			({
+				canister_ids,
+				meta,
+				icrc1_metadata,
+				parameters,
+				nervous_system_parameters: {
+					neuron_minimum_dissolve_delay_to_vote_seconds,
+					neuron_minimum_stake_e8s
+				}
+			}) => ({
 				canister_ids,
 				meta,
 				icrc1_metadata: filterIcrc1Metadata(icrc1_metadata),
-				nervous_system_parameters,
+				nervous_system_parameters: {
+					neuron_minimum_dissolve_delay_to_vote_seconds,
+					neuron_minimum_stake_e8s
+				},
 				parameters
 			})
 		);
