@@ -377,6 +377,9 @@ const assertTimestamps = async () => {
 	const [docMetadata, docContent] = await getDocs(key);
 
 	if (isNullish(docMetadata) || isNullish(docContent)) {
+		// TODO: remove me
+		console.warn("DEBUG:", key, docMetadata, docContent);
+
 		throw new Error("'Invalid metadata and content saved on chain to submit a proposal.'");
 	}
 
