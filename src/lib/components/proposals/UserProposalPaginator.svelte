@@ -33,6 +33,8 @@
 	$: displayNext =
 		nonNullish($userProposalsStore) &&
 		($userProposalsStore.matches_pages ?? 0n) > ($userProposalsStore.items_page ?? 0n) + 1n;
+
+	$: console.log($userProposalsStore);
 </script>
 
 {#if nonNullish($userProposalsStore)}
