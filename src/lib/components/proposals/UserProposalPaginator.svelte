@@ -32,9 +32,7 @@
 	let displayNext: boolean;
 	$: displayNext =
 		nonNullish($userProposalsStore) &&
-		($userProposalsStore.matches_pages ?? 0n) > ($userProposalsStore.items_page ?? 0n) + 1n;
-
-	$: console.log($userProposalsStore);
+		($userProposalsStore.matches_pages ?? 0n) > ($userProposalsStore.items_page ?? 0n);
 </script>
 
 {#if nonNullish($userProposalsStore)}
