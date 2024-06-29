@@ -1,13 +1,9 @@
 import { isNullish } from '@dfinity/utils';
-import type { marked as markedTypes, Renderer } from 'marked';
+import { type marked as markedTypes, type Renderer, type Tokens } from 'marked';
 
 type Marked = typeof markedTypes;
 
-export const targetBlankLinkRenderer = (
-	href: string | null | undefined,
-	title: string | null | undefined,
-	text: string
-): string =>
+export const targetBlankLinkRenderer = ({ href, title, text }: Tokens.Link): string =>
 	`<a${
 		href === null || href === undefined
 			? ''
@@ -20,11 +16,7 @@ export const targetBlankLinkRenderer = (
  * Based on https://github.com/markedjs/marked/blob/master/src/Renderer.js#L186
  * @returns <a> tag to image
  */
-export const imageToLinkRenderer = (
-	src: string | null | undefined,
-	title: string | null | undefined,
-	alt: string
-): string => {
+export const imageToLinkRenderer = ({ href: src, title, text: alt }: Tokens.Image): string => {
 	if (src === undefined || src === null || src?.length === 0) {
 		return alt;
 	}
@@ -52,13 +44,15 @@ const transformImg = (img: string): string => {
 	const alt = img.match(/alt="([^"]+)"/)?.[1] || 'img';
 	const title = img.match(/title="([^"]+)"/)?.[1];
 	const shouldEscape = isNullish(src) || src.startsWith('data:image');
-	const imageHtml = shouldEscape ? escapeHtml(img) : imageToLinkRenderer(src, title, alt);
+	const imageHtml = shouldEscape
+		? escapeHtml(img)
+		: imageToLinkRenderer({ href: src, title: title ?? null, text: alt, type: 'image', raw: src });
 
 	return imageHtml;
 };
 
 /** Avoid <img> tags; instead, apply the same logic as for markdown images by either escaping them or converting them to links. */
-export const htmlRenderer = (html: string): string =>
+export const htmlRenderer = ({ text: html }: Tokens.HTML | Tokens.Tag): string =>
 	/<img\s+[^>]*>/gi.test(html) ? transformImg(html) : html;
 
 /**
