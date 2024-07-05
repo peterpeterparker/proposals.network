@@ -4,6 +4,7 @@
 	import { debounce } from '@dfinity/utils';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import { getContext } from 'svelte';
+	import SubmitTitle from '$lib/components/submit/SubmitTitle.svelte';
 
 	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
@@ -92,9 +93,7 @@
 		})();
 </script>
 
-<h1 class="mb-12 text-4xl font-bold capitalize md:text-6xl">
-	Register Your Node Provider Principal
-</h1>
+<SubmitTitle>Register Your Node Provider Principal</SubmitTitle>
 
 <h2 class="mb-6 text-2xl">
 	To add a new node provider, provide the name, principal ID, announcement, URL, and SHA256 hash of
