@@ -33,7 +33,8 @@
 
 	const proposalOptions: { value: ProposalAction; label: string }[] = [
 		{ value: 'Motion', label: 'Motion' },
-		{ value: 'AddOrRemoveNodeProvider', label: 'Add a new node provider' }
+		{ value: 'AddOrRemoveNodeProvider', label: 'Add a new node provider' },
+		{ value: 'CreateServiceNervousSystem', label: 'Propose a SNS' }
 	];
 </script>
 

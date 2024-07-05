@@ -5,6 +5,7 @@
 	import { isNullish } from '@dfinity/utils';
 	import Button from '$lib/components/ui/Button.svelte';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
+	import SubmitTitle from '$lib/components/submit/SubmitTitle.svelte';
 
 	const { store }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
@@ -12,7 +13,7 @@
 	const next = () => dispatch('pnwrkNext');
 </script>
 
-<h1 class="mb-12 text-4xl font-bold capitalize md:text-6xl">What kind of Proposal?</h1>
+<SubmitTitle>What kind of Proposal?</SubmitTitle>
 
 <h2 class="mb-6 text-2xl">
 	There are various types of proposals, so the first thing to do is to choose the one you're looking

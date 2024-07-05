@@ -30,6 +30,8 @@
 
 {#if $store?.metadata?.proposalAction === 'AddOrRemoveNodeProvider'}
 	<SubmitAddNodeProvider />
+{:else if $store?.metadata?.proposalAction === 'CreateServiceNervousSystem'}
+	<SubmitMotion />
 {:else}
 	<SubmitMotion />
 {/if}

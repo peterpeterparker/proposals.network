@@ -1,8 +1,9 @@
 <script lang="ts">
 	import SubmitWriteEdit from '$lib/components/submit/SubmitWriteEdit.svelte';
+	import SubmitTitle from '$lib/components/submit/SubmitTitle.svelte';
 </script>
 
-<h1 class="mb-12 text-4xl font-bold capitalize md:text-6xl">Craft Your Proposal</h1>
+<SubmitTitle>Craft Your Motion</SubmitTitle>
 
 <h2 class="mb-6 text-2xl">
 	To submit a motion proposal, you need both a summary (explaining what it's all about) and motion
