@@ -23,7 +23,7 @@ cd proposals.network
 npm ci
 ```
 
-Start dfx v0.15.2 from the root directory:
+Start dfx v0.20.0 from the root directory:
 
 ```bash
 dfx start
@@ -43,14 +43,18 @@ Proceed with the configuration of the Satellite datastore:
 
 At this point, you are good to go except that you need the NNS governance canister.
 
-Run following command to install all the NNS canisters.
+To ensure you get the latest canisters and because DFX is not clever enough to figure this out on its own, uninstall and install a tagged version of the NNS extension to avoid getting an utterly outdated version of NNS-dapp:
+
+```
+dfx extension uninstall nns
+dfx extension install nns --version 0.4.1
+```
+
+Run following command to finally install all the NNS canisters.
 
 ```
 dfx nns install
 ```
-
-If the command throws an error `error: unrecognized subcommand 'nns'`, it means the extension is not yet installed for dfx.
-To install it run `dfx extension install nns`.
 
 I suggest writing down the list of canisters and URLs printed out by the latest dfx command.
 There is no way to print it again later on, so if you don't do so, you might never figure out where the NNS DApp is deployed locally.
