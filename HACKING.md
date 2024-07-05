@@ -2,20 +2,7 @@
 
 This document explains how to run locally [proposals.network](https://proposals.network).
 
-## Table of contents
-
-- [Introduction](#introduction)
-- [Development](#development)
-
-## Introduction
-
-This repo utilizes the [Junolator](https://github.com/junobuild/emulator), a local emulator suite designed for building and testing [Juno](https://juno.build)'s satellites locally.
-
-While it's unofficial and not the developer experience I envision for Juno's devs to work locally, it serves its purpose for now, as I haven't yet developed a better tool yet.
-
-## Development
-
-Clone the repository and install dependencies:
+Start by cloning the repository and install dependencies:
 
 ```
 git clone https://github.com/peterpeterparker/proposals.network

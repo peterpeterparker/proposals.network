@@ -1,23 +1,26 @@
 {
 	"collections": {
-		"db": [
+		"datastore": [
 			{
 				"collection": "metadata",
 				"read": "managed",
 				"write": "managed",
-				"memory": "stable"
+				"memory": "stable",
+				"mutablePermissions": true
 			},
 			{
 				"collection": "content",
 				"read": "managed",
 				"write": "managed",
-				"memory": "stable"
+				"memory": "stable",
+				"mutablePermissions": true
 			},
 			{
 				"collection": "neuron",
 				"read": "managed",
 				"write": "managed",
-				"memory": "stable"
+				"memory": "stable",
+				"mutablePermissions": true
 			}
 		],
 		"storage": []

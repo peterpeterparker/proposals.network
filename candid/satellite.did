@@ -19,6 +19,13 @@ type AssetNoContent = record {
   encodings : vec record { text; AssetEncodingNoContent };
   headers : vec record { text; text };
   created_at : nat64;
+  version : opt nat64;
+};
+type AuthenticationConfig = record {
+  internet_identity : opt AuthenticationConfigInternetIdentity;
+};
+type AuthenticationConfigInternetIdentity = record {
+  derivation_origin : opt text;
 };
 type CommitBatch = record {
   batch_id : nat;
@@ -37,9 +44,10 @@ type ControllerScope = variant { Write; Admin };
 type CustomDomain = record {
   updated_at : nat64;
   created_at : nat64;
+  version : opt nat64;
   bn_id : opt text;
 };
-type DelDoc = record { updated_at : opt nat64 };
+type DelDoc = record { version : opt nat64 };
 type DeleteControllersArgs = record { controllers : vec principal };
 type DepositCyclesArgs = record { cycles : nat; destination_id : principal };
 type Doc = record {
@@ -48,6 +56,7 @@ type Doc = record {
   data : vec nat8;
   description : opt text;
   created_at : nat64;
+  version : opt nat64;
 };
 type HttpRequest = record {
   url : text;
@@ -105,6 +114,7 @@ type Rule = record {
   max_size : opt nat;
   read : Permission;
   created_at : nat64;
+  version : opt nat64;
   mutable_permissions : opt bool;
   write : Permission;
 };
@@ -119,16 +129,16 @@ type SetControllersArgs = record {
   controllers : vec principal;
 };
 type SetDoc = record {
-  updated_at : opt nat64;
   data : vec nat8;
   description : opt text;
+  version : opt nat64;
 };
 type SetRule = record {
   max_capacity : opt nat32;
   memory : opt Memory;
-  updated_at : opt nat64;
   max_size : opt nat;
   read : Permission;
+  version : opt nat64;
   mutable_permissions : opt bool;
   write : Permission;
 };
@@ -136,9 +146,11 @@ type StorageConfig = record {
   iframe : opt StorageConfigIFrame;
   rewrites : vec record { text; text };
   headers : vec record { text; vec record { text; text } };
+  raw_access : opt StorageConfigRawAccess;
   redirects : opt vec record { text; StorageConfigRedirect };
 };
 type StorageConfigIFrame = variant { Deny; AllowAny; SameOrigin };
+type StorageConfigRawAccess = variant { Deny; Allow };
 type StorageConfigRedirect = record { status_code : nat16; location : text };
 type StreamingCallbackHttpResponse = record {
   token : opt StreamingCallbackToken;
@@ -182,6 +194,7 @@ service : () -> {
   del_rule : (RulesType, text, DelDoc) -> ();
   deposit_cycles : (DepositCyclesArgs) -> ();
   get_asset : (text, text) -> (opt AssetNoContent) query;
+  get_auth_config : () -> (opt AuthenticationConfig) query;
   get_config : () -> (Config);
   get_doc : (text, text) -> (opt Doc) query;
   get_many_assets : (vec record { text; text }) -> (
@@ -201,6 +214,7 @@ service : () -> {
   list_docs : (text, ListParams) -> (ListResults_1) query;
   list_rules : (RulesType) -> (vec record { text; Rule }) query;
   memory_size : () -> (MemorySize) query;
+  set_auth_config : (AuthenticationConfig) -> ();
   set_config : (Config) -> ();
   set_controllers : (SetControllersArgs) -> (
       vec record { principal; Controller },
