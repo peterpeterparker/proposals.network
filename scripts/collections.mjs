@@ -14,7 +14,7 @@ const configRules = async ({ type, rules }) => {
 	const existingRules = await list(type);
 
 	await Promise.all(
-		rules.map(({ collection, memory, ...rest }) =>
+		rules.map(({ collection, ...rest }) =>
 			setRule({
 				type,
 				satellite,
@@ -23,7 +23,6 @@ const configRules = async ({ type, rules }) => {
 						({ collection: existingCollection }) => existingCollection === collection
 					) ?? {}),
 					collection,
-					memory: memory === 'stable' ? 'Stable' : 'Heap',
 					...rest
 				}
 			})
@@ -33,11 +32,11 @@ const configRules = async ({ type, rules }) => {
 
 const setCollections = async () => {
 	const {
-		collections: { db, storage }
+		collections: { datastore, storage }
 	} = await readConfig();
 
 	await Promise.all([
-		configRules({ type: 'db', rules: db }),
+		configRules({ type: 'db', rules: datastore }),
 		configRules({ type: 'storage', rules: storage })
 	]);
 };

@@ -1,5 +1,4 @@
 import { config } from 'dotenv';
-import fetch from 'node-fetch';
 import { initIdentity } from './identity.utils.mjs';
 
 config();

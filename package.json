@@ -54,7 +54,6 @@
 		"eslint": "^8.57.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.41.0",
-		"node-fetch": "^3.3.2",
 		"pem-file": "^1.0.1",
 		"postcss": "^8.4.38",
 		"prettier": "^3.3.2",
