@@ -31,9 +31,9 @@
 		await reload();
 	};
 
-	const proposalOptions = [
-		{ value: 'Motion' as ProposalAction, label: 'Motion' },
-		{ value: 'AddOrRemoveNodeProvider' as ProposalAction, label: 'Add a new node provider' }
+	const proposalOptions: { value: ProposalAction; label: string }[] = [
+		{ value: 'Motion', label: 'Motion' },
+		{ value: 'AddOrRemoveNodeProvider', label: 'Add a new node provider' }
 	];
 </script>
 

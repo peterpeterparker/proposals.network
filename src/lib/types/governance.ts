@@ -51,4 +51,4 @@ export type Proposal = Pick<
 	};
 
 // These types correspond with IC Proposal Documentation (https://wiki.internetcomputer.org/wiki/Network_Nervous_System#Proposals)
-export type ProposalAction = 'Motion' | 'AddOrRemoveNodeProvider' | undefined;
+export type ProposalAction = 'Motion' | 'AddOrRemoveNodeProvider';
