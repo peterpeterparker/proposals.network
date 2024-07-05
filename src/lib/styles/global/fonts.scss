@@ -1,6 +1,7 @@
 @layer base {
 	h1 {
 		@apply text-7xl;
+		@apply leading-tight;
 		@apply font-bold;
 		letter-spacing: -3.2px;
 	}

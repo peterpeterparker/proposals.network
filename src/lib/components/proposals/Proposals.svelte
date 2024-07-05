@@ -47,7 +47,7 @@
 
 <Section color="secondary">
 	<h2
-		class="text-6xl md:text-7xl mb-12 tracking-tight font-bold lg:mx-4"
+		class="text-6xl md:text-7xl md:leading-tight mb-12 tracking-tight font-bold lg:mx-4"
 		use:onIntersectionTitle
 		on:pnwrkIntersecting={onTitleIntersection}
 	>

@@ -14,7 +14,7 @@
 	<HeroAnimation />
 
 	<div class="w-full h-full relative flex items-center justify-center flex-col pt-24">
-		<h1 class="text-center px-2 md:max-w-[70vw] xl:max-w-[50vw] text-5xl sm:text-7xl">
+		<h1 class="text-center px-2 md:max-w-[70vw] xl:max-w-[50vw] text-5xl sm:text-7xl sm:leading-tight">
 			Browse and submit proposals on ICP
 		</h1>
 
