@@ -7,7 +7,7 @@ deploy () {
 
   # Deploy satellite
   PRINCIPAL="$(dfx identity get-principal)"
-  dfx deploy satellite --argument "$(didc encode '(record {controllers = vec { principal"'${PRINCIPAL}'";}})' --format hex)" --argument-type raw
+  dfx deploy satellite --specified-id jx5yt-yyaaa-aaaal-abzbq-cai --argument "$(didc encode '(record {controllers = vec { principal"'${PRINCIPAL}'";}})' --format hex)" --argument-type raw
 
   II="$(dfx canister id internet_identity)"
   SAT="$(dfx canister id satellite)"
