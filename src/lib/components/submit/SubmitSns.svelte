@@ -2,19 +2,24 @@
 	import SubmitTitle from '$lib/components/submit/SubmitTitle.svelte';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import { getContext } from 'svelte';
-	import type { ProposalContent } from '$lib/types/juno';
 	import SubmitWriteContent from '$lib/components/submit/SubmitWriteContent.svelte';
 	import InputFile from '$lib/components/ui/InputFile.svelte';
+	import { isNullish } from '@dfinity/utils';
+	import { assertSnsYaml } from '$lib/services/sns.services';
 
 	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
-	let content: ProposalContent | undefined;
+	let parametersFile: File | undefined;
 
-	let parameters = '';
+	const parseYaml = async () => {
+		if (isNullish(parametersFile)) {
+			return;
+		}
 
-	const init = async () => {
-		parameters = $store?.metadata?.parameters ?? '';
+		await assertSnsYaml(parametersFile);
 	};
+
+	$: parametersFile, (async () => await parseYaml())();
 </script>
 
 <SubmitTitle>Propose Your SNS</SubmitTitle>
@@ -26,6 +31,6 @@
 
 <SubmitWriteContent>
 	<svelte:fragment slot="before">
-		<InputFile placeholder="Initial parameters (.yaml file)" />
+		<InputFile bind:file={parametersFile} placeholder="Initial parameters (.yaml file)" />
 	</svelte:fragment>
 </SubmitWriteContent>

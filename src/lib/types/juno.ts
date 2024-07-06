@@ -21,16 +21,11 @@ export interface ProposalMotionEditableMetadata {
 	summary?: string;
 }
 
-export interface ProposalSnsEditableMetadata {
-	parameters?: string;
-}
-
 export type ProposalEditableMetadata = {
 	url?: string;
 	proposalAction?: ProposalAction;
 } & ProposalMotionEditableMetadata &
-	ProposalNodeProviderEditableMetadata &
-	ProposalSnsEditableMetadata;
+	ProposalNodeProviderEditableMetadata;
 
 export type ProposalMetadata = {
 	status: 'draft' | 'submitted';
