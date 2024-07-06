@@ -4,6 +4,7 @@
 	import { getContext } from 'svelte';
 	import type { ProposalContent } from '$lib/types/juno';
 	import SubmitWriteContent from '$lib/components/submit/SubmitWriteContent.svelte';
+	import Input from '$lib/components/ui/Input.svelte';
 
 	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
@@ -23,4 +24,8 @@
 	summary.
 </h2>
 
-<SubmitWriteContent></SubmitWriteContent>
+<SubmitWriteContent>
+	<svelte:fragment slot="before">
+		<Input inputType="file" pinPlaceholder placeholder="Initial parameters (.yaml file)" />
+	</svelte:fragment>
+</SubmitWriteContent>

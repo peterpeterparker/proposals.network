@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 
+	export let inputType: 'text' | 'file' = 'text';
 	export let placeholder: string;
 	export let value = '';
 	export let disabled = false;
@@ -20,6 +21,7 @@
 	</aside>
 
 	<input
+		{...{ type: inputType }}
 		bind:value
 		{placeholder}
 		{disabled}
