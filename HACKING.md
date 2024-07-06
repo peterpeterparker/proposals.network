@@ -30,11 +30,11 @@ Proceed with the configuration of the Satellite datastore:
 
 At this point, you are good to go except that you need the NNS governance canister.
 
-To ensure you get the latest canisters and because DFX is not clever enough to figure this out on its own, uninstall (if you previously installed the extension) and install a tagged version of the NNS extension to avoid getting an utterly outdated version of NNS-dapp:
+Uninstall (if you previously installed the extension) and install the NNS extension which will spin the Governance and NNS dapp:
 
 ```
 dfx extension uninstall nns
-dfx extension install nns --version 0.4.1
+dfx extension install nns
 ```
 
 Run following command to finally install all the NNS canisters.
