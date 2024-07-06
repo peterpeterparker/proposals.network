@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Input from '$lib/components/ui/Input.svelte';
+	import InputText from '$lib/components/ui/InputText.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import type { Doc } from '@junobuild/core-peer';
 	import type { Neuron } from '$lib/types/juno';
@@ -43,7 +43,7 @@
 	</p>
 
 	<div class="mb-5">
-		<Input placeholder="Neuron ID" bind:value={neuronId} disabled={$isBusy} />
+		<InputText placeholder="Neuron ID" bind:value={neuronId} disabled={$isBusy} />
 	</div>
 
 	<div class="flex gap-2">

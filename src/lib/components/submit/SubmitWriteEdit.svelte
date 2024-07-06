@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Input from '$lib/components/ui/Input.svelte';
+	import InputText from '$lib/components/ui/InputText.svelte';
 	import { getEditable, setContent, setMetadata } from '$lib/services/idb.services';
 	import { debounce, nonNullish } from '@dfinity/utils';
 	import type { ProposalContent } from '$lib/types/juno';
@@ -66,17 +66,17 @@
 </script>
 
 {#if nonNullish(content)}
-	<Input placeholder="The proposal title" bind:value={title} pinPlaceholder={title !== ''} />
+	<InputText placeholder="The proposal title" bind:value={title} pinPlaceholder={title !== ''} />
 
 	<Editor {content} {onUpdate} />
 
-	<Input
+	<InputText
 		placeholder="An URL (https://forum.dfinity.org...)"
 		bind:value={url}
 		pinPlaceholder={url !== ''}
 	/>
 
-	<Input
+	<InputText
 		placeholder="Your motion text"
 		bind:value={motionText}
 		pinPlaceholder={motionText !== ''}
