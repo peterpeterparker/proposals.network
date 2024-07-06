@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Input from '$lib/components/ui/Input.svelte';
+	import InputText from '$lib/components/ui/InputText.svelte';
 	import { setMetadata } from '$lib/services/idb.services';
 	import { debounce } from '@dfinity/utils';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
@@ -100,43 +100,43 @@
 	your self-declaration and proof of identity documents.
 </h2>
 
-<Input
+<InputText
 	placeholder="Node Provider name"
 	bind:value={nodeProviderName}
 	pinPlaceholder={nodeProviderName !== ''}
 />
 
-<Input
+<InputText
 	placeholder="A URL to your forum announcement and discussion (https://forum.dfinity.org...)"
 	bind:value={url}
 	pinPlaceholder={url !== ''}
 />
 
-<Input
+<InputText
 	placeholder="A URL to your self-declaration document (https://wiki.internetcomputer.org/wiki/...)"
 	bind:value={urlSelfDeclaration}
 	pinPlaceholder={urlSelfDeclaration !== ''}
 />
 
-<Input
+<InputText
 	placeholder="SHA256 hash of your self-declaration document"
 	bind:value={hashSelfDeclaration}
 	pinPlaceholder={hashSelfDeclaration !== ''}
 />
 
-<Input
+<InputText
 	placeholder="A URL to your proof of identity document (https://wiki.internetcomputer.org/wiki/...)"
 	bind:value={urlIdentityProof}
 	pinPlaceholder={urlIdentityProof !== ''}
 />
 
-<Input
+<InputText
 	placeholder="SHA256 hash of your proof of identity document"
 	bind:value={hashIdentityProof}
 	pinPlaceholder={hashIdentityProof !== ''}
 />
 
-<Input
+<InputText
 	placeholder="Node Provider Principal ID"
 	bind:value={nodeProviderId}
 	pinPlaceholder={nodeProviderId !== ''}

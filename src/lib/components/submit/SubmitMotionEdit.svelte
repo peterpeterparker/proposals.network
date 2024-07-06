@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Input from '$lib/components/ui/Input.svelte';
+	import InputText from '$lib/components/ui/InputText.svelte';
 	import { setMetadata } from '$lib/services/idb.services';
 	import { debounce } from '@dfinity/utils';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
@@ -59,17 +59,17 @@
 
 <SubmitWriteContent>
 	<svelte:fragment slot="before">
-		<Input placeholder="The proposal title" bind:value={title} pinPlaceholder={title !== ''} />
+		<InputText placeholder="The proposal title" bind:value={title} pinPlaceholder={title !== ''} />
 	</svelte:fragment>
 
 	<svelte:fragment slot="after">
-		<Input
+		<InputText
 			placeholder="An URL (https://forum.dfinity.org...)"
 			bind:value={url}
 			pinPlaceholder={url !== ''}
 		/>
 
-		<Input
+		<InputText
 			placeholder="Your motion text"
 			bind:value={motionText}
 			pinPlaceholder={motionText !== ''}
