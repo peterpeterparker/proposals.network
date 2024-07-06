@@ -6,6 +6,7 @@
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import SubmitBusy from '$lib/components/submit/SubmitBusy.svelte';
 	import { assertAddNodeProviderMetadata } from '$lib/services/submit.services';
+	import SubmitSns from '$lib/components/submit/SubmitSns.svelte';
 
 	const { store }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
@@ -31,7 +32,7 @@
 {#if $store?.metadata?.proposalAction === 'AddOrRemoveNodeProvider'}
 	<SubmitAddNodeProvider />
 {:else if $store?.metadata?.proposalAction === 'CreateServiceNervousSystem'}
-	<SubmitMotion />
+	<SubmitSns />
 {:else}
 	<SubmitMotion />
 {/if}

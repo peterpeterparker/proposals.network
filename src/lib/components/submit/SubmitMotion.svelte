@@ -1,5 +1,5 @@
 <script lang="ts">
-	import SubmitWriteEdit from '$lib/components/submit/SubmitWriteEdit.svelte';
+	import SubmitMotionEdit from '$lib/components/submit/SubmitMotionEdit.svelte';
 	import SubmitTitle from '$lib/components/submit/SubmitTitle.svelte';
 </script>
 
@@ -11,4 +11,4 @@
 	discussion.
 </h2>
 
-<SubmitWriteEdit />
+<SubmitMotionEdit />
