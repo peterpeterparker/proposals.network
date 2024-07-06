@@ -4,22 +4,33 @@
 	import { getContext } from 'svelte';
 	import SubmitWriteContent from '$lib/components/submit/SubmitWriteContent.svelte';
 	import InputFile from '$lib/components/ui/InputFile.svelte';
-	import { isNullish } from '@dfinity/utils';
-	import { assertSnsYaml } from '$lib/services/sns.services';
+	import { debounce, isNullish } from '@dfinity/utils';
+	import { uploadSnsYaml } from '$lib/services/sns.services';
+	import { routeKey } from '$lib/derived/nav.derived';
+	import { userStore } from '$lib/stores/user.store';
 
 	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
+	let downloadUrl: string | undefined;
 	let parametersFile: File | undefined;
 
-	const parseYaml = async () => {
+	const saveYaml = async () => {
 		if (isNullish(parametersFile)) {
 			return;
 		}
 
-		await assertSnsYaml(parametersFile);
+		const {downloadUrl: url} = await uploadSnsYaml({
+			routeKey: $routeKey,
+			file: parametersFile,
+			user: $userStore
+		});
+
+		downloadUrl = url;
 	};
 
-	$: parametersFile, (async () => await parseYaml())();
+	const debounceSaveYaml = debounce(saveYaml);
+
+	$: parametersFile, (() => debounceSaveYaml())();
 </script>
 
 <SubmitTitle>Propose Your SNS</SubmitTitle>

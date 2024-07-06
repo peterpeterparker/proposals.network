@@ -23,7 +23,15 @@
 				"mutablePermissions": true
 			}
 		],
-		"storage": []
+		"storage": [
+			{
+				"collection": "sns-yaml",
+				"read": "managed",
+				"write": "managed",
+				"memory": "stable",
+				"mutablePermissions": true
+			}
+		]
 	},
 	"controllers": []
 }
