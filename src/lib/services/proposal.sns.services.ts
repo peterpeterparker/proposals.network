@@ -122,77 +122,74 @@ export const mapSnsYamlToCreateServiceNervousSystem = ({
 }: {
 	yaml: SnsYaml;
 	logo: string;
-}): CreateServiceNervousSystem => {
-
-	return {
-		name,
-		url,
-		description,
-		logo: {
+}): CreateServiceNervousSystem => ({
+	name,
+	url,
+	description,
+	logo: {
+		base64Encoding: logo
+	},
+	ledgerParameters: {
+		transactionFee: mapTokens(Token.transaction_fee),
+		tokenSymbol: Token.symbol,
+		tokenLogo: {
 			base64Encoding: logo
 		},
-		ledgerParameters: {
-			transactionFee: mapTokens(Token.transaction_fee),
-			tokenSymbol: Token.symbol,
-			tokenLogo: {
-				base64Encoding: logo
-			},
-			tokenName: Token.name
-		},
-		governanceParameters: {
-			neuronMaximumDissolveDelayBonus: mapPercentage(
-				Voting.MaximumVotingPowerBonuses.DissolveDelay.bonus
-			),
-			neuronMaximumAgeForAgeBonus: mapDuration(Voting.MaximumVotingPowerBonuses.Age.duration),
-			neuronMaximumDissolveDelay: mapDuration(
-				Voting.MaximumVotingPowerBonuses.DissolveDelay.duration
-			),
-			neuronMinimumDissolveDelayToVote: mapDuration(Voting.minimum_dissolve_delay),
-			neuronMaximumAgeBonus: mapPercentage(Voting.MaximumVotingPowerBonuses.Age.bonus),
-			neuronMinimumStake: mapTokens(Neurons.minimum_creation_stake),
-			proposalWaitForQuietDeadlineIncrease: mapDuration(
-				Proposals.maximum_wait_for_quiet_deadline_extension
-			),
-			proposalInitialVotingPeriod: mapDuration(Proposals.initial_voting_period),
-			proposalRejectionFee: mapTokens(Proposals.rejection_fee),
-			votingRewardParameters: {
-				rewardRateTransitionDuration: mapDuration(Voting.RewardRate.transition_duration),
-				initialRewardRate: mapPercentage(Voting.RewardRate.initial),
-				finalRewardRate: mapPercentage(Voting.RewardRate.final)
-			}
-		},
-		fallbackControllerPrincipalIds,
-		dappCanisters,
-		swapParameters: {
-			minimumParticipants: BigInt(Swap.minimum_participants),
-			duration: mapDuration(Swap.duration),
-			neuronBasketConstructionParameters: undefined,
-			confirmationText: Swap.confirmation_text,
-			maximumParticipantIcp: mapTokens(Swap.maximum_participant_icp),
-			neuronsFundInvestmentIcp: undefined,
-			minimumIcp: undefined,
-			minimumParticipantIcp: mapTokens(Swap.minimum_participant_icp),
-			startTime: nonNullish(Swap.start_time) ? mapTimeOfDay(Swap.start_time) : undefined,
-			maximumIcp: undefined,
-			restrictedCountries: nonNullish(Swap.restricted_countries)
-				? {
-						isoCodes: Swap.restricted_countries
-					}
-				: undefined,
-			maxDirectParticipationIcp: mapTokens(Swap.maximum_direct_participation_icp),
-			minDirectParticipationIcp: mapTokens(Swap.minimum_direct_participation_icp),
-			neuronsFundParticipation: Swap.neurons_fund_participation
-		},
-		initialTokenDistribution: {
-			swapDistribution: {
-				total: mapTokens(Distribution.InitialBalances.swap)
-			},
-			treasuryDistribution: {
-				total: mapTokens(Distribution.InitialBalances.governance)
-			},
-			developerDistribution: {
-				developerNeurons: Distribution.Neurons.map(mapNeuron)
-			}
+		tokenName: Token.name
+	},
+	governanceParameters: {
+		neuronMaximumDissolveDelayBonus: mapPercentage(
+			Voting.MaximumVotingPowerBonuses.DissolveDelay.bonus
+		),
+		neuronMaximumAgeForAgeBonus: mapDuration(Voting.MaximumVotingPowerBonuses.Age.duration),
+		neuronMaximumDissolveDelay: mapDuration(
+			Voting.MaximumVotingPowerBonuses.DissolveDelay.duration
+		),
+		neuronMinimumDissolveDelayToVote: mapDuration(Voting.minimum_dissolve_delay),
+		neuronMaximumAgeBonus: mapPercentage(Voting.MaximumVotingPowerBonuses.Age.bonus),
+		neuronMinimumStake: mapTokens(Neurons.minimum_creation_stake),
+		proposalWaitForQuietDeadlineIncrease: mapDuration(
+			Proposals.maximum_wait_for_quiet_deadline_extension
+		),
+		proposalInitialVotingPeriod: mapDuration(Proposals.initial_voting_period),
+		proposalRejectionFee: mapTokens(Proposals.rejection_fee),
+		votingRewardParameters: {
+			rewardRateTransitionDuration: mapDuration(Voting.RewardRate.transition_duration),
+			initialRewardRate: mapPercentage(Voting.RewardRate.initial),
+			finalRewardRate: mapPercentage(Voting.RewardRate.final)
 		}
-	};
-};
+	},
+	fallbackControllerPrincipalIds,
+	dappCanisters,
+	swapParameters: {
+		minimumParticipants: BigInt(Swap.minimum_participants),
+		duration: mapDuration(Swap.duration),
+		neuronBasketConstructionParameters: undefined,
+		confirmationText: Swap.confirmation_text,
+		maximumParticipantIcp: mapTokens(Swap.maximum_participant_icp),
+		neuronsFundInvestmentIcp: undefined,
+		minimumIcp: undefined,
+		minimumParticipantIcp: mapTokens(Swap.minimum_participant_icp),
+		startTime: nonNullish(Swap.start_time) ? mapTimeOfDay(Swap.start_time) : undefined,
+		maximumIcp: undefined,
+		restrictedCountries: nonNullish(Swap.restricted_countries)
+			? {
+					isoCodes: Swap.restricted_countries
+				}
+			: undefined,
+		maxDirectParticipationIcp: mapTokens(Swap.maximum_direct_participation_icp),
+		minDirectParticipationIcp: mapTokens(Swap.minimum_direct_participation_icp),
+		neuronsFundParticipation: Swap.neurons_fund_participation
+	},
+	initialTokenDistribution: {
+		swapDistribution: {
+			total: mapTokens(Distribution.InitialBalances.swap)
+		},
+		treasuryDistribution: {
+			total: mapTokens(Distribution.InitialBalances.governance)
+		},
+		developerDistribution: {
+			developerNeurons: Distribution.Neurons.map(mapNeuron)
+		}
+	}
+});
