@@ -97,27 +97,37 @@ const mapNeuron = ({
 
 // Map source: https://github.com/dfinity/ic/blob/17df8febdb922c3981475035d830f09d9b990a5a/rs/registry/admin/src/main.rs#L2592
 export const mapSnsYamlToCreateServiceNervousSystem = ({
-	name,
-	description,
-	url,
-	Token,
-	Voting,
-	Proposals,
-	Neurons,
-	fallback_controller_principals: fallbackControllerPrincipalIds,
-	dapp_canisters: dappCanisters,
-	Swap,
-	Distribution
-}: SnsYaml): CreateServiceNervousSystem => {
+	yaml: {
+		name,
+		description,
+		url,
+		Token,
+		Voting,
+		Proposals,
+		Neurons,
+		fallback_controller_principals: fallbackControllerPrincipalIds,
+		dapp_canisters: dappCanisters,
+		Swap,
+		Distribution
+	},
+	logo
+}: {
+	yaml: SnsYaml;
+	logo: string;
+}): CreateServiceNervousSystem => {
 	return {
 		name,
 		url,
 		description,
-		logo: undefined, // TODO
+		logo: {
+			base64Encoding: logo
+		},
 		ledgerParameters: {
 			transactionFee: mapTokens(Token.transaction_fee),
 			tokenSymbol: Token.symbol,
-			tokenLogo: undefined, // TODO
+			tokenLogo: {
+				base64Encoding: logo
+			},
 			tokenName: Token.name
 		},
 		governanceParameters: {

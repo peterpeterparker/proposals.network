@@ -98,9 +98,7 @@ export const uploadSnsFile = async ({
 	}
 };
 
-export const mapSnsYaml = async (
-	file: Blob
-): Promise<{ result: 'ok' | 'error'; yaml?: SnsYaml }> => {
+const blobToString = async (file: Blob): Promise<string> => {
 	const reader = new FileReader();
 	await new Promise((resolve, reject) => {
 		reader.onload = resolve;
@@ -108,7 +106,23 @@ export const mapSnsYaml = async (
 		reader.readAsText(file);
 	});
 
-	const dataURL = reader?.result as string;
+	return reader?.result as string;
+}
+
+export const mapSnsYaml = async (
+	file: Blob
+): Promise<{ result: 'ok' | 'error'; yaml?: SnsYaml }> => {
+	let dataURL: string;
+
+	try {
+		dataURL = await blobToString(file);
+	} catch (err: unknown) {
+		toasts.error({
+			msg: { text: 'The Yaml file cannot be parsed to a readable string.' },
+			err
+		});
+		return { result: 'error' };
+	}
 
 	let json: unknown;
 
@@ -186,7 +200,7 @@ export const assertCreateServiceNervousSystemAssets = async (
 
 export const getSnsData = async (
 	key: ProposalKey
-): Promise<{ result: 'ok' | 'error'; yaml?: SnsYaml }> => {
+): Promise<{ result: 'ok' | 'error'; yaml?: SnsYaml, logo?: string }> => {
 	const assets = await getEditableAssets();
 
 	if (isNullish(assets)) {
@@ -213,8 +227,22 @@ export const getSnsData = async (
 		return { result: 'error' };
 	}
 
+	const logoFullPath = snsAssetFullPath({
+		key,
+		extension: 'png',
+		collection: 'sns-logo'
+	});
+
+	const logoAsset = assets?.find(({ fullPath }) => fullPath === logoFullPath);
+
+	if (isNullish(logoAsset)) {
+		toasts.error({ msg: { text: 'No logo file has been uploaded.' } });
+		return { result: 'error' };
+	}
+
 	return {
 		result: 'ok',
-		yaml
+		yaml,
+		logo: await blobToString(logoAsset.file)
 	};
 };

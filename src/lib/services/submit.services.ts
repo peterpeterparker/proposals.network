@@ -356,9 +356,9 @@ export const submitCreateServiceNervousSystemProposal = async ({
 			return { result: 'error' };
 		}
 
-		const { result, yaml } = await getSnsData(key);
+		const { result, yaml, logo } = await getSnsData(key);
 
-		if (result === 'error' || isNullish(yaml)) {
+		if (result === 'error' || isNullish(yaml) || isNullish(logo)) {
 			return { result: 'error' };
 		}
 
@@ -380,7 +380,7 @@ export const submitCreateServiceNervousSystemProposal = async ({
 			summary: content,
 			neuronId,
 			governance,
-			createSns: mapSnsYamlToCreateServiceNervousSystem(yaml)
+			createSns: mapSnsYamlToCreateServiceNervousSystem({yaml, logo})
 		});
 	};
 
