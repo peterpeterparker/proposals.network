@@ -1,17 +1,59 @@
+import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
 import { snsYaml } from '$lib/types/sns';
+import type { UserOption } from '$lib/types/user';
+import { fromNullable, isNullish, nonNullish } from '@dfinity/utils';
+import { downloadUrl, getAsset, uploadFile } from '@junobuild/core-peer';
+import { nanoid } from 'nanoid';
 import { parse } from 'yaml';
-import {isNullish} from "@dfinity/utils";
-import type {UserOption} from "$lib/types/user";
-import {busy} from "$lib/stores/busy.store";
-import {type Asset, uploadFile} from "@junobuild/core-peer";
-import {nanoid} from "nanoid";
 
-export const uploadSnsYaml = async ({user, routeKey, file}: {
+export const getSnsYaml = async (
+	routeKey: string | undefined | null
+): Promise<{ result: 'ok' | 'error'; downloadUrl?: string | undefined }> => {
+	if (isNullish(routeKey)) {
+		toasts.error({
+			msg: {
+				text: 'No route key is provided, therefore the Yaml file cannot be fetched.'
+			}
+		});
+		return { result: 'error' };
+	}
+
+	try {
+		const asset = await getAsset({
+			collection: 'sns-yaml',
+			fullPath: `/sns-yaml/${routeKey}.yaml`
+		});
+
+		return {
+			result: 'ok',
+			...(nonNullish(asset) && {
+				downloadUrl: downloadUrl({
+					assetKey: {
+						fullPath: asset.key.full_path,
+						token: fromNullable(asset.key.token)
+					}
+				})
+			})
+		};
+	} catch (err: unknown) {
+		toasts.error({
+			msg: { text: 'Something went wrong while getting your neuron metadata.' },
+			err
+		});
+		return { result: 'error' };
+	}
+};
+
+export const uploadSnsYaml = async ({
+	user,
+	routeKey,
+	file
+}: {
 	user: UserOption;
-	file: File
+	file: File;
 	routeKey: string | undefined | null;
-}): Promise<{ result: 'ok' | 'error', downloadUrl?: string }> => {
+}): Promise<{ result: 'ok' | 'error'; downloadUrl?: string }> => {
 	if (isNullish(user)) {
 		toasts.error({
 			msg: { text: 'You are not signed in.' }
@@ -28,24 +70,24 @@ export const uploadSnsYaml = async ({user, routeKey, file}: {
 		return { result: 'error' };
 	}
 
-	const {result} = await assertSnsYaml(file);
+	const { result } = await assertSnsYaml(file);
 
-	if (result === "error") {
-		return {result};
+	if (result === 'error') {
+		return { result };
 	}
 
 	busy.start();
 
 	try {
-		const {downloadUrl} = await uploadFile({
-			collection: "sns-yaml",
+		const { downloadUrl } = await uploadFile({
+			collection: 'sns-yaml',
 			data: file,
 			fullPath: `/sns-yaml/${routeKey}.yaml`,
 			token: nanoid()
 		});
 
 		toasts.show({
-			text: "Your Yaml file is valid and saved. Well done. 👍",
+			text: 'Your Yaml file is valid and saved. Well done. 👍',
 			level: 'info',
 			duration: 2000
 		});
@@ -60,8 +102,7 @@ export const uploadSnsYaml = async ({user, routeKey, file}: {
 	} finally {
 		busy.stop();
 	}
-
-}
+};
 
 const assertSnsYaml = async (file: File): Promise<{ result: 'ok' | 'error' }> => {
 	const reader = new FileReader();

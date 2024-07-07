@@ -1,11 +1,11 @@
 <script lang="ts">
 	import SubmitTitle from '$lib/components/submit/SubmitTitle.svelte';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
-	import { getContext } from 'svelte';
+	import { getContext, onMount } from 'svelte';
 	import SubmitWriteContent from '$lib/components/submit/SubmitWriteContent.svelte';
 	import InputFile from '$lib/components/ui/InputFile.svelte';
 	import { debounce, isNullish } from '@dfinity/utils';
-	import { uploadSnsYaml } from '$lib/services/sns.services';
+	import { getSnsYaml, uploadSnsYaml } from '$lib/services/sns.services';
 	import { routeKey } from '$lib/derived/nav.derived';
 	import { userStore } from '$lib/stores/user.store';
 
@@ -14,12 +14,17 @@
 	let downloadUrl: string | undefined;
 	let parametersFile: File | undefined;
 
+	onMount(async () => {
+		const { downloadUrl: url } = await getSnsYaml($routeKey);
+		downloadUrl = url;
+	});
+
 	const saveYaml = async () => {
 		if (isNullish(parametersFile)) {
 			return;
 		}
 
-		const {downloadUrl: url} = await uploadSnsYaml({
+		const { downloadUrl: url } = await uploadSnsYaml({
 			routeKey: $routeKey,
 			file: parametersFile,
 			user: $userStore
@@ -42,6 +47,10 @@
 
 <SubmitWriteContent>
 	<svelte:fragment slot="before">
-		<InputFile bind:file={parametersFile} placeholder="Initial parameters (.yaml file)" />
+		<InputFile
+			bind:file={parametersFile}
+			{downloadUrl}
+			placeholder="Initial parameters (.yaml file)"
+		/>
 	</svelte:fragment>
 </SubmitWriteContent>
