@@ -8,12 +8,20 @@ import type {
 } from '@dfinity/nns/dist/types/types/governance_converters';
 import { isNullish, nonNullish } from '@dfinity/utils';
 
-const mapTokens = (fee: string): Tokens => ({
-	e8s: BigInt(fee.replace('e8s', '').trim())
+const mapTokens = (value: string): Tokens => ({
+	e8s: BigInt(
+		value
+			.toLowerCase()
+			.replace('e8s', '')
+			.replace('tokens', '')
+			.replace('token', '')
+			.replaceAll('_', '')
+			.trim()
+	)
 });
 
 const mapPercentage = (percentage: string): Percentage => ({
-	basisPoints: BigInt(percentage.replace('%', '').trim())
+	basisPoints: BigInt(Number(percentage.toLowerCase().replace('%', '').trim()) * 100)
 });
 
 const mapDuration = (duration: string): Duration => {
@@ -115,6 +123,7 @@ export const mapSnsYamlToCreateServiceNervousSystem = ({
 	yaml: SnsYaml;
 	logo: string;
 }): CreateServiceNervousSystem => {
+
 	return {
 		name,
 		url,
