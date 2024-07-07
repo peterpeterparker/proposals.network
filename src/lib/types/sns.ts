@@ -186,16 +186,18 @@ const votingSchema = z.object({
 	})
 });
 
+const neuronSchema = z.object({
+	principal: principalIdSchema,
+	stake: tokenValueSchema,
+	memo: z.number(),
+	dissolve_delay: durationSchema,
+	vesting_period: durationSchema
+});
+
+export type NeuronSchema = z.infer<typeof neuronSchema>;
+
 const distributionSchema = z.object({
-	Neurons: z
-		.object({
-			principal: principalIdSchema,
-			stake: tokenValueSchema,
-			memo: z.number(),
-			dissolve_delay: durationSchema,
-			vesting_period: durationSchema
-		})
-		.array(),
+	Neurons: neuronSchema.array(),
 	InitialBalances: z.object({
 		governance: tokenValueSchema,
 		swap: tokenValueSchema

@@ -1,7 +1,12 @@
-import { type SnsYaml } from '$lib/types/sns';
+import { type NeuronSchema, type SnsYaml } from '$lib/types/sns';
 import type { CreateServiceNervousSystem, Tokens } from '@dfinity/nns';
-import type { Duration, Percentage } from '@dfinity/nns/dist/types/types/governance_converters';
-import { isNullish } from '@dfinity/utils';
+import type {
+	Duration,
+	GlobalTimeOfDay,
+	NeuronDistribution,
+	Percentage
+} from '@dfinity/nns/dist/types/types/governance_converters';
+import { isNullish, nonNullish } from '@dfinity/utils';
 
 const mapTokens = (fee: string): Tokens => ({
 	e8s: BigInt(fee.replace('e8s', '').trim())
@@ -68,6 +73,28 @@ const mapDuration = (duration: string): Duration => {
 	};
 };
 
+const mapTimeOfDay = (timeOfDay: string): GlobalTimeOfDay => {
+	const [hours, minutes] = timeOfDay.split(' ')[0].split(':').map(Number);
+
+	return {
+		secondsAfterUtcMidnight: BigInt(hours * 3600 + minutes * 60)
+	};
+};
+
+const mapNeuron = ({
+	principal,
+	memo,
+	stake,
+	dissolve_delay,
+	vesting_period
+}: NeuronSchema): NeuronDistribution => ({
+	controller: principal,
+	memo: BigInt(memo),
+	stake: mapTokens(stake),
+	dissolveDelay: mapDuration(dissolve_delay),
+	vestingPeriod: mapDuration(vesting_period)
+});
+
 // Map source: https://github.com/dfinity/ic/blob/17df8febdb922c3981475035d830f09d9b990a5a/rs/registry/admin/src/main.rs#L2592
 export const mapSnsYamlToCreateServiceNervousSystem = ({
 	name,
@@ -79,7 +106,8 @@ export const mapSnsYamlToCreateServiceNervousSystem = ({
 	Neurons,
 	fallback_controller_principals: fallbackControllerPrincipalIds,
 	dapp_canisters: dappCanisters,
-	Swap
+	Swap,
+	Distribution
 }: SnsYaml): CreateServiceNervousSystem => {
 	return {
 		name,
@@ -121,7 +149,31 @@ export const mapSnsYamlToCreateServiceNervousSystem = ({
 			duration: mapDuration(Swap.duration),
 			neuronBasketConstructionParameters: undefined,
 			confirmationText: Swap.confirmation_text,
-			maximumParticipantIcp: mapTokens(Swap.maximum_participant_icp)
+			maximumParticipantIcp: mapTokens(Swap.maximum_participant_icp),
+			neuronsFundInvestmentIcp: undefined,
+			minimumIcp: undefined,
+			minimumParticipantIcp: mapTokens(Swap.minimum_participant_icp),
+			startTime: nonNullish(Swap.start_time) ? mapTimeOfDay(Swap.start_time) : undefined,
+			maximumIcp: undefined,
+			restrictedCountries: nonNullish(Swap.restricted_countries)
+				? {
+						isoCodes: Swap.restricted_countries
+					}
+				: undefined,
+			maxDirectParticipationIcp: mapTokens(Swap.maximum_direct_participation_icp),
+			minDirectParticipationIcp: mapTokens(Swap.minimum_direct_participation_icp),
+			neuronsFundParticipation: Swap.neurons_fund_participation
+		},
+		initialTokenDistribution: {
+			swapDistribution: {
+				total: mapTokens(Distribution.InitialBalances.swap)
+			},
+			treasuryDistribution: {
+				total: mapTokens(Distribution.InitialBalances.governance)
+			},
+			developerDistribution: {
+				developerNeurons: Distribution.Neurons.map(mapNeuron)
+			}
 		}
 	};
 };
