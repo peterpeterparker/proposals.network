@@ -34,7 +34,7 @@ Uninstall (if you previously installed the extension) and install the NNS extens
 
 ```
 dfx extension uninstall nns
-dfx extension install nns
+dfx extension install nns --version 0.4.1
 ```
 
 Run following command to finally install all the NNS canisters.
