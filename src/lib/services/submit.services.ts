@@ -12,6 +12,7 @@ import {
 	submitMotionProposal as submitMotionProposalApi,
 	type ProposalParams
 } from '$lib/services/proposal.services';
+import { mapSnsYamlToCreateServiceNervousSystem } from '$lib/services/proposal.sns.services';
 import { getSnsData, snsAssetFullPath } from '$lib/services/submit.sns.services';
 import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
@@ -378,7 +379,8 @@ export const submitCreateServiceNervousSystemProposal = async ({
 			url,
 			summary: content,
 			neuronId,
-			governance
+			governance,
+			createSns: mapSnsYamlToCreateServiceNervousSystem(yaml)
 		});
 	};
 
