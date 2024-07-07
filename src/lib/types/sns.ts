@@ -252,7 +252,7 @@ export const snsYaml = z.object({
 	logo: z.string().optional(),
 	url: urlSchema,
 	NnsProposal: nnsProposalSchema,
-	fallback_controller_principals: z.array(principalIdSchema),
+	fallback_controller_principals: z.array(principalIdSchema).min(1),
 	dapp_canisters: z.array(principalIdSchema),
 	Token: tokenSchema,
 	Proposals: proposalsSchema,
