@@ -259,3 +259,5 @@ export const snsYaml = z.object({
 	Distribution: distributionSchema,
 	Swap: swapSchema
 });
+
+export type SnsYaml = z.infer<typeof snsYaml>;

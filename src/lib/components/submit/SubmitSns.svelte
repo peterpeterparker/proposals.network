@@ -2,7 +2,7 @@
 	import SubmitTitle from '$lib/components/submit/SubmitTitle.svelte';
 	import SubmitWriteContent from '$lib/components/submit/SubmitWriteContent.svelte';
 	import SubmitSnsAttachFile from '$lib/components/submit/SubmitSnsAttachFile.svelte';
-	import { assertSnsYaml } from '$lib/services/submit.sns.services';
+	import { mapSnsYaml } from '$lib/services/submit.sns.services';
 </script>
 
 <SubmitTitle>Propose Your SNS</SubmitTitle>
@@ -18,7 +18,7 @@
 			placeholder="Initial parameters (Yaml file)"
 			extension="yaml"
 			collection="sns-parameters"
-			assert={assertSnsYaml}
+			assert={mapSnsYaml}
 			accept=".yml,.yaml"
 		/>
 

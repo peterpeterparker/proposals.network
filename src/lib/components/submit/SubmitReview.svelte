@@ -9,7 +9,8 @@
 	import { getEditable } from '$lib/services/idb.services';
 	import {
 		submitMotionProposal,
-		submitAddNodeProviderProposal
+		submitAddNodeProviderProposal,
+		submitCreateServiceNervousSystemProposal
 	} from '$lib/services/submit.services';
 	import { userStore } from '$lib/stores/user.store';
 	import { governanceStore } from '$lib/derived/governance.derived';
@@ -37,12 +38,15 @@
 		const submitProposal =
 			$store?.metadata?.proposalAction === 'AddOrRemoveNodeProvider'
 				? submitAddNodeProviderProposal
-				: submitMotionProposal;
+				: $store?.metadata?.proposalAction === 'CreateServiceNervousSystem'
+					? submitCreateServiceNervousSystemProposal
+					: submitMotionProposal;
 
 		const { result, proposalId } = await submitProposal({
 			user: $userStore,
 			neuronId,
-			governance: $governanceStore
+			governance: $governanceStore,
+			key: $store?.key
 		});
 
 		if (result === 'error') {

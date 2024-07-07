@@ -3,7 +3,7 @@ import { getEditableAssets, setAsset } from '$lib/services/idb.services';
 import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
 import type { ProposalKey, StorageSnsCollections } from '$lib/types/juno';
-import { snsYaml } from '$lib/types/sns';
+import { type SnsYaml, snsYaml } from '$lib/types/sns';
 import type { UserOption } from '$lib/types/user';
 import { isNullish } from '@dfinity/utils';
 import { uploadFile } from '@junobuild/core-peer';
@@ -15,7 +15,7 @@ export const snsAssetFullPath = ({
 	collection,
 	extension
 }: {
-	key: ProposalKey | undefined | null;
+	key: ProposalKey;
 	collection: StorageSnsCollections;
 	extension: 'yaml' | 'png';
 }): string => `/${collection}/${key}.${extension}`;
@@ -98,7 +98,9 @@ export const uploadSnsFile = async ({
 	}
 };
 
-export const assertSnsYaml = async (file: File): Promise<{ result: 'ok' | 'error' }> => {
+export const mapSnsYaml = async (
+	file: Blob
+): Promise<{ result: 'ok' | 'error'; yaml?: SnsYaml }> => {
 	const reader = new FileReader();
 	await new Promise((resolve, reject) => {
 		reader.onload = resolve;
@@ -121,7 +123,8 @@ export const assertSnsYaml = async (file: File): Promise<{ result: 'ok' | 'error
 	}
 
 	try {
-		snsYaml.parse(json);
+		const yaml = snsYaml.parse(json);
+		return { result: 'ok', yaml };
 	} catch (err: unknown) {
 		toasts.error({
 			msg: {
@@ -131,8 +134,6 @@ export const assertSnsYaml = async (file: File): Promise<{ result: 'ok' | 'error
 		});
 		return { result: 'error' };
 	}
-
-	return { result: 'ok' };
 };
 
 export const assertCreateServiceNervousSystemAssets = async (
@@ -181,4 +182,39 @@ export const assertCreateServiceNervousSystemAssets = async (
 	}
 
 	return { valid: true };
+};
+
+export const getSnsData = async (
+	key: ProposalKey
+): Promise<{ result: 'ok' | 'error'; yaml?: SnsYaml }> => {
+	const assets = await getEditableAssets();
+
+	if (isNullish(assets)) {
+		toasts.error({ msg: { text: 'No assets have been uploaded.' } });
+		return { result: 'error' };
+	}
+
+	const yamlFullPath = snsAssetFullPath({
+		key,
+		extension: 'yaml',
+		collection: 'sns-parameters'
+	});
+
+	const yamlAsset = assets?.find(({ fullPath }) => fullPath === yamlFullPath);
+
+	if (isNullish(yamlAsset)) {
+		toasts.error({ msg: { text: 'No Yaml file has been uploaded.' } });
+		return { result: 'error' };
+	}
+
+	const { result, yaml } = await mapSnsYaml(yamlAsset.file);
+
+	if (result === 'error' || isNullish(yaml)) {
+		return { result: 'error' };
+	}
+
+	return {
+		result: 'ok',
+		yaml
+	};
 };

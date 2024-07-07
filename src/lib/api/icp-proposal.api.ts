@@ -1,8 +1,9 @@
 import { getAgent } from '$lib/api/agent.api';
 import { GOVERNANCE_CANISTER_ID, NETWORK_PAGINATION } from '$lib/constants/app.constants';
-import type {
-	AddNodeProviderProposalParams,
-	MotionProposalParams
+import {
+	type AddNodeProviderProposalParams,
+	type CreateServiceNervousSystemParams,
+	type MotionProposalParams
 } from '$lib/services/proposal.services';
 import { enumsExclude } from '$lib/utils/enum.utils';
 import { AnonymousIdentity } from '@dfinity/agent';
@@ -81,6 +82,13 @@ export const makeAddNodeProviderProposal = async (
 	return makeProposal(request);
 };
 
+export const makeCreateServiceNervousSystemProposal = async (
+	params: Omit<CreateServiceNervousSystemParams, 'governance'>
+): Promise<ProposalId | undefined> => {
+	const request = makeCreateServiceNervousSystemRequest(params);
+	return makeProposal(request);
+};
+
 const makeProposal = async (request: MakeProposalRequest): Promise<ProposalId | undefined> => {
 	assertNonNullish(GOVERNANCE_CANISTER_ID, 'The ICP governance canister ID is not set.');
 
@@ -123,6 +131,18 @@ const makeNodeProviderProposalRequest = ({
 				}
 			}
 		}
+	},
+	neuronId: BigInt(neuronId),
+	...rest
+});
+
+const makeCreateServiceNervousSystemRequest = ({
+	createSns,
+	neuronId,
+	...rest
+}: Omit<CreateServiceNervousSystemParams, 'governance'>): MakeProposalRequest => ({
+	action: {
+		CreateServiceNervousSystem: createSns
 	},
 	neuronId: BigInt(neuronId),
 	...rest

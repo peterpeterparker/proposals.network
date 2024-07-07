@@ -8,10 +8,11 @@ import {
 } from '$lib/services/idb.services';
 import {
 	submitAddNodeProviderProposal as submitAddNodeProviderProposalApi,
+	submitCreateServiceNervousSystemProposal as submitCreateServiceNervousSystemProposalApi,
 	submitMotionProposal as submitMotionProposalApi,
 	type ProposalParams
 } from '$lib/services/proposal.services';
-import { snsAssetFullPath } from '$lib/services/submit.sns.services';
+import { getSnsData, snsAssetFullPath } from '$lib/services/submit.sns.services';
 import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
 import type {
@@ -241,6 +242,7 @@ export const submitMotionProposal = async ({
 	...rest
 }: {
 	user: UserOption;
+	key: ProposalKey | undefined | null;
 } & Partial<Pick<ProposalParams, 'neuronId' | 'governance'>>): Promise<SubmitProposalResult> => {
 	const submit = async ({
 		metadata,
@@ -290,6 +292,7 @@ export const submitAddNodeProviderProposal = async ({
 	...rest
 }: {
 	user: UserOption;
+	key: ProposalKey | undefined | null;
 } & Partial<Pick<ProposalParams, 'neuronId' | 'governance'>>): Promise<SubmitProposalResult> => {
 	const submit = async ({
 		metadata,
@@ -316,6 +319,64 @@ export const submitAddNodeProviderProposal = async ({
 			id: nodeProviderId,
 			rewardAccount: undefined,
 			summary,
+			neuronId,
+			governance
+		});
+	};
+
+	return submitProposal({
+		neuronId,
+		fn: submit,
+		...rest
+	});
+};
+
+export const submitCreateServiceNervousSystemProposal = async ({
+	neuronId,
+	governance,
+	key,
+	...rest
+}: {
+	user: UserOption;
+	key: ProposalKey | undefined | null;
+} & Partial<Pick<ProposalParams, 'neuronId' | 'governance'>>): Promise<SubmitProposalResult> => {
+	const submit = async ({
+		neuronId
+	}: { metadata: ProposalEditableMetadata } & Pick<
+		ProposalParams,
+		'neuronId'
+	>): Promise<SubmitProposalResult> => {
+		if (isNullish(key)) {
+			toasts.error({
+				msg: {
+					text: 'No key is provided, therefore the proposal cannot be submitted.'
+				}
+			});
+			return { result: 'error' };
+		}
+
+		const { result, yaml } = await getSnsData(key);
+
+		if (result === 'error' || isNullish(yaml)) {
+			return { result: 'error' };
+		}
+
+		const title = `NNS Proposal to create an SNS named '${yaml.name}'`;
+		const url = yaml.url;
+
+		const [_, content, __] = await getEditable();
+
+		if (isNullish(content)) {
+			toasts.error({
+				msg: { text: 'No content to submit the proposal.' }
+			});
+			return { result: 'error' };
+		}
+
+		return submitCreateServiceNervousSystemProposalApi({
+			title,
+			url,
+			summary: content,
 			neuronId,
 			governance
 		});
