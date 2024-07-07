@@ -1,5 +1,5 @@
 import { DEV } from '$lib/constants/app.constants';
-import { setAsset } from '$lib/services/idb.services';
+import { getEditableAssets, setAsset } from '$lib/services/idb.services';
 import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
 import type { ProposalKey, StorageSnsCollections } from '$lib/types/juno';
@@ -133,4 +133,52 @@ export const assertSnsYaml = async (file: File): Promise<{ result: 'ok' | 'error
 	}
 
 	return { result: 'ok' };
+};
+
+export const assertCreateServiceNervousSystemAssets = async (
+	key: ProposalKey | undefined | null
+): Promise<{ valid: boolean }> => {
+	const assets = await getEditableAssets();
+
+	if (isNullish(assets)) {
+		toasts.error({ msg: { text: 'No assets have been uploaded.' } });
+		return { valid: false };
+	}
+
+	if (isNullish(key)) {
+		toasts.error({
+			msg: {
+				text: 'No key is provided, therefore the files cannot be asserted.'
+			}
+		});
+		return { valid: false };
+	}
+
+	const yamlFullPath = snsAssetFullPath({
+		key,
+		extension: 'yaml',
+		collection: 'sns-parameters'
+	});
+
+	const yamlAsset = assets?.find(({ fullPath }) => fullPath === yamlFullPath);
+
+	if (isNullish(yamlAsset)) {
+		toasts.error({ msg: { text: 'No Yaml file has been uploaded.' } });
+		return { valid: false };
+	}
+
+	const logoFullPath = snsAssetFullPath({
+		key,
+		extension: 'png',
+		collection: 'sns-logo'
+	});
+
+	const logoAsset = assets?.find(({ fullPath }) => fullPath === logoFullPath);
+
+	if (isNullish(logoAsset)) {
+		toasts.error({ msg: { text: 'No logo file has been uploaded.' } });
+		return { valid: false };
+	}
+
+	return { valid: true };
 };
