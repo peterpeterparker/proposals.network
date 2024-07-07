@@ -1,9 +1,13 @@
 <script lang="ts">
 	import InputPlaceholder from '$lib/components/ui/InputPlaceholder.svelte';
+	import { isNullish } from '@dfinity/utils';
+	import { fade } from 'svelte/transition';
+	import AttachmentLink from "$lib/components/ui/AttachmentLink.svelte";
 
 	export let placeholder: string;
 	export let file: File | undefined;
 	export let disabled = false;
+	export let downloadUrl: string | undefined = undefined;
 
 	const onChange = (event: Event) => {
 		const target = event.target as unknown as { files: File[] };
@@ -21,4 +25,14 @@
 		class="p-2.5 focus:outline-none w-full placeholder-black"
 		accept=".yml,.yaml"
 	/>
+
+	<p class="px-2.5 pt-1 pb-2.5 text-xs">
+		{#if isNullish(downloadUrl)}
+			&ZeroWidthSpace;
+		{:else}
+			<span in:fade class="block">
+				<AttachmentLink href={downloadUrl}>File attached.</AttachmentLink>
+			</span>
+		{/if}
+	</p>
 </InputPlaceholder>
