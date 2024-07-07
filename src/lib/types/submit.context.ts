@@ -1,4 +1,4 @@
-import type {ProposalEditableMetadata, ProposalKey} from '$lib/types/juno';
+import type { ProposalEditableMetadata, ProposalKey } from '$lib/types/juno';
 import type { Writable } from 'svelte/store';
 
 export interface SubmitStore {

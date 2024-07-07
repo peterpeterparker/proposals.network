@@ -2,13 +2,13 @@
 	export let href: string;
 	export let ariaLabel = '';
 	export let underline: 'hover' | 'visible' = 'visible';
-    export let target: "_blank" | undefined = undefined;
+	export let target: '_blank' | undefined = undefined;
 </script>
 
 <a
 	{href}
 	rel="nofollow noopener noreferrer"
-    {target}
+	{target}
 	aria-label={ariaLabel}
 	title={ariaLabel}
 	class="inline-flex items-center gap-0.5 max-w-full"

@@ -21,9 +21,9 @@
 
 		const { downloadUrl: url } = await getSnsYaml($store.key);
 		downloadUrl = url;
-	}
+	};
 
-	$: $store, (async () => await mount())()
+	$: $store, (async () => await mount())();
 
 	const saveYaml = async () => {
 		if (isNullish(parametersFile)) {

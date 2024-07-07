@@ -2,7 +2,7 @@
 	import InputPlaceholder from '$lib/components/ui/InputPlaceholder.svelte';
 	import { isNullish } from '@dfinity/utils';
 	import { fade } from 'svelte/transition';
-	import AttachmentLink from "$lib/components/ui/AttachmentLink.svelte";
+	import AttachmentLink from '$lib/components/ui/AttachmentLink.svelte';
 
 	export let placeholder: string;
 	export let file: File | undefined;

@@ -1,12 +1,12 @@
 import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
+import type { ProposalKey } from '$lib/types/juno';
 import { snsYaml } from '$lib/types/sns';
 import type { UserOption } from '$lib/types/user';
 import { fromNullable, isNullish, nonNullish } from '@dfinity/utils';
 import { downloadUrl, getAsset, uploadFile } from '@junobuild/core-peer';
 import { nanoid } from 'nanoid';
 import { parse } from 'yaml';
-import type {ProposalKey} from "$lib/types/juno";
 
 export const getSnsYaml = async (
 	key: ProposalKey | undefined | null
