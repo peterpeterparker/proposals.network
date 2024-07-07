@@ -164,7 +164,10 @@ export const mapSnsYamlToCreateServiceNervousSystem = ({
 	swapParameters: {
 		minimumParticipants: BigInt(Swap.minimum_participants),
 		duration: mapDuration(Swap.duration),
-		neuronBasketConstructionParameters: undefined,
+		neuronBasketConstructionParameters: {
+			count: BigInt(Swap.VestingSchedule.events),
+			dissolveDelayInterval: mapDuration(Swap.VestingSchedule.interval)
+		},
 		confirmationText: Swap.confirmation_text,
 		maximumParticipantIcp: mapTokens(Swap.maximum_participant_icp),
 		neuronsFundInvestmentIcp: undefined,
