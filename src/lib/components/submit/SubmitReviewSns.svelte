@@ -5,7 +5,6 @@
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import { getContext } from 'svelte';
 	import AttachmentLink from '$lib/components/ui/AttachmentLink.svelte';
-	import { downloadUrl } from '@junobuild/core-peer';
 
 	export let content: ProposalContent | undefined;
 
@@ -17,7 +16,7 @@
 <Container>
 	<aside slot="title">Initial parameters</aside>
 	<article class="p-2.5">
-		<AttachmentLink href={$assets?.['sns-yaml'] ?? ''}>File attached.</AttachmentLink>
+		<AttachmentLink href={$assets?.['sns-parameters'] ?? ''}>File attached.</AttachmentLink>
 	</article>
 </Container>
 

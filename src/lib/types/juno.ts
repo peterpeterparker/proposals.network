@@ -36,6 +36,6 @@ export type ProposalMetadataDoc = Doc<ProposalMetadata>;
 
 export type Neuron = Record<GovernanceCanisterId, (string | bigint)[]>;
 
-export type StorageSnsYamlCollection = 'sns-yaml';
+export type StorageSnsYamlCollection = 'sns-parameters';
 export type StorageSnsPngCollection = 'sns-logo';
 export type StorageSnsCollections = StorageSnsYamlCollection | StorageSnsPngCollection;

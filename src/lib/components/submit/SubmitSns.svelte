@@ -17,7 +17,7 @@
 		<SubmitSnsAttach
 			placeholder="Initial parameters (Yaml file)"
 			extension="yaml"
-			collection="sns-yaml"
+			collection="sns-parameters"
 			assert={assertSnsYaml}
 			accept=".yml,.yaml"
 		/>
