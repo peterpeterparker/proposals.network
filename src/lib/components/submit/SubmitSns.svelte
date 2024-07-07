@@ -28,6 +28,7 @@
 			collection="sns-logo"
 			assert={async () => ({ result: 'ok' })}
 			accept="image/png"
+			linkTarget="_blank"
 		/>
 	</svelte:fragment>
 </SubmitWriteContent>

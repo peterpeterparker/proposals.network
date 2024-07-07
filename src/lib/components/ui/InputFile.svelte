@@ -9,6 +9,7 @@
 	export let disabled = false;
 	export let downloadUrl: string | undefined = undefined;
 	export let accept: string | undefined;
+	export let linkTarget: '_blank' | undefined = undefined;
 
 	const onChange = (event: Event) => {
 		const target = event.target as unknown as { files: File[] };
@@ -32,7 +33,7 @@
 			&ZeroWidthSpace;
 		{:else}
 			<span in:fade class="block">
-				<AttachmentLink href={downloadUrl}>File attached.</AttachmentLink>
+				<AttachmentLink href={downloadUrl} target={linkTarget}>File attached.</AttachmentLink>
 			</span>
 		{/if}
 	</p>

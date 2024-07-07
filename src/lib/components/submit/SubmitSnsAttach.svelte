@@ -9,8 +9,9 @@
 	export let placeholder: string;
 	export let collection: string;
 	export let extension: 'yaml' | 'png';
-    export let accept: string;
+	export let accept: string;
 	export let assert: (file: File) => Promise<{ result: 'ok' | 'error' }>;
+	export let linkTarget: '_blank' | undefined = undefined;
 
 	const { store }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
@@ -25,7 +26,7 @@
 		const { downloadUrl: url } = await getDownloadUrl({
 			key: $store.key,
 			collection,
-            extension
+			extension
 		});
 
 		downloadUrl = url;
@@ -55,4 +56,4 @@
 	$: file, (() => debounceSaveYaml())();
 </script>
 
-<InputFile bind:file {downloadUrl} {placeholder} {accept} />
+<InputFile bind:file {downloadUrl} {placeholder} {accept} {linkTarget} />

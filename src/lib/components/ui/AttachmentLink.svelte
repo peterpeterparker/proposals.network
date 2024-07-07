@@ -4,9 +4,10 @@
 
 	export let href: string;
 	export let ariaLabel = '';
+	export let target: '_blank' | undefined = undefined;
 </script>
 
-<Link {href} {ariaLabel} underline="hover">
+<Link {href} {ariaLabel} {target} underline="hover">
 	<IconAttach />
 
 	<span class="inline-block truncate"><slot /></span>
