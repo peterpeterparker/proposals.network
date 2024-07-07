@@ -302,16 +302,15 @@ export const submitAddNodeProviderProposal = async ({
 		ProposalParams,
 		'neuronId'
 	>): Promise<SubmitProposalResult> => {
-		const { url, nodeProviderId } = metadata;
+		const { url, nodeProviderId, title } = metadata;
 
-		if (isNullish(url) || isNullish(nodeProviderId)) {
+		if (isNullish(url) || isNullish(nodeProviderId) || isNullish(title)) {
 			toasts.error({
-				msg: { text: 'No url or node provider ID to submit the proposal.' }
+				msg: { text: 'No title, url or node provider ID to submit the proposal.' }
 			});
 			return { result: 'error' };
 		}
 
-		const title = `Add Node Provider: ${metadata?.nodeProviderName}`;
 		const summary = `Register a node provider '${metadata?.nodeProviderName}', in line with the announcement and discussion at [${metadata?.url}](${metadata?.url}).\n\nThe self-declaration documentation is available at [${metadata?.urlSelfDeclaration}](${metadata?.urlSelfDeclaration}) with SHA256 hash \`${metadata?.hashSelfDeclaration}\`.\n\nThe proof of identity is available at [${metadata?.urlIdentityProof}](${metadata?.urlIdentityProof}) with SHA256 hash \`${metadata?.hashIdentityProof}\`.`;
 
 		return submitAddNodeProviderProposalApi({
