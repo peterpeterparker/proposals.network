@@ -107,7 +107,18 @@ const blobToString = async (file: Blob): Promise<string> => {
 	});
 
 	return reader?.result as string;
-}
+};
+
+const blobToDataURL = async (file: Blob): Promise<string> => {
+	const reader = new FileReader();
+	await new Promise((resolve, reject) => {
+		reader.onload = resolve;
+		reader.onerror = reject;
+		reader.readAsDataURL(file);
+	});
+
+	return reader?.result as string;
+};
 
 export const mapSnsYaml = async (
 	file: Blob
@@ -200,7 +211,7 @@ export const assertCreateServiceNervousSystemAssets = async (
 
 export const getSnsData = async (
 	key: ProposalKey
-): Promise<{ result: 'ok' | 'error'; yaml?: SnsYaml, logo?: string }> => {
+): Promise<{ result: 'ok' | 'error'; yaml?: SnsYaml; logo?: string }> => {
 	const assets = await getEditableAssets();
 
 	if (isNullish(assets)) {
@@ -243,6 +254,6 @@ export const getSnsData = async (
 	return {
 		result: 'ok',
 		yaml,
-		logo: await blobToString(logoAsset.file)
+		logo: await blobToDataURL(logoAsset.file)
 	};
 };
