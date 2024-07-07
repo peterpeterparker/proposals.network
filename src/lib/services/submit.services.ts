@@ -11,19 +11,22 @@ import {
 	submitMotionProposal as submitMotionProposalApi,
 	type ProposalParams
 } from '$lib/services/proposal.services';
+import { snsAssetFullPath } from '$lib/services/sns.services';
 import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
 import type {
+	ProposalAsset,
 	ProposalContent,
 	ProposalEditableMetadata,
 	ProposalKey,
-	ProposalMetadata
+	ProposalMetadata,
+	StorageSnsCollections
 } from '$lib/types/juno';
 import type { UserOption } from '$lib/types/user';
 import { replaceHistory } from '$lib/utils/route.utils';
 import { assertSHA256, assertUrlsFromWiki } from '$lib/utils/submit.node-provider.utils';
-import { isNullish, notEmptyString } from '@dfinity/utils';
-import { getDoc, setDoc, type Doc } from '@junobuild/core-peer';
+import { fromNullable, isNullish, nonNullish, notEmptyString } from '@dfinity/utils';
+import { downloadUrl, getAsset, getDoc, setDoc, type Doc } from '@junobuild/core-peer';
 import { nanoid } from 'nanoid';
 
 export const initUserProposal = async ({
@@ -53,7 +56,8 @@ export const initUserProposal = async ({
 					metadata: undefined,
 					docMetadata: undefined,
 					docContent: undefined,
-					newProposal: true
+					newProposal: true,
+					assets: undefined
 				}),
 				updateUrl(key)
 			]);
@@ -122,6 +126,11 @@ export const initUserProposal = async ({
 
 		const { data: jsonContent, ...content } = docContent;
 
+		const assets =
+			proposalAction === 'CreateServiceNervousSystem'
+				? await initUserProposalAssets({ key: routeKey })
+				: undefined;
+
 		await init({
 			key: routeKey,
 			metadata: editableMetadata,
@@ -131,7 +140,8 @@ export const initUserProposal = async ({
 				data
 			},
 			docContent: content as Omit<Doc<ProposalMetadata>, 'data'> | undefined,
-			newProposal: false
+			newProposal: false,
+			assets
 		});
 
 		return {
@@ -147,6 +157,68 @@ export const initUserProposal = async ({
 
 		return { result: 'error', metadata: undefined, content: undefined };
 	}
+};
+
+const initUserProposalAssets = async ({ key }: { key: ProposalKey }): Promise<ProposalAsset[]> => {
+	const results = await Promise.all([
+		loadAsset({
+			key,
+			extension: 'yaml',
+			collection: 'sns-parameters'
+		}),
+		loadAsset({
+			key,
+			extension: 'png',
+			collection: 'sns-logo'
+		})
+	]);
+
+	return results.filter(nonNullish);
+};
+
+const loadAsset = async ({
+	key,
+	collection,
+	extension
+}: {
+	key: ProposalKey;
+	collection: StorageSnsCollections;
+	extension: 'yaml' | 'png';
+}): Promise<ProposalAsset | undefined> => {
+	const fullPath = snsAssetFullPath({
+		key,
+		extension,
+		collection
+	});
+
+	const asset = await getAsset({
+		collection,
+		fullPath
+	});
+
+	if (isNullish(asset)) {
+		return undefined;
+	}
+
+	const assetKey = {
+		fullPath: fullPath,
+		token: fromNullable(asset.key.token)
+	};
+
+	const url = downloadUrl({
+		assetKey
+	});
+
+	const response = await fetch(url);
+
+	if (!response.ok) {
+		throw new Error(`Cannot load asset: ${fullPath}`);
+	}
+
+	return {
+		...assetKey,
+		file: await response.blob()
+	};
 };
 
 const updateUrl = async (proposalKey: string) => {

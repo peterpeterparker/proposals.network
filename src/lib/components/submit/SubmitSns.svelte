@@ -1,7 +1,7 @@
 <script lang="ts">
 	import SubmitTitle from '$lib/components/submit/SubmitTitle.svelte';
 	import SubmitWriteContent from '$lib/components/submit/SubmitWriteContent.svelte';
-	import SubmitSnsAttach from '$lib/components/submit/SubmitSnsAttach.svelte';
+	import SubmitSnsAttachFile from '$lib/components/submit/SubmitSnsAttachFile.svelte';
 	import { assertSnsYaml } from '$lib/services/sns.services';
 </script>
 
@@ -14,7 +14,7 @@
 
 <SubmitWriteContent>
 	<svelte:fragment slot="before">
-		<SubmitSnsAttach
+		<SubmitSnsAttachFile
 			placeholder="Initial parameters (Yaml file)"
 			extension="yaml"
 			collection="sns-parameters"
@@ -22,7 +22,7 @@
 			accept=".yml,.yaml"
 		/>
 
-		<SubmitSnsAttach
+		<SubmitSnsAttachFile
 			placeholder="Logo of the Dao and Token"
 			extension="png"
 			collection="sns-logo"

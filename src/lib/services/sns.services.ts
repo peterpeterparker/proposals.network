@@ -1,49 +1,24 @@
+import { DEV } from '$lib/constants/app.constants';
+import { setAsset } from '$lib/services/idb.services';
 import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
 import type { ProposalKey, StorageSnsCollections } from '$lib/types/juno';
 import { snsYaml } from '$lib/types/sns';
 import type { UserOption } from '$lib/types/user';
-import { fromNullable, isNullish, nonNullish } from '@dfinity/utils';
-import { downloadUrl, getAsset, uploadFile } from '@junobuild/core-peer';
+import { isNullish } from '@dfinity/utils';
+import { uploadFile } from '@junobuild/core-peer';
 import { nanoid } from 'nanoid';
 import { parse } from 'yaml';
 
-export const getDownloadUrl = async ({
+export const snsAssetFullPath = ({
 	key,
 	collection,
 	extension
 }: {
-	key: ProposalKey;
+	key: ProposalKey | undefined | null;
 	collection: StorageSnsCollections;
 	extension: 'yaml' | 'png';
-}): Promise<{ result: 'ok' | 'error'; downloadUrl?: string | undefined }> => {
-	const fullPath = `/${collection}/${key}.${extension}`;
-
-	try {
-		const asset = await getAsset({
-			collection,
-			fullPath
-		});
-
-		return {
-			result: 'ok',
-			...(nonNullish(asset) && {
-				downloadUrl: downloadUrl({
-					assetKey: {
-						fullPath: asset.key.full_path,
-						token: fromNullable(asset.key.token)
-					}
-				})
-			})
-		};
-	} catch (err: unknown) {
-		toasts.error({
-			msg: { text: `Something went wrong while getting the file ${fullPath}.` },
-			err
-		});
-		return { result: 'error' };
-	}
-};
+}): string => `/${collection}/${key}.${extension}`;
 
 export const uploadSnsFile = async ({
 	user,
@@ -84,14 +59,31 @@ export const uploadSnsFile = async ({
 
 	busy.start();
 
-	const fullPath = `/${collection}/${key}.${extension}`;
+	const fullPath = snsAssetFullPath({
+		key,
+		extension,
+		collection
+	});
 
 	try {
+		const {
+			location: { origin }
+		} = window;
+
+		const token = nanoid();
+
 		const { downloadUrl } = await uploadFile({
 			collection,
 			data: file,
 			fullPath,
-			token: nanoid()
+			token,
+			...(DEV && { headers: [['Access-Control-Allow-Origin', origin]] })
+		});
+
+		await setAsset({
+			file,
+			fullPath,
+			token
 		});
 
 		return { result: 'ok', downloadUrl };
