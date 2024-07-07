@@ -23,6 +23,7 @@
 	import { writable } from 'svelte/store';
 	import {
 		SUBMIT_CONTEXT_KEY,
+		type SubmitAssetsStoreData,
 		type SubmitContext,
 		type SubmitStoreData
 	} from '$lib/types/submit.context';
@@ -88,6 +89,7 @@
 	 */
 
 	const metadataStore = writable<SubmitStoreData>(undefined);
+	const assetsStore = writable<SubmitAssetsStoreData>(undefined);
 
 	const loadMetadata = async () => {
 		if (isNullish(step) || !['select', 'write', 'readonly'].includes(step)) {
@@ -107,7 +109,8 @@
 
 	setContext<SubmitContext>(SUBMIT_CONTEXT_KEY, {
 		store: metadataStore,
-		reload
+		reload,
+		assets: assetsStore
 	});
 </script>
 

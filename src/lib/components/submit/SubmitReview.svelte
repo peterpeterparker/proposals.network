@@ -18,6 +18,7 @@
 	import SubmitReviewAddNodeProvider from '$lib/components/submit/SubmitReviewAddNodeProvider.svelte';
 	import SubmitReviewMotion from '$lib/components/submit/SubmitReviewMotion.svelte';
 	import { fade } from 'svelte/transition';
+	import SubmitReviewSns from '$lib/components/submit/SubmitReviewSns.svelte';
 
 	export let neuronId: string | undefined;
 
@@ -67,6 +68,8 @@
 		<div in:fade>
 			{#if $store?.metadata?.proposalAction === 'AddOrRemoveNodeProvider'}
 				<SubmitReviewAddNodeProvider />
+			{:else if $store?.metadata?.proposalAction === 'CreateServiceNervousSystem'}
+				<SubmitReviewSns {content} />
 			{:else}
 				<SubmitReviewMotion {content} />
 			{/if}

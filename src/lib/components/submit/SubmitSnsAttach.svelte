@@ -3,20 +3,31 @@
 	import { debounce, isNullish } from '@dfinity/utils';
 	import { getDownloadUrl, uploadSnsFile } from '$lib/services/sns.services';
 	import { userStore } from '$lib/stores/user.store';
-	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
+	import {
+		SUBMIT_CONTEXT_KEY,
+		type SubmitAssetsStore,
+		type SubmitContext
+	} from '$lib/types/submit.context';
 	import { getContext } from 'svelte';
+	import type { StorageSnsCollections } from '$lib/types/juno';
 
 	export let placeholder: string;
-	export let collection: string;
+	export let collection: StorageSnsCollections;
 	export let extension: 'yaml' | 'png';
 	export let accept: string;
 	export let assert: (file: File) => Promise<{ result: 'ok' | 'error' }>;
 	export let linkTarget: '_blank' | undefined = undefined;
 
-	const { store }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
+	const { store, assets }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
 	let downloadUrl: string | undefined;
 	let file: File | undefined;
+
+	const updateContext = () =>
+		assets.set({
+			...($assets ?? ({} as SubmitAssetsStore)),
+			[collection]: downloadUrl
+		});
 
 	const mount = async () => {
 		if (isNullish($store?.key)) {
@@ -30,6 +41,8 @@
 		});
 
 		downloadUrl = url;
+
+		updateContext();
 	};
 
 	$: $store, (async () => await mount())();
@@ -49,6 +62,8 @@
 		});
 
 		downloadUrl = url;
+
+		updateContext();
 	};
 
 	const debounceSaveYaml = debounce(save);

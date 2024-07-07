@@ -15,7 +15,7 @@
 <SubmitWriteContent>
 	<svelte:fragment slot="before">
 		<SubmitSnsAttach
-			placeholder="Initial parameters (.yaml file)"
+			placeholder="Initial parameters (Yaml file)"
 			extension="yaml"
 			collection="sns-yaml"
 			assert={assertSnsYaml}
@@ -23,7 +23,7 @@
 		/>
 
 		<SubmitSnsAttach
-			placeholder="Dao and Token Logo"
+			placeholder="Logo of the Dao and Token"
 			extension="png"
 			collection="sns-logo"
 			assert={async () => ({ result: 'ok' })}

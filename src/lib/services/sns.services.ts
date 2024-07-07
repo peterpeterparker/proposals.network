@@ -1,6 +1,6 @@
 import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
-import type { ProposalKey } from '$lib/types/juno';
+import type { ProposalKey, StorageSnsCollections } from '$lib/types/juno';
 import { snsYaml } from '$lib/types/sns';
 import type { UserOption } from '$lib/types/user';
 import { fromNullable, isNullish, nonNullish } from '@dfinity/utils';
@@ -14,7 +14,7 @@ export const getDownloadUrl = async ({
 	extension
 }: {
 	key: ProposalKey;
-	collection: string;
+	collection: StorageSnsCollections;
 	extension: 'yaml' | 'png';
 }): Promise<{ result: 'ok' | 'error'; downloadUrl?: string | undefined }> => {
 	const fullPath = `/${collection}/${key}.${extension}`;
@@ -56,7 +56,7 @@ export const uploadSnsFile = async ({
 	user: UserOption;
 	file: File;
 	key: ProposalKey | undefined | null;
-	collection: string;
+	collection: StorageSnsCollections;
 	extension: 'yaml' | 'png';
 	assert: (file: File) => Promise<{ result: 'ok' | 'error' }>;
 }): Promise<{ result: 'ok' | 'error'; downloadUrl?: string }> => {
