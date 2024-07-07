@@ -341,6 +341,7 @@ export const submitCreateServiceNervousSystemProposal = async ({
 	key: ProposalKey | undefined | null;
 } & Partial<Pick<ProposalParams, 'neuronId' | 'governance'>>): Promise<SubmitProposalResult> => {
 	const submit = async ({
+		metadata,
 		neuronId
 	}: { metadata: ProposalEditableMetadata } & Pick<
 		ProposalParams,
@@ -355,13 +356,21 @@ export const submitCreateServiceNervousSystemProposal = async ({
 			return { result: 'error' };
 		}
 
+		const { title } = metadata;
+
+		if (isNullish(title)) {
+			toasts.error({
+				msg: { text: 'No title to submit the proposal.' }
+			});
+			return { result: 'error' };
+		}
+
 		const { result, yaml, logo } = await getSnsData(key);
 
 		if (result === 'error' || isNullish(yaml) || isNullish(logo)) {
 			return { result: 'error' };
 		}
 
-		const title = `NNS Proposal to create an SNS named '${yaml.name}'`;
 		const url = yaml.url;
 
 		const [_, content, __] = await getEditable();
@@ -379,7 +388,7 @@ export const submitCreateServiceNervousSystemProposal = async ({
 			summary: content,
 			neuronId,
 			governance,
-			createSns: mapSnsYamlToCreateServiceNervousSystem({yaml, logo})
+			createSns: mapSnsYamlToCreateServiceNervousSystem({ yaml, logo })
 		});
 	};
 

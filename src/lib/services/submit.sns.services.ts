@@ -25,15 +25,13 @@ export const uploadSnsFile = async ({
 	key,
 	file,
 	collection,
-	extension,
-	assert
+	extension
 }: {
 	user: UserOption;
 	file: File;
 	key: ProposalKey | undefined | null;
 	collection: StorageSnsCollections;
 	extension: 'yaml' | 'png';
-	assert: (file: File) => Promise<{ result: 'ok' | 'error' }>;
 }): Promise<{ result: 'ok' | 'error'; downloadUrl?: string }> => {
 	if (isNullish(user)) {
 		toasts.error({
@@ -49,12 +47,6 @@ export const uploadSnsFile = async ({
 			}
 		});
 		return { result: 'error' };
-	}
-
-	const { result } = await assert(file);
-
-	if (result === 'error') {
-		return { result };
 	}
 
 	busy.start();

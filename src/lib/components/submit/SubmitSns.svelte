@@ -1,8 +1,8 @@
 <script lang="ts">
 	import SubmitTitle from '$lib/components/submit/SubmitTitle.svelte';
 	import SubmitWriteContent from '$lib/components/submit/SubmitWriteContent.svelte';
-	import SubmitSnsAttachFile from '$lib/components/submit/SubmitSnsAttachFile.svelte';
-	import { mapSnsYaml } from '$lib/services/submit.sns.services';
+	import SubmitSnsAttachYamlFile from '$lib/components/submit/SubmitSnsAttachYamlFile.svelte';
+	import SubmitSnsAttachLogoFile from '$lib/components/submit/SubmitSnsAttachLogoFile.svelte';
 </script>
 
 <SubmitTitle>Propose Your SNS</SubmitTitle>
@@ -14,21 +14,8 @@
 
 <SubmitWriteContent>
 	<svelte:fragment slot="before">
-		<SubmitSnsAttachFile
-			placeholder="Initial parameters (Yaml file)"
-			extension="yaml"
-			collection="sns-parameters"
-			assert={mapSnsYaml}
-			accept=".yml,.yaml"
-		/>
+		<SubmitSnsAttachYamlFile />
 
-		<SubmitSnsAttachFile
-			placeholder="Logo of the Dao and Token"
-			extension="png"
-			collection="sns-logo"
-			assert={async () => ({ result: 'ok' })}
-			accept="image/png"
-			linkTarget="_blank"
-		/>
+		<SubmitSnsAttachLogoFile />
 	</svelte:fragment>
 </SubmitWriteContent>
