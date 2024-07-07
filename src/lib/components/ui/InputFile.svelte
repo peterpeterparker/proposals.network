@@ -8,6 +8,7 @@
 	export let file: File | undefined;
 	export let disabled = false;
 	export let downloadUrl: string | undefined = undefined;
+	export let accept: string | undefined;
 
 	const onChange = (event: Event) => {
 		const target = event.target as unknown as { files: File[] };
@@ -23,7 +24,7 @@
 		{disabled}
 		class:opacity-20={disabled}
 		class="p-2.5 focus:outline-none w-full placeholder-black"
-		accept=".yml,.yaml"
+		{accept}
 	/>
 
 	<p class="px-2.5 pt-1 pb-2.5 text-xs">

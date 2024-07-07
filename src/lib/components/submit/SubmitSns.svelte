@@ -1,47 +1,8 @@
 <script lang="ts">
 	import SubmitTitle from '$lib/components/submit/SubmitTitle.svelte';
-	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
-	import { getContext, onMount } from 'svelte';
 	import SubmitWriteContent from '$lib/components/submit/SubmitWriteContent.svelte';
-	import InputFile from '$lib/components/ui/InputFile.svelte';
-	import { debounce, isNullish } from '@dfinity/utils';
-	import { getSnsYaml, uploadSnsYaml } from '$lib/services/sns.services';
-	import { routeKey } from '$lib/derived/nav.derived';
-	import { userStore } from '$lib/stores/user.store';
-
-	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
-
-	let downloadUrl: string | undefined;
-	let parametersFile: File | undefined;
-
-	const mount = async () => {
-		if (isNullish($store?.key)) {
-			return;
-		}
-
-		const { downloadUrl: url } = await getSnsYaml($store.key);
-		downloadUrl = url;
-	};
-
-	$: $store, (async () => await mount())();
-
-	const saveYaml = async () => {
-		if (isNullish(parametersFile)) {
-			return;
-		}
-
-		const { downloadUrl: url } = await uploadSnsYaml({
-			key: $store?.key,
-			file: parametersFile,
-			user: $userStore
-		});
-
-		downloadUrl = url;
-	};
-
-	const debounceSaveYaml = debounce(saveYaml);
-
-	$: parametersFile, (() => debounceSaveYaml())();
+	import SubmitSnsAttach from '$lib/components/submit/SubmitSnsAttach.svelte';
+	import { assertSnsYaml } from '$lib/services/sns.services';
 </script>
 
 <SubmitTitle>Propose Your SNS</SubmitTitle>
@@ -53,10 +14,20 @@
 
 <SubmitWriteContent>
 	<svelte:fragment slot="before">
-		<InputFile
-			bind:file={parametersFile}
-			{downloadUrl}
+		<SubmitSnsAttach
 			placeholder="Initial parameters (.yaml file)"
+			extension="yaml"
+			collection="sns-yaml"
+			assert={assertSnsYaml}
+			accept=".yml,.yaml"
+		/>
+
+		<SubmitSnsAttach
+			placeholder="Dao and Token Logo"
+			extension="png"
+			collection="sns-logo"
+			assert={async () => ({ result: 'ok' })}
+			accept="image/png"
 		/>
 	</svelte:fragment>
 </SubmitWriteContent>

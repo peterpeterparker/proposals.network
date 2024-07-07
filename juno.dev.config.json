@@ -30,6 +30,13 @@
 				"write": "managed",
 				"memory": "stable",
 				"mutablePermissions": true
+			},
+			{
+				"collection": "sns-logo",
+				"read": "managed",
+				"write": "managed",
+				"memory": "stable",
+				"mutablePermissions": true
 			}
 		]
 	},
