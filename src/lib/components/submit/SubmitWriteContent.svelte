@@ -11,7 +11,7 @@
 	let content: ProposalContent | undefined;
 
 	const init = async () => {
-		const [_, existingContent] = await getEditable();
+		const [_, existingContent, __] = await getEditable();
 		content = existingContent;
 	};
 

@@ -6,11 +6,12 @@ import { fromNullable, isNullish, nonNullish } from '@dfinity/utils';
 import { downloadUrl, getAsset, uploadFile } from '@junobuild/core-peer';
 import { nanoid } from 'nanoid';
 import { parse } from 'yaml';
+import type {ProposalKey} from "$lib/types/juno";
 
 export const getSnsYaml = async (
-	routeKey: string | undefined | null
+	key: ProposalKey | undefined | null
 ): Promise<{ result: 'ok' | 'error'; downloadUrl?: string | undefined }> => {
-	if (isNullish(routeKey)) {
+	if (isNullish(key)) {
 		toasts.error({
 			msg: {
 				text: 'No route key is provided, therefore the Yaml file cannot be fetched.'
@@ -22,7 +23,7 @@ export const getSnsYaml = async (
 	try {
 		const asset = await getAsset({
 			collection: 'sns-yaml',
-			fullPath: `/sns-yaml/${routeKey}.yaml`
+			fullPath: `/sns-yaml/${key}.yaml`
 		});
 
 		return {
@@ -47,12 +48,12 @@ export const getSnsYaml = async (
 
 export const uploadSnsYaml = async ({
 	user,
-	routeKey,
+	key,
 	file
 }: {
 	user: UserOption;
 	file: File;
-	routeKey: string | undefined | null;
+	key: ProposalKey | undefined | null;
 }): Promise<{ result: 'ok' | 'error'; downloadUrl?: string }> => {
 	if (isNullish(user)) {
 		toasts.error({
@@ -61,10 +62,10 @@ export const uploadSnsYaml = async ({
 		return { result: 'error' };
 	}
 
-	if (isNullish(routeKey)) {
+	if (isNullish(key)) {
 		toasts.error({
 			msg: {
-				text: 'No route key is provided, therefore the Yaml file cannot be saved.'
+				text: 'No key is provided, therefore the Yaml file cannot be saved.'
 			}
 		});
 		return { result: 'error' };
@@ -82,7 +83,7 @@ export const uploadSnsYaml = async ({
 		const { downloadUrl } = await uploadFile({
 			collection: 'sns-yaml',
 			data: file,
-			fullPath: `/sns-yaml/${routeKey}.yaml`,
+			fullPath: `/sns-yaml/${key}.yaml`,
 			token: nanoid()
 		});
 

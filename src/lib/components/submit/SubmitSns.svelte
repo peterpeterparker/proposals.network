@@ -14,10 +14,16 @@
 	let downloadUrl: string | undefined;
 	let parametersFile: File | undefined;
 
-	onMount(async () => {
-		const { downloadUrl: url } = await getSnsYaml($routeKey);
+	const mount = async () => {
+		if (isNullish($store?.key)) {
+			return;
+		}
+
+		const { downloadUrl: url } = await getSnsYaml($store.key);
 		downloadUrl = url;
-	});
+	}
+
+	$: $store, (async () => await mount())()
 
 	const saveYaml = async () => {
 		if (isNullish(parametersFile)) {
@@ -25,7 +31,7 @@
 		}
 
 		const { downloadUrl: url } = await uploadSnsYaml({
-			routeKey: $routeKey,
+			key: $store?.key,
 			file: parametersFile,
 			user: $userStore
 		});

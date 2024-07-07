@@ -186,7 +186,7 @@ export const submitMotionProposal = async ({
 			return { result: 'error' };
 		}
 
-		const [_, content] = await getEditable();
+		const [_, content, __] = await getEditable();
 
 		if (isNullish(content)) {
 			toasts.error({

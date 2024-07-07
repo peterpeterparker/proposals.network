@@ -71,10 +71,11 @@ export const setMetadata = (metadata: ProposalEditableMetadata): Promise<void> =
 		proposalsStore
 	);
 
-export const getEditable = (): Promise<[ProposalEditableMetadata, ProposalContent]> =>
+export const getEditable = (): Promise<[ProposalEditableMetadata, ProposalContent, ProposalKey]> =>
 	Promise.all([
 		getIdb(KEY_PROPOSAL_METADATA, proposalsStore),
-		getIdb(KEY_PROPOSAL_CONTENT, proposalsStore)
+		getIdb(KEY_PROPOSAL_CONTENT, proposalsStore),
+		getIdb(KEY_PROPOSAL_KEY, proposalsStore)
 	]);
 
 export const updateMetadataDoc = ({

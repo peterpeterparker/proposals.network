@@ -26,7 +26,7 @@
 	let content: ProposalContent | undefined;
 
 	onMount(async () => {
-		const [_, c] = await getEditable();
+		const [_, c, __] = await getEditable();
 		content = c;
 	});
 
