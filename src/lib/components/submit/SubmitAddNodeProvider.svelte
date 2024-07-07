@@ -55,7 +55,10 @@
 
 		await setMetadata({
 			...($store?.metadata ?? {}),
-			...(nodeProviderName !== '' && { nodeProviderName }),
+			...(nodeProviderName !== '' && {
+				nodeProviderName,
+				title: `Add Node Provider: ${nodeProviderName}`
+			}),
 			...(url !== '' && { url }),
 			...(urlSelfDeclaration !== '' && { urlSelfDeclaration }),
 			...(urlIdentityProof !== '' && { urlIdentityProof }),
