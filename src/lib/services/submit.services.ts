@@ -11,7 +11,7 @@ import {
 	submitMotionProposal as submitMotionProposalApi,
 	type ProposalParams
 } from '$lib/services/proposal.services';
-import { snsAssetFullPath } from '$lib/services/sns.services';
+import { snsAssetFullPath } from '$lib/services/submit.sns.services';
 import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
 import type {

@@ -3,7 +3,7 @@
 	import { getContext } from 'svelte';
 	import { getEditableAssets } from '$lib/services/idb.services';
 	import { isNullish, nonNullish } from '@dfinity/utils';
-	import { snsAssetFullPath } from '$lib/services/sns.services';
+	import { snsAssetFullPath } from '$lib/services/submit.sns.services';
 	import { downloadUrl as downloadUrlLib } from '@junobuild/core-peer';
 	import type { StorageSnsCollections } from '$lib/types/juno';
 

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import InputFile from '$lib/components/ui/InputFile.svelte';
 	import { debounce, isNullish } from '@dfinity/utils';
-	import { uploadSnsFile } from '$lib/services/sns.services';
+	import { uploadSnsFile } from '$lib/services/submit.sns.services';
 	import { userStore } from '$lib/stores/user.store';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import { getContext } from 'svelte';
