@@ -12,7 +12,6 @@
 	export let collection: StorageSnsCollections;
 	export let extension: 'yaml' | 'png';
 	export let accept: string;
-	export let assert: (file: File) => Promise<{ result: 'ok' | 'error' }>;
 	export let linkTarget: '_blank' | undefined = undefined;
 
 	const { store }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
@@ -29,7 +28,6 @@
 			key: $store?.key,
 			file: file,
 			user: $userStore,
-			assert,
 			extension,
 			collection
 		});
