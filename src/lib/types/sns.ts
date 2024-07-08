@@ -28,6 +28,13 @@ const assertValue = ({ value: text, labels }: { value: string; labels: string[] 
 const urlSchema = z
 	.string()
 	.url()
+	.refine((url: string): boolean => assertBytes({ text: url, min: 10, max: 512 }), {
+		message: 'URL must be between 10 to 512 bytes'
+	});
+
+const proposalUrlSchema = z
+	.string()
+	.url()
 	.refine((url: string): boolean => assertBytes({ text: url, min: 10, max: 2048 }), {
 		message: 'URL must be between 10 to 2048 bytes'
 	})
@@ -83,7 +90,7 @@ const tokenNameSchema = z
 
 const nnsProposalSchema = z.object({
 	title: titleSchema,
-	url: z.string().url(),
+	url: proposalUrlSchema,
 	summary: summarySchema
 });
 
