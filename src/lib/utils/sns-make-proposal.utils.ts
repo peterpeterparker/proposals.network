@@ -8,6 +8,18 @@ import type {
 } from '@dfinity/nns/dist/types/types/governance_converters';
 import { isNullish, nonNullish } from '@dfinity/utils';
 
+const E8S_PER_ICP = 100_000_000n;
+
+const mapE8s = (value: string): Tokens => ({
+	e8s: BigInt(
+		value
+			.toLowerCase()
+			.replace('e8s', '')
+			.replaceAll('_', '')
+			.trim()
+	)
+});
+
 const mapTokens = (value: string): Tokens => ({
 	e8s: BigInt(
 		value
@@ -17,7 +29,7 @@ const mapTokens = (value: string): Tokens => ({
 			.replace('token', '')
 			.replaceAll('_', '')
 			.trim()
-	)
+	) * E8S_PER_ICP
 });
 
 const mapPercentage = (percentage: string): Percentage => ({
@@ -58,7 +70,7 @@ const mapDuration = (duration: string): Duration => {
 	let totalSeconds = 0;
 
 	const durationParts = duration.match(
-		/\d+\s*(seconds?|sec|s|minutes?|min|m|hours?|hr|h|days?|d|weeks?|w|months?|M|years?|y)/g
+		/\d+\s*(seconds?|sec|s|minutes?|min|m(?![o|O]|onths?)|hours?|hr|h|days?|d|weeks?|w|months?|M|years?|y)/g
 	);
 
 	if (isNullish(durationParts)) {
@@ -130,7 +142,7 @@ export const mapSnsYamlToCreateServiceNervousSystem = ({
 		base64Encoding: logo
 	},
 	ledgerParameters: {
-		transactionFee: mapTokens(Token.transaction_fee),
+		transactionFee: mapE8s(Token.transaction_fee),
 		tokenSymbol: Token.symbol,
 		tokenLogo: {
 			base64Encoding: logo
