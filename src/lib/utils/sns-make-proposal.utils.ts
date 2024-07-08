@@ -10,6 +10,10 @@ import { isNullish, nonNullish } from '@dfinity/utils';
 
 const E8S_PER_ICP = 100_000_000n;
 
+const ONE_DAY_SECONDS = 24 * 60 * 60;
+const ONE_YEAR_SECONDS = (4 * 365 + 1) * ONE_DAY_SECONDS / 4;
+const ONE_MONTH_SECONDS = ONE_YEAR_SECONDS / 12;
+
 const mapE8s = (value: string): Tokens => ({
 	e8s: BigInt(
 		value
@@ -59,12 +63,12 @@ const mapDuration = (duration: string): Duration => {
 		weeks: 604800,
 		week: 604800,
 		w: 604800,
-		months: 2630016, // 30.44 days
-		month: 2630016,
-		M: 2630016,
-		years: 31557600, // 365.25 days
-		year: 31557600,
-		y: 31557600
+		months: ONE_MONTH_SECONDS, // 30.44 days (2629800?)
+		month: ONE_MONTH_SECONDS,
+		M: ONE_MONTH_SECONDS,
+		years: ONE_YEAR_SECONDS, // 365.25 days (31557600?)
+		year: ONE_YEAR_SECONDS,
+		y: ONE_YEAR_SECONDS
 	};
 
 	let totalSeconds = 0;
