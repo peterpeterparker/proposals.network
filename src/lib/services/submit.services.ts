@@ -12,7 +12,7 @@ import {
 	submitMotionProposal as submitMotionProposalApi,
 	type ProposalParams
 } from '$lib/services/proposal.services';
-import { mapSnsYamlToCreateServiceNervousSystem } from '$lib/services/proposal.sns.services';
+import { mapSnsYamlToCreateServiceNervousSystem } from '$lib/utils/sns-make-proposal.utils';
 import { getSnsData, snsAssetFullPath } from '$lib/services/submit.sns.services';
 import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
