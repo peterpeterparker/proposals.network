@@ -28,9 +28,40 @@ const assertValue = ({ value: text, labels }: { value: string; labels: string[] 
 const urlSchema = z
 	.string()
 	.url()
-	.refine((url: string): boolean => assertBytes({ text: url, min: 10, max: 512 }), {
-		message: 'URL must be between 10 to 512 bytes'
-	});
+	.refine((url: string): boolean => assertBytes({ text: url, min: 10, max: 2048 }), {
+		message: 'URL must be between 10 to 2048 bytes'
+	})
+	.refine(
+		(url: string) => {
+			try {
+				new URL(url);
+				return true;
+			} catch {
+				return false;
+			}
+		},
+		{
+			message: 'Invalid URL'
+		}
+	)
+	.refine(
+		(url: string): boolean => {
+			const { protocol } = new URL(url);
+			return protocol === 'https:';
+		},
+		{
+			message: 'URL protocol must be HTTPS.'
+		}
+	)
+	.refine(
+		(url: string): boolean => {
+			const { host } = new URL(url);
+			return host === 'forum.dfinity.org';
+		},
+		{
+			message: 'URL domain must be forum.dfinity.org.'
+		}
+	);
 
 const titleSchema = z
 	.string()
