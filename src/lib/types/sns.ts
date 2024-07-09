@@ -1,6 +1,6 @@
 import { DEV } from '$lib/constants/app.constants';
 import { Principal } from '@dfinity/principal';
-import { isNullish } from '@dfinity/utils';
+import { convertStringToE8s, isNullish } from '@dfinity/utils';
 import { z } from 'zod';
 
 const assertBytes = ({ text, min, max }: { text: string; min: number; max: number }): boolean => {
@@ -8,21 +8,66 @@ const assertBytes = ({ text, min, max }: { text: string; min: number; max: numbe
 	return byteLength >= min && byteLength <= max;
 };
 
-const assertValue = ({ value: text, labels }: { value: string; labels: string[] }): boolean => {
+const assertE8sValue = (input: string): boolean => {
+	const text = input.toLowerCase();
+
+	if (!text.includes('e8s')) {
+		return false;
+	}
+
 	if (text.trim().length !== text.length) {
 		return false;
 	}
 
-	const [value, symbol] = text.split(' ');
+	const noWhiteSpace = text.replace(/\s+/g, '');
+
+	const pattern = /^([\d_.,]+)(e8s)$/i;
+	const match = noWhiteSpace.match(pattern);
+
+	if (isNullish(match)) {
+		return false;
+	}
+
+	const [, value, symbol] = match;
 
 	if (isNullish(value) || isNullish(symbol)) {
 		return false;
 	}
 
 	const number = parseFloat(value.replace(/_/g, ''));
-	const isNumber = !isNaN(number) && isFinite(number);
 
-	return isNumber && labels.includes(symbol);
+	return !isNaN(number) && isFinite(number);
+};
+
+const assertTokensValue = (input: string): boolean => {
+	const text = input.toLowerCase();
+
+	if (!text.includes('token') && !text.includes('tokens')) {
+		return false;
+	}
+
+	if (text.trim().length !== text.length) {
+		return false;
+	}
+
+	const noWhiteSpace = text.replace(/\s+/g, '');
+
+	const pattern = /^([\d_.,]+)(token|tokens)$/i;
+	const match = noWhiteSpace.match(pattern);
+
+	if (isNullish(match)) {
+		return false;
+	}
+
+	const [, value, symbol] = match;
+
+	if (isNullish(value) || isNullish(symbol)) {
+		return false;
+	}
+
+	const result = convertStringToE8s(value.replace(/_/g, ''));
+
+	return typeof result === 'bigint';
 };
 
 const urlSchema = z
@@ -103,34 +148,18 @@ const symbolSchema = z
 		message: 'Symbol must be between 3 to 10 bytes'
 	});
 
-const e8sSchema = z.string().refine(
-	(e8s: string): boolean =>
-		assertValue({
-			value: e8s,
-			labels: ['e8s']
-		}),
-	{
-		message: "Value must contain a number and end with 'e8s'"
-	}
-);
+const e8sOrTokensSchema = z
+	.string()
+	.refine((token: string): boolean => assertE8sValue(token) || assertTokensValue(token), {
+		message: "Value must contain a number that ends with 'e8s' or 'token' or 'tokens'"
+	});
 
 const tokenSchema = z.object({
 	name: tokenNameSchema,
 	symbol: symbolSchema,
-	transaction_fee: e8sSchema,
+	transaction_fee: e8sOrTokensSchema,
 	logo: z.string().optional()
 });
-
-const tokenValueSchema = z.string().refine(
-	(token: string): boolean =>
-		assertValue({
-			value: token,
-			labels: ['token', 'tokens']
-		}),
-	{
-		message: "Value must contain a number and end with 'token' or 'tokens'"
-	}
-);
 
 const durationSchema = z.string().refine(
 	(duration: string): boolean => {
@@ -169,7 +198,7 @@ const durationSchema = z.string().refine(
 );
 
 const proposalsSchema = z.object({
-	rejection_fee: tokenValueSchema,
+	rejection_fee: e8sOrTokensSchema,
 	initial_voting_period: durationSchema,
 	maximum_wait_for_quiet_deadline_extension: durationSchema
 });
@@ -189,7 +218,7 @@ const principalIdSchema = z.string().refine(
 );
 
 const neuronsSchema = z.object({
-	minimum_creation_stake: tokenValueSchema
+	minimum_creation_stake: e8sOrTokensSchema
 });
 
 const percentageSchema = z.string().refine(
@@ -226,7 +255,7 @@ const votingSchema = z.object({
 
 const neuronSchema = z.object({
 	principal: principalIdSchema,
-	stake: tokenValueSchema,
+	stake: e8sOrTokensSchema,
 	memo: z.number(),
 	dissolve_delay: durationSchema,
 	vesting_period: durationSchema
@@ -237,10 +266,10 @@ export type NeuronSchema = z.infer<typeof neuronSchema>;
 const distributionSchema = z.object({
 	Neurons: neuronSchema.array(),
 	InitialBalances: z.object({
-		governance: tokenValueSchema,
-		swap: tokenValueSchema
+		governance: e8sOrTokensSchema,
+		swap: e8sOrTokensSchema
 	}),
-	total: tokenValueSchema
+	total: e8sOrTokensSchema
 });
 
 const confirmationSchema = z
@@ -268,10 +297,10 @@ const timeOfDaySchema = z
 
 const swapSchema = z.object({
 	minimum_participants: z.number(),
-	minimum_direct_participation_icp: tokenValueSchema,
-	maximum_direct_participation_icp: tokenValueSchema,
-	minimum_participant_icp: tokenValueSchema,
-	maximum_participant_icp: tokenValueSchema,
+	minimum_direct_participation_icp: e8sOrTokensSchema,
+	maximum_direct_participation_icp: e8sOrTokensSchema,
+	minimum_participant_icp: e8sOrTokensSchema,
+	maximum_participant_icp: e8sOrTokensSchema,
 	confirmation_text: confirmationSchema.optional(),
 	restricted_countries: countryCodeSchema.array().optional(),
 	VestingSchedule: z.object({

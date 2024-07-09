@@ -13,13 +13,14 @@ const ONE_YEAR_SECONDS = ((4 * 365 + 1) * ONE_DAY_SECONDS) / 4;
 const ONE_MONTH_SECONDS = ONE_YEAR_SECONDS / 12;
 
 const mapE8s = (value: string): Tokens => ({
-	e8s: BigInt(value.toLowerCase().replace('e8s', '').replaceAll('_', '').trim())
+	e8s: BigInt(value.toLowerCase().replace(/\s+/g, '').replace('e8s', '').replaceAll('_', '').trim())
 });
 
 const mapTokens = (value: string): Tokens => {
 	const e8s = convertStringToE8s(
 		value
 			.toLowerCase()
+			.replace(/\s+/g, '')
 			.replace('e8s', '')
 			.replace('tokens', '')
 			.replace('token', '')
@@ -32,6 +33,16 @@ const mapTokens = (value: string): Tokens => {
 	}
 
 	throw new Error(`Invalid ${value} to convert to tokens.`);
+};
+
+const mapE8sOrTokens = (input: string): Tokens => {
+	const text = input.toLowerCase();
+
+	if (text.includes('e8s')) {
+		return mapE8s(text);
+	}
+
+	return mapTokens(text);
 };
 
 const mapPercentage = (percentage: string): Percentage => ({
@@ -112,7 +123,7 @@ const mapNeuron = ({
 }: NeuronSchema): NeuronDistribution => ({
 	controller: principal,
 	memo: BigInt(memo),
-	stake: mapTokens(stake),
+	stake: mapE8sOrTokens(stake),
 	dissolveDelay: mapDuration(dissolve_delay),
 	vestingPeriod: mapDuration(vesting_period)
 });
@@ -144,7 +155,7 @@ export const mapSnsYamlToCreateServiceNervousSystem = ({
 		base64Encoding: logo
 	},
 	ledgerParameters: {
-		transactionFee: mapE8s(Token.transaction_fee),
+		transactionFee: mapE8sOrTokens(Token.transaction_fee),
 		tokenSymbol: Token.symbol,
 		tokenLogo: {
 			base64Encoding: logo
@@ -161,12 +172,12 @@ export const mapSnsYamlToCreateServiceNervousSystem = ({
 		),
 		neuronMinimumDissolveDelayToVote: mapDuration(Voting.minimum_dissolve_delay),
 		neuronMaximumAgeBonus: mapPercentage(Voting.MaximumVotingPowerBonuses.Age.bonus),
-		neuronMinimumStake: mapTokens(Neurons.minimum_creation_stake),
+		neuronMinimumStake: mapE8sOrTokens(Neurons.minimum_creation_stake),
 		proposalWaitForQuietDeadlineIncrease: mapDuration(
 			Proposals.maximum_wait_for_quiet_deadline_extension
 		),
 		proposalInitialVotingPeriod: mapDuration(Proposals.initial_voting_period),
-		proposalRejectionFee: mapTokens(Proposals.rejection_fee),
+		proposalRejectionFee: mapE8sOrTokens(Proposals.rejection_fee),
 		votingRewardParameters: {
 			rewardRateTransitionDuration: mapDuration(Voting.RewardRate.transition_duration),
 			initialRewardRate: mapPercentage(Voting.RewardRate.initial),
@@ -183,10 +194,10 @@ export const mapSnsYamlToCreateServiceNervousSystem = ({
 			dissolveDelayInterval: mapDuration(Swap.VestingSchedule.interval)
 		},
 		confirmationText: Swap.confirmation_text,
-		maximumParticipantIcp: mapTokens(Swap.maximum_participant_icp),
+		maximumParticipantIcp: mapE8sOrTokens(Swap.maximum_participant_icp),
 		neuronsFundInvestmentIcp: undefined,
 		minimumIcp: undefined,
-		minimumParticipantIcp: mapTokens(Swap.minimum_participant_icp),
+		minimumParticipantIcp: mapE8sOrTokens(Swap.minimum_participant_icp),
 		startTime: nonNullish(Swap.start_time) ? mapTimeOfDay(Swap.start_time) : undefined,
 		maximumIcp: undefined,
 		restrictedCountries: nonNullish(Swap.restricted_countries)
@@ -194,16 +205,16 @@ export const mapSnsYamlToCreateServiceNervousSystem = ({
 					isoCodes: Swap.restricted_countries
 				}
 			: undefined,
-		maxDirectParticipationIcp: mapTokens(Swap.maximum_direct_participation_icp),
-		minDirectParticipationIcp: mapTokens(Swap.minimum_direct_participation_icp),
+		maxDirectParticipationIcp: mapE8sOrTokens(Swap.maximum_direct_participation_icp),
+		minDirectParticipationIcp: mapE8sOrTokens(Swap.minimum_direct_participation_icp),
 		neuronsFundParticipation: Swap.neurons_fund_participation
 	},
 	initialTokenDistribution: {
 		swapDistribution: {
-			total: mapTokens(Distribution.InitialBalances.swap)
+			total: mapE8sOrTokens(Distribution.InitialBalances.swap)
 		},
 		treasuryDistribution: {
-			total: mapTokens(Distribution.InitialBalances.governance)
+			total: mapE8sOrTokens(Distribution.InitialBalances.governance)
 		},
 		developerDistribution: {
 			developerNeurons: Distribution.Neurons.map(mapNeuron)
