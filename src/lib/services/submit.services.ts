@@ -371,7 +371,7 @@ export const submitCreateServiceNervousSystemProposal = async ({
 			return { result: 'error' };
 		}
 
-		const url = yaml.url;
+		const url = yaml.NnsProposal.url;
 
 		const [_, content, __] = await getEditable();
 
