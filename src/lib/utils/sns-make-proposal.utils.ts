@@ -6,26 +6,18 @@ import type {
 	NeuronDistribution,
 	Percentage
 } from '@dfinity/nns/dist/types/types/governance_converters';
-import { isNullish, nonNullish } from '@dfinity/utils';
-
-const E8S_PER_ICP = 100_000_000n;
+import { convertStringToE8s, isNullish, nonNullish } from '@dfinity/utils';
 
 const ONE_DAY_SECONDS = 24 * 60 * 60;
-const ONE_YEAR_SECONDS = (4 * 365 + 1) * ONE_DAY_SECONDS / 4;
+const ONE_YEAR_SECONDS = ((4 * 365 + 1) * ONE_DAY_SECONDS) / 4;
 const ONE_MONTH_SECONDS = ONE_YEAR_SECONDS / 12;
 
 const mapE8s = (value: string): Tokens => ({
-	e8s: BigInt(
-		value
-			.toLowerCase()
-			.replace('e8s', '')
-			.replaceAll('_', '')
-			.trim()
-	)
+	e8s: BigInt(value.toLowerCase().replace('e8s', '').replaceAll('_', '').trim())
 });
 
-const mapTokens = (value: string): Tokens => ({
-	e8s: BigInt(
+const mapTokens = (value: string): Tokens => {
+	const e8s = convertStringToE8s(
 		value
 			.toLowerCase()
 			.replace('e8s', '')
@@ -33,8 +25,14 @@ const mapTokens = (value: string): Tokens => ({
 			.replace('token', '')
 			.replaceAll('_', '')
 			.trim()
-	) * E8S_PER_ICP
-});
+	);
+
+	if (typeof e8s === 'bigint') {
+		return { e8s };
+	}
+
+	throw new Error(`Invalid ${value} to convert to tokens.`);
+};
 
 const mapPercentage = (percentage: string): Percentage => ({
 	basisPoints: BigInt(Number(percentage.toLowerCase().replace('%', '').trim()) * 100)
