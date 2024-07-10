@@ -8,12 +8,44 @@ import type {
 } from '@dfinity/nns/dist/types/types/governance_converters';
 import { convertStringToE8s, isNullish, nonNullish } from '@dfinity/utils';
 
+interface UnitsToSeconds {
+	seconds: number;
+	second: number;
+	sec: number;
+	s: number;
+	minutes: number;
+	minute: number;
+	min: number;
+	m: number;
+	hours: number;
+	hour: number;
+	hr: number;
+	h: number;
+	days: number;
+	day: number;
+	d: number;
+	weeks: number;
+	week: number;
+	w: number;
+	months: number;
+	month: number;
+	M: number;
+	years: number;
+	year: number;
+	y: number;
+}
+
+type GovernanceUnitsToSeconds = Pick<
+	UnitsToSeconds,
+	'months' | 'month' | 'M' | 'years' | 'year' | 'y'
+>;
+
 // NNS and SNS seconds are different. See https://forum.dfinity.org/t/sns-yaml-month-and-year-conversion-to-seconds/32905.
 const ONE_DAY_SECONDS = 24 * 60 * 60;
 const ONE_YEAR_SECONDS = ((4 * 365 + 1) * ONE_DAY_SECONDS) / 4;
 const ONE_MONTH_SECONDS = ONE_YEAR_SECONDS / 12;
 
-const nnsUnitsToSeconds: Record<string, number> = {
+const nnsUnitsToSeconds: GovernanceUnitsToSeconds = {
 	months: ONE_MONTH_SECONDS, // 2629800
 	month: ONE_MONTH_SECONDS,
 	M: ONE_MONTH_SECONDS,
@@ -22,7 +54,7 @@ const nnsUnitsToSeconds: Record<string, number> = {
 	y: ONE_YEAR_SECONDS
 };
 
-const snsUnitsToSeconds: Record<string, number> = {
+const snsUnitsToSeconds: GovernanceUnitsToSeconds = {
 	months: 2_630_016, // 30.44d = 2_630_016
 	month: 2_630_016,
 	M: 2_630_016,
@@ -73,11 +105,9 @@ const mapDuration = ({
 	governanceUnitsToSeconds
 }: {
 	duration: string;
-	governanceUnitsToSeconds: Record<string, number>;
+	governanceUnitsToSeconds: GovernanceUnitsToSeconds;
 }): Duration => {
-	let totalSeconds = 0;
-
-	const unitsToSeconds: Record<string, number> = {
+	const unitsToSeconds: UnitsToSeconds = {
 		seconds: 1,
 		second: 1,
 		sec: 1,
@@ -107,6 +137,8 @@ const mapDuration = ({
 		throw new Error(`Invalid duration string: ${duration}`);
 	}
 
+	let totalSeconds = 0;
+
 	durationParts.forEach((part) => {
 		const matches = part.match(/\d+|\D+/g);
 
@@ -115,7 +147,8 @@ const mapDuration = ({
 		}
 
 		const [value, unit] = matches;
-		totalSeconds += parseInt(value) * (unitsToSeconds[unit.trim().toLowerCase()] ?? 0);
+		totalSeconds +=
+			parseInt(value) * (unitsToSeconds[unit.trim().toLowerCase() as keyof UnitsToSeconds] ?? 0);
 	});
 
 	return {
