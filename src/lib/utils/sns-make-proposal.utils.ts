@@ -8,9 +8,28 @@ import type {
 } from '@dfinity/nns/dist/types/types/governance_converters';
 import { convertStringToE8s, isNullish, nonNullish } from '@dfinity/utils';
 
+// NNS and SNS seconds are different. See https://forum.dfinity.org/t/sns-yaml-month-and-year-conversion-to-seconds/32905.
 const ONE_DAY_SECONDS = 24 * 60 * 60;
 const ONE_YEAR_SECONDS = ((4 * 365 + 1) * ONE_DAY_SECONDS) / 4;
 const ONE_MONTH_SECONDS = ONE_YEAR_SECONDS / 12;
+
+const nnsUnitsToSeconds: Record<string, number> = {
+	months: ONE_MONTH_SECONDS, // 2629800
+	month: ONE_MONTH_SECONDS,
+	M: ONE_MONTH_SECONDS,
+	years: ONE_YEAR_SECONDS, // 2629800 * 12
+	year: ONE_YEAR_SECONDS,
+	y: ONE_YEAR_SECONDS
+};
+
+const snsUnitsToSeconds: Record<string, number> = {
+	months: 2_630_016, // 30.44d = 2_630_016
+	month: 2_630_016,
+	M: 2_630_016,
+	years: 31_557_600, // 365.25d = 31_557_600
+	year: 31_557_600,
+	y: 31_557_600
+};
 
 const mapE8s = (value: string): Tokens => ({
 	e8s: BigInt(value.toLowerCase().replace(/\s+/g, '').replace('e8s', '').replaceAll('_', '').trim())
@@ -49,10 +68,15 @@ const mapPercentage = (percentage: string): Percentage => ({
 	basisPoints: BigInt(Number(percentage.toLowerCase().replace('%', '').trim()) * 100)
 });
 
-const mapDuration = (duration: string): Duration => {
-	// DFINITY uses humantime crate
-	// Source: https://github.com/dfinity/ic/blob/17df8febdb922c3981475035d830f09d9b990a5a/rs/nervous_system/humanize/src/lib.rs#L58
-	// Crate: https://github.com/tailhook/humantime/blob/12ce6f50894a56a410b390e5608ac9db8afe2407/src/duration.rs#L123
+const mapDuration = ({
+	duration,
+	governanceUnitsToSeconds
+}: {
+	duration: string;
+	governanceUnitsToSeconds: Record<string, number>;
+}): Duration => {
+	let totalSeconds = 0;
+
 	const unitsToSeconds: Record<string, number> = {
 		seconds: 1,
 		second: 1,
@@ -72,15 +96,8 @@ const mapDuration = (duration: string): Duration => {
 		weeks: 604800,
 		week: 604800,
 		w: 604800,
-		months: ONE_MONTH_SECONDS, // 30.44 days (2629800?)
-		month: ONE_MONTH_SECONDS,
-		M: ONE_MONTH_SECONDS,
-		years: ONE_YEAR_SECONDS, // 365.25 days (31557600?)
-		year: ONE_YEAR_SECONDS,
-		y: ONE_YEAR_SECONDS
+		...governanceUnitsToSeconds
 	};
-
-	let totalSeconds = 0;
 
 	const durationParts = duration.match(
 		/\d+\s*(seconds?|sec|s|minutes?|min|m(?![o|O]|onths?)|hours?|hr|h|days?|d|weeks?|w|months?|M|years?|y)/g
@@ -124,8 +141,14 @@ const mapNeuron = ({
 	controller: principal,
 	memo: BigInt(memo),
 	stake: mapE8sOrTokens(stake),
-	dissolveDelay: mapDuration(dissolve_delay),
-	vestingPeriod: mapDuration(vesting_period)
+	dissolveDelay: mapDuration({
+		duration: dissolve_delay,
+		governanceUnitsToSeconds: snsUnitsToSeconds
+	}),
+	vestingPeriod: mapDuration({
+		duration: vesting_period,
+		governanceUnitsToSeconds: snsUnitsToSeconds
+	})
 });
 
 // Map source: https://github.com/dfinity/ic/blob/17df8febdb922c3981475035d830f09d9b990a5a/rs/registry/admin/src/main.rs#L2592
@@ -166,20 +189,34 @@ export const mapSnsYamlToCreateServiceNervousSystem = ({
 		neuronMaximumDissolveDelayBonus: mapPercentage(
 			Voting.MaximumVotingPowerBonuses.DissolveDelay.bonus
 		),
-		neuronMaximumAgeForAgeBonus: mapDuration(Voting.MaximumVotingPowerBonuses.Age.duration),
-		neuronMaximumDissolveDelay: mapDuration(
-			Voting.MaximumVotingPowerBonuses.DissolveDelay.duration
-		),
-		neuronMinimumDissolveDelayToVote: mapDuration(Voting.minimum_dissolve_delay),
+		neuronMaximumAgeForAgeBonus: mapDuration({
+			duration: Voting.MaximumVotingPowerBonuses.Age.duration,
+			governanceUnitsToSeconds: nnsUnitsToSeconds
+		}),
+		neuronMaximumDissolveDelay: mapDuration({
+			duration: Voting.MaximumVotingPowerBonuses.DissolveDelay.duration,
+			governanceUnitsToSeconds: nnsUnitsToSeconds
+		}),
+		neuronMinimumDissolveDelayToVote: mapDuration({
+			duration: Voting.minimum_dissolve_delay,
+			governanceUnitsToSeconds: snsUnitsToSeconds
+		}),
 		neuronMaximumAgeBonus: mapPercentage(Voting.MaximumVotingPowerBonuses.Age.bonus),
 		neuronMinimumStake: mapE8sOrTokens(Neurons.minimum_creation_stake),
-		proposalWaitForQuietDeadlineIncrease: mapDuration(
-			Proposals.maximum_wait_for_quiet_deadline_extension
-		),
-		proposalInitialVotingPeriod: mapDuration(Proposals.initial_voting_period),
+		proposalWaitForQuietDeadlineIncrease: mapDuration({
+			duration: Proposals.maximum_wait_for_quiet_deadline_extension,
+			governanceUnitsToSeconds: nnsUnitsToSeconds
+		}),
+		proposalInitialVotingPeriod: mapDuration({
+			duration: Proposals.initial_voting_period,
+			governanceUnitsToSeconds: nnsUnitsToSeconds
+		}),
 		proposalRejectionFee: mapE8sOrTokens(Proposals.rejection_fee),
 		votingRewardParameters: {
-			rewardRateTransitionDuration: mapDuration(Voting.RewardRate.transition_duration),
+			rewardRateTransitionDuration: mapDuration({
+				duration: Voting.RewardRate.transition_duration,
+				governanceUnitsToSeconds: nnsUnitsToSeconds
+			}),
 			initialRewardRate: mapPercentage(Voting.RewardRate.initial),
 			finalRewardRate: mapPercentage(Voting.RewardRate.final)
 		}
@@ -188,10 +225,16 @@ export const mapSnsYamlToCreateServiceNervousSystem = ({
 	dappCanisters,
 	swapParameters: {
 		minimumParticipants: BigInt(Swap.minimum_participants),
-		duration: mapDuration(Swap.duration),
+		duration: mapDuration({
+			duration: Swap.duration,
+			governanceUnitsToSeconds: nnsUnitsToSeconds
+		}),
 		neuronBasketConstructionParameters: {
 			count: BigInt(Swap.VestingSchedule.events),
-			dissolveDelayInterval: mapDuration(Swap.VestingSchedule.interval)
+			dissolveDelayInterval: mapDuration({
+				duration: Swap.VestingSchedule.interval,
+				governanceUnitsToSeconds: nnsUnitsToSeconds
+			})
 		},
 		confirmationText: Swap.confirmation_text,
 		maximumParticipantIcp: mapE8sOrTokens(Swap.maximum_participant_icp),
