@@ -129,7 +129,7 @@ const summarySchema = z
 
 const tokenNameSchema = z
 	.string()
-	.refine((text: string): boolean => text.trim().length !== text.length, {
+	.refine((text: string): boolean => text.trim().length === text.length, {
 		message: 'Token must not have leading or trailing spaces'
 	})
 	.refine((text: string): boolean => assertBytes({ text, min: 4, max: 255 }), {
