@@ -12,7 +12,6 @@ import {
 	submitMotionProposal as submitMotionProposalApi,
 	type ProposalParams
 } from '$lib/services/proposal.services';
-import { mapSnsYamlToCreateServiceNervousSystem } from '$lib/utils/sns-make-proposal.utils';
 import { getSnsData, snsAssetFullPath } from '$lib/services/submit.sns.services';
 import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
@@ -26,6 +25,7 @@ import type {
 } from '$lib/types/juno';
 import type { UserOption } from '$lib/types/user';
 import { replaceHistory } from '$lib/utils/route.utils';
+import { mapSnsYamlToCreateServiceNervousSystem } from '$lib/utils/sns-make-proposal.utils';
 import { assertSHA256, assertUrlsFromWiki } from '$lib/utils/submit.node-provider.utils';
 import { fromNullable, isNullish, nonNullish, notEmptyString } from '@dfinity/utils';
 import { downloadUrl, getAsset, getDoc, setDoc, type Doc } from '@junobuild/core-peer';
