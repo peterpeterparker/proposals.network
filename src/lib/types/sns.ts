@@ -315,7 +315,6 @@ const swapSchema = z.object({
 export const snsYaml = z.object({
 	name: z.string().max(255),
 	description: z.string().max(2000),
-	Principals: z.string().array().length(0),
 	logo: z.string().optional(),
 	url: urlSchema,
 	NnsProposal: nnsProposalSchema,
