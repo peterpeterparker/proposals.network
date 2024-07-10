@@ -1,6 +1,6 @@
 import { DEV } from '$lib/constants/app.constants';
 import { Principal } from '@dfinity/principal';
-import { convertStringToE8s, isNullish } from '@dfinity/utils';
+import { convertStringToE8s, isNullish, nonNullish } from '@dfinity/utils';
 import { z } from 'zod';
 
 const assertBytes = ({ text, min, max }: { text: string; min: number; max: number }): boolean => {
@@ -129,6 +129,9 @@ const summarySchema = z
 
 const tokenNameSchema = z
 	.string()
+	.refine((text: string): boolean => text.trim().length !== text.length, {
+		message: 'Token must not have leading or trailing spaces'
+	})
 	.refine((text: string): boolean => assertBytes({ text, min: 4, max: 255 }), {
 		message: 'Title must be between 4 to 255 bytes'
 	});
@@ -312,9 +315,29 @@ const swapSchema = z.object({
 	neurons_fund_participation: z.boolean()
 });
 
+const descriptionSchema = z
+	.string()
+	.refine(
+		(text: string | undefined): boolean =>
+			nonNullish(text) && assertBytes({ text, min: 1, max: 2000 }),
+		{
+			message: 'Description must be given and up to 2000 bytes'
+		}
+	);
+
+const nameSchema = z
+	.string()
+	.refine(
+		(text: string | undefined): boolean =>
+			nonNullish(text) && assertBytes({ text, min: 1, max: 255 }),
+		{
+			message: 'Name must be given and up to 255 bytes'
+		}
+	);
+
 export const snsYaml = z.object({
-	name: z.string().max(255),
-	description: z.string().max(2000),
+	name: nameSchema,
+	description: descriptionSchema,
 	logo: z.string().optional(),
 	url: urlSchema,
 	NnsProposal: nnsProposalSchema,
