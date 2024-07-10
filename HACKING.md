@@ -16,6 +16,8 @@ Start dfx v0.20.0 from the root directory:
 dfx start
 ```
 
+> It will crash some errors but, it's expected. See this [thread](https://forum.dfinity.org/t/dfx-nns-install-unusable/32802) for context.
+
 Deploy Internet Identity and a Satellite:
 
 ```

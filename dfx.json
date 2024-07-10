@@ -45,7 +45,8 @@
 		"local": {
 			"bind": "127.0.0.1:8080",
 			"replica": {
-				"subnet_type": "system"
+				"subnet_type": "system",
+				"port": 8000
 			},
 			"type": "ephemeral"
 		}
