@@ -18,16 +18,10 @@ dfx start
 
 > It will crash some errors but, it's expected. See this [thread](https://forum.dfinity.org/t/dfx-nns-install-unusable/32802) for context.
 
-Deploy Internet Identity and a Satellite:
+Deploy Internet Identity and a configured Satellite:
 
 ```
 ./junolator deploy
-```
-
-Proceed with the configuration of the Satellite datastore:
-
-```
-./junolator config
 ```
 
 At this point, you are good to go except that you need the NNS governance canister.
