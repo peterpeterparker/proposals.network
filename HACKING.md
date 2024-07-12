@@ -50,13 +50,11 @@ There is no way to print it again later on, so if you don't do so, you might nev
 
 At this point you are almost good but, if you want to test SNS proposal locally you need to top up the SNS-W canister that was spin with previous script as it is not deployed with enough resources. Don't ask why.
 
-> Here was assume nns-sns-wasm was deployed with qaa6y-5yaaa-aaaaa-aaafa-cai. Double check it's the case.
-
 ```
-dfx canister deposit-cycles 50000000000000 qaa6y-5yaaa-aaaaa-aaafa-cai
+dfx ledger fabricate-cycles --canister qaa6y-5yaaa-aaaaa-aaafa-cai --t 9999999999
 ```
 
-In addition you will need to patch the ICRC-1 Index canister Wasm uploaded in the SNS-Wasm canister because `dfx nns install` is buggy.
+In addition, you will need to patch the ICRC-1 Index canister Wasm uploaded in the SNS-Wasm canister because `dfx nns install` is buggy.
 
 ```
 ./scripts/download.icrc.sh
@@ -86,15 +84,11 @@ dfx canister create satellite_2
 dfx canister update-settings --add-controller r7inp-6aaaa-aaaaa-aaabq-cai satellite_2
 ```
 
-Finally revert your change in `dfx.json` and use the canister ID that was created for the dapp you would like to decentralize locally.
+Finally, revert your change in `dfx.json` and use the canister ID that was created for the dapp you would like to decentralize locally.
 
 ### Neuron Fund
 
-To create a SNS proposal for a SNS.yaml file that specify `neurons_fund_participation: true` you need to do two things.
-
-1. In NNS dapp, select the neuron that you have created and enable `Participate in neuron's fund`.
-
-2. Then open your terminal run following command to provide that particular neuron maturity by running following script:
+To create an SNS proposal for an `SNS.yaml` file that specifies `neurons_fund_participation: true`, you need to run the following command to provide the particular neuron you staked maturity to and set it to participate in the neuron fund by running the following script:
 
 ```
 ./scripts/update.neuron.mjs
