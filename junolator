@@ -41,6 +41,7 @@ case $1 in
     init
     install
     deploy
+    node scripts/collections.mjs
     ;;
   config)
     node scripts/collections.mjs
