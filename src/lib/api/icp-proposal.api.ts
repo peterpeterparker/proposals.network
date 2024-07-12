@@ -45,7 +45,8 @@ export const listIcpProposals = async (
 				obj: ProposalStatus as unknown as ProposalStatus,
 				values: [ProposalStatus.Unknown]
 			}),
-			includeAllManageNeuronProposals: false
+			includeAllManageNeuronProposals: false,
+			omitLargeFields: true
 		},
 		certified: false
 	});
