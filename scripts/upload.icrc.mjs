@@ -47,7 +47,6 @@ const deployIndexCanister = async () => {
 
 	const {wasm, hash} = await loadGWasm();
 
-	console.log(JSON.stringify(await actor.get_wasm_metadata({hash: [hexStringToUint8Array(hash)]})));
 	console.log(`Upload ${hash}`);
 
 	await actor.add_wasm({
