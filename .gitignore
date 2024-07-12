@@ -25,3 +25,8 @@ package/
 static/workers
 
 nns_canisters_ids.md
+
+ic-icrc1*.wasm
+ic-icrc1*.wasm.gz
+ic-icrc1*.did
+sns-*.wasm
