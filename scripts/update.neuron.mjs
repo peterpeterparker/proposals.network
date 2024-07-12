@@ -30,7 +30,8 @@ const updateNeuron = async () => {
 
 	const updateNeuron = {
 		...neuron.Ok,
-		maturity_e8s_equivalent: 100_000_000_000_000n
+		maturity_e8s_equivalent: 100_000_000_000_000n,
+		joined_community_fund_timestamp_seconds: [BigInt(Math.floor(Date.now() / 1000))]
 	};
 
 	const { update_neuron } = await getGovernanceTestActor(governanceCanisterId);
