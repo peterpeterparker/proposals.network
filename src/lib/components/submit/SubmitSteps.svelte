@@ -91,7 +91,7 @@
 
 	<Step status={writeStatus}>
 		<svelte:fragment slot="step">{showSelect ? 3 : 2}</svelte:fragment>
-		Write
+		Edit
 	</Step>
 
 	<Step status={neuronStatus}>
