@@ -1,6 +1,11 @@
 <script lang="ts">
 	import SubmitMotionEdit from '$lib/components/submit/SubmitMotionEdit.svelte';
 	import SubmitTitle from '$lib/components/submit/SubmitTitle.svelte';
+	import SubmitContinue from '$lib/components/submit/SubmitContinue.svelte';
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
+	const next = () => dispatch('pnwrkNext');
 </script>
 
 <SubmitTitle>Craft Your Motion</SubmitTitle>
@@ -12,3 +17,5 @@
 </h2>
 
 <SubmitMotionEdit />
+
+<SubmitContinue on:click={next} />
