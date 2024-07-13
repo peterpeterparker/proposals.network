@@ -51,7 +51,7 @@
 		<SubmitTitle>Verify Your Controllers</SubmitTitle>
 
 		<h2 class="mb-6 text-2xl">
-			You also need to prepare the decentralization of your smart contracts.
+			One last thing: prepare the decentralization of your smart contracts.
 		</h2>
 
 		<p class="leading-relaxed mb-2">
