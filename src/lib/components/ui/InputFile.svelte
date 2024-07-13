@@ -28,7 +28,7 @@
 		{accept}
 	/>
 
-	<p class="px-2.5 pt-1 pb-2.5 text-xs">
+	<p class="px-2.5 pt-1 pb-2.5 text-xs min-h-9">
 		{#if isNullish(downloadUrl)}
 			&ZeroWidthSpace;
 		{:else}

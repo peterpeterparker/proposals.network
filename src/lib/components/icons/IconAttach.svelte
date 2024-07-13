@@ -1,6 +1,6 @@
 <!-- source: https://fonts.google.com/icons?selected=Material+Symbols+Rounded:attach_file:FILL@0;wght@400;GRAD@0;opsz@24&icon.size=24&icon.color=%23e8eaed&icon.query=link -->
 <script lang="ts">
-	export let size = '18';
+	export let size = '14';
 </script>
 
 <svg
