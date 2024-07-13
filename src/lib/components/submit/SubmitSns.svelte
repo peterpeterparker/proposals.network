@@ -1,6 +1,5 @@
 <script lang="ts">
 	import SubmitTitle from '$lib/components/submit/SubmitTitle.svelte';
-	import SubmitWriteContent from '$lib/components/submit/SubmitWriteContent.svelte';
 	import SubmitSnsAttachYamlFile from '$lib/components/submit/SubmitSnsAttachYamlFile.svelte';
 	import SubmitSnsAttachLogoFile from '$lib/components/submit/SubmitSnsAttachLogoFile.svelte';
 	import { createEventDispatcher, getContext } from 'svelte';
@@ -11,10 +10,11 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import Copy from '$lib/components/ui/Copy.svelte';
 	import { isBusy } from '$lib/derived/busy.derived';
+	import SubmitSnsContent from '$lib/components/submit/SubmitSnsContent.svelte';
 
 	const { store }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
-	let step: 'draft' | 'controllers' = 'draft';
+	let step: 'params' | 'draft' | 'controllers' = 'params';
 
 	const dispatch = createEventDispatcher();
 	const next = async () => {
@@ -28,27 +28,28 @@
 	};
 </script>
 
-<SubmitTitle>Propose Your SNS</SubmitTitle>
-
-{#if step === 'draft'}
+{#if step === 'params'}
 	<div in:blur>
+		<SubmitTitle>Propose Your SNS</SubmitTitle>
+
 		<h2 class="mb-6 text-2xl">
-			To propose an SNS, you need its parameters (provided in a configuration file), a logo, and a
-			summary.
+			To propose an SNS, you need its parameters (provided in a configuration file) and a logo.
 		</h2>
 
-		<SubmitWriteContent>
-			<svelte:fragment slot="before">
-				<SubmitSnsAttachYamlFile />
+		<SubmitSnsAttachYamlFile />
 
-				<SubmitSnsAttachLogoFile />
-			</svelte:fragment>
-		</SubmitWriteContent>
+		<SubmitSnsAttachLogoFile />
 
-		<SubmitContinue on:click={() => (step = 'controllers')} />
+		<SubmitContinue on:click={() => (step = 'draft')} />
+	</div>
+{:else if step === 'draft'}
+	<div in:blur>
+		<SubmitSnsContent on:click={() => (step = 'controllers')} />
 	</div>
 {:else}
 	<div in:blur>
+		<SubmitTitle>Verify Your Controllers</SubmitTitle>
+
 		<h2 class="mb-6 text-2xl">
 			You also need to prepare the decentralization of your smart contracts.
 		</h2>

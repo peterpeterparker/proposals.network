@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import IconSync from '$lib/components/icons/IconSync.svelte';
 	import { fade } from 'svelte/transition';
 	import { isWizardBusy } from '$lib/derived/busy.derived';
