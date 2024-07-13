@@ -45,7 +45,7 @@ There is no way to print it again later on, so if you don't do so, you might nev
 At this point you are almost good but, if you want to test SNS proposal locally you need to top up the SNS-W canister that was spin with previous script as it is not deployed with enough resources. Don't ask why.
 
 ```
-dfx ledger fabricate-cycles --canister qaa6y-5yaaa-aaaaa-aaafa-cai --t 100
+dfx ledger fabricate-cycles --canister qaa6y-5yaaa-aaaaa-aaafa-cai --t 100000
 ```
 
 In addition, you will need to patch the ICRC-1 Index canister Wasm uploaded in the SNS-Wasm canister because `dfx nns install` is buggy.
