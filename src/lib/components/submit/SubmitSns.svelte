@@ -8,17 +8,13 @@
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import SubmitContinue from '$lib/components/submit/SubmitContinue.svelte';
 	import { blur } from 'svelte/transition';
-	import type { SnsYaml } from '$lib/types/sns';
-	import { isNullish } from '@dfinity/utils';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Copy from '$lib/components/ui/Copy.svelte';
-	import { busy } from '$lib/stores/busy.store';
 	import { isBusy } from '$lib/derived/busy.derived';
 
 	const { store }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
 	let step: 'draft' | 'controllers' = 'draft';
-	let yaml: SnsYaml | undefined = undefined;
 
 	const dispatch = createEventDispatcher();
 	const next = async () => {
