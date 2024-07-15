@@ -1,4 +1,5 @@
 import { type NeuronSchema, type SnsYaml } from '$lib/types/sns';
+import { formatToken } from '$lib/utils/token.utils';
 import type { CreateServiceNervousSystem, Tokens } from '@dfinity/nns';
 import type {
 	Duration,
@@ -6,7 +7,7 @@ import type {
 	NeuronDistribution,
 	Percentage
 } from '@dfinity/nns/dist/types/types/governance_converters';
-import { convertStringToE8s, isNullish, nonNullish } from '@dfinity/utils';
+import { convertStringToE8s, isNullish, nonNullish, TokenAmountV2 } from '@dfinity/utils';
 
 interface UnitsToSeconds {
 	seconds: number;
@@ -297,3 +298,106 @@ export const mapSnsYamlToCreateServiceNervousSystem = ({
 		}
 	}
 });
+
+export const mapSnsYamlForContent = (
+	yaml: SnsYaml
+): {
+	minimumParticipantIcp: string;
+	maximumParticipantIcp: string;
+	minDirectParticipationIcp: string;
+	maxDirectParticipationIcp: string;
+	swapDistribution: string;
+	treasuryDistribution: string;
+	developersDistribution: string;
+} => {
+	const { swapParameters, initialTokenDistribution } = mapSnsYamlToCreateServiceNervousSystem({
+		yaml,
+		logo: ''
+	});
+
+	const snsToken = {
+		symbol: yaml.Token.symbol,
+		name: yaml.Token.name,
+		decimals: 8
+	};
+
+	const ICPToken = {
+		symbol: 'ICP',
+		name: 'Internet Computer',
+		decimals: 8
+	};
+
+	const BLANK = '__________________';
+
+	const minimumParticipantIcp = nonNullish(swapParameters?.minimumParticipantIcp?.e8s)
+		? formatToken(
+				TokenAmountV2.fromUlps({
+					amount: swapParameters.minimumParticipantIcp.e8s,
+					token: ICPToken
+				})
+			)
+		: BLANK;
+	const maximumParticipantIcp = nonNullish(swapParameters?.maximumParticipantIcp?.e8s)
+		? formatToken(
+				TokenAmountV2.fromUlps({
+					amount: swapParameters.maximumParticipantIcp.e8s,
+					token: ICPToken
+				})
+			)
+		: BLANK;
+
+	const minDirectParticipationIcp = nonNullish(swapParameters?.minDirectParticipationIcp?.e8s)
+		? formatToken(
+				TokenAmountV2.fromUlps({
+					amount: swapParameters.minDirectParticipationIcp.e8s,
+					token: ICPToken
+				})
+			)
+		: BLANK;
+	const maxDirectParticipationIcp = nonNullish(swapParameters?.maxDirectParticipationIcp?.e8s)
+		? formatToken(
+				TokenAmountV2.fromUlps({
+					amount: swapParameters.maxDirectParticipationIcp.e8s,
+					token: ICPToken
+				})
+			)
+		: BLANK;
+
+	const swapDistribution = initialTokenDistribution?.swapDistribution?.total?.e8s;
+	const treasuryDistribution = initialTokenDistribution?.treasuryDistribution?.total?.e8s;
+	const developersDistribution = initialTokenDistribution?.developerDistribution?.developerNeurons
+		.map((neuron) => neuron.stake?.e8s)
+		.filter(nonNullish)
+		.reduce((acc, e8s) => acc + e8s, 0n);
+
+	return {
+		minimumParticipantIcp,
+		maximumParticipantIcp,
+		minDirectParticipationIcp,
+		maxDirectParticipationIcp,
+		swapDistribution: nonNullish(swapDistribution)
+			? formatToken(
+					TokenAmountV2.fromUlps({
+						amount: swapDistribution,
+						token: snsToken
+					})
+				)
+			: BLANK,
+		treasuryDistribution: nonNullish(treasuryDistribution)
+			? formatToken(
+					TokenAmountV2.fromUlps({
+						amount: treasuryDistribution,
+						token: snsToken
+					})
+				)
+			: BLANK,
+		developersDistribution: nonNullish(developersDistribution)
+			? formatToken(
+					TokenAmountV2.fromUlps({
+						amount: developersDistribution,
+						token: snsToken
+					})
+				)
+			: BLANK
+	};
+};

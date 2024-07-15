@@ -12,6 +12,7 @@
 	import SubmitTitle from '$lib/components/submit/SubmitTitle.svelte';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import { getContext } from 'svelte';
+	import { mapSnsYamlForContent } from '$lib/utils/sns-make-proposal.utils';
 
 	const { store }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
@@ -38,6 +39,16 @@
 		}
 
 		const {
+			minimumParticipantIcp,
+			maximumParticipantIcp,
+			minDirectParticipationIcp,
+			maxDirectParticipationIcp,
+			swapDistribution,
+			treasuryDistribution,
+			developersDistribution
+		} = mapSnsYamlForContent(yaml);
+
+		const {
 			name,
 			description,
 			url,
@@ -54,7 +65,14 @@
 			.replaceAll(
 				'<URL>',
 				`<a href="${url}" target="_blank" rel="noopener noreferrer">${url.replace('https://', '')}</a>`
-			);
+			)
+			.replaceAll('<MINIMUM_PARTICIPANT_ICP>', minimumParticipantIcp)
+			.replaceAll('<MAXIMUM_PARTICIPANT_ICP>', maximumParticipantIcp)
+			.replaceAll('<MIN_DIRECT_PARTICIPATION_ICP>', minDirectParticipationIcp)
+			.replaceAll('<MAX_DIRECT_PARTICIPATION_ICP>', maxDirectParticipationIcp)
+			.replaceAll('<TREASURY_DISTRIBUTION>', treasuryDistribution)
+			.replaceAll('<SWAP_DISTRIBUTION>', swapDistribution)
+			.replaceAll('<DEVELOPERS_DISTRIBUTION>', developersDistribution);
 		await setContent(content);
 
 		status = 'ok';
