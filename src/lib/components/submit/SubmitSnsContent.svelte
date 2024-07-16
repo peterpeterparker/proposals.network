@@ -2,7 +2,7 @@
 	import { fade } from 'svelte/transition';
 	import { getSnsData } from '$lib/services/submit.sns.services';
 	import { isNullish, nonNullish, notEmptyString } from '@dfinity/utils';
-	import { getEditable, setContent } from '$lib/services/idb.services';
+	import { getContent, getEditable, setContent } from '$lib/services/idb.services';
 	import SubmitError from '$lib/components/submit/SubmitError.svelte';
 	import SubmitWriteContent from '$lib/components/submit/SubmitWriteContent.svelte';
 	import SpinnerText from '$lib/components/ui/SpinnerText.svelte';
@@ -11,8 +11,10 @@
 	import SubmitContinue from '$lib/components/submit/SubmitContinue.svelte';
 	import SubmitTitle from '$lib/components/submit/SubmitTitle.svelte';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
-	import { getContext } from 'svelte';
+	import { createEventDispatcher, getContext } from 'svelte';
 	import { mapSnsYamlForContent } from '$lib/utils/sns-make-proposal.utils';
+	import { assertBytes } from '$lib/types/assertions';
+	import { toasts } from '$lib/stores/toasts.store';
 
 	const { store }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
@@ -85,6 +87,21 @@
 	};
 
 	$: $store, (async () => init())();
+
+	const dispatch = createEventDispatcher();
+
+	const onContinue = async () => {
+		const [_, content, __] = await getContent();
+
+		if (!assertBytes({ text: content ?? '', min: 10, max: 2000 })) {
+			toasts.error({
+				msg: { text: 'Proposal content must be between 10 to 2000 bytes.' }
+			});
+			return;
+		}
+
+		dispatch('pnwrkNext');
+	};
 </script>
 
 {#if status !== 'error'}
@@ -99,7 +116,7 @@
 	{:else if status === 'ok'}
 		<SubmitWriteContent />
 
-		<SubmitContinue on:click />
+		<SubmitContinue on:click={onContinue} />
 	{/if}
 {:else}
 	<div in:fade>

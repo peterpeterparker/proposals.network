@@ -44,7 +44,7 @@
 	</div>
 {:else if step === 'draft'}
 	<div in:blur>
-		<SubmitSnsContent on:click={() => (step = 'controllers')} />
+		<SubmitSnsContent on:pnwrkNext={() => (step = 'controllers')} />
 	</div>
 {:else}
 	<div in:blur>
