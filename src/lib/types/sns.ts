@@ -123,9 +123,14 @@ const titleSchema = z
 
 const summarySchema = z
 	.string()
-	.refine((text: string): boolean => assertBytes({ text, min: 10, max: 2000 }), {
-		message: 'Summary must be between 10 to 2000 bytes'
-	});
+	.optional()
+	.refine(
+		(text: string | undefined): boolean =>
+			isNullish(text) || text === '' || assertBytes({ text, min: 10, max: 2000 }),
+		{
+			message: 'Summary must undefined, empty or between 10 to 2000 bytes'
+		}
+	);
 
 const tokenNameSchema = z
 	.string()

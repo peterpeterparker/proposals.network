@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { getSnsData } from '$lib/services/submit.sns.services';
-	import { isNullish } from '@dfinity/utils';
+	import { isNullish, nonNullish, notEmptyString } from '@dfinity/utils';
 	import { getEditable, setContent } from '$lib/services/idb.services';
 	import SubmitError from '$lib/components/submit/SubmitError.svelte';
 	import SubmitWriteContent from '$lib/components/submit/SubmitWriteContent.svelte';
@@ -35,6 +35,12 @@
 
 		if (result === 'error' || isNullish(yaml)) {
 			status = 'error';
+			return;
+		}
+
+		if (nonNullish(yaml.NnsProposal.summary) && yaml.NnsProposal.summary !== '') {
+			await setContent(yaml.NnsProposal.summary);
+			status = 'ok';
 			return;
 		}
 
