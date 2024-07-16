@@ -365,7 +365,7 @@ export const submitCreateServiceNervousSystemProposal = async ({
 			return { result: 'error' };
 		}
 
-		const { result, yaml, logo } = await getSnsData(key);
+		const { result, yaml, logo } = await getSnsData({ key, assertLogo: true });
 
 		if (result === 'error' || isNullish(yaml) || isNullish(logo)) {
 			return { result: 'error' };

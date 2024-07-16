@@ -33,7 +33,7 @@
 			return;
 		}
 
-		const { result, yaml } = await getSnsData(key);
+		const { result, yaml } = await getSnsData({key, assertLogo: false});
 
 		if (result === 'error' || isNullish(yaml)) {
 			status = 'error';

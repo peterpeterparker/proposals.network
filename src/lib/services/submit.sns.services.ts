@@ -5,7 +5,7 @@ import { toasts } from '$lib/stores/toasts.store';
 import type { ProposalKey, StorageSnsCollections } from '$lib/types/juno';
 import { type SnsYaml, snsYaml } from '$lib/types/sns';
 import type { UserOption } from '$lib/types/user';
-import { isNullish } from '@dfinity/utils';
+import { isNullish, nonNullish } from '@dfinity/utils';
 import { uploadFile } from '@junobuild/core-peer';
 import { nanoid } from 'nanoid';
 import { parse } from 'yaml';
@@ -201,9 +201,13 @@ export const assertCreateServiceNervousSystemAssets = async (
 	return { valid: true };
 };
 
-export const getSnsData = async (
-	key: ProposalKey
-): Promise<{ result: 'ok' | 'error'; yaml?: SnsYaml; logo?: string }> => {
+export const getSnsData = async ({
+	key,
+	assertLogo
+}: {
+	key: ProposalKey;
+	assertLogo: boolean;
+}): Promise<{ result: 'ok' | 'error'; yaml?: SnsYaml; logo?: string }> => {
 	const assets = await getEditableAssets();
 
 	if (isNullish(assets)) {
@@ -238,7 +242,7 @@ export const getSnsData = async (
 
 	const logoAsset = assets?.find(({ fullPath }) => fullPath === logoFullPath);
 
-	if (isNullish(logoAsset)) {
+	if (assertLogo && isNullish(logoAsset)) {
 		toasts.error({ msg: { text: 'No logo file has been uploaded.' } });
 		return { result: 'error' };
 	}
@@ -246,6 +250,6 @@ export const getSnsData = async (
 	return {
 		result: 'ok',
 		yaml,
-		logo: await blobToDataURL(logoAsset.file)
+		logo: nonNullish(logoAsset) ? await blobToDataURL(logoAsset.file) : undefined
 	};
 };
