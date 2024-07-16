@@ -2,11 +2,7 @@ import { DEV } from '$lib/constants/app.constants';
 import { Principal } from '@dfinity/principal';
 import { convertStringToE8s, isNullish, nonNullish } from '@dfinity/utils';
 import { z } from 'zod';
-
-const assertBytes = ({ text, min, max }: { text: string; min: number; max: number }): boolean => {
-	const byteLength = new TextEncoder().encode(text).length;
-	return byteLength >= min && byteLength <= max;
-};
+import { assertBytes } from '$lib/types/assertions';
 
 const assertE8sValue = (input: string): boolean => {
 	const text = input.toLowerCase();
