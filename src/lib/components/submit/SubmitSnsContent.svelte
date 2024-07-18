@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { getSnsData } from '$lib/services/submit.sns.services';
-	import { isNullish, nonNullish, notEmptyString } from '@dfinity/utils';
+	import { isNullish, nonNullish } from '@dfinity/utils';
 	import { getContent, getEditable, setContent } from '$lib/services/idb.services';
 	import SubmitError from '$lib/components/submit/SubmitError.svelte';
 	import SubmitWriteContent from '$lib/components/submit/SubmitWriteContent.svelte';
@@ -33,7 +33,7 @@
 			return;
 		}
 
-		const { result, yaml } = await getSnsData({key, assertLogo: false});
+		const { result, yaml } = await getSnsData({ key, assertLogo: false });
 
 		if (result === 'error' || isNullish(yaml)) {
 			status = 'error';
