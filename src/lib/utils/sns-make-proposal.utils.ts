@@ -46,7 +46,9 @@ const ONE_DAY_SECONDS = 24 * 60 * 60;
 const ONE_YEAR_SECONDS = ((4 * 365 + 1) * ONE_DAY_SECONDS) / 4;
 const ONE_MONTH_SECONDS = ONE_YEAR_SECONDS / 12;
 
-const nnsUnitsToSeconds: GovernanceUnitsToSeconds = {
+// After debugging those number of seconds those not seem to be required.
+// https://forum.dfinity.org/t/sns-yaml-month-and-year-conversion-to-seconds/32905/21?u=peterparker
+const _nnsUnitsToSeconds: GovernanceUnitsToSeconds = {
 	months: ONE_MONTH_SECONDS, // 2629800
 	month: ONE_MONTH_SECONDS,
 	M: ONE_MONTH_SECONDS,
@@ -225,11 +227,11 @@ export const mapSnsYamlToCreateServiceNervousSystem = ({
 		),
 		neuronMaximumAgeForAgeBonus: mapDuration({
 			duration: Voting.MaximumVotingPowerBonuses.Age.duration,
-			governanceUnitsToSeconds: nnsUnitsToSeconds
+			governanceUnitsToSeconds: snsUnitsToSeconds
 		}),
 		neuronMaximumDissolveDelay: mapDuration({
 			duration: Voting.MaximumVotingPowerBonuses.DissolveDelay.duration,
-			governanceUnitsToSeconds: nnsUnitsToSeconds
+			governanceUnitsToSeconds: snsUnitsToSeconds
 		}),
 		neuronMinimumDissolveDelayToVote: mapDuration({
 			duration: Voting.minimum_dissolve_delay,
@@ -239,17 +241,17 @@ export const mapSnsYamlToCreateServiceNervousSystem = ({
 		neuronMinimumStake: mapE8sOrTokens(Neurons.minimum_creation_stake),
 		proposalWaitForQuietDeadlineIncrease: mapDuration({
 			duration: Proposals.maximum_wait_for_quiet_deadline_extension,
-			governanceUnitsToSeconds: nnsUnitsToSeconds
+			governanceUnitsToSeconds: snsUnitsToSeconds
 		}),
 		proposalInitialVotingPeriod: mapDuration({
 			duration: Proposals.initial_voting_period,
-			governanceUnitsToSeconds: nnsUnitsToSeconds
+			governanceUnitsToSeconds: snsUnitsToSeconds
 		}),
 		proposalRejectionFee: mapE8sOrTokens(Proposals.rejection_fee),
 		votingRewardParameters: {
 			rewardRateTransitionDuration: mapDuration({
 				duration: Voting.RewardRate.transition_duration,
-				governanceUnitsToSeconds: nnsUnitsToSeconds
+				governanceUnitsToSeconds: snsUnitsToSeconds
 			}),
 			initialRewardRate: mapPercentage(Voting.RewardRate.initial),
 			finalRewardRate: mapPercentage(Voting.RewardRate.final)
@@ -261,13 +263,13 @@ export const mapSnsYamlToCreateServiceNervousSystem = ({
 		minimumParticipants: BigInt(Swap.minimum_participants),
 		duration: mapDuration({
 			duration: Swap.duration,
-			governanceUnitsToSeconds: nnsUnitsToSeconds
+			governanceUnitsToSeconds: snsUnitsToSeconds
 		}),
 		neuronBasketConstructionParameters: {
 			count: BigInt(Swap.VestingSchedule.events),
 			dissolveDelayInterval: mapDuration({
 				duration: Swap.VestingSchedule.interval,
-				governanceUnitsToSeconds: nnsUnitsToSeconds
+				governanceUnitsToSeconds: snsUnitsToSeconds
 			})
 		},
 		confirmationText: Swap.confirmation_text,
