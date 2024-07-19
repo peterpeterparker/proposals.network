@@ -4,7 +4,7 @@
 	import { debounce } from '@dfinity/utils';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import { getContext } from 'svelte';
-	import SubmitTitle from '$lib/components/submit/SubmitTitle.svelte';
+	import SubmitTitle from '$lib/components/ui/Title.svelte';
 
 	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import SubmitWriteEdit from '$lib/components/submit/SubmitWriteEdit.svelte';
-	import SubmitTitle from '$lib/components/submit/SubmitTitle.svelte';
+	import SubmitTitle from '$lib/components/ui/Title.svelte';
 </script>
 
 <SubmitTitle>Craft Your Motion</SubmitTitle>

@@ -5,7 +5,7 @@
 	import { isNullish } from '@dfinity/utils';
 	import Button from '$lib/components/ui/Button.svelte';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
-	import SubmitTitle from '$lib/components/submit/SubmitTitle.svelte';
+	import SubmitTitle from '$lib/components/ui/Title.svelte';
 
 	const { store }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
