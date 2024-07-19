@@ -12,7 +12,6 @@
 	import { deleteNeuronId, getNeuron } from '$lib/services/neuron.services';
 	import { nonNullish } from '@dfinity/utils';
 	import OopsError from '$lib/components/ui/OopsError.svelte';
-	import { USER_PAGINATION } from '$lib/constants/app.constants';
 	import SkeletonRows from '$lib/components/ui/SkeletonRows.svelte';
 	import SettingsNeuronRow from '$lib/components/settings/SettingsNeuronRow.svelte';
 	import type { GovernanceCanisterId } from '$lib/types/core';
