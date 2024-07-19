@@ -48,7 +48,7 @@
 	</div>
 {:else}
 	<div in:blur>
-		<SubmitTitle>Verify Your Controllers</SubmitTitle>
+		<Title>Verify Your Controllers</Title>
 
 		<h2 class="mb-6 text-2xl">
 			One last thing: prepare the decentralization of your smart contracts.
