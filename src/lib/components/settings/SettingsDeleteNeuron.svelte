@@ -31,3 +31,12 @@
 		</button>
 	</div>
 </Dialog>
+
+<style lang="scss">
+	@use '../../styles/mixins/text';
+
+	h2 {
+		word-break: break-all;
+		@include text.clamp(3);
+	}
+</style>

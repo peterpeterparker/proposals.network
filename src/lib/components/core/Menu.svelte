@@ -10,7 +10,7 @@
 	import { userInitialized, userSignedIn } from '$lib/derived/user.derived';
 	import { signIn, signOut } from '$lib/services/auth.services';
 	import IconLogin from '$lib/components/icons/IconLogin.svelte';
-	import { submitUrl } from '$lib/utils/nav.utils';
+	import { submitUrl, settingsUrl } from '$lib/utils/nav.utils';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
 
 	export let visible = false;
@@ -46,7 +46,7 @@
 						</div>
 						{#if $userSignedIn}
 							<div class="hover:underline hover:underline-offset-8 mb-4">
-								<a href="/settings">Settings</a>
+								<a href={settingsUrl({ governanceId: $governanceIdStore })}>Settings</a>
 							</div>
 						{/if}
 					</div>

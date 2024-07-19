@@ -12,7 +12,6 @@
 	import { deleteNeuronId, getNeuron } from '$lib/services/neuron.services';
 	import { nonNullish } from '@dfinity/utils';
 	import OopsError from '$lib/components/ui/OopsError.svelte';
-	import { USER_PAGINATION } from '$lib/constants/app.constants';
 	import SkeletonRows from '$lib/components/ui/SkeletonRows.svelte';
 	import SettingsNeuronRow from '$lib/components/settings/SettingsNeuronRow.svelte';
 	import type { GovernanceCanisterId } from '$lib/types/core';
@@ -107,7 +106,7 @@
 
 						<tbody>
 							{#if status === 'loading'}
-								<SkeletonRows rows={USER_PAGINATION} columns={3} />
+								<SkeletonRows rows={3} columns={4} />
 							{:else if neurons.length === 0}
 								<tr>
 									<td colspan="3">

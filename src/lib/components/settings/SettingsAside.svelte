@@ -1,11 +1,16 @@
 <script lang="ts">
 	import UserProposalsLoader from '$lib/components/proposals/UserProposalsLoader.svelte';
-	import { userProposalsStore } from '$lib/stores/user-proposals.store';
+	import { submitUrl } from '$lib/utils/nav.utils';
+	import { governanceIdStore, governanceSnsesStore } from '$lib/derived/governance.derived';
+	import type { Governance } from '$lib/types/governance';
+	import { findGovernance } from '$lib/utils/governance.utils';
+	import { nonNullish } from '@dfinity/utils';
 
-	let countSubmitted: number;
-	$: countSubmitted = ($userProposalsStore?.items ?? []).filter(
-		({ data: { status } }) => status === 'submitted'
-	).length;
+	let governance: Governance | undefined;
+	$: governance = findGovernance({
+		governanceId: $governanceIdStore,
+		governanceSnses: $governanceSnsesStore
+	});
 </script>
 
 <UserProposalsLoader>
@@ -13,9 +18,10 @@
 		<span class="text-lg font-bold block mb-4">You miss a 100% of the shots you don't take.</span>
 
 		<p class="leading-relaxed mb-4">
-			You created <strong>{$userProposalsStore?.items.length ?? 0}</strong> proposals and submitted
-			<strong>{countSubmitted}</strong>
-			of them.
+			<a class="underline underline-offset-2" href={submitUrl({ governanceId: $governanceIdStore })}
+				>Submit</a
+			>
+			a proposal{nonNullish(governance) ? ` on ${governance.name}` : ''} now!
 		</p>
 	</div>
 </UserProposalsLoader>

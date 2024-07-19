@@ -11,6 +11,9 @@ export const homeUrl = (param: Pick<GovernanceIdParam, 'governanceId'>): string 
 export const submitUrl = (param: Pick<GovernanceIdParam, 'governanceId'>): string =>
 	`/submit/?${governanceParam({ ...param, separator: false })}`;
 
+export const settingsUrl = (param: Pick<GovernanceIdParam, 'governanceId'>): string =>
+	`/settings/?${governanceParam({ ...param, separator: false })}`;
+
 export const userProposalUrl = ({
 	key,
 	governanceId
