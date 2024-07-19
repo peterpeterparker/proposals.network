@@ -107,7 +107,7 @@
 
 						<tbody>
 							{#if status === 'loading'}
-								<SkeletonRows rows={USER_PAGINATION} columns={3} />
+								<SkeletonRows rows={3} columns={4} />
 							{:else if neurons.length === 0}
 								<tr>
 									<td colspan="3">
