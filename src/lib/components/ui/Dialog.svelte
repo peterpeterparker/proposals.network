@@ -40,7 +40,6 @@
 {/if}
 
 <style lang="scss">
-	@use '../../styles/mixins/display';
 	@use '../../styles/mixins/media';
 
 	.modal {
