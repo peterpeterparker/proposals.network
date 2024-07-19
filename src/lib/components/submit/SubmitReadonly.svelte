@@ -5,7 +5,7 @@
 	import type { ProposalMetadata } from '$lib/types/juno';
 	import { isNullish } from '@dfinity/utils';
 	import SpinnerText from '$lib/components/ui/SpinnerText.svelte';
-	import SubmitError from '$lib/components/submit/SubmitError.svelte';
+	import OopsError from '$lib/components/ui/OopsError.svelte';
 	import { fade } from 'svelte/transition';
 	import SubmitProposalNav from '$lib/components/submit/SubmitProposalNav.svelte';
 
@@ -29,6 +29,6 @@
 	<SubmitProposalNav proposalId={metadata?.data.proposalId} />
 {:else}
 	<div in:fade>
-		<SubmitError />
+		<OopsError />
 	</div>
 {/if}
