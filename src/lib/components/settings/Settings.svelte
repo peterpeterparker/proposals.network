@@ -19,7 +19,7 @@
 	import IconDelete from '$lib/components/icons/IconDelete.svelte';
 	import type { Doc } from '@junobuild/core-peer';
 	import type { Neuron } from '$lib/types/juno';
-	import SettingsAside from "$lib/components/settings/SettingsAside.svelte";
+	import SettingsAside from '$lib/components/settings/SettingsAside.svelte';
 
 	let status: 'loading' | 'ok' | 'error' = 'loading';
 

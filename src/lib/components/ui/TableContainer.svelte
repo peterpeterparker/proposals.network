@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Table from '$lib/components/ui/Table.svelte';
 	import TableMobileActions from '$lib/components/ui/TableMobileActions.svelte';
-	import type {ComponentType} from "svelte";
+	import type { ComponentType } from 'svelte';
 
 	export let color: 'primary' | 'secondary' = 'primary';
 	export let rows: number | undefined;

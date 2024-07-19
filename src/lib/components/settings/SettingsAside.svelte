@@ -13,8 +13,8 @@
 		<span class="text-lg font-bold block mb-4">You miss a 100% of the shots you don't take.</span>
 
 		<p class="leading-relaxed mb-4">
-			You created <strong>{$userProposalsStore?.items.length ?? 0}</strong> proposals and
-			submitted <strong>{countSubmitted}</strong>
+			You created <strong>{$userProposalsStore?.items.length ?? 0}</strong> proposals and submitted
+			<strong>{countSubmitted}</strong>
 			of them.
 		</p>
 	</div>
