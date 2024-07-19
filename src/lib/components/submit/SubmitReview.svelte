@@ -2,7 +2,7 @@
 	import type { ProposalContent } from '$lib/types/juno';
 	import { createEventDispatcher, onMount } from 'svelte';
 	import { nonNullish } from '@dfinity/utils';
-	import SubmitError from '$lib/components/submit/SubmitError.svelte';
+	import OopsError from '$lib/components/ui/OopsError.svelte';
 	import Copy from '$lib/components/ui/Copy.svelte';
 	import { isBusy } from '$lib/derived/busy.derived';
 	import Button from '$lib/components/ui/Button.svelte';
@@ -85,5 +85,5 @@
 		</div>
 	</form>
 {:else}
-	<SubmitError />
+	<OopsError />
 {/if}
