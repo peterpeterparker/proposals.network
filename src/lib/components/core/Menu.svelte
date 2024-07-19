@@ -44,6 +44,11 @@
 						<div class="hover:underline hover:underline-offset-8 mb-4">
 							<a href={submitUrl({ governanceId: $governanceIdStore })}>Submit a proposal</a>
 						</div>
+						{#if $userSignedIn}
+							<div class="hover:underline hover:underline-offset-8 mb-4">
+								<a href="/settings">Settings</a>
+							</div>
+						{/if}
 					</div>
 					<div class="pb-12">
 						<span class="text-lg font-bold block mb-4">Resources</span>

@@ -1,0 +1,6 @@
+body {
+	&:has([role='menu']),
+	&:has([role='dialog']) {
+		overflow: hidden;
+	}
+}

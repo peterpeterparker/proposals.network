@@ -9,7 +9,7 @@
 	import UserProposalView from '$lib/components/proposals/UserProposalView.svelte';
 	import UserProposalStatus from '$lib/components/proposals/UserProposalStatus.svelte';
 	import ProposalLink from '$lib/components/proposals/ProposalLink.svelte';
-	import UserProposalGovernance from '$lib/components/proposals/UserProposalGovernance.svelte';
+	import GovernanceCell from '$lib/components/core/GovernanceCell.svelte';
 	import type { Governance } from '$lib/types/governance';
 	import { findGovernance } from '$lib/utils/governance.utils';
 	import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
@@ -38,7 +38,7 @@
 
 <tr>
 	<UserProposalLink {key} />
-	<UserProposalGovernance {governance} />
+	<GovernanceCell {governance} />
 	<ProposalLink id={proposalId} />
 	<td class="max-w-lg truncate">{title ?? nodeProviderName ?? ''}</td>
 	<UserProposalStatus {proposalId} {governance} />
