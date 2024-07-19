@@ -12,7 +12,7 @@
 	import { nonNullish } from '@dfinity/utils';
 	import SubmitNeuronMetadata from '$lib/components/submit/SubmitNeuronMetadata.svelte';
 	import { firstNeuronId } from '$lib/utils/juno.utils';
-	import SubmitError from '$lib/components/submit/SubmitError.svelte';
+	import OopsError from '$lib/components/ui/OopsError.svelte';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
 	import SubmitNeuronRequirements from '$lib/components/submit/SubmitNeuronRequirements.svelte';
 
@@ -55,6 +55,6 @@
 	{/if}
 {:else}
 	<div in:fade>
-		<SubmitError />
+		<OopsError />
 	</div>
 {/if}
