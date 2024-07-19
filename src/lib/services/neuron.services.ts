@@ -64,7 +64,6 @@ export const deleteNeuronId = async ({
 
 	return await saveNeuron({
 		neuron,
-		neuronId,
 		prepareNeuronData,
 		...rest
 	});
@@ -90,7 +89,6 @@ export const setNeuron = async ({
 
 	return await saveNeuron({
 		neuron,
-		neuronId,
 		prepareNeuronData,
 		...rest
 	});
@@ -99,13 +97,11 @@ export const setNeuron = async ({
 const saveNeuron = async ({
 	user,
 	neuron,
-	neuronId,
 	governanceId,
 	prepareNeuronData
 }: {
 	user: UserOption;
 	neuron: Doc<Neuron> | undefined;
-	neuronId: string;
 	governanceId: OptionGovernanceId;
 	prepareNeuronData: (governanceId: GovernanceCanisterId) => Neuron;
 }): Promise<{ result: 'ok' | 'error'; neuron: Doc<Neuron> | undefined }> => {
