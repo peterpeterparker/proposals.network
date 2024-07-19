@@ -13,6 +13,7 @@
 	import {governanceIdStore} from "$lib/derived/governance.derived";
 	import type {Neuron} from "$lib/types/juno";
 	import type {Doc} from "@junobuild/core-peer";
+	import SpinnerText from "$lib/components/ui/SpinnerText.svelte";
 
 	let neurons: Doc<Neuron>[] = [];
 
@@ -46,6 +47,9 @@
 					text="Principal copied."
 				/>  on proposals.network.
 			</h2>
+
+
+			<SpinnerText>Hold tight, loading your neurons...</SpinnerText>
 
 			<h2 class="mt-16 mb-6 text-4xl">Your Neurons</h2>
 

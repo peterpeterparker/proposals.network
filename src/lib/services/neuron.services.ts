@@ -4,7 +4,7 @@ import type { OptionGovernanceId } from '$lib/types/governance';
 import type { Neuron } from '$lib/types/juno';
 import type { UserOption } from '$lib/types/user';
 import { isNullish, nonNullish } from '@dfinity/utils';
-import { getDoc, setDoc, type Doc } from '@junobuild/core-peer';
+import { getDoc, listDocs, setDoc, type Doc, type ListResults } from '@junobuild/core-peer';
 
 export const getNeuron = async (
 	user: UserOption
@@ -92,5 +92,31 @@ export const setNeuron = async ({
 		return { result: 'error', neuron: undefined };
 	} finally {
 		busy.stop();
+	}
+};
+
+export const listNeurons = async (
+	user: UserOption
+): Promise<{ result: 'ok' | 'error'; neurons: ListResults<Doc<Neuron>> | undefined }> => {
+	if (isNullish(user)) {
+		toasts.error({
+			msg: { text: 'You are not signed in.' }
+		});
+		return { result: 'error', neurons: undefined };
+	}
+
+	try {
+		const neurons = await listDocs<Neuron>({
+			collection: 'neuron',
+			filter: {}
+		});
+
+		return { result: 'ok', neurons };
+	} catch (err: unknown) {
+		toasts.error({
+			msg: { text: 'Something went wrong while list your neurons.' },
+			err
+		});
+		return { result: 'error', neurons: undefined };
 	}
 };
