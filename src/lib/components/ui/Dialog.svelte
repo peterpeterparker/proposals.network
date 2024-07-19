@@ -40,6 +40,7 @@
 {/if}
 
 <style lang="scss">
+	@use '../../styles/mixins/display';
 	@use '../../styles/mixins/media';
 
 	.modal {
@@ -47,12 +48,5 @@
 		@include display.inset;
 
 		z-index: calc(var(--z-index) + 998);
-	}
-
-	.content {
-		@include media.min-width(medium) {
-			overflow-y: auto;
-			overflow-x: hidden;
-		}
 	}
 </style>
