@@ -4,6 +4,7 @@
 	import { findGovernance } from '$lib/utils/governance.utils';
 	import { governanceSnsesStore } from '$lib/derived/governance.derived';
 	import GovernanceCell from '$lib/components/core/GovernanceCell.svelte';
+    import ButtonCell from "$lib/components/ui/ButtonCell.svelte";
 
 	export let neuron: [GovernanceCanisterId, (string | bigint)[]];
 
@@ -23,5 +24,7 @@
 <tr>
     <GovernanceCell {governance} />
     <td>{neuronId ?? ''}</td>
-    <td></td>
+    <td>
+        <ButtonCell>Delete</ButtonCell>
+    </td>
 </tr>

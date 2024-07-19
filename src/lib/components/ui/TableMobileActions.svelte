@@ -2,9 +2,18 @@
 	import { nonNullish } from '@dfinity/utils';
 	import ButtonView from '$lib/components/ui/ButtonView.svelte';
 	import { fade } from 'svelte/transition';
+	import type { ComponentType } from 'svelte';
+	import IconView from '$lib/components/icons/IconView.svelte';
 
 	export let table: HTMLTableElement | null;
 	export let rows: number | undefined;
+	export let actionLabel: string | undefined;
+	export let actionIcon: ComponentType | undefined;
+
+	let rowAriaLabel: string;
+	$: rowAriaLabel = actionLabel ?? 'View';
+	let rowActionIcon: ComponentType;
+	$: rowActionIcon = actionIcon ?? IconView;
 
 	let r: number[];
 	$: r = Array.from({ length: rows ?? 0 }, (_, i) => i);
@@ -23,7 +32,7 @@
 		transition:fade={{ duration: 150 }}
 	>
 		{#each r as row}
-			<ButtonView on:click={() => trigger(row)} />
+			<ButtonView on:click={() => trigger(row)} ariaLabel={rowAriaLabel} icon={rowActionIcon} />
 		{/each}
 	</div>
 {/if}

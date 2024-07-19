@@ -17,6 +17,7 @@
 	import SkeletonRows from '$lib/components/ui/SkeletonRows.svelte';
 	import SettingsNeuronRow from '$lib/components/settings/SettingsNeuronRow.svelte';
 	import type { GovernanceCanisterId } from '$lib/types/core';
+	import IconDelete from '$lib/components/icons/IconDelete.svelte';
 
 	let status: 'loading' | 'ok' | 'error' = 'loading';
 
@@ -73,7 +74,7 @@
 				<h2 class="mt-16 mb-6 text-4xl">Your Neurons</h2>
 
 				<div class="lg:-mx-4">
-					<TableContainer rows={neurons.length}>
+					<TableContainer rows={neurons.length} actionLabel="Delete" actionIcon={IconDelete}>
 						<thead>
 							<tr>
 								<th>Governance</th>
