@@ -1,5 +1,5 @@
 <script lang="ts">
-	import SubmitTitle from '$lib/components/submit/SubmitTitle.svelte';
+	import Title from '$lib/components/ui/Title.svelte';
 	import SubmitSnsAttachYamlFile from '$lib/components/submit/SubmitSnsAttachYamlFile.svelte';
 	import SubmitSnsAttachLogoFile from '$lib/components/submit/SubmitSnsAttachLogoFile.svelte';
 	import { createEventDispatcher, getContext } from 'svelte';
@@ -30,7 +30,7 @@
 
 {#if step === 'params'}
 	<div in:blur>
-		<SubmitTitle>Propose Your SNS</SubmitTitle>
+		<Title>Propose Your SNS</Title>
 
 		<h2 class="mb-6 text-2xl">
 			To propose an SNS, you need its parameters (provided in a configuration file) and a logo.

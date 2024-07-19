@@ -9,7 +9,7 @@
 	import template from '$lib/markdown/proposal-template.md?raw';
 	import snsTemplate from '$lib/markdown/sns-proposal-template.md?raw';
 	import SubmitContinue from '$lib/components/submit/SubmitContinue.svelte';
-	import SubmitTitle from '$lib/components/submit/SubmitTitle.svelte';
+	import Title from '$lib/components/ui/Title.svelte';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import { createEventDispatcher, getContext } from 'svelte';
 	import { mapSnsYamlForContent } from '$lib/utils/sns-make-proposal.utils';
@@ -105,7 +105,7 @@
 </script>
 
 {#if status !== 'error'}
-	<SubmitTitle>Craft Your Proposal</SubmitTitle>
+	<Title>Craft Your Proposal</Title>
 
 	<h2 class="mb-6 text-2xl">
 		Cool stuff 💪! In addition to the details of your SNS, you also need to craft a proposal.
