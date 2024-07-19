@@ -10,7 +10,7 @@
 	import TableContainer from '$lib/components/ui/TableContainer.svelte';
 	import { fade } from 'svelte/transition';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
-	import { getNeuron } from '$lib/services/neuron.services';
+	import { deleteNeuronId, getNeuron, setNeuron } from '$lib/services/neuron.services';
 	import { nonNullish } from '@dfinity/utils';
 	import OopsError from '$lib/components/ui/OopsError.svelte';
 	import { USER_PAGINATION } from '$lib/constants/app.constants';
@@ -18,10 +18,13 @@
 	import SettingsNeuronRow from '$lib/components/settings/SettingsNeuronRow.svelte';
 	import type { GovernanceCanisterId } from '$lib/types/core';
 	import IconDelete from '$lib/components/icons/IconDelete.svelte';
+	import type { Doc } from '@junobuild/core-peer';
+	import type { Neuron } from '$lib/types/juno';
 
 	let status: 'loading' | 'ok' | 'error' = 'loading';
 
 	let neurons: [GovernanceCanisterId, (string | bigint)[]][] = [];
+	let neuron: Doc<Neuron> | undefined;
 
 	const reset = () => {
 		neurons = [];
@@ -43,13 +46,30 @@
 
 		status = 'loading';
 
-		const { result, neuron } = await getNeuron($userStore);
+		const { result, neuron: n } = await getNeuron($userStore);
 
 		status = result === 'ok' ? 'ok' : 'error';
-		neurons = nonNullish(neuron) ? Object.entries(neuron.data) : [];
+		neurons = nonNullish(n) ? Object.entries(n.data) : [];
+		neuron = n;
 	};
 
 	$: $userStore, $governanceIdStore, (async () => load())();
+
+	const deleteNeuron = async ({ detail: neuronId }: CustomEvent<string | bigint>) => {
+		const { result, neuron: updatedNeuron } = await deleteNeuronId({
+			user: $userStore,
+			neuron,
+			neuronId: `${neuronId}`,
+			governanceId: $governanceIdStore
+		});
+
+		if (result === 'error') {
+			return;
+		}
+
+		neurons = nonNullish(updatedNeuron) ? Object.entries(updatedNeuron.data) : [];
+		neuron = updatedNeuron;
+	};
 </script>
 
 <SplitPane col="reverse">
@@ -96,7 +116,7 @@
 								</tr>
 							{:else}
 								{#each neurons as neuron (neuron[0])}
-									<SettingsNeuronRow {neuron} />
+									<SettingsNeuronRow {neuron} on:pnwrkDelete={deleteNeuron} />
 								{/each}
 							{/if}
 						</tbody>
