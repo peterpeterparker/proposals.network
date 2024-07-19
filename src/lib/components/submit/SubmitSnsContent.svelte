@@ -3,7 +3,7 @@
 	import { getSnsData } from '$lib/services/submit.sns.services';
 	import { isNullish, nonNullish } from '@dfinity/utils';
 	import { getContent, getEditable, setContent } from '$lib/services/idb.services';
-	import SubmitError from '$lib/components/submit/SubmitError.svelte';
+	import OopsError from '$lib/components/ui/OopsError.svelte';
 	import SubmitWriteContent from '$lib/components/submit/SubmitWriteContent.svelte';
 	import SpinnerText from '$lib/components/ui/SpinnerText.svelte';
 	import template from '$lib/markdown/proposal-template.md?raw';
@@ -120,6 +120,6 @@
 	{/if}
 {:else}
 	<div in:fade>
-		<SubmitError />
+		<OopsError />
 	</div>
 {/if}
