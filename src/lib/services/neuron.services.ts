@@ -94,29 +94,3 @@ export const setNeuron = async ({
 		busy.stop();
 	}
 };
-
-export const listNeurons = async (
-	user: UserOption
-): Promise<{ result: 'ok' | 'error'; neurons: ListResults<Doc<Neuron>> | undefined }> => {
-	if (isNullish(user)) {
-		toasts.error({
-			msg: { text: 'You are not signed in.' }
-		});
-		return { result: 'error', neurons: undefined };
-	}
-
-	try {
-		const neurons = await listDocs<Neuron>({
-			collection: 'neuron',
-			filter: {}
-		});
-
-		return { result: 'ok', neurons };
-	} catch (err: unknown) {
-		toasts.error({
-			msg: { text: 'Something went wrong while list your neurons.' },
-			err
-		});
-		return { result: 'error', neurons: undefined };
-	}
-};

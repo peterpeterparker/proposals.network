@@ -10,17 +10,17 @@
 	import TableContainer from '$lib/components/ui/TableContainer.svelte';
 	import { fade } from 'svelte/transition';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
-	import type { Neuron } from '$lib/types/juno';
-	import type { Doc } from '@junobuild/core-peer';
-	import SpinnerText from '$lib/components/ui/SpinnerText.svelte';
-	import { listNeurons } from '$lib/services/neuron.services';
+	import { getNeuron } from '$lib/services/neuron.services';
 	import { nonNullish } from '@dfinity/utils';
 	import OopsError from '$lib/components/ui/OopsError.svelte';
 	import { USER_PAGINATION } from '$lib/constants/app.constants';
 	import SkeletonRows from '$lib/components/ui/SkeletonRows.svelte';
+	import SettingsNeuronRow from '$lib/components/settings/SettingsNeuronRow.svelte';
+	import type { GovernanceCanisterId } from '$lib/types/core';
 
 	let status: 'loading' | 'ok' | 'error' = 'loading';
-	let neurons: Doc<Neuron>[] = [];
+
+	let neurons: [GovernanceCanisterId, (string | bigint)[]][] = [];
 
 	const reset = () => {
 		neurons = [];
@@ -42,10 +42,10 @@
 
 		status = 'loading';
 
-		const { result, neurons: listResults } = await listNeurons($userStore);
+		const { result, neuron } = await getNeuron($userStore);
 
-		status = result === 'ok' && nonNullish(neurons) ? 'ok' : 'error';
-		neurons = listResults?.items ?? [];
+		status = result === 'ok' ? 'ok' : 'error';
+		neurons = nonNullish(neuron) ? Object.entries(neuron.data) : [];
 	};
 
 	$: $userStore, $governanceIdStore, (async () => load())();
@@ -75,25 +75,29 @@
 				<div class="lg:-mx-4">
 					<TableContainer rows={neurons.length}>
 						<thead>
-						<tr>
-							<th>Neuron</th>
-							<th>Governance</th>
-							<th></th>
-						</tr>
+							<tr>
+								<th>Governance</th>
+								<th>Neuron</th>
+								<th></th>
+							</tr>
 						</thead>
 
 						<tbody>
-						{#if status === 'loading'}
-							<SkeletonRows rows={USER_PAGINATION} columns={3} />
-						{:else if neurons.length === 0}
-							<tr>
-								<td colspan="3">
-									<span class="inline-block"
-									>You have not used any neurons to craft proposals yet.</span
-									>
-								</td>
-							</tr>
-						{:else}{/if}
+							{#if status === 'loading'}
+								<SkeletonRows rows={USER_PAGINATION} columns={3} />
+							{:else if neurons.length === 0}
+								<tr>
+									<td colspan="3">
+										<span class="inline-block"
+											>You have not used any neurons to craft proposals yet.</span
+										>
+									</td>
+								</tr>
+							{:else}
+								{#each neurons as neuron (neuron[0])}
+									<SettingsNeuronRow {neuron} />
+								{/each}
+							{/if}
 						</tbody>
 					</TableContainer>
 				</div>
