@@ -6,11 +6,10 @@
 	import Title from '$lib/components/ui/Title.svelte';
 	import { userStore } from '$lib/stores/user.store';
 	import Copy from '$lib/components/ui/Copy.svelte';
-	import IconError from '$lib/components/icons/IconError.svelte';
 	import TableContainer from '$lib/components/ui/TableContainer.svelte';
 	import { fade } from 'svelte/transition';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
-	import { deleteNeuronId, getNeuron, setNeuron } from '$lib/services/neuron.services';
+	import { deleteNeuronId, getNeuron } from '$lib/services/neuron.services';
 	import { nonNullish } from '@dfinity/utils';
 	import OopsError from '$lib/components/ui/OopsError.svelte';
 	import { USER_PAGINATION } from '$lib/constants/app.constants';
@@ -122,11 +121,6 @@
 						</tbody>
 					</TableContainer>
 				</div>
-
-				<p class="leading-relaxed text-sm mt-8 mb-4 italic">
-					<IconError /> If you delete any neurons, please remember to also remove the associated hotkeys
-					in the related neurons.
-				</p>
 			{/if}
 		{/if}
 	</UserInitializedGuard>
