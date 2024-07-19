@@ -8,7 +8,9 @@
 	$: title = $store?.proposal?.title;
 </script>
 
-<h1 class="font-bold capitalize mb-12 text-5xl lg:text-7xl lg:leading-tight break-words">
+<h1
+	class="font-bold capitalize mb-12 text-5xl lg:text-7xl leading-tight lg:leading-tight break-words"
+>
 	{title ?? 'Proposal'}
 </h1>
 
