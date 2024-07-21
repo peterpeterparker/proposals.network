@@ -15,7 +15,7 @@
 	"scripts": {
 		"build:csp": "node scripts/build.csp.mjs",
 		"build:post-process": "npm run build:csp",
-		"build:snses": "node scripts/build.snses.mjs",
+		"build:snses": "node scripts/build.snses.mjs && prettier --write src/lib/data/snses.json",
 		"build": "npm run build:snses && tsc --noEmit && vite build && npm run build:post-process",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",

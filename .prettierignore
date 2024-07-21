@@ -15,5 +15,3 @@ yarn.lock
 /target
 
 .dfx
-
-src/lib/data/snses.json

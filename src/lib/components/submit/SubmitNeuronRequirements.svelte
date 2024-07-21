@@ -3,8 +3,6 @@
 	import { governanceStore, snsStore } from '$lib/derived/governance.derived';
 	import { formatToken } from '$lib/utils/token.utils';
 
-	// parameters.nervous_system_parameters.neuron_minimum_dissolve_delay_to_vote_seconds|neuron_minimum_stake_e8s
-
 	const ICP_MIN_DISSOLVE_DELAY = 15_780_000; // 6 months
 	const ICP_NEURON_MINIMUM_STAKE_E8S = 10; // 10 ICP
 
@@ -13,19 +11,18 @@
 		$snsStore?.nervous_system_parameters.neuron_minimum_dissolve_delay_to_vote_seconds ??
 		ICP_MIN_DISSOLVE_DELAY;
 
-	let neuronMinimumStake = ICP_NEURON_MINIMUM_STAKE_E8S;
-	$: neuronMinimumStake =
-		$snsStore?.nervous_system_parameters.neuron_minimum_stake_e8s ?? ICP_NEURON_MINIMUM_STAKE_E8S;
+	let rejectCostE8s: number | undefined;
+	$: rejectCostE8s = $snsStore?.nervous_system_parameters.reject_cost_e8s;
 
 	let amount: TokenAmountV2 | undefined;
 	$: $governanceStore,
 		$snsStore,
 		(() => {
-			if (nonNullish($snsStore)) {
+			if (nonNullish($snsStore) && nonNullish(rejectCostE8s)) {
 				amount =
 					$governanceStore?.token !== undefined
 						? TokenAmountV2.fromUlps({
-								amount: BigInt(neuronMinimumStake),
+								amount: BigInt(rejectCostE8s),
 								token: $governanceStore.token
 							})
 						: undefined;

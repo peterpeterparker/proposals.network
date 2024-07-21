@@ -36,6 +36,7 @@ export type CachedNervousFunctionDto = {
 export interface CachedNervousSystemParameters {
 	neuron_minimum_dissolve_delay_to_vote_seconds: number;
 	neuron_minimum_stake_e8s: number;
+	reject_cost_e8s: number;
 }
 
 export type CachedSnsTokenMetadataDtoNat = { Nat: number[] };
