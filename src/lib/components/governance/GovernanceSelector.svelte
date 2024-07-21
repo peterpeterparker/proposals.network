@@ -2,15 +2,12 @@
 	import Img from '$lib/components/ui/Img.svelte';
 	import { governanceStore } from '$lib/derived/governance.derived';
 	import IconChevronDown from '$lib/components/icons/IconChevronDown.svelte';
-	import GovernanceDialog from '$lib/components/governance/GovernanceDialog.svelte';
+	import { emit } from '$lib/utils/events.utils';
 
 	let logoSrc: string;
 	$: logoSrc = $governanceStore?.logo ?? 'logo/icp.svg';
 
-	let visible = false;
-
-	const onSelect = () => (visible = true);
-	const onClose = () => (visible = false);
+	const onSelect = () => emit({ message: 'pnwrkOpenGovernance' });
 </script>
 
 <button
@@ -27,7 +24,3 @@
 		<IconChevronDown size="32px" />
 	</div>
 </button>
-
-{#if visible}
-	<GovernanceDialog on:pnwrkClose={onClose} on:pnwrkSelect={onClose} />
-{/if}
