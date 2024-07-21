@@ -13,7 +13,10 @@
 	};
 </script>
 
-<button class="hover:underline hover:underline-offset-8 mb-4 text-left" on:click={() => (visible = true)}>Submit a proposal</button>
+<button
+	class="hover:underline hover:underline-offset-8 mb-4 text-left"
+	on:click={() => (visible = true)}>Submit a proposal</button
+>
 
 {#if visible}
 	<GovernanceDialog on:pnwrkClose={close} on:pnwrkSelect={navigate} />

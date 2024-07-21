@@ -12,7 +12,7 @@
 	import IconLogin from '$lib/components/icons/IconLogin.svelte';
 	import { settingsUrl } from '$lib/utils/nav.utils';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
-	import GovernanceMenuLink from "$lib/components/governance/GovernanceMenuLink.svelte";
+	import GovernanceMenuLink from '$lib/components/governance/GovernanceMenuLink.svelte';
 
 	export let visible = false;
 </script>

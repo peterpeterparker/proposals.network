@@ -1,6 +1,6 @@
 <script lang="ts">
 	import UserProposalsLoader from '$lib/components/proposals/UserProposalsLoader.svelte';
-	import GovernanceSubmitLink from "$lib/components/governance/GovernanceSubmitLink.svelte";
+	import GovernanceSubmitLink from '$lib/components/governance/GovernanceSubmitLink.svelte';
 </script>
 
 <UserProposalsLoader>
