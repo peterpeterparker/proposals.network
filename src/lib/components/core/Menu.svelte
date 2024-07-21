@@ -10,7 +10,7 @@
 	import { userInitialized, userSignedIn } from '$lib/derived/user.derived';
 	import { signIn, signOut } from '$lib/services/auth.services';
 	import IconLogin from '$lib/components/icons/IconLogin.svelte';
-	import { submitUrl, settingsUrl } from '$lib/utils/nav.utils';
+	import { settingsUrl } from '$lib/utils/nav.utils';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
 	import GovernanceMenuLink from "$lib/components/governance/GovernanceMenuLink.svelte";
 
