@@ -36,6 +36,7 @@
 			transition:scale={{ delay: 25, duration: 150, easing: quintOut }}
 			class="relative max-w-[90vw] md:max-w-screen-md max-h-[86vh] overflow-y-auto px-8 py-4 bg-white border-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)]"
 			class:w-96={!wide}
+			class:w-full={wide}
 			class:sm:min-w-96={wide}
 		>
 			<slot />

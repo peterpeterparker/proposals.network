@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Button from '$lib/components/ui/Button.svelte';
 	import { submitUrl } from '$lib/utils/nav.utils';
 	import type { GovernanceId } from '$lib/types/governance';
 	import { goto } from '$app/navigation';
@@ -14,7 +13,7 @@
 	};
 </script>
 
-<Button on:click={() => (visible = true)}>Submit a proposal</Button>
+<button class="hover:underline hover:underline-offset-8 mb-4 text-left" on:click={() => (visible = true)}>Submit a proposal</button>
 
 {#if visible}
 	<GovernanceDialog on:pnwrkClose={close} on:pnwrkSelect={navigate} />

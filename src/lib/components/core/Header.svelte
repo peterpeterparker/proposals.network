@@ -2,7 +2,7 @@
 	import IconMenu from '$lib/components/icons/IconMenu.svelte';
 	import Menu from '$lib/components/core/Menu.svelte';
 	import IconLogo from '$lib/components/icons/IconLogo.svelte';
-	import SubmitLink from '$lib/components/submit/SubmitLink.svelte';
+	import GovernanceSubmitLink from '$lib/components/governance/GovernanceSubmitLink.svelte';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
 	import { homeUrl } from '$lib/utils/nav.utils';
 
@@ -21,7 +21,7 @@
 			<ul class="flex justify-end items-center space-x-4 h-full">
 				{#if submit}
 					<li class="hidden md:block pr-3">
-						<SubmitLink />
+						<GovernanceSubmitLink />
 					</li>
 				{/if}
 				<li class="h-full flex border-l-2 border-black pl-5">
