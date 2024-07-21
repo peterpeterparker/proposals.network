@@ -10,8 +10,9 @@
 	import { userInitialized, userSignedIn } from '$lib/derived/user.derived';
 	import { signIn, signOut } from '$lib/services/auth.services';
 	import IconLogin from '$lib/components/icons/IconLogin.svelte';
-	import { submitUrl, settingsUrl } from '$lib/utils/nav.utils';
+	import { settingsUrl } from '$lib/utils/nav.utils';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
+	import GovernanceMenuLink from '$lib/components/governance/GovernanceMenuLink.svelte';
 
 	export let visible = false;
 </script>
@@ -41,9 +42,7 @@
 						<div class="hover:underline hover:underline-offset-8 mb-4">
 							<a href="/">Browse</a>
 						</div>
-						<div class="hover:underline hover:underline-offset-8 mb-4">
-							<a href={submitUrl({ governanceId: $governanceIdStore })}>Submit a proposal</a>
-						</div>
+						<GovernanceMenuLink />
 						{#if $userSignedIn}
 							<div class="hover:underline hover:underline-offset-8 mb-4">
 								<a href={settingsUrl({ governanceId: $governanceIdStore })}>Settings</a>

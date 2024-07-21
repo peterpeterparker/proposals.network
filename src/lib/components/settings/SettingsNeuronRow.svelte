@@ -3,7 +3,7 @@
 	import type { Governance } from '$lib/types/governance';
 	import { findGovernance } from '$lib/utils/governance.utils';
 	import { governanceSnsesStore } from '$lib/derived/governance.derived';
-	import GovernanceCell from '$lib/components/core/GovernanceCell.svelte';
+	import GovernanceCell from '$lib/components/governance/GovernanceCell.svelte';
 	import ButtonCell from '$lib/components/ui/ButtonCell.svelte';
 	import SettingsDeleteNeuron from '$lib/components/settings/SettingsDeleteNeuron.svelte';
 	import { nonNullish } from '@dfinity/utils';

@@ -14,6 +14,7 @@ declare global {
 		interface HTMLAttributes<T> {
 			'on:junoSignOutAuthTimer'?: (event: CustomEvent<any>) => void;
 			'on:pnwrkIntersecting'?: (event: CustomEvent<any>) => void;
+			'on:pnwrkOpenGovernance'?: (event: CustomEvent<any>) => void;
 		}
 	}
 

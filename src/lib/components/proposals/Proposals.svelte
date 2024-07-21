@@ -13,7 +13,7 @@
 	import ProposalRow from '$lib/components/proposals/ProposalRow.svelte';
 	import ProposalPaginator from '$lib/components/proposals/ProposalPaginator.svelte';
 	import ProposalOpen from '$lib/components/proposals/ProposalOpen.svelte';
-	import GovernanceSelector from '$lib/components/core/GovernanceSelector.svelte';
+	import GovernanceSelector from '$lib/components/governance/GovernanceSelector.svelte';
 	import { governanceIdStore, governanceTypeStore } from '$lib/derived/governance.derived';
 	import type { GovernanceCanisterId } from '$lib/types/core';
 

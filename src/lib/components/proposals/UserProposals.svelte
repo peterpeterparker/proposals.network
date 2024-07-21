@@ -4,7 +4,7 @@
 	import Section from '$lib/components/ui/Section.svelte';
 	import { userProposalsStore } from '$lib/stores/user-proposals.store';
 	import UserProposalRow from '$lib/components/proposals/UserProposalRow.svelte';
-	import SubmitLink from '$lib/components/submit/SubmitLink.svelte';
+	import GovernanceSubmitLink from '$lib/components/governance/GovernanceSubmitLink.svelte';
 	import UserProposalPaginator from '$lib/components/proposals/UserProposalPaginator.svelte';
 	import { fade } from 'svelte/transition';
 	import { USER_PAGINATION } from '$lib/constants/app.constants';
@@ -62,7 +62,7 @@
 				</div>
 			{:else if $userProposalsStore?.items_length === 0n}
 				<div in:fade class="lg:mx-4 my-4">
-					<SubmitLink />
+					<GovernanceSubmitLink />
 				</div>
 			{:else}
 				<UserProposalPaginator />
