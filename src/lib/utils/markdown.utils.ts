@@ -9,7 +9,7 @@ export const targetBlankLinkRenderer = ({ href, title, text }: Tokens.Link): str
 			? ''
 			: ` target="_blank" rel="noopener noreferrer" href="${href}"`
 	}${title === null || title === undefined ? '' : ` title="${title}"`}>${
-		text.length === 0 ? href ?? title : text
+		text.length === 0 ? (href ?? title) : text
 	}</a>`;
 
 /**
