@@ -9,7 +9,7 @@
 	import UserProposalView from '$lib/components/proposals/UserProposalView.svelte';
 	import UserProposalStatus from '$lib/components/proposals/UserProposalStatus.svelte';
 	import ProposalLink from '$lib/components/proposals/ProposalLink.svelte';
-	import GovernanceCell from '$lib/components/core/GovernanceCell.svelte';
+	import GovernanceCell from '$lib/components/governance/GovernanceCell.svelte';
 	import type { Governance } from '$lib/types/governance';
 	import { findGovernance } from '$lib/utils/governance.utils';
 	import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';

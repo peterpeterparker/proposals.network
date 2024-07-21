@@ -110,7 +110,7 @@ const submitProposal = async ({
 		return { result: 'ok', proposalId };
 	} catch (err: unknown) {
 		toasts.error({
-			msg: { text: 'The proposal cannot be submitted to the ICP governance.' },
+			msg: { text: 'The proposal cannot be submitted.' },
 			err
 		});
 		return { result: 'error', proposalId: undefined };
