@@ -1,0 +1,48 @@
+<script lang="ts">
+	import Dialog from '$lib/components/ui/Dialog.svelte';
+	import Img from '$lib/components/ui/Img.svelte';
+	import type { Governance, GovernanceId } from '$lib/types/governance';
+	import { nonNullish } from '@dfinity/utils';
+	import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
+	import { NNS_GOVERNANCE_METADATA } from '$lib/constants/governance.constants';
+	import { sortedSnsesStore } from '$lib/derived/sns.derived';
+	import { mapSnsGovernance } from '$lib/utils/governance.utils';
+	import { switchGovernance } from '$lib/utils/nav.utils';
+	import { createEventDispatcher } from 'svelte';
+
+	let governances: Governance[];
+	$: governances = [
+		...(nonNullish(GOVERNANCE_CANISTER_ID)
+			? [{ id: GOVERNANCE_CANISTER_ID, ...NNS_GOVERNANCE_METADATA }]
+			: []),
+		...$sortedSnsesStore.map((sns) =>
+			mapSnsGovernance({
+				governanceId: sns.canister_ids.governance_canister_id,
+				sns
+			})
+		)
+	];
+
+	const dispatch = createEventDispatcher();
+
+	const onSelectGovernance = async (governanceId: GovernanceId) => {
+		await switchGovernance(governanceId);
+		dispatch('pnwrkSelect', governanceId);
+	};
+</script>
+
+<Dialog wide on:pnwrkClose>
+	<h2 class="mb-6 text-2xl">Which governance?</h2>
+
+	<div class="grid grid-flow-row gap-4 grid-cols-3">
+		{#each governances as governance}
+			<button
+				on:click={() => onSelectGovernance(governance.id)}
+				class="inline-flex justify-center sm:justify-start gap-1 align-middle border-black border-2 py-1 px-2.5 lg:rounded-md hover:bg-[#79F7FF] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:bg-[#00E1EF]"
+			>
+				<Img src={governance.logo} width="24px" />
+				<span class=" truncate hidden sm:block">{governance.name}</span>
+			</button>
+		{/each}
+	</div>
+</Dialog>
