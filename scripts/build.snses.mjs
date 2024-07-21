@@ -94,7 +94,8 @@ export const findSnses = async () => {
 				parameters,
 				nervous_system_parameters: {
 					neuron_minimum_dissolve_delay_to_vote_seconds,
-					neuron_minimum_stake_e8s
+					neuron_minimum_stake_e8s,
+					reject_cost_e8s
 				}
 			}) => ({
 				canister_ids,
@@ -102,7 +103,8 @@ export const findSnses = async () => {
 				icrc1_metadata: filterIcrc1Metadata(icrc1_metadata),
 				nervous_system_parameters: {
 					neuron_minimum_dissolve_delay_to_vote_seconds,
-					neuron_minimum_stake_e8s
+					neuron_minimum_stake_e8s,
+					reject_cost_e8s
 				},
 				parameters
 			})

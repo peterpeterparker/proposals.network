@@ -22,7 +22,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2629800,
-			"neuron_minimum_stake_e8s": 100000000000
+			"neuron_minimum_stake_e8s": 100000000000,
+			"reject_cost_e8s": 5000000000000
 		},
 		"parameters": {
 			"reserved_ids": [1001],
@@ -143,7 +144,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2628000,
-			"neuron_minimum_stake_e8s": 400000000
+			"neuron_minimum_stake_e8s": 400000000,
+			"reject_cost_e8s": 1000000000
 		},
 		"parameters": {
 			"reserved_ids": [1005, 1006, 1007, 5000, 100000, 100001, 100002, 100003],
@@ -693,7 +695,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2628000,
-			"neuron_minimum_stake_e8s": 10000000
+			"neuron_minimum_stake_e8s": 10000000,
+			"reject_cost_e8s": 500000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -905,7 +908,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 7889400,
-			"neuron_minimum_stake_e8s": 500000000
+			"neuron_minimum_stake_e8s": 500000000,
+			"reject_cost_e8s": 10000000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -1078,7 +1082,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 604800,
-			"neuron_minimum_stake_e8s": 1000000000000
+			"neuron_minimum_stake_e8s": 1000000000000,
+			"reject_cost_e8s": 10000000000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -1225,7 +1230,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2629800,
-			"neuron_minimum_stake_e8s": 3600000000
+			"neuron_minimum_stake_e8s": 3600000000,
+			"reject_cost_e8s": 200000000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -1359,7 +1365,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2628000,
-			"neuron_minimum_stake_e8s": 500000000
+			"neuron_minimum_stake_e8s": 500000000,
+			"reject_cost_e8s": 10000000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -1584,7 +1591,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2629000,
-			"neuron_minimum_stake_e8s": 400000000
+			"neuron_minimum_stake_e8s": 400000000,
+			"reject_cost_e8s": 10000000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -1705,7 +1713,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
-			"neuron_minimum_stake_e8s": 400000000
+			"neuron_minimum_stake_e8s": 400000000,
+			"reject_cost_e8s": 100000000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -1865,7 +1874,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 5260032,
-			"neuron_minimum_stake_e8s": 19900000000
+			"neuron_minimum_stake_e8s": 19900000000,
+			"reject_cost_e8s": 600000000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -1986,7 +1996,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
-			"neuron_minimum_stake_e8s": 500000000
+			"neuron_minimum_stake_e8s": 500000000,
+			"reject_cost_e8s": 12500000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -2133,7 +2144,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 7890048,
-			"neuron_minimum_stake_e8s": 10000000000
+			"neuron_minimum_stake_e8s": 10000000000,
+			"reject_cost_e8s": 100000000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -2293,7 +2305,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
-			"neuron_minimum_stake_e8s": 500000000
+			"neuron_minimum_stake_e8s": 500000000,
+			"reject_cost_e8s": 1000000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -2414,7 +2427,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
-			"neuron_minimum_stake_e8s": 10000000
+			"neuron_minimum_stake_e8s": 10000000,
+			"reject_cost_e8s": 500000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -2548,7 +2562,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
-			"neuron_minimum_stake_e8s": 1000000
+			"neuron_minimum_stake_e8s": 1000000,
+			"reject_cost_e8s": 10000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -2721,7 +2736,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
-			"neuron_minimum_stake_e8s": 1000000000
+			"neuron_minimum_stake_e8s": 1000000000,
+			"reject_cost_e8s": 10000000000
 		},
 		"parameters": {
 			"reserved_ids": [1015],
@@ -4090,7 +4106,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
-			"neuron_minimum_stake_e8s": 500000000
+			"neuron_minimum_stake_e8s": 500000000,
+			"reject_cost_e8s": 12800000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -4211,7 +4228,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2592000,
-			"neuron_minimum_stake_e8s": 400000000
+			"neuron_minimum_stake_e8s": 400000000,
+			"reject_cost_e8s": 1000000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -4631,7 +4649,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
-			"neuron_minimum_stake_e8s": 100000000000
+			"neuron_minimum_stake_e8s": 100000000000,
+			"reject_cost_e8s": 700000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -4817,7 +4836,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
-			"neuron_minimum_stake_e8s": 1000000000
+			"neuron_minimum_stake_e8s": 1000000000,
+			"reject_cost_e8s": 5000000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -5042,7 +5062,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 7890048,
-			"neuron_minimum_stake_e8s": 5000000000
+			"neuron_minimum_stake_e8s": 5000000000,
+			"reject_cost_e8s": 1000000000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -5163,7 +5184,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 7890048,
-			"neuron_minimum_stake_e8s": 500000000
+			"neuron_minimum_stake_e8s": 500000000,
+			"reject_cost_e8s": 10000000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -5284,7 +5306,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 604800,
-			"neuron_minimum_stake_e8s": 1000000
+			"neuron_minimum_stake_e8s": 1000000,
+			"reject_cost_e8s": 25000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -5418,7 +5441,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 31557600,
-			"neuron_minimum_stake_e8s": 1000000
+			"neuron_minimum_stake_e8s": 1000000,
+			"reject_cost_e8s": 2000000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -5539,7 +5563,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 31560192,
-			"neuron_minimum_stake_e8s": 88800000000
+			"neuron_minimum_stake_e8s": 88800000000,
+			"reject_cost_e8s": 100000000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -5660,7 +5685,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 7890048,
-			"neuron_minimum_stake_e8s": 10000000000
+			"neuron_minimum_stake_e8s": 10000000000,
+			"reject_cost_e8s": 10000000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -5794,7 +5820,8 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 7890048,
-			"neuron_minimum_stake_e8s": 10000000000
+			"neuron_minimum_stake_e8s": 10000000000,
+			"reject_cost_e8s": 50000000000
 		},
 		"parameters": {
 			"reserved_ids": [],
