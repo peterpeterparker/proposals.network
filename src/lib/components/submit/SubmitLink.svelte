@@ -9,13 +9,12 @@
 	import Img from '$lib/components/ui/Img.svelte';
 	import { NNS_GOVERNANCE_METADATA } from '$lib/constants/governance.constants';
 	import { nonNullish } from '@dfinity/utils';
-	import type { Governance } from '$lib/types/governance';
+	import type { Governance, GovernanceId } from '$lib/types/governance';
 	import { mapSnsGovernance } from '$lib/utils/governance.utils';
+	import { goto } from '$app/navigation';
 
 	let visible = false;
 	const onClick = () => (visible = true);
-
-	// <a href={submitUrl({ governanceId: $governanceIdStore })}> </a>
 
 	let governances: Governance[];
 	$: governances = [
@@ -29,20 +28,25 @@
 			})
 		)
 	];
+
+	const navigate = async (governanceId: GovernanceId) => await goto(submitUrl({ governanceId }));
 </script>
 
 <Button on:click={onClick}>Submit a proposal</Button>
 
 {#if visible}
-	<Dialog on:pnwrkClose={() => (visible = false)}>
+	<Dialog wide on:pnwrkClose={() => (visible = false)}>
 		<h2 class="mb-6 text-2xl">For which governance?</h2>
 
-		<div class="grid grid-flow-row gap-4 grid-cols-2">
+		<div class="grid grid-flow-row gap-4 grid-cols-3">
 			{#each governances as governance}
-				<span class="inline-flex gap-1 align-middle"
-					><Img src={governance.logo} width="24px" />
-					<span class=" truncate">{governance.name}</span></span
+				<button
+					on:click={() => navigate(governance.id)}
+					class="inline-flex gap-1 align-middle border-black border-2 py-1 px-2.5 lg:rounded-md hover:bg-[#79F7FF] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:bg-[#00E1EF]"
 				>
+					<Img src={governance.logo} width="24px" />
+					<span class=" truncate">{governance.name}</span>
+				</button>
 			{/each}
 		</div>
 	</Dialog>
