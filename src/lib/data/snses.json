@@ -894,8 +894,8 @@
 			"ledger_canister_id": "6rdgd-kyaaa-aaaaq-aaavq-cai"
 		},
 		"meta": {
-			"url": "https://hotornot.wtf",
-			"name": "Hot or Not",
+			"url": "https://yral.com",
+			"name": "YRAL",
 			"description": "A decentralized short-video social media platform governed by the people for the people",
 			"logo": "/v1/sns/root/67bll-riaaa-aaaaq-aaauq-cai/logo.png"
 		},
@@ -2278,6 +2278,19 @@
 							"target_method_name": "set_reserve_transfer_amounts"
 						}
 					}
+				},
+				{
+					"id": 1004,
+					"name": "Set GLDGov daily burn amount from reserve pool",
+					"description": "Proposal to adjust the daily amount of GLDGov burned from the reserve pool of the sns_rewards canister.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "iyehc-lqaaa-aaaap-ab25a-cai",
+							"target_canister_id": "iyehc-lqaaa-aaaap-ab25a-cai",
+							"validator_method_name": "set_daily_gldgov_burn_rate_validate",
+							"target_method_name": "set_daily_gldgov_burn_rate"
+						}
+					}
 				}
 			]
 		}
@@ -2707,6 +2720,19 @@
 							"target_canister_id": "ok64y-uiaaa-aaaag-qdcbq-cai",
 							"validator_method_name": "validate_transfer_icpswap_lp_position",
 							"target_method_name": "transfer_icpswap_lp_position"
+						}
+					}
+				},
+				{
+					"id": 2004,
+					"name": "deploy_icrc1_tokens_to_icpswap",
+					"description": null,
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "ok64y-uiaaa-aaaag-qdcbq-cai",
+							"target_canister_id": "ok64y-uiaaa-aaaag-qdcbq-cai",
+							"validator_method_name": "validate_deploy_icrc1_tokens_to_icpswap",
+							"target_method_name": "deploy_icrc1_tokens_to_icpswap"
 						}
 					}
 				}
@@ -5658,6 +5684,19 @@
 					"name": "Manage dapp canister settings",
 					"description": "Proposal to change canister settings for some dapp canisters.",
 					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 2001,
+					"name": "Upgrade OGY dashboard frontend.",
+					"description": "Proposal to upgrade the OGY dashboard frontend to new version.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "jbj2y-2qaaa-aaaal-ajc5q-cai",
+							"target_canister_id": "jbj2y-2qaaa-aaaal-ajc5q-cai",
+							"validator_method_name": "validate_commit_proposed_batch",
+							"target_method_name": "commit_proposed_batch"
+						}
+					}
 				}
 			]
 		}
@@ -5671,7 +5710,7 @@
 			"ledger_canister_id": "jcmow-hyaaa-aaaaq-aadlq-cai"
 		},
 		"meta": {
-			"url": "https://forum.dfinity.org/t/introducing-waterneuron/30897",
+			"url": "https://waterneuron.fi/stake/",
 			"name": "WaterNeuron",
 			"description": "WaterNeuron is a liquid staking protocol designed for the Internet Computer network. \nStaking ICP becomes straightforward and efficient. \n\nLearn more: https://docs.waterneuron.fi | https://x.com/waterneuron | https://t.me/waterneuron\n",
 			"logo": "/v1/sns/root/jmod6-4iaaa-aaaaq-aadkq-cai/logo.png"
@@ -5926,6 +5965,32 @@
 							"target_canister_id": "el2py-miaaa-aaaar-qabxq-cai",
 							"validator_method_name": "sns_validate_controller_create_trade_contract",
 							"target_method_name": "controller_create_trade_contract"
+						}
+					}
+				},
+				{
+					"id": 20001,
+					"name": "Website Upgrade",
+					"description": null,
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "em3jm-bqaaa-aaaar-qabxa-cai",
+							"target_canister_id": "em3jm-bqaaa-aaaar-qabxa-cai",
+							"validator_method_name": "sns_validate_controller_commit_batch",
+							"target_method_name": "controller_commit_batch"
+						}
+					}
+				},
+				{
+					"id": 30001,
+					"name": "Sell CTS tokens at the CTS market",
+					"description": "This proposal type lets the CTS SNS governance canister call the trade_tokens method on the CTS/CYCLES trading-pair canister at the CTS market. This proposal type lets the CTS SNS sell CTS tokens at the CTS market.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "ckhlr-yiaaa-aaaar-qag4a-cai",
+							"target_canister_id": "ckhlr-yiaaa-aaaar-qag4a-cai",
+							"validator_method_name": "sns_validate_trade_tokens",
+							"target_method_name": "trade_tokens"
 						}
 					}
 				}
