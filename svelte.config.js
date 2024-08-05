@@ -15,15 +15,14 @@ const config = {
 		adapter: adapter({
 			fallback: 'index.html',
 			precompress: false
-		})
+		}),
+		version: {
+			name: version
+		}
 	},
 
 	serviceWorker: {
 		register: false
-	},
-
-	version: {
-		name: version
 	}
 };
 
