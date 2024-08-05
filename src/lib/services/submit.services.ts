@@ -27,6 +27,7 @@ import type { UserOption } from '$lib/types/user';
 import { replaceHistory } from '$lib/utils/route.utils';
 import { mapSnsYamlToCreateServiceNervousSystem } from '$lib/utils/sns-make-proposal.utils';
 import { assertSHA256, assertUrlsFromWiki } from '$lib/utils/submit.node-provider.utils';
+import { decodeIcrcAccount } from '@dfinity/ledger-icrc';
 import { fromNullable, isNullish, nonNullish, notEmptyString } from '@dfinity/utils';
 import { downloadUrl, getAsset, getDoc, setDoc, type Doc } from '@junobuild/core-peer';
 import { nanoid } from 'nanoid';
@@ -110,7 +111,9 @@ export const initUserProposal = async ({
 			urlSelfDeclaration,
 			hashIdentityProof,
 			hashSelfDeclaration,
-			proposalAction
+			proposalAction,
+			destinationAccount,
+			amount
 		} = data;
 		const editableMetadata = {
 			title,
@@ -123,7 +126,9 @@ export const initUserProposal = async ({
 			urlSelfDeclaration,
 			hashIdentityProof,
 			hashSelfDeclaration,
-			proposalAction
+			proposalAction,
+			destinationAccount,
+			amount
 		};
 
 		const { data: jsonContent, ...content } = docContent;
@@ -533,6 +538,35 @@ const assertTimestamps = async () => {
 			'Timestamps are no synced, therefore the proposal cannot be submitted. Maybe you edited the proposal on another device. Try to reload and retry'
 		);
 	}
+};
+
+export const assertSnsTreasuryFundsMetadata = async (
+	metadata: ProposalEditableMetadata | undefined | null
+): Promise<{ valid: boolean }> => {
+	if (isNullish(metadata)) {
+		toasts.error({ msg: { text: 'No metadata have been edited.' } });
+		return { valid: false };
+	}
+
+	const { destinationAccount, amount } = metadata;
+
+	try {
+		decodeIcrcAccount(destinationAccount ?? '');
+	} catch (err: unknown) {
+		toasts.error({
+			msg: { text: 'Invalid destination account.' }
+		});
+		return { valid: false };
+	}
+
+	if (isNullish(amount) || amount <= 0n) {
+		toasts.error({
+			msg: { text: 'An amount to transfer must be provided.' }
+		});
+		return { valid: false };
+	}
+
+	return { valid: true };
 };
 
 export const assertAddNodeProviderMetadata = async (

@@ -1,5 +1,6 @@
 import type { GovernanceCanisterId, Markdown } from '$lib/types/core';
 import type { ProposalAction } from '$lib/types/governance';
+import type { IcrcAccountText } from '$lib/types/ic-js';
 import type { Asset, Doc } from '@junobuild/core-peer';
 
 export type ProposalContent = Markdown;
@@ -21,11 +22,17 @@ export interface ProposalMotionEditableMetadata {
 	summary?: string;
 }
 
+export interface ProposalSnsTreasuryFundsEditableMetadata {
+	destinationAccount?: IcrcAccountText;
+	amount?: bigint;
+}
+
 export type ProposalEditableMetadata = {
 	url?: string;
 	proposalAction?: ProposalAction;
 } & ProposalMotionEditableMetadata &
-	ProposalNodeProviderEditableMetadata;
+	ProposalNodeProviderEditableMetadata &
+	ProposalSnsTreasuryFundsEditableMetadata;
 
 export type ProposalMetadata = {
 	status: 'draft' | 'submitted';

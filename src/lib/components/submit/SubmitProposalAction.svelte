@@ -41,7 +41,13 @@
 		{ value: 'CreateServiceNervousSystem', label: 'Propose a SNS (experimental)' }
 	];
 
-	const proposalOptionsSns: ProposalOptions = [{ value: 'Motion', label: 'Motion' }];
+	const proposalOptionsSns: ProposalOptions = [
+		{ value: 'Motion', label: 'Motion' },
+		{
+			value: 'TransferSnsTreasuryFunds',
+			label: 'Transfer SNS treasury funds'
+		}
+	];
 
 	let proposalOptions: ProposalOptions;
 	$: proposalOptions = governanceType === 'sns' ? proposalOptionsSns : proposalOptionsNns;
