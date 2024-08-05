@@ -16,13 +16,14 @@ const config = {
 			fallback: 'index.html',
 			precompress: false
 		}),
+
 		version: {
 			name: version
-		}
-	},
+		},
 
-	serviceWorker: {
-		register: false
+		serviceWorker: {
+			register: false
+		}
 	}
 };
 
