@@ -1,6 +1,7 @@
 import {
 	getProposal as getProposalNns,
 	makeAddNodeProviderProposal,
+	makeCreateServiceNervousSystemProposal,
 	makeMotionProposal as makeMotionProposalICP
 } from '$lib/api/icp-proposal.api';
 import {
@@ -12,7 +13,13 @@ import { toasts } from '$lib/stores/toasts.store';
 import type { Governance, OptionGovernanceId, Proposal } from '$lib/types/governance';
 import { mapIcpProposal } from '$lib/utils/icp-proposals.utils';
 import { mapSnsProposal } from '$lib/utils/sns-proposals.utils';
-import type { MakeProposalRequest, Motion, NodeProvider, ProposalId } from '@dfinity/nns';
+import type {
+	CreateServiceNervousSystem,
+	MakeProposalRequest,
+	Motion,
+	NodeProvider,
+	ProposalId
+} from '@dfinity/nns';
 import { assertNonNullish, nonNullish } from '@dfinity/utils';
 import { get } from 'svelte/store';
 
@@ -25,6 +32,10 @@ export type ProposalParams = Omit<MakeProposalRequest, 'action' | 'title' | 'neu
 export type MotionProposalParams = ProposalParams & Motion;
 
 export type AddNodeProviderProposalParams = ProposalParams & NodeProvider;
+
+export type CreateServiceNervousSystemParams = ProposalParams & {
+	createSns: CreateServiceNervousSystem;
+};
 
 export const submitMotionProposal = async ({
 	governance,
@@ -54,6 +65,23 @@ export const submitAddNodeProviderProposal = async ({
 }> => {
 	const submit = (): Promise<bigint | undefined> => {
 		return makeAddNodeProviderProposal(rest);
+	};
+
+	return submitProposal({
+		governance,
+		fn: submit
+	});
+};
+
+export const submitCreateServiceNervousSystemProposal = async ({
+	governance,
+	...rest
+}: CreateServiceNervousSystemParams): Promise<{
+	result: 'ok' | 'error';
+	proposalId: bigint | undefined;
+}> => {
+	const submit = (): Promise<bigint | undefined> => {
+		return makeCreateServiceNervousSystemProposal(rest);
 	};
 
 	return submitProposal({

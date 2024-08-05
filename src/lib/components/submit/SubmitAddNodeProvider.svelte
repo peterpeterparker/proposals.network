@@ -3,8 +3,10 @@
 	import { setMetadata } from '$lib/services/idb.services';
 	import { debounce } from '@dfinity/utils';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
-	import { getContext } from 'svelte';
-	import SubmitTitle from '$lib/components/ui/Title.svelte';
+	import { createEventDispatcher, getContext } from 'svelte';
+	import Title from '$lib/components/ui/Title.svelte';
+	import { assertAddNodeProviderMetadata } from '$lib/services/submit.services';
+	import SubmitContinue from '$lib/components/submit/SubmitContinue.svelte';
 
 	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
@@ -94,9 +96,20 @@
 
 			debounceSave();
 		})();
+
+	const dispatch = createEventDispatcher();
+	const next = async () => {
+		const { valid } = await assertAddNodeProviderMetadata($store?.metadata);
+
+		if (!valid) {
+			return;
+		}
+
+		dispatch('pnwrkNext');
+	};
 </script>
 
-<SubmitTitle>Register Your Node Provider Principal</SubmitTitle>
+<Title>Register Your Node Provider Principal</Title>
 
 <h2 class="mb-6 text-2xl">
 	To add a new node provider, provide the name, principal ID, announcement, URL, and SHA256 hash of
@@ -144,3 +157,5 @@
 	bind:value={nodeProviderId}
 	pinPlaceholder={nodeProviderId !== ''}
 />
+
+<SubmitContinue on:click={next} />

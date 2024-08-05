@@ -1,9 +1,14 @@
 <script lang="ts">
-	import SubmitWriteEdit from '$lib/components/submit/SubmitWriteEdit.svelte';
-	import SubmitTitle from '$lib/components/ui/Title.svelte';
+	import SubmitMotionEdit from '$lib/components/submit/SubmitMotionEdit.svelte';
+	import Title from '$lib/components/ui/Title.svelte';
+	import SubmitContinue from '$lib/components/submit/SubmitContinue.svelte';
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
+	const next = () => dispatch('pnwrkNext');
 </script>
 
-<SubmitTitle>Craft Your Motion</SubmitTitle>
+<Title>Craft Your Motion</Title>
 
 <h2 class="mb-6 text-2xl">
 	To submit a motion proposal, you need both a summary (explaining what it's all about) and motion
@@ -11,4 +16,6 @@
 	discussion.
 </h2>
 
-<SubmitWriteEdit />
+<SubmitMotionEdit />
+
+<SubmitContinue on:click={next} />

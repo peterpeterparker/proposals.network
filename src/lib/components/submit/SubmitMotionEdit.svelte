@@ -1,15 +1,12 @@
 <script lang="ts">
 	import InputText from '$lib/components/ui/InputText.svelte';
-	import { getEditable, setContent, setMetadata } from '$lib/services/idb.services';
-	import { debounce, nonNullish } from '@dfinity/utils';
-	import type { ProposalContent } from '$lib/types/juno';
-	import Editor from '$lib/components/ui/Editor.svelte';
+	import { setMetadata } from '$lib/services/idb.services';
+	import { debounce } from '@dfinity/utils';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import { getContext } from 'svelte';
+	import SubmitWriteContent from '$lib/components/submit/SubmitWriteContent.svelte';
 
 	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
-
-	let content: ProposalContent | undefined;
 
 	let title = '';
 	let url = '';
@@ -19,9 +16,6 @@
 		title = $store?.metadata?.title ?? '';
 		url = $store?.metadata?.url ?? '';
 		motionText = $store?.metadata?.motionText ?? '';
-
-		const [_, existingContent] = await getEditable();
-		content = existingContent;
 	};
 
 	$: $store, (async () => await init())();
@@ -61,24 +55,24 @@
 
 			debounceSave();
 		})();
-
-	const onUpdate = async (content: ProposalContent) => await setContent(content);
 </script>
 
-{#if nonNullish(content)}
-	<InputText placeholder="The proposal title" bind:value={title} pinPlaceholder={title !== ''} />
+<SubmitWriteContent>
+	<svelte:fragment slot="before">
+		<InputText placeholder="The proposal title" bind:value={title} pinPlaceholder={title !== ''} />
+	</svelte:fragment>
 
-	<Editor {content} {onUpdate} />
+	<svelte:fragment slot="after">
+		<InputText
+			placeholder="An URL (https://forum.dfinity.org...)"
+			bind:value={url}
+			pinPlaceholder={url !== ''}
+		/>
 
-	<InputText
-		placeholder="An URL (https://forum.dfinity.org...)"
-		bind:value={url}
-		pinPlaceholder={url !== ''}
-	/>
-
-	<InputText
-		placeholder="Your motion text"
-		bind:value={motionText}
-		pinPlaceholder={motionText !== ''}
-	/>
-{/if}
+		<InputText
+			placeholder="Your motion text"
+			bind:value={motionText}
+			pinPlaceholder={motionText !== ''}
+		/>
+	</svelte:fragment>
+</SubmitWriteContent>

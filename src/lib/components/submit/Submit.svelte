@@ -94,9 +94,10 @@
 			return;
 		}
 
-		const [metadata, _] = await getEditable();
+		const [metadata, _, key] = await getEditable();
 		metadataStore.set({
-			metadata
+			metadata,
+			key
 		});
 	};
 

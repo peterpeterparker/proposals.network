@@ -1,6 +1,6 @@
 import type { GovernanceCanisterId, Markdown } from '$lib/types/core';
 import type { ProposalAction } from '$lib/types/governance';
-import type { Doc } from '@junobuild/core-peer';
+import type { Asset, Doc } from '@junobuild/core-peer';
 
 export type ProposalContent = Markdown;
 export type ProposalKey = string;
@@ -35,3 +35,11 @@ export type ProposalMetadata = {
 export type ProposalMetadataDoc = Doc<ProposalMetadata>;
 
 export type Neuron = Record<GovernanceCanisterId, (string | bigint)[]>;
+
+export type StorageSnsYamlCollection = 'sns-parameters';
+export type StorageSnsPngCollection = 'sns-logo';
+export type StorageSnsCollections = StorageSnsYamlCollection | StorageSnsPngCollection;
+
+export type ProposalAsset = Pick<Asset, 'fullPath' | 'token'> & {
+	file: Blob;
+};

@@ -23,7 +23,22 @@
 				"mutablePermissions": true
 			}
 		],
-		"storage": []
+		"storage": [
+			{
+				"collection": "sns-parameters",
+				"read": "managed",
+				"write": "managed",
+				"memory": "stable",
+				"mutablePermissions": true
+			},
+			{
+				"collection": "sns-logo",
+				"read": "managed",
+				"write": "managed",
+				"memory": "stable",
+				"mutablePermissions": true
+			}
+		]
 	},
 	"controllers": []
 }
