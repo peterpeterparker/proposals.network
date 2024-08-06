@@ -33,9 +33,9 @@
 			return;
 		}
 
-		const { destinationAccount, amount } = metadata;
+		const { destinationAddress, amount } = metadata;
 
-		if (isNullish(destinationAccount) || isNullish(amount)) {
+		if (isNullish(destinationAddress) || isNullish(amount)) {
 			status = 'error';
 			return;
 		}
@@ -49,7 +49,7 @@
 
 		const content = snsTemplate
 			.replaceAll('<AMOUNT>', formattedAmount)
-			.replaceAll('<DESTINATION_ADDRESS>', destinationAccount)
+			.replaceAll('<DESTINATION_ADDRESS>', destinationAddress)
 			.replaceAll('<GOVERNANCE>', $governanceStore?.name ?? 'Internet Computer')
 			.replaceAll('<TOKEN_SYMBOL>', 'ICP');
 

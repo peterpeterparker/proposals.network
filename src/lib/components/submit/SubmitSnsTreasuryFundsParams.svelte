@@ -12,11 +12,11 @@
 
 	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
-	let destinationAccount = '';
+	let destinationAddress = '';
 	let amount = '';
 
 	const init = () => {
-		destinationAccount = $store?.metadata?.destinationAccount ?? '';
+		destinationAddress = $store?.metadata?.destinationAddress ?? '';
 		amount = nonNullish($store?.metadata?.amount)
 			? formatToken(
 					TokenAmountV2.fromUlps({
@@ -30,7 +30,7 @@
 	onMount(init);
 
 	const save = async () => {
-		if (destinationAccount === '' && amount === '') {
+		if (destinationAddress === '' && amount === '') {
 			return;
 		}
 
@@ -59,7 +59,7 @@
 		const parsedAmount = amountToBigint();
 
 		if (
-			destinationAccount === $store?.metadata?.destinationAccount &&
+			destinationAddress === $store?.metadata?.destinationAddress &&
 			parsedAmount === $store?.metadata?.amount
 		) {
 			return;
@@ -67,7 +67,7 @@
 
 		await setMetadata({
 			...($store?.metadata ?? {}),
-			...(destinationAccount !== '' && { destinationAccount }),
+			...(destinationAddress !== '' && { destinationAddress }),
 			...(nonNullish(parsedAmount) && { amount: parsedAmount })
 		});
 
@@ -76,10 +76,10 @@
 
 	const debounceSave = debounce(save);
 
-	$: destinationAccount,
+	$: destinationAddress,
 		amount,
 		(() => {
-			if (destinationAccount === '' && amount === '') {
+			if (destinationAddress === '' && amount === '') {
 				return;
 			}
 
@@ -107,8 +107,8 @@
 
 <InputText
 	placeholder="Destination account"
-	bind:value={destinationAccount}
-	pinPlaceholder={destinationAccount !== ''}
+	bind:value={destinationAddress}
+	pinPlaceholder={destinationAddress !== ''}
 />
 
 <InputText placeholder="ICP amount" bind:value={amount} pinPlaceholder={amount !== ''} />

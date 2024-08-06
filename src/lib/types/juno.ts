@@ -23,7 +23,7 @@ export interface ProposalMotionEditableMetadata {
 }
 
 export interface ProposalSnsTreasuryFundsEditableMetadata {
-	destinationAccount?: IcrcAccountText;
+	destinationAddress?: IcrcAccountText;
 	amount?: bigint;
 }
 

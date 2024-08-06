@@ -112,7 +112,7 @@ export const initUserProposal = async ({
 			hashIdentityProof,
 			hashSelfDeclaration,
 			proposalAction,
-			destinationAccount,
+			destinationAddress,
 			amount
 		} = data;
 		const editableMetadata = {
@@ -127,7 +127,7 @@ export const initUserProposal = async ({
 			hashIdentityProof,
 			hashSelfDeclaration,
 			proposalAction,
-			destinationAccount,
+			destinationAddress,
 			amount
 		};
 
@@ -548,10 +548,10 @@ export const assertSnsTreasuryFundsMetadata = async (
 		return { valid: false };
 	}
 
-	const { destinationAccount, amount } = metadata;
+	const { destinationAddress, amount } = metadata;
 
 	try {
-		decodeIcrcAccount(destinationAccount ?? '');
+		decodeIcrcAccount(destinationAddress ?? '');
 	} catch (err: unknown) {
 		toasts.error({
 			msg: { text: 'Invalid destination account.' }
