@@ -9,8 +9,7 @@ import {
 import {
 	submitAddNodeProviderProposal as submitAddNodeProviderProposalApi,
 	submitCreateServiceNervousSystemProposal as submitCreateServiceNervousSystemProposalApi,
-	submitMotionProposal as submitMotionProposalApi,
-	type ProposalParams
+	submitMotionProposal as submitMotionProposalApi
 } from '$lib/services/proposal.services';
 import { getSnsData, snsAssetFullPath } from '$lib/services/submit.sns.services';
 import { busy } from '$lib/stores/busy.store';
@@ -23,6 +22,7 @@ import type {
 	ProposalMetadata,
 	StorageSnsCollections
 } from '$lib/types/juno';
+import type { ProposalParams } from '$lib/types/proposal.params';
 import type { UserOption } from '$lib/types/user';
 import { replaceHistory } from '$lib/utils/route.utils';
 import { mapSnsYamlToCreateServiceNervousSystem } from '$lib/utils/sns-make-proposal.utils';

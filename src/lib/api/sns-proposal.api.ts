@@ -1,8 +1,8 @@
 import { getAgent } from '$lib/api/agent.api';
 import { NETWORK_PAGINATION } from '$lib/constants/app.constants';
-import type { MotionProposalParams } from '$lib/services/proposal.services';
 import type { GovernanceId } from '$lib/types/governance';
 import type { SnsProposal } from '$lib/types/ic-js';
+import type { MotionProposalParams } from '$lib/types/proposal.params';
 import { AnonymousIdentity } from '@dfinity/agent';
 import type { ProposalId } from '@dfinity/nns';
 import { Principal } from '@dfinity/principal';
