@@ -45,7 +45,7 @@
 		{ value: 'Motion', label: 'Motion' },
 		{
 			value: 'TransferSnsTreasuryFunds',
-			label: 'Transfer SNS treasury funds'
+			label: 'Transfer treasury funds'
 		}
 	];
 

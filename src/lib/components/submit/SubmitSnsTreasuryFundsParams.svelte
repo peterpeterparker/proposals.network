@@ -63,8 +63,6 @@
 
 		const parsedAmount = amountToBigint();
 
-		console.log(typeof amount, amount, parsedAmount);
-
 		if (
 			destinationAddress === $store?.metadata?.destinationAddress &&
 			parsedAmount === $store?.metadata?.amount
@@ -75,7 +73,8 @@
 		await setMetadata({
 			...($store?.metadata ?? {}),
 			...(destinationAddress !== '' && { destinationAddress }),
-			...(nonNullish(parsedAmount) && { amount: parsedAmount })
+			...(nonNullish(parsedAmount) && { amount: parsedAmount }),
+			title: 'Transfer treasury funds'
 		});
 
 		await reload();
