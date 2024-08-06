@@ -10,7 +10,8 @@
 	import {
 		submitMotionProposal,
 		submitAddNodeProviderProposal,
-		submitCreateServiceNervousSystemProposal
+		submitCreateServiceNervousSystemProposal,
+		submitTransferTreasuryFundsProposal
 	} from '$lib/services/submit.services';
 	import { userStore } from '$lib/stores/user.store';
 	import { governanceStore } from '$lib/derived/governance.derived';
@@ -20,8 +21,7 @@
 	import SubmitReviewMotion from '$lib/components/submit/motion/SubmitReviewMotion.svelte';
 	import { fade } from 'svelte/transition';
 	import SubmitReviewSns from '$lib/components/submit/propose-sns/SubmitReviewSns.svelte';
-	import SubmitReviewSnsTreasuryFunds
-		from "$lib/components/submit/sns-transfer-treasury/SubmitReviewSnsTreasuryFunds.svelte";
+	import SubmitReviewSnsTreasuryFunds from '$lib/components/submit/sns-transfer-treasury/SubmitReviewSnsTreasuryFunds.svelte';
 
 	export let neuronId: string | undefined;
 
@@ -42,7 +42,9 @@
 				? submitAddNodeProviderProposal
 				: $store?.metadata?.proposalAction === 'CreateServiceNervousSystem'
 					? submitCreateServiceNervousSystemProposal
-					: submitMotionProposal;
+					: $store?.metadata?.proposalAction === 'TransferSnsTreasuryFunds'
+						? submitTransferTreasuryFundsProposal
+						: submitMotionProposal;
 
 		const { result, proposalId } = await submitProposal({
 			user: $userStore,
