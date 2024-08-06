@@ -35,7 +35,7 @@
 			return;
 		}
 
-		const amountToBigint = (): bigint | undefined => {
+		const amountToToken = (): TokenAmountV2 | undefined => {
 			if (isNullish(amount)) {
 				return undefined;
 			}
@@ -47,12 +47,7 @@
 				});
 
 				if (token instanceof TokenAmountV2) {
-					const value = ulpsToE8s({
-						ulps: token.toUlps(),
-						decimals: token.token.decimals
-					});
-
-					return value > 0n ? value : undefined;
+					return token;
 				}
 			} catch (err: unknown) {
 				// We ignore error here
@@ -61,20 +56,36 @@
 			return undefined;
 		};
 
-		const parsedAmount = amountToBigint();
+		const amountToken = amountToToken();
 
 		if (
 			destinationAddress === $store?.metadata?.destinationAddress &&
-			parsedAmount === $store?.metadata?.amount
+			amountToken === $store?.metadata?.amount
 		) {
 			return;
 		}
 
+		const title =
+			destinationAddress !== '' && nonNullish(amountToken)
+				? `Transfer ${formatToken(amountToken)} ICP to ${destinationAddress}`
+				: destinationAddress !== ''
+					? `Transfer treasury funds to ${destinationAddress}`
+					: nonNullish(amountToken)
+						? `Transfer ${formatToken(amountToken)} ICP`
+						: 'Transfer treasury funds';
+
+		const amountE8s = nonNullish(amountToken)
+			? ulpsToE8s({
+					ulps: amountToken.toUlps(),
+					decimals: amountToken.token.decimals
+				})
+			: undefined;
+
 		await setMetadata({
 			...($store?.metadata ?? {}),
 			...(destinationAddress !== '' && { destinationAddress }),
-			...(nonNullish(parsedAmount) && { amount: parsedAmount }),
-			title: 'Transfer treasury funds'
+			...(nonNullish(amountE8s) && { amount: amountE8s }),
+			title
 		});
 
 		await reload();

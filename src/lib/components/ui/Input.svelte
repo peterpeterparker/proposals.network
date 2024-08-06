@@ -166,5 +166,5 @@
 	on:input={handleInput}
 	on:keydown={handleKeyDown}
 	data-1p-ignore={ignore1Password}
-	class="w-full outline-0"
+	class="w-full outline-0 placeholder-black"
 />

@@ -652,7 +652,7 @@ export const assertSnsTreasuryFundsMetadata = async (
 		decodeIcrcAccount(destinationAddress ?? '');
 	} catch (err: unknown) {
 		toasts.error({
-			msg: { text: 'Invalid destination account.' }
+			msg: { text: 'Invalid destination address.' }
 		});
 		return { valid: false };
 	}
