@@ -5,8 +5,8 @@ import {
 	makeMotionProposal as makeMotionProposalICP
 } from '$lib/api/icp-proposal.api';
 import {
-	getProposal as getProposalSns,
-	makeProposal as makeMotionProposalSns
+	getProposal as getProposalSns, makeMotionProposal,
+	makeMotionProposal as makeMotionProposalSns
 } from '$lib/api/sns-proposal.api';
 import { rootCanisterIdStore, snsNsFunctionsStore } from '$lib/derived/sns.derived';
 import { toasts } from '$lib/stores/toasts.store';
@@ -36,6 +36,8 @@ export type AddNodeProviderProposalParams = ProposalParams & NodeProvider;
 export type CreateServiceNervousSystemParams = ProposalParams & {
 	createSns: CreateServiceNervousSystem;
 };
+
+export type TransferSnsTreasuryFundsParams = ProposalParams;
 
 export const submitMotionProposal = async ({
 	governance,
@@ -82,6 +84,23 @@ export const submitCreateServiceNervousSystemProposal = async ({
 }> => {
 	const submit = (): Promise<bigint | undefined> => {
 		return makeCreateServiceNervousSystemProposal(rest);
+	};
+
+	return submitProposal({
+		governance,
+		fn: submit
+	});
+};
+
+export const submitTransferSnsTreasuryFunds = async ({
+	governance,
+	...rest
+}: TransferSnsTreasuryFundsParams): Promise<{
+	result: 'ok' | 'error';
+	proposalId: bigint | undefined;
+}> => {
+	const submit = (): Promise<bigint | undefined> => {
+		return makeMotionProposalSns(rest);
 	};
 
 	return submitProposal({
