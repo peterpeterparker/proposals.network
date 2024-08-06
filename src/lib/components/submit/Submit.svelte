@@ -28,7 +28,7 @@
 	} from '$lib/types/submit.context';
 	import { setContext } from 'svelte';
 	import { getEditable } from '$lib/services/idb.services';
-	import { isNullish } from '@dfinity/utils';
+	import { isNullish, nonNullish } from '@dfinity/utils';
 	import { page } from '$app/stores';
 	import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
 	import SubmitGovernance from '$lib/components/submit/SubmitGovernance.svelte';
@@ -39,6 +39,8 @@
 	// TODO: move neuronId and proposalId to context
 	let neuronId: string | undefined;
 	let proposalId: bigint | undefined;
+
+	let governanceType: 'nns' | 'sns';
 
 	const init = async () => {
 		const { result, metadata } = await initUserProposal({ user: $userStore, routeKey: $routeKey });
@@ -61,12 +63,13 @@
 		// We need the imperative governance ID to initialize only once the first step.
 		const governanceQueryParam = $page.url.searchParams.get('g');
 
-		// The select step is displayed only on ICP/NNS and only if the user has not yet selected a type of proposal.
-		step =
-			(isNullish(governanceQueryParam) || governanceQueryParam == GOVERNANCE_CANISTER_ID) &&
-			isNullish(metadata?.proposalAction)
-				? 'select'
-				: 'write';
+		// The select step is displayed only if the user has not yet selected a type of proposal.
+		step = isNullish(metadata?.proposalAction) ? 'select' : 'write';
+
+		governanceType =
+			nonNullish(governanceQueryParam) && governanceQueryParam !== GOVERNANCE_CANISTER_ID
+				? 'sns'
+				: 'nns';
 	};
 
 	$: $userStore, $routeKey, (async () => await init())();
@@ -122,7 +125,7 @@
 		{#if $userNotSignedIn}
 			<SubmitSignIn />
 		{:else if step === 'select'}
-			<SubmitSelect on:pnwrkNext={() => (step = 'write')} />
+			<SubmitSelect {governanceType} on:pnwrkNext={() => (step = 'write')} />
 		{:else if step === 'write'}
 			<SubmitWrite on:pnwrkNext={() => (step = 'neuron')} />
 		{:else if step === 'neuron'}

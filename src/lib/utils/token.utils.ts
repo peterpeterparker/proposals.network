@@ -27,7 +27,7 @@ type RoundMode =
  *
  * This is used to then convert the amount to a string or to a number afterwards.
  */
-const ulpsToE8s = ({ ulps, decimals }: { ulps: bigint; decimals: number }): bigint => {
+export const ulpsToE8s = ({ ulps, decimals }: { ulps: bigint; decimals: number }): bigint => {
 	if (decimals === 8) {
 		return ulps;
 	} else if (decimals < 8) {

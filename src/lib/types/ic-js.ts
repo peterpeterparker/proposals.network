@@ -6,3 +6,5 @@ export interface SnsProposal {
 	action: [] | [SnsAction];
 	summary: string;
 }
+
+export type IcrcAccountText = string;

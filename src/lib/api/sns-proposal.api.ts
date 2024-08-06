@@ -2,11 +2,20 @@ import { getAgent } from '$lib/api/agent.api';
 import { NETWORK_PAGINATION } from '$lib/constants/app.constants';
 import type { GovernanceId } from '$lib/types/governance';
 import type { SnsProposal } from '$lib/types/ic-js';
-import type { MotionProposalParams } from '$lib/types/proposal.params';
+import type {
+	MotionProposalParams,
+	ProposalParams,
+	TransferTreasuryFundsParams
+} from '$lib/types/proposal.params';
 import { AnonymousIdentity } from '@dfinity/agent';
 import type { ProposalId } from '@dfinity/nns';
 import { Principal } from '@dfinity/principal';
-import { SnsGovernanceCanister, type SnsManageNeuron, type SnsNeuronId } from '@dfinity/sns';
+import {
+	type SnsAction,
+	SnsGovernanceCanister,
+	type SnsManageNeuron,
+	type SnsNeuronId
+} from '@dfinity/sns';
 import type { ListProposalsResponse, ProposalData } from '@dfinity/sns/dist/candid/sns_governance';
 import { fromNullable, hexStringToUint8Array, nonNullish } from '@dfinity/utils';
 import { unsafeIdentity } from '@junobuild/core-peer';
@@ -49,14 +58,44 @@ export const getProposal = async ({
 	return getProposal({ proposalId: { id: proposalId }, certified: false });
 };
 
-export const makeProposal = async ({
+export const makeMotionProposal = async ({
+	motionText,
+	...rest
+}: Omit<MotionProposalParams, 'governance'> & { governanceId: GovernanceId }): Promise<
+	ProposalId | undefined
+> => {
+	return await makeProposal({
+		action: {
+			Motion: {
+				motion_text: motionText
+			}
+		},
+		...rest
+	});
+};
+
+export const makeTransferTreasuryFundsProposal = async ({
+	transferFunds: TransferSnsTreasuryFunds,
+	...rest
+}: Omit<TransferTreasuryFundsParams, 'governance'> & { governanceId: GovernanceId }): Promise<
+	ProposalId | undefined
+> => {
+	return await makeProposal({
+		action: {
+			TransferSnsTreasuryFunds
+		},
+		...rest
+	});
+};
+
+const makeProposal = async ({
 	url,
 	summary,
 	title,
-	motionText,
 	neuronId,
+	action,
 	governanceId
-}: Omit<MotionProposalParams, 'governance'> & { governanceId: GovernanceId }): Promise<
+}: Omit<ProposalParams, 'governance'> & { governanceId: GovernanceId; action: SnsAction }): Promise<
 	ProposalId | undefined
 > => {
 	const agent = await getAgent({ identity: await unsafeIdentity() });
@@ -85,13 +124,7 @@ export const makeProposal = async ({
 					url,
 					summary,
 					title,
-					action: [
-						{
-							Motion: {
-								motion_text: motionText
-							}
-						}
-					]
+					action: [action]
 				}
 			}
 		});

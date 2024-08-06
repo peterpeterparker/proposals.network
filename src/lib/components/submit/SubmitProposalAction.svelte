@@ -6,6 +6,8 @@
 	import { getContext } from 'svelte';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 
+	export let governanceType: 'nns' | 'sns';
+
 	let proposalAction: ProposalAction | undefined;
 
 	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
@@ -31,11 +33,24 @@
 		await reload();
 	};
 
-	const proposalOptions: { value: ProposalAction; label: string }[] = [
+	type ProposalOptions = { value: ProposalAction; label: string }[];
+
+	const proposalOptionsNns: ProposalOptions = [
 		{ value: 'Motion', label: 'Motion' },
 		{ value: 'AddOrRemoveNodeProvider', label: 'Add a new node provider' },
 		{ value: 'CreateServiceNervousSystem', label: 'Propose a SNS (experimental)' }
 	];
+
+	const proposalOptionsSns: ProposalOptions = [
+		{ value: 'Motion', label: 'Motion' },
+		{
+			value: 'TransferSnsTreasuryFunds',
+			label: 'Transfer treasury funds'
+		}
+	];
+
+	let proposalOptions: ProposalOptions;
+	$: proposalOptions = governanceType === 'sns' ? proposalOptionsSns : proposalOptionsNns;
 </script>
 
 <InputSelect bind:value={proposalAction} on:change={save}>

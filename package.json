@@ -71,6 +71,7 @@
 	"dependencies": {
 		"@dfinity/identity": "^1.3.0",
 		"@dfinity/ledger-icp": "^2.2.3",
+		"@dfinity/ledger-icrc": "^2.4.0",
 		"@dfinity/nns": "^5.1.2-next-2024-07-07",
 		"@dfinity/principal": "^1.3.0",
 		"@dfinity/sns": "^3.0.3",

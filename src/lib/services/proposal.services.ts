@@ -6,7 +6,8 @@ import {
 } from '$lib/api/icp-proposal.api';
 import {
 	getProposal as getProposalSns,
-	makeProposal as makeMotionProposalSns
+	makeMotionProposal as makeMotionProposalSns,
+	makeTransferTreasuryFundsProposal
 } from '$lib/api/sns-proposal.api';
 import { rootCanisterIdStore, snsNsFunctionsStore } from '$lib/derived/sns.derived';
 import { toasts } from '$lib/stores/toasts.store';
@@ -15,7 +16,8 @@ import type {
 	AddNodeProviderProposalParams,
 	CreateServiceNervousSystemParams,
 	MotionProposalParams,
-	ProposalParams
+	ProposalParams,
+	TransferTreasuryFundsParams
 } from '$lib/types/proposal.params';
 import { mapIcpProposal } from '$lib/utils/icp-proposals.utils';
 import { mapSnsProposal } from '$lib/utils/sns-proposals.utils';
@@ -68,6 +70,23 @@ export const submitCreateServiceNervousSystemProposal = async ({
 }> => {
 	const submit = (): Promise<bigint | undefined> => {
 		return makeCreateServiceNervousSystemProposal(rest);
+	};
+
+	return submitProposal({
+		governance,
+		fn: submit
+	});
+};
+
+export const submitTransferTreasuryFunds = async ({
+	governance,
+	...rest
+}: TransferTreasuryFundsParams): Promise<{
+	result: 'ok' | 'error';
+	proposalId: bigint | undefined;
+}> => {
+	const submit = async (governance: Governance): Promise<bigint | undefined> => {
+		return makeTransferTreasuryFundsProposal({ ...rest, governanceId: governance.id });
 	};
 
 	return submitProposal({

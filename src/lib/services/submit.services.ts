@@ -7,9 +7,10 @@ import {
 	init
 } from '$lib/services/idb.services';
 import {
-	submitAddNodeProviderProposal as submitAddNodeProviderProposalApi,
-	submitCreateServiceNervousSystemProposal as submitCreateServiceNervousSystemProposalApi,
-	submitMotionProposal as submitMotionProposalApi
+	submitAddNodeProviderProposal as submitAddNodeProviderProposalServices,
+	submitCreateServiceNervousSystemProposal as submitCreateServiceNervousSystemProposalServices,
+	submitMotionProposal as submitMotionProposalServices,
+	submitTransferTreasuryFunds as submitTransferTreasuryFundsServices
 } from '$lib/services/proposal.services';
 import { getSnsData, snsAssetFullPath } from '$lib/services/submit.sns.services';
 import { busy } from '$lib/stores/busy.store';
@@ -27,6 +28,8 @@ import type { UserOption } from '$lib/types/user';
 import { replaceHistory } from '$lib/utils/route.utils';
 import { mapSnsYamlToCreateServiceNervousSystem } from '$lib/utils/sns-make-proposal.utils';
 import { assertSHA256, assertUrlsFromWiki } from '$lib/utils/submit.node-provider.utils';
+import { decodeIcrcAccount, type IcrcAccount } from '@dfinity/ledger-icrc';
+import type { TransferSnsTreasuryFunds } from '@dfinity/sns/dist/candid/sns_governance';
 import { fromNullable, isNullish, nonNullish, notEmptyString } from '@dfinity/utils';
 import { downloadUrl, getAsset, getDoc, setDoc, type Doc } from '@junobuild/core-peer';
 import { nanoid } from 'nanoid';
@@ -110,7 +113,9 @@ export const initUserProposal = async ({
 			urlSelfDeclaration,
 			hashIdentityProof,
 			hashSelfDeclaration,
-			proposalAction
+			proposalAction,
+			destinationAddress,
+			amount
 		} = data;
 		const editableMetadata = {
 			title,
@@ -123,7 +128,9 @@ export const initUserProposal = async ({
 			urlSelfDeclaration,
 			hashIdentityProof,
 			hashSelfDeclaration,
-			proposalAction
+			proposalAction,
+			destinationAddress,
+			amount
 		};
 
 		const { data: jsonContent, ...content } = docContent;
@@ -270,7 +277,7 @@ export const submitMotionProposal = async ({
 			return { result: 'error' };
 		}
 
-		return submitMotionProposalApi({
+		return submitMotionProposalServices({
 			title,
 			url,
 			motionText,
@@ -313,7 +320,7 @@ export const submitAddNodeProviderProposal = async ({
 
 		const summary = `Register a node provider '${metadata?.nodeProviderName}', in line with the announcement and discussion at [${metadata?.url}](${metadata?.url}).\n\nThe self-declaration documentation is available at [${metadata?.urlSelfDeclaration}](${metadata?.urlSelfDeclaration}) with SHA256 hash \`${metadata?.hashSelfDeclaration}\`.\n\nThe proof of identity is available at [${metadata?.urlIdentityProof}](${metadata?.urlIdentityProof}) with SHA256 hash \`${metadata?.hashIdentityProof}\`.`;
 
-		return submitAddNodeProviderProposalApi({
+		return submitAddNodeProviderProposalServices({
 			title,
 			url,
 			id: nodeProviderId,
@@ -350,7 +357,7 @@ export const submitCreateServiceNervousSystemProposal = async ({
 		if (isNullish(key)) {
 			toasts.error({
 				msg: {
-					text: 'No key is provided, therefore the proposal cannot be submitted.'
+					text: 'No key is provided, therefore the proposal can be submitted.'
 				}
 			});
 			return { result: 'error' };
@@ -382,13 +389,108 @@ export const submitCreateServiceNervousSystemProposal = async ({
 			return { result: 'error' };
 		}
 
-		return submitCreateServiceNervousSystemProposalApi({
+		return submitCreateServiceNervousSystemProposalServices({
 			title,
 			url,
 			summary: content,
 			neuronId,
 			governance,
 			createSns: mapSnsYamlToCreateServiceNervousSystem({ yaml, logo })
+		});
+	};
+
+	return submitProposal({
+		neuronId,
+		fn: submit,
+		...rest
+	});
+};
+
+export const submitTransferTreasuryFundsProposal = async ({
+	neuronId,
+	governance,
+	key,
+	...rest
+}: {
+	user: UserOption;
+	key: ProposalKey | undefined | null;
+} & Partial<Pick<ProposalParams, 'neuronId' | 'governance'>>): Promise<SubmitProposalResult> => {
+	const submit = async ({
+		metadata,
+		neuronId
+	}: { metadata: ProposalEditableMetadata } & Pick<
+		ProposalParams,
+		'neuronId'
+	>): Promise<SubmitProposalResult> => {
+		if (isNullish(key)) {
+			toasts.error({
+				msg: {
+					text: 'No key is provided, therefore the proposal can be submitted.'
+				}
+			});
+			return { result: 'error' };
+		}
+
+		const { title, url, destinationAddress, amount } = metadata;
+
+		if (isNullish(title) || isNullish(url)) {
+			toasts.error({
+				msg: { text: 'No title or url to submit the proposal.' }
+			});
+			return { result: 'error' };
+		}
+
+		if (isNullish(amount) || amount <= 0n) {
+			toasts.error({
+				msg: { text: `Invalid amount ${amount} to submit proposal.` }
+			});
+			return { result: 'error' };
+		}
+
+		let account: IcrcAccount;
+
+		try {
+			account = decodeIcrcAccount(destinationAddress ?? '');
+		} catch (err: unknown) {
+			toasts.error({
+				msg: { text: `Invalid destination address ${destinationAddress} to submit proposal.` }
+			});
+			return { result: 'error' };
+		}
+
+		const [_, content, __] = await getEditable();
+
+		if (isNullish(content)) {
+			toasts.error({
+				msg: { text: 'No content to submit the proposal.' }
+			});
+			return { result: 'error' };
+		}
+
+		// https://forum.dfinity.org/t/transfersnstreasuryfunds-whats-from-treasury/33892/2?u=peterparker
+		enum TransferFrom {
+			TRANSFER_FROM_UNSPECIFIED = 0,
+			TRANSFER_FROM_ICP_TREASURY = 1,
+			TRANSFER_FROM_SNS_TOKEN_TREASURY = 2
+		}
+
+		const { owner, subaccount } = account;
+
+		const transferFunds: TransferSnsTreasuryFunds = {
+			from_treasury: TransferFrom.TRANSFER_FROM_ICP_TREASURY,
+			memo: [],
+			amount_e8s: amount,
+			to_principal: [owner],
+			to_subaccount: nonNullish(subaccount) ? [{ subaccount }] : []
+		};
+
+		return submitTransferTreasuryFundsServices({
+			title,
+			url,
+			summary: content,
+			neuronId,
+			governance,
+			transferFunds
 		});
 	};
 
@@ -530,9 +632,38 @@ const assertTimestamps = async () => {
 		docContent.version !== docContentIdb?.version
 	) {
 		throw new Error(
-			'Timestamps are no synced, therefore the proposal cannot be submitted. Maybe you edited the proposal on another device. Try to reload and retry'
+			'Timestamps are no synced, therefore the proposal can be submitted. Maybe you edited the proposal on another device. Try to reload and retry'
 		);
 	}
+};
+
+export const assertSnsTreasuryFundsMetadata = async (
+	metadata: ProposalEditableMetadata | undefined | null
+): Promise<{ valid: boolean }> => {
+	if (isNullish(metadata)) {
+		toasts.error({ msg: { text: 'No metadata have been edited.' } });
+		return { valid: false };
+	}
+
+	const { destinationAddress, amount } = metadata;
+
+	try {
+		decodeIcrcAccount(destinationAddress ?? '');
+	} catch (err: unknown) {
+		toasts.error({
+			msg: { text: 'Invalid destination address.' }
+		});
+		return { valid: false };
+	}
+
+	if (isNullish(amount) || amount <= 0n) {
+		toasts.error({
+			msg: { text: 'An amount to transfer must be provided.' }
+		});
+		return { valid: false };
+	}
+
+	return { valid: true };
 };
 
 export const assertAddNodeProviderMetadata = async (

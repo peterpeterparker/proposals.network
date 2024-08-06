@@ -5,6 +5,7 @@ import type {
 	Motion,
 	NodeProvider
 } from '@dfinity/nns';
+import type { TransferSnsTreasuryFunds } from '@dfinity/sns/dist/candid/sns_governance';
 
 export type ProposalParams = Omit<MakeProposalRequest, 'action' | 'title' | 'neuronId'> & {
 	neuronId: string;
@@ -17,4 +18,8 @@ export type AddNodeProviderProposalParams = ProposalParams & NodeProvider;
 
 export type CreateServiceNervousSystemParams = ProposalParams & {
 	createSns: CreateServiceNervousSystem;
+};
+
+export type TransferTreasuryFundsParams = ProposalParams & {
+	transferFunds: TransferSnsTreasuryFunds;
 };
