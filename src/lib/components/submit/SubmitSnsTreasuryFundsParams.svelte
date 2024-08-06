@@ -1,7 +1,7 @@
 <script lang="ts">
 	import InputText from '$lib/components/ui/InputText.svelte';
 	import { setMetadata } from '$lib/services/idb.services';
-	import { debounce, ICPToken, nonNullish, TokenAmountV2 } from '@dfinity/utils';
+	import { debounce, ICPToken, isNullish, nonNullish, TokenAmountV2 } from '@dfinity/utils';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import { createEventDispatcher, getContext } from 'svelte';
 	import Title from '$lib/components/ui/Title.svelte';
@@ -9,11 +9,12 @@
 	import SubmitContinue from '$lib/components/submit/SubmitContinue.svelte';
 	import { formatToken, ulpsToE8s } from '$lib/utils/token.utils';
 	import { onMount } from 'svelte';
+	import InputCurrency from '$lib/components/ui/InputCurrency.svelte';
 
 	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
 	let destinationAddress = '';
-	let amount = '';
+	let amount: string | number | undefined;
 
 	const init = () => {
 		destinationAddress = $store?.metadata?.destinationAddress ?? '';
@@ -24,20 +25,24 @@
 						token: ICPToken
 					})
 				).replaceAll(',', '')
-			: '';
+			: undefined;
 	};
 
 	onMount(init);
 
 	const save = async () => {
-		if (destinationAddress === '' && amount === '') {
+		if (destinationAddress === '' && (isNullish(amount) || amount === '')) {
 			return;
 		}
 
 		const amountToBigint = (): bigint | undefined => {
+			if (isNullish(amount)) {
+				return undefined;
+			}
+
 			try {
 				const token = TokenAmountV2.fromString({
-					amount,
+					amount: `${amount}`,
 					token: ICPToken
 				});
 
@@ -57,6 +62,8 @@
 		};
 
 		const parsedAmount = amountToBigint();
+
+		console.log(typeof amount, amount, parsedAmount);
 
 		if (
 			destinationAddress === $store?.metadata?.destinationAddress &&
@@ -79,7 +86,7 @@
 	$: destinationAddress,
 		amount,
 		(() => {
-			if (destinationAddress === '' && amount === '') {
+			if (destinationAddress === '' && (isNullish(amount) || amount === '')) {
 				return;
 			}
 
@@ -111,6 +118,6 @@
 	pinPlaceholder={destinationAddress !== ''}
 />
 
-<InputText placeholder="ICP amount" bind:value={amount} pinPlaceholder={amount !== ''} />
+<InputCurrency placeholder="ICP amount" bind:value={amount} pinPlaceholder={nonNullish(amount)} />
 
 <SubmitContinue on:click={next} />
