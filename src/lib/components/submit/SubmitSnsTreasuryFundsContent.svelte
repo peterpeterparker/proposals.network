@@ -70,7 +70,7 @@
 	<Title>Craft Your Proposal</Title>
 
 	<h2 class="mb-6 text-2xl">
-		Great stuff 💪! In addition to the amount and destination, you also need to craft a proposal.
+		Great stuff 💪! In addition to the destination and amount, you also need to craft a proposal.
 	</h2>
 
 	{#if status === 'loading'}

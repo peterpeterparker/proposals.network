@@ -112,11 +112,11 @@
 </h2>
 
 <InputText
-	placeholder="Destination account"
+	placeholder="Destination address"
 	bind:value={destinationAddress}
 	pinPlaceholder={destinationAddress !== ''}
 />
 
-<InputCurrency placeholder="ICP amount" bind:value={amount} pinPlaceholder={nonNullish(amount)} />
+<InputCurrency placeholder="Amount in ICP" bind:value={amount} pinPlaceholder={nonNullish(amount)} />
 
 <SubmitContinue on:click={next} />
