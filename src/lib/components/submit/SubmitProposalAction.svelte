@@ -6,8 +6,7 @@
 	import { getContext } from 'svelte';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import { page } from '$app/stores';
-
-	export let governanceType: 'nns' | 'sns';
+	import { governanceTypeStore } from '$lib/derived/governance.derived';
 
 	let proposalAction: ProposalAction | undefined;
 
@@ -21,7 +20,7 @@
 		}
 
 		proposalAction =
-			governanceType === 'nns'
+			$governanceTypeStore === 'icp'
 				? action?.toLowerCase() === 'Motion'.toLowerCase()
 					? 'Motion'
 					: action?.toLowerCase() === 'AddOrRemoveNodeProvider'.toLowerCase()
@@ -88,7 +87,7 @@
 	];
 
 	let proposalOptions: ProposalOptions;
-	$: proposalOptions = governanceType === 'sns' ? proposalOptionsSns : proposalOptionsNns;
+	$: proposalOptions = $governanceTypeStore !== 'icp' ? proposalOptionsSns : proposalOptionsNns;
 </script>
 
 <InputSelect bind:value={proposalAction} on:change={save}>

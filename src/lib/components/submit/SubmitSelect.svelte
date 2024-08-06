@@ -7,8 +7,6 @@
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import SubmitTitle from '$lib/components/ui/Title.svelte';
 
-	export let governanceType: 'nns' | 'sns';
-
 	const { store }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
 	const dispatch = createEventDispatcher();
@@ -23,7 +21,7 @@
 </h2>
 
 <div class="mb-6">
-	<SubmitProposalAction {governanceType} />
+	<SubmitProposalAction />
 </div>
 
 <Button color="tertiary" disabled={isNullish($store?.metadata?.proposalAction)} on:click={next}
