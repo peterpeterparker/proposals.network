@@ -83,8 +83,8 @@
 
 		await setMetadata({
 			...($store?.metadata ?? {}),
-			...(destinationAddress !== '' && { destinationAddress }),
-			...(nonNullish(amountE8s) && { amount: amountE8s }),
+			...(destinationAddress !== $store?.metadata?.destinationAddress && { destinationAddress }),
+			...(amountToken !== $store?.metadata?.amount && { amount: amountE8s }),
 			title
 		});
 
