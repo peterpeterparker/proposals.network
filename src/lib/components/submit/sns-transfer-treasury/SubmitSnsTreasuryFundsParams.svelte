@@ -10,11 +10,13 @@
 	import { formatToken, ulpsToE8s } from '$lib/utils/token.utils';
 	import { onMount } from 'svelte';
 	import InputCurrency from '$lib/components/ui/InputCurrency.svelte';
+	import { governanceStore } from '$lib/derived/governance.derived';
 
 	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
 	let destinationAddress = '';
 	let amount: string | number | undefined;
+	let url = '';
 
 	const init = () => {
 		destinationAddress = $store?.metadata?.destinationAddress ?? '';
@@ -26,12 +28,15 @@
 					})
 				).replaceAll(',', '')
 			: undefined;
+		url =
+			$store?.metadata?.url ??
+			`https://proposals.network${nonNullish($governanceStore?.id) ? `?g=${$governanceStore.id}` : ''}`;
 	};
 
 	onMount(init);
 
 	const save = async () => {
-		if (destinationAddress === '' && (isNullish(amount) || amount === '')) {
+		if (destinationAddress === '' && (isNullish(amount) || amount === '') && url === '') {
 			return;
 		}
 
@@ -60,7 +65,8 @@
 
 		if (
 			destinationAddress === $store?.metadata?.destinationAddress &&
-			amountToken === $store?.metadata?.amount
+			amountToken === $store?.metadata?.amount &&
+			url === $store?.metadata?.url
 		) {
 			return;
 		}
@@ -85,6 +91,7 @@
 			...($store?.metadata ?? {}),
 			...(destinationAddress !== $store?.metadata?.destinationAddress && { destinationAddress }),
 			...(amountToken !== $store?.metadata?.amount && { amount: amountE8s }),
+			...(url !== $store?.metadata?.url && { url }),
 			title
 		});
 
@@ -96,7 +103,7 @@
 	$: destinationAddress,
 		amount,
 		(() => {
-			if (destinationAddress === '' && (isNullish(amount) || amount === '')) {
+			if (destinationAddress === '' && (isNullish(amount) || amount === '') && url === '') {
 				return;
 			}
 
@@ -132,6 +139,12 @@
 	placeholder="Amount in ICP"
 	bind:value={amount}
 	pinPlaceholder={nonNullish(amount)}
+/>
+
+<InputText
+	placeholder="A URL (for display purposes only)"
+	bind:value={url}
+	pinPlaceholder={url !== ''}
 />
 
 <SubmitContinue on:click={next} />

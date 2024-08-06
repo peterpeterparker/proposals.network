@@ -431,11 +431,11 @@ export const submitTransferTreasuryFundsProposal = async ({
 			return { result: 'error' };
 		}
 
-		const { title, destinationAddress, amount } = metadata;
+		const { title, url, destinationAddress, amount } = metadata;
 
-		if (isNullish(title)) {
+		if (isNullish(title) || isNullish(url)) {
 			toasts.error({
-				msg: { text: 'No title to submit the proposal.' }
+				msg: { text: 'No title or url to submit the proposal.' }
 			});
 			return { result: 'error' };
 		}
@@ -486,8 +486,7 @@ export const submitTransferTreasuryFundsProposal = async ({
 
 		return submitTransferTreasuryFundsServices({
 			title,
-			// TODO: no idea. https://forum.dfinity.org/t/transfersnstreasuryfunds-what-url/33944
-			url: 'https://proposals.network',
+			url,
 			summary: content,
 			neuronId,
 			governance,

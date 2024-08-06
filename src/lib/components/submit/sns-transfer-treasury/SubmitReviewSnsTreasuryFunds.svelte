@@ -32,4 +32,9 @@
 	<article class="p-2.5">{amount}</article>
 </Container>
 
+<Container>
+	<aside slot="title">A URL (for display purposes only)</aside>
+	<article class="p-2.5">{$store?.metadata?.url ?? ''}</article>
+</Container>
+
 <HtmlMarkdown {content} />
