@@ -23,7 +23,7 @@
 						amount: $store.metadata.amount,
 						token: ICPToken
 					})
-				)
+				).replaceAll(',', '')
 			: '';
 	};
 
