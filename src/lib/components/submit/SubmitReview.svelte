@@ -20,6 +20,8 @@
 	import SubmitReviewMotion from '$lib/components/submit/motion/SubmitReviewMotion.svelte';
 	import { fade } from 'svelte/transition';
 	import SubmitReviewSns from '$lib/components/submit/propose-sns/SubmitReviewSns.svelte';
+	import SubmitReviewSnsTreasuryFunds
+		from "$lib/components/submit/sns-transfer-treasury/SubmitReviewSnsTreasuryFunds.svelte";
 
 	export let neuronId: string | undefined;
 
@@ -74,6 +76,8 @@
 				<SubmitReviewAddNodeProvider />
 			{:else if $store?.metadata?.proposalAction === 'CreateServiceNervousSystem'}
 				<SubmitReviewSns {content} />
+			{:else if $store?.metadata?.proposalAction === 'TransferSnsTreasuryFunds'}
+				<SubmitReviewSnsTreasuryFunds {content} />
 			{:else}
 				<SubmitReviewMotion {content} />
 			{/if}
