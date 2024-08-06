@@ -5,39 +5,24 @@ import {
 	makeMotionProposal as makeMotionProposalICP
 } from '$lib/api/icp-proposal.api';
 import {
-	getProposal as getProposalSns, makeMotionProposal,
+	getProposal as getProposalSns,
 	makeMotionProposal as makeMotionProposalSns
 } from '$lib/api/sns-proposal.api';
 import { rootCanisterIdStore, snsNsFunctionsStore } from '$lib/derived/sns.derived';
 import { toasts } from '$lib/stores/toasts.store';
 import type { Governance, OptionGovernanceId, Proposal } from '$lib/types/governance';
+import type {
+	AddNodeProviderProposalParams,
+	CreateServiceNervousSystemParams,
+	MotionProposalParams,
+	ProposalParams,
+	TransferSnsTreasuryFundsParams
+} from '$lib/types/proposal.params';
 import { mapIcpProposal } from '$lib/utils/icp-proposals.utils';
 import { mapSnsProposal } from '$lib/utils/sns-proposals.utils';
-import type {
-	CreateServiceNervousSystem,
-	MakeProposalRequest,
-	Motion,
-	NodeProvider,
-	ProposalId
-} from '@dfinity/nns';
+import type { ProposalId } from '@dfinity/nns';
 import { assertNonNullish, nonNullish } from '@dfinity/utils';
 import { get } from 'svelte/store';
-
-export type ProposalParams = Omit<MakeProposalRequest, 'action' | 'title' | 'neuronId'> & {
-	neuronId: string;
-	title: string;
-	governance: Governance | undefined;
-};
-
-export type MotionProposalParams = ProposalParams & Motion;
-
-export type AddNodeProviderProposalParams = ProposalParams & NodeProvider;
-
-export type CreateServiceNervousSystemParams = ProposalParams & {
-	createSns: CreateServiceNervousSystem;
-};
-
-export type TransferSnsTreasuryFundsParams = ProposalParams;
 
 export const submitMotionProposal = async ({
 	governance,

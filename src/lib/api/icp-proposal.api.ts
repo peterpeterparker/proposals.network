@@ -1,10 +1,10 @@
 import { getAgent } from '$lib/api/agent.api';
 import { GOVERNANCE_CANISTER_ID, NETWORK_PAGINATION } from '$lib/constants/app.constants';
-import {
-	type AddNodeProviderProposalParams,
-	type CreateServiceNervousSystemParams,
-	type MotionProposalParams
-} from '$lib/services/proposal.services';
+import type {
+	AddNodeProviderProposalParams,
+	CreateServiceNervousSystemParams,
+	MotionProposalParams
+} from '$lib/types/proposal.params';
 import { enumsExclude } from '$lib/utils/enum.utils';
 import { AnonymousIdentity } from '@dfinity/agent';
 import type { ListProposalsResponse, ProposalInfo } from '@dfinity/nns';
