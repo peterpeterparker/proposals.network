@@ -11,6 +11,7 @@
 	import { onMount } from 'svelte';
 	import InputCurrency from '$lib/components/ui/InputCurrency.svelte';
 	import { governanceStore } from '$lib/derived/governance.derived';
+	import { page } from '$app/stores';
 
 	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
@@ -19,7 +20,16 @@
 	let url = '';
 
 	const init = () => {
-		destinationAddress = $store?.metadata?.destinationAddress ?? '';
+		// We get the potential query parameters imperatively to initialize the values only once
+		const destinationAddressQueryParam = $page.url.searchParams.get('destination');
+		const amountQueryParam = $page.url.searchParams.get('amount');
+
+		destinationAddress = $store?.metadata?.destinationAddress ?? destinationAddressQueryParam ?? '';
+
+		url =
+			$store?.metadata?.url ??
+			`https://proposals.network${nonNullish($governanceStore?.id) ? `?g=${$governanceStore.id}` : ''}`;
+
 		amount = nonNullish($store?.metadata?.amount)
 			? formatToken(
 					TokenAmountV2.fromUlps({
@@ -28,9 +38,33 @@
 					})
 				).replaceAll(',', '')
 			: undefined;
-		url =
-			$store?.metadata?.url ??
-			`https://proposals.network${nonNullish($governanceStore?.id) ? `?g=${$governanceStore.id}` : ''}`;
+
+		if (nonNullish(amount) || isNullish(amountQueryParam)) {
+			return;
+		}
+
+		const amountE8sToToken = (): TokenAmountV2 | undefined => {
+			if (isNullish(amountQueryParam)) {
+				return undefined;
+			}
+
+			try {
+				return TokenAmountV2.fromUlps({
+					amount: BigInt(amountQueryParam),
+					token: ICPToken
+				});
+			} catch (err: unknown) {
+				// We ignore error here
+			}
+
+			return undefined;
+		};
+
+		const amountQueryParamE8s = amountE8sToToken();
+
+		amount = nonNullish(amountQueryParamE8s)
+			? formatToken(amountQueryParamE8s).replaceAll(',', '')
+			: undefined;
 	};
 
 	onMount(init);
