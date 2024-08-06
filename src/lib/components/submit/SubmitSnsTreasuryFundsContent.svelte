@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { getSnsData } from '$lib/services/submit.sns.services';
-	import {ICPToken, isNullish, nonNullish, TokenAmountV2} from '@dfinity/utils';
+	import { ICPToken, isNullish, TokenAmountV2 } from '@dfinity/utils';
 	import { getEditable, setContent } from '$lib/services/idb.services';
 	import OopsError from '$lib/components/ui/OopsError.svelte';
 	import SubmitWriteContent from '$lib/components/submit/SubmitWriteContent.svelte';
@@ -12,11 +11,10 @@
 	import Title from '$lib/components/ui/Title.svelte';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import { createEventDispatcher, getContext } from 'svelte';
-	import { mapSnsYamlForContent } from '$lib/utils/sns-make-proposal.utils';
 	import { isBusy } from '$lib/derived/busy.derived';
 	import Button from '$lib/components/ui/Button.svelte';
-	import {governanceStore} from "$lib/derived/governance.derived";
-	import {formatToken} from "$lib/utils/token.utils";
+	import { governanceStore } from '$lib/derived/governance.derived';
+	import { formatToken } from '$lib/utils/token.utils';
 
 	const { store }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
@@ -42,16 +40,18 @@
 			return;
 		}
 
-		const formattedAmount = formatToken(TokenAmountV2.fromUlps({
-			amount: BigInt(amount),
-			token: ICPToken
-		}))
+		const formattedAmount = formatToken(
+			TokenAmountV2.fromUlps({
+				amount: BigInt(amount),
+				token: ICPToken
+			})
+		);
 
 		const content = snsTemplate
 			.replaceAll('<AMOUNT>', formattedAmount)
 			.replaceAll('<DESTINATION_ADDRESS>', destinationAccount)
 			.replaceAll('<GOVERNANCE>', $governanceStore?.name ?? 'Internet Computer')
-			.replaceAll('<TOKEN_SYMBOL>', "ICP");
+			.replaceAll('<TOKEN_SYMBOL>', 'ICP');
 
 		await setContent(content);
 
