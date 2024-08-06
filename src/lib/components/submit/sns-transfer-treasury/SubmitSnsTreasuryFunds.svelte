@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { blur } from 'svelte/transition';
-	import SubmitSnsTreasuryFundsParams from '$lib/components/submit/SubmitSnsTreasuryFundsParams.svelte';
-	import SubmitSnsTreasuryFundsContent from '$lib/components/submit/SubmitSnsTreasuryFundsContent.svelte';
+	import SubmitSnsTreasuryFundsParams from '$lib/components/submit/sns-transfer-treasury/SubmitSnsTreasuryFundsParams.svelte';
+	import SubmitSnsTreasuryFundsContent from '$lib/components/submit/sns-transfer-treasury/SubmitSnsTreasuryFundsContent.svelte';
 
 	let step: 'params' | 'draft' = 'params';
 </script>

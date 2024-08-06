@@ -5,7 +5,7 @@
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import SubmitBusy from '$lib/components/submit/SubmitBusy.svelte';
 	import SubmitSns from '$lib/components/submit/propose-sns/SubmitSns.svelte';
-	import SubmitSnsTreasuryFunds from '$lib/components/submit/SubmitSnsTreasuryFunds.svelte';
+	import SubmitSnsTreasuryFunds from '$lib/components/submit/sns-transfer-treasury/SubmitSnsTreasuryFunds.svelte';
 
 	const { store }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 </script>
