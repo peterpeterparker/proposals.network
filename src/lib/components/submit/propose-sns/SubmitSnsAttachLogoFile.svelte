@@ -5,19 +5,15 @@
 	import { userStore } from '$lib/stores/user.store';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import { getContext } from 'svelte';
-	import type { StorageSnsCollections } from '$lib/types/juno';
-	import SubmitSnsFile from '$lib/components/submit/SubmitSnsFile.svelte';
-
-	export let placeholder: string;
-	export let collection: StorageSnsCollections;
-	export let extension: 'yaml' | 'png';
-	export let accept: string;
-	export let linkTarget: '_blank' | undefined = undefined;
+	import SubmitSnsFile from '$lib/components/submit/propose-sns/SubmitSnsFile.svelte';
 
 	const { store }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
 	let downloadUrl: string | undefined;
 	let file: File | undefined;
+
+	const collection = 'sns-logo';
+	const extension = 'png';
 
 	const save = async () => {
 		if (isNullish(file)) {
@@ -35,11 +31,17 @@
 		downloadUrl = url;
 	};
 
-	const debounceSaveYaml = debounce(save);
+	const debounceSave = debounce(save);
 
-	$: file, (() => debounceSaveYaml())();
+	$: file, (() => debounceSave())();
 </script>
 
 <SubmitSnsFile {extension} {collection} bind:downloadUrl>
-	<InputFile bind:file {downloadUrl} {placeholder} {accept} {linkTarget} />
+	<InputFile
+		bind:file
+		{downloadUrl}
+		placeholder="Logo of the Dao and Token"
+		accept="image/png"
+		linkTarget="_blank"
+	/>
 </SubmitSnsFile>

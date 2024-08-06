@@ -5,7 +5,7 @@
 	import { userStore } from '$lib/stores/user.store';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import { getContext } from 'svelte';
-	import SubmitSnsFile from '$lib/components/submit/SubmitSnsFile.svelte';
+	import SubmitSnsFile from '$lib/components/submit/propose-sns/SubmitSnsFile.svelte';
 	import { setMetadata } from '$lib/services/idb.services';
 
 	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Title from '$lib/components/ui/Title.svelte';
-	import SubmitSnsAttachYamlFile from '$lib/components/submit/SubmitSnsAttachYamlFile.svelte';
-	import SubmitSnsAttachLogoFile from '$lib/components/submit/SubmitSnsAttachLogoFile.svelte';
+	import SubmitSnsAttachYamlFile from '$lib/components/submit/propose-sns/SubmitSnsAttachYamlFile.svelte';
+	import SubmitSnsAttachLogoFile from '$lib/components/submit/propose-sns/SubmitSnsAttachLogoFile.svelte';
 	import { createEventDispatcher, getContext } from 'svelte';
 	import { assertCreateServiceNervousSystemAssets } from '$lib/services/submit.sns.services';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
@@ -10,7 +10,7 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import Copy from '$lib/components/ui/Copy.svelte';
 	import { isBusy } from '$lib/derived/busy.derived';
-	import SubmitSnsContent from '$lib/components/submit/SubmitSnsContent.svelte';
+	import SubmitSnsContent from '$lib/components/submit/propose-sns/SubmitSnsContent.svelte';
 
 	const { store }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 

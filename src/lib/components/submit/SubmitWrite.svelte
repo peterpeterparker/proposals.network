@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import SubmitMotion from '$lib/components/submit/SubmitMotion.svelte';
-	import SubmitAddNodeProvider from '$lib/components/submit/SubmitAddNodeProvider.svelte';
+	import SubmitMotion from '$lib/components/submit/motion/SubmitMotion.svelte';
+	import SubmitAddNodeProvider from '$lib/components/submit/add-node-provider/SubmitAddNodeProvider.svelte';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import SubmitBusy from '$lib/components/submit/SubmitBusy.svelte';
-	import SubmitSns from '$lib/components/submit/SubmitSns.svelte';
+	import SubmitSns from '$lib/components/submit/propose-sns/SubmitSns.svelte';
 
 	const { store }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 </script>
