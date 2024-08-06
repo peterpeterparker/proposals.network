@@ -7,7 +7,7 @@
 	import SubmitWriteContent from '$lib/components/submit/SubmitWriteContent.svelte';
 	import SpinnerText from '$lib/components/ui/SpinnerText.svelte';
 	import template from '$lib/markdown/proposal-template.md?raw';
-	import snsTemplate from '$lib/markdown/sns-proposal-template.md?raw';
+	import snsTemplate from '$lib/markdown/proposal-create-sns-template.md?raw';
 	import SubmitContinue from '$lib/components/submit/SubmitContinue.svelte';
 	import Title from '$lib/components/ui/Title.svelte';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
