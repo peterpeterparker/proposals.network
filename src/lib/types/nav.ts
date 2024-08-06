@@ -7,7 +7,7 @@ export type RouteParams = {
 };
 
 export type SubmitRouteParams = RouteParams & {
-	action: ProposalAction | null | undefined;
+	action: ProposalAction | string | null | undefined;
 	destination: string | null | undefined;
 	amount: string | null | undefined;
 };

@@ -1,6 +1,6 @@
 import { browser } from '$app/environment';
 import { goto } from '$app/navigation';
-import type { OptionGovernanceId } from '$lib/types/governance';
+import type { OptionGovernanceId, ProposalAction } from '$lib/types/governance';
 import type { RouteParams, SubmitRouteParams } from '$lib/types/nav';
 import { isNullish, nonNullish } from '@dfinity/utils';
 import type { LoadEvent } from '@sveltejs/kit';
@@ -88,7 +88,8 @@ export const loadSubmitRouteParams = ($event: LoadEvent): SubmitRouteParams => {
 		return {
 			...params,
 			destination: undefined,
-			amount: undefined
+			amount: undefined,
+			action: undefined
 		};
 	}
 
@@ -99,6 +100,7 @@ export const loadSubmitRouteParams = ($event: LoadEvent): SubmitRouteParams => {
 	return {
 		...params,
 		destination: searchParams?.get('destination'),
-		amount: searchParams?.get('amount')
+		amount: searchParams?.get('amount'),
+		action: searchParams?.get('action') as ProposalAction | string | undefined | null
 	};
 };
