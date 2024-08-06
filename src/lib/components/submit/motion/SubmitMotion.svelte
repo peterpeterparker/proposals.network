@@ -1,5 +1,5 @@
 <script lang="ts">
-	import SubmitMotionEdit from '$lib/components/submit/SubmitMotionEdit.svelte';
+	import SubmitMotionEdit from '$lib/components/submit/motion/SubmitMotionEdit.svelte';
 	import Title from '$lib/components/ui/Title.svelte';
 	import SubmitContinue from '$lib/components/submit/SubmitContinue.svelte';
 	import { createEventDispatcher } from 'svelte';

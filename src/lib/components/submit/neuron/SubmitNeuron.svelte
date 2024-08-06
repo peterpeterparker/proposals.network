@@ -6,15 +6,15 @@
 	import type { Neuron } from '$lib/types/juno';
 	import { getNeuron } from '$lib/services/neuron.services';
 	import { fade } from 'svelte/transition';
-	import SubmitNeuronForm from '$lib/components/submit/SubmitNeuronForm.svelte';
+	import SubmitNeuronForm from '$lib/components/submit/neuron/SubmitNeuronForm.svelte';
 	import SpinnerText from '$lib/components/ui/SpinnerText.svelte';
-	import SubmitNeuronHotkey from '$lib/components/submit/SubmitNeuronHotkey.svelte';
+	import SubmitNeuronHotkey from '$lib/components/submit/neuron/SubmitNeuronHotkey.svelte';
 	import { nonNullish } from '@dfinity/utils';
-	import SubmitNeuronMetadata from '$lib/components/submit/SubmitNeuronMetadata.svelte';
+	import SubmitNeuronMetadata from '$lib/components/submit/neuron/SubmitNeuronMetadata.svelte';
 	import { firstNeuronId } from '$lib/utils/juno.utils';
 	import OopsError from '$lib/components/ui/OopsError.svelte';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
-	import SubmitNeuronRequirements from '$lib/components/submit/SubmitNeuronRequirements.svelte';
+	import SubmitNeuronRequirements from '$lib/components/submit/neuron/SubmitNeuronRequirements.svelte';
 
 	export let neuronId: string | undefined;
 

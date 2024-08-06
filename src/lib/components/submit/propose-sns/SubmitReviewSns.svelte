@@ -3,7 +3,7 @@
 	import HtmlMarkdown from '$lib/components/ui/HtmlMarkdown.svelte';
 	import type { ProposalContent } from '$lib/types/juno';
 	import AttachmentLink from '$lib/components/ui/AttachmentLink.svelte';
-	import SubmitSnsFile from '$lib/components/submit/SubmitSnsFile.svelte';
+	import SubmitSnsFile from '$lib/components/submit/propose-sns/SubmitSnsFile.svelte';
 
 	export let content: ProposalContent | undefined;
 

@@ -16,10 +16,10 @@
 	import { governanceStore } from '$lib/derived/governance.derived';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
 	import { getContext } from 'svelte';
-	import SubmitReviewAddNodeProvider from '$lib/components/submit/SubmitReviewAddNodeProvider.svelte';
-	import SubmitReviewMotion from '$lib/components/submit/SubmitReviewMotion.svelte';
+	import SubmitReviewAddNodeProvider from '$lib/components/submit/add-node-provider/SubmitReviewAddNodeProvider.svelte';
+	import SubmitReviewMotion from '$lib/components/submit/motion/SubmitReviewMotion.svelte';
 	import { fade } from 'svelte/transition';
-	import SubmitReviewSns from '$lib/components/submit/SubmitReviewSns.svelte';
+	import SubmitReviewSns from '$lib/components/submit/propose-sns/SubmitReviewSns.svelte';
 
 	export let neuronId: string | undefined;
 

@@ -10,7 +10,7 @@
 	import { initUserProposal } from '$lib/services/submit.services';
 	import { goto } from '$app/navigation';
 	import { confirmToCloseBrowser } from '$lib/utils/before-unload.utils';
-	import SubmitNeuron from '$lib/components/submit/SubmitNeuron.svelte';
+	import SubmitNeuron from '$lib/components/submit/neuron/SubmitNeuron.svelte';
 	import SubmitReview from '$lib/components/submit/SubmitReview.svelte';
 	import { isWizardBusy } from '$lib/derived/busy.derived';
 	import SubmitDone from '$lib/components/submit/SubmitDone.svelte';
