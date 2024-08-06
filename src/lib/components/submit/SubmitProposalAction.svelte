@@ -5,6 +5,7 @@
 	import { isNullish, nonNullish } from '@dfinity/utils';
 	import { getContext } from 'svelte';
 	import { SUBMIT_CONTEXT_KEY, type SubmitContext } from '$lib/types/submit.context';
+	import { page } from '$app/stores';
 
 	export let governanceType: 'nns' | 'sns';
 
@@ -12,9 +13,46 @@
 
 	const { store, reload }: SubmitContext = getContext<SubmitContext>(SUBMIT_CONTEXT_KEY);
 
-	const init = () => (proposalAction = $store?.metadata?.proposalAction);
+	const initWithQueryParam = async () => {
+		const action = $page.url.searchParams.get('action');
 
-	$: $store, init();
+		if (isNullish(action)) {
+			return;
+		}
+
+		proposalAction =
+			governanceType === 'nns'
+				? action?.toLowerCase() === 'Motion'.toLowerCase()
+					? 'Motion'
+					: action?.toLowerCase() === 'AddOrRemoveNodeProvider'.toLowerCase()
+						? 'AddOrRemoveNodeProvider'
+						: action?.toLowerCase() === 'CreateServiceNervousSystem'.toLowerCase()
+							? 'CreateServiceNervousSystem'
+							: undefined
+				: action?.toLowerCase() === 'Motion'.toLowerCase()
+					? 'Motion'
+					: action?.toLowerCase() === 'TransferSnsTreasuryFunds'.toLowerCase()
+						? 'TransferSnsTreasuryFunds'
+						: undefined;
+
+		if (isNullish(proposalAction)) {
+			return;
+		}
+
+		await save();
+	};
+
+	const init = async () => {
+		proposalAction = $store?.metadata?.proposalAction;
+
+		if (nonNullish(proposalAction)) {
+			return;
+		}
+
+		await initWithQueryParam();
+	};
+
+	$: $store, (async () => await init())();
 
 	const save = async () => {
 		if (isNullish(proposalAction)) {
