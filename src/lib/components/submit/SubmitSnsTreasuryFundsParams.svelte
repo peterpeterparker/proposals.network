@@ -117,6 +117,10 @@
 	pinPlaceholder={destinationAddress !== ''}
 />
 
-<InputCurrency placeholder="Amount in ICP" bind:value={amount} pinPlaceholder={nonNullish(amount)} />
+<InputCurrency
+	placeholder="Amount in ICP"
+	bind:value={amount}
+	pinPlaceholder={nonNullish(amount)}
+/>
 
 <SubmitContinue on:click={next} />
