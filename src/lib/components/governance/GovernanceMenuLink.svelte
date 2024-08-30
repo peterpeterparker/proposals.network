@@ -1,23 +1,9 @@
 <script lang="ts">
-	import { submitUrl } from '$lib/utils/nav.utils';
-	import type { GovernanceId } from '$lib/types/governance';
-	import { goto } from '$app/navigation';
-	import GovernanceDialog from '$lib/components/governance/GovernanceDialog.svelte';
+	import { emit } from '$lib/utils/events.utils';
 
-	let visible = false;
-
-	const close = () => (visible = false);
-	const navigate = async ({ detail: governanceId }: CustomEvent<GovernanceId>) => {
-		close();
-		await goto(submitUrl({ governanceId }));
-	};
+	const onClick = () => emit({ message: 'pnwrkOpenGovernance', detail: { navigate: true } });
 </script>
 
-<button
-	class="hover:underline hover:underline-offset-8 mb-4 text-left"
-	on:click={() => (visible = true)}>Submit a proposal</button
+<button class="hover:underline hover:underline-offset-8 mb-4 text-left" on:click={onClick}
+	>Submit a proposal</button
 >
-
-{#if visible}
-	<GovernanceDialog on:pnwrkClose={close} on:pnwrkSelect={navigate} />
-{/if}
