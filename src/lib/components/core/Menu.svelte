@@ -15,6 +15,20 @@
 	import GovernanceMenuLink from '$lib/components/governance/GovernanceMenuLink.svelte';
 
 	export let visible = false;
+
+	const close = () => (visible = false);
+
+	const login = async () => {
+		close();
+
+		await signIn();
+	};
+
+	const logout = async () => {
+		close();
+
+		await signOut();
+	};
 </script>
 
 {#if visible}
@@ -42,7 +56,7 @@
 						<div class="hover:underline hover:underline-offset-8 mb-4">
 							<a href="/">Browse</a>
 						</div>
-						<GovernanceMenuLink />
+						<GovernanceMenuLink on:pnwrkClose={close} />
 						{#if $userSignedIn}
 							<div class="hover:underline hover:underline-offset-8 mb-4">
 								<a href={settingsUrl({ governanceId: $governanceIdStore })}>Settings</a>
@@ -97,15 +111,11 @@
 
 							{#if $userInitialized}
 								{#if $userSignedIn}
-									<ButtonIcon disabled={false} on:click={signOut} ariaLabel="Sign-out">
+									<ButtonIcon disabled={false} on:click={logout} ariaLabel="Sign-out">
 										<IconLogout />
 									</ButtonIcon>
 								{:else}
-									<ButtonIcon
-										disabled={false}
-										on:click={async () => await signIn()}
-										ariaLabel="Sign-in"
-									>
+									<ButtonIcon disabled={false} on:click={login} ariaLabel="Sign-in">
 										<IconLogin />
 									</ButtonIcon>
 								{/if}
