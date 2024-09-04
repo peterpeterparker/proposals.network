@@ -1340,6 +1340,19 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 2761,
+					"name": "transferPosition",
+					"description": null,
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "eefpt-6yaaa-aaaam-adbxq-cai",
+							"target_canister_id": "tupjz-uyaaa-aaaag-qcjmq-cai",
+							"validator_method_name": "validate_transfer_position",
+							"target_method_name": "transferPosition"
+						}
+					}
+				},
+				{
 					"id": 1694553093582,
 					"name": "commit_proposed_batch",
 					"description": null,
@@ -1411,19 +1424,19 @@
 				{
 					"id": 4,
 					"name": "Add nervous system function",
-					"description": "Proposal to add a new, user-defined, nervous system function:a canister call which can then be executed by proposal.",
+					"description": "Proposal to add a new, user-defined, nervous system function: a canister call which can then be executed by proposal.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
 					"id": 5,
 					"name": "Remove nervous system function",
-					"description": "Proposal to remove a user-defined nervous system function,which will be no longer executable by proposal.",
+					"description": "Proposal to remove a user-defined nervous system function, which will be no longer executable by proposal.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
 					"id": 6,
 					"name": "Execute nervous system function",
-					"description": "Proposal to execute a user-defined nervous system function,previously added by an AddNervousSystemFunction proposal. A canister call will be made when executed.",
+					"description": "Proposal to execute a user-defined nervous system function, previously added by an AddNervousSystemFunction proposal. A canister call will be made when executed.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -1458,7 +1471,7 @@
 				},
 				{
 					"id": 12,
-					"name": "Mint SNS Tokens",
+					"name": "Mint SNS tokens",
 					"description": "Proposal to mint SNS tokens to a specified recipient.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
@@ -1920,19 +1933,19 @@
 				{
 					"id": 4,
 					"name": "Add nervous system function",
-					"description": "Proposal to add a new, user-defined, nervous system function:a canister call which can then be executed by proposal.",
+					"description": "Proposal to add a new, user-defined, nervous system function: a canister call which can then be executed by proposal.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
 					"id": 5,
 					"name": "Remove nervous system function",
-					"description": "Proposal to remove a user-defined nervous system function,which will be no longer executable by proposal.",
+					"description": "Proposal to remove a user-defined nervous system function, which will be no longer executable by proposal.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
 					"id": 6,
 					"name": "Execute nervous system function",
-					"description": "Proposal to execute a user-defined nervous system function,previously added by an AddNervousSystemFunction proposal. A canister call will be made when executed.",
+					"description": "Proposal to execute a user-defined nervous system function, previously added by an AddNervousSystemFunction proposal. A canister call will be made when executed.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -1967,7 +1980,7 @@
 				},
 				{
 					"id": 12,
-					"name": "Mint SNS Tokens",
+					"name": "Mint SNS tokens",
 					"description": "Proposal to mint SNS tokens to a specified recipient.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
@@ -2512,19 +2525,19 @@
 				{
 					"id": 4,
 					"name": "Add nervous system function",
-					"description": "Proposal to add a new, user-defined, nervous system function:a canister call which can then be executed by proposal.",
+					"description": "Proposal to add a new, user-defined, nervous system function: a canister call which can then be executed by proposal.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
 					"id": 5,
 					"name": "Remove nervous system function",
-					"description": "Proposal to remove a user-defined nervous system function,which will be no longer executable by proposal.",
+					"description": "Proposal to remove a user-defined nervous system function, which will be no longer executable by proposal.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
 					"id": 6,
 					"name": "Execute nervous system function",
-					"description": "Proposal to execute a user-defined nervous system function,previously added by an AddNervousSystemFunction proposal. A canister call will be made when executed.",
+					"description": "Proposal to execute a user-defined nervous system function, previously added by an AddNervousSystemFunction proposal. A canister call will be made when executed.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -2559,7 +2572,7 @@
 				},
 				{
 					"id": 12,
-					"name": "Mint SNS Tokens",
+					"name": "Mint SNS tokens",
 					"description": "Proposal to mint SNS tokens to a specified recipient.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
@@ -5089,6 +5102,19 @@
 					}
 				},
 				{
+					"id": 1101,
+					"name": "RemovePool",
+					"description": null,
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "7vygu-3yaaa-aaaag-qjxaq-cai",
+							"target_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
+							"validator_method_name": "removePoolValidate",
+							"target_method_name": "removePool"
+						}
+					}
+				},
+				{
 					"id": 2001,
 					"name": "SetFarmAdmins",
 					"description": null,
@@ -5137,6 +5163,19 @@
 							"target_canister_id": "c5jrt-yaaaa-aaaag-qb5ra-cai",
 							"validator_method_name": "createValidate",
 							"target_method_name": "create"
+						}
+					}
+				},
+				{
+					"id": 3002,
+					"name": "AddStakingPoolControllers",
+					"description": null,
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "3oics-6iaaa-aaaag-qkaoq-cai",
+							"target_canister_id": "34ovl-syaaa-aaaag-qkanq-cai",
+							"validator_method_name": "addStakingPoolControllersValidate",
+							"target_method_name": "addStakingPoolControllers"
 						}
 					}
 				},
@@ -5801,7 +5840,7 @@
 			"ledger_canister_id": "jcmow-hyaaa-aaaaq-aadlq-cai"
 		},
 		"meta": {
-			"url": "https://waterneuron.fi/stake/",
+			"url": "https://waterneuron.fi/",
 			"name": "WaterNeuron",
 			"description": "WaterNeuron is a liquid staking protocol designed for the Internet Computer network. \nStaking ICP becomes straightforward and efficient. \n\nLearn more: https://docs.waterneuron.fi | https://x.com/waterneuron | https://t.me/waterneuron\n",
 			"logo": "/v1/sns/root/jmod6-4iaaa-aaaaq-aadkq-cai/logo.png"
