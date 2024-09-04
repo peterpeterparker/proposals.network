@@ -1,5 +1,5 @@
 import pkgAgent from '@dfinity/agent';
-import { idlFactory } from '../node_modules/@junobuild/admin/declarations/satellite/satellite.factory.did.mjs';
+import { idlFactory } from '../node_modules/@junobuild/admin/dist/declarations/satellite/satellite.factory.did.mjs';
 import { getDfxIdentity } from './dfx.identity.mjs';
 import { initIdentity } from './identity.utils.mjs';
 import { satellite } from './satellite.utils.mjs';
