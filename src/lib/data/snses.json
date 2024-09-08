@@ -4752,6 +4752,19 @@
 							"target_method_name": "executePromoteNewClub"
 						}
 					}
+				},
+				{
+					"id": 24000,
+					"name": "Commit Frontend Canister Update",
+					"description": "Commit updated frontend canister with computed evidence.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "bgpwv-eqaaa-aaaal-qb6eq-cai",
+							"target_canister_id": "bgpwv-eqaaa-aaaal-qb6eq-cai",
+							"validator_method_name": "validate_commit_proposed_batch",
+							"target_method_name": "commit_proposed_batch"
+						}
+					}
 				}
 			]
 		}
