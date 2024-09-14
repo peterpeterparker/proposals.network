@@ -17,8 +17,14 @@
 		<h1
 			class="text-center px-2 md:max-w-[70vw] xl:max-w-[50vw] text-5xl sm:text-7xl sm:leading-tight"
 		>
-			Browse and submit proposals on ICP
+			Shape the ICP
 		</h1>
+
+		<h2
+			class="text-center px-2 md:max-w-[90vw] xl:max-w-[70vw] text-4xl sm:text-5xl sm:leading-tight"
+		>
+			NNS & SNS Proposals
+		</h2>
 
 		<button class="animate-bounce pt-16" on:click={scroll} aria-label="Continue">
 			<IconDoubleArrow />
