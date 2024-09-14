@@ -5,6 +5,7 @@
 	import Paginator from '$lib/components/ui/Paginator.svelte';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
 	import { userProposalsStore } from '$lib/stores/user-proposals.store';
+	import { USER_PAGINATION } from '$lib/constants/app.constants';
 
 	let previousStartAfter: string | undefined;
 	let startAfter: string | undefined;
@@ -32,7 +33,9 @@
 	let displayNext: boolean;
 	$: displayNext =
 		nonNullish($userProposalsStore) &&
-		($userProposalsStore.matches_pages ?? 0n) > ($userProposalsStore.items_page ?? 0n);
+		($userProposalsStore.matches_length ?? 0n) >
+			($userProposalsStore.items_page ?? 0n) * BigInt(USER_PAGINATION) +
+				$userProposalsStore.items_length;
 </script>
 
 {#if nonNullish($userProposalsStore)}
