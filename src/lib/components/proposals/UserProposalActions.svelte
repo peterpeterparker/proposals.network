@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { signIn } from '$lib/services/auth.services.js';
 	import Popover from '$lib/components/ui/Popover.svelte';
 	import type { ProposalMetadataDoc } from '$lib/types/juno';
 	import { nonNullish } from '@dfinity/utils';
 	import IconView from '$lib/components/icons/IconView.svelte';
 	import IconDelete from '$lib/components/icons/IconDelete.svelte';
-	import ButtonCell from '$lib/components/ui/ButtonCell.svelte';
 	import UserProposalViewLink from '$lib/components/proposals/UserProposalViewLink.svelte';
+	import UserProposalDeleteDialog from '$lib/components/proposals/UserProposalDeleteDialog.svelte';
 
 	let visible = false;
+	let visibleDelete = false;
 
 	let button: HTMLButtonElement | undefined;
 	let doc: ProposalMetadataDoc | undefined;
@@ -23,8 +23,14 @@
 
 	const close = () => {
 		visible = false;
+		visibleDelete = false;
 		button = undefined;
 		doc = undefined;
+	};
+
+	const onDelete = () => {
+		visible = false;
+		visibleDelete = true;
 	};
 </script>
 
@@ -36,8 +42,12 @@
 			<IconView size="20" /> View
 		</UserProposalViewLink>
 
-		<button class="flex gap-2 items-center mt-2" on:click={async () => await signIn('ic0.app')}>
+		<button class="flex gap-2 items-center mt-2" on:click={onDelete}>
 			<IconDelete size="20" /> Delete
 		</button>
 	</Popover>
+{/if}
+
+{#if visibleDelete && nonNullish(doc)}
+	<UserProposalDeleteDialog {doc} on:pnwrkClose={close} />
 {/if}
