@@ -6,6 +6,8 @@
 	import IconDelete from '$lib/components/icons/IconDelete.svelte';
 	import UserProposalViewLink from '$lib/components/proposals/UserProposalViewLink.svelte';
 	import UserProposalDeleteDialog from '$lib/components/proposals/UserProposalDeleteDialog.svelte';
+	import { deleteProposal } from '$lib/services/user-proposal.services';
+	import { governanceIdStore } from '$lib/derived/governance.derived';
 
 	let visible = false;
 	let visibleDelete = false;
@@ -32,6 +34,19 @@
 		visible = false;
 		visibleDelete = true;
 	};
+
+	const doDelete = async () => {
+		const { result } = await deleteProposal({
+			doc,
+			governanceId: $governanceIdStore
+		});
+
+		if (result !== 'ok') {
+			return;
+		}
+
+		close();
+	};
 </script>
 
 <svelte:window on:pnwrkOpenUserProposalActions={onOpen} />
@@ -49,5 +64,5 @@
 {/if}
 
 {#if visibleDelete && nonNullish(doc)}
-	<UserProposalDeleteDialog {doc} on:pnwrkClose={close} />
+	<UserProposalDeleteDialog {doc} on:pnwrkClose={close} on:pnwrkDelete={doDelete} />
 {/if}
