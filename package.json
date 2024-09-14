@@ -38,6 +38,8 @@
 	},
 	"devDependencies": {
 		"@dfinity/identity-secp256k1": "^2.0.0",
+		"@junobuild/admin": "^0.0.56",
+		"@junobuild/cli-tools": "^0.0.14",
 		"@junobuild/config": "^0.0.14",
 		"@playwright/test": "^1.46.1",
 		"@rollup/plugin-inject": "^5.0.5",
@@ -76,7 +78,6 @@
 		"@dfinity/principal": "^2.0.0",
 		"@dfinity/sns": "^3.2.0",
 		"@dfinity/utils": "^2.5.0",
-		"@junobuild/admin": "^0.0.56",
 		"@junobuild/analytics": "^0.0.28",
 		"@junobuild/core-peer": "^0.0.27",
 		"@tiptap/core": "^2.6.6",
