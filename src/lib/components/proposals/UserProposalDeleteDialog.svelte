@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Dialog from '$lib/components/ui/Dialog.svelte';
 	import { createEventDispatcher } from 'svelte';
-	import type {ProposalMetadataDoc} from "$lib/types/juno";
+	import type { ProposalMetadataDoc } from '$lib/types/juno';
 
 	export let doc: ProposalMetadataDoc;
 
