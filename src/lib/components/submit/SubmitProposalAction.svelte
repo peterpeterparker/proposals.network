@@ -75,7 +75,7 @@
 	const proposalOptionsNns: ProposalOptions = [
 		{ value: 'Motion', label: 'Motion' },
 		{ value: 'AddOrRemoveNodeProvider', label: 'Add a new node provider' },
-		{ value: 'CreateServiceNervousSystem', label: 'Propose a SNS (experimental)' }
+		{ value: 'CreateServiceNervousSystem', label: 'Propose a SNS' }
 	];
 
 	const proposalOptionsSns: ProposalOptions = [
