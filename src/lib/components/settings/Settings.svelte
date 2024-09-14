@@ -2,7 +2,7 @@
 	import SplitPane from '$lib/components/ui/SplitPane.svelte';
 	import UserInitializedGuard from '$lib/components/guards/UserInitializedGuard.svelte';
 	import { userNotInitialized, userNotSignedIn } from '$lib/derived/user.derived';
-	import SettingsSignIn from '$lib/components/settings/SettingsSignIn.svelte';
+	import SignInSection from '$lib/components/core/SignInSection.svelte';
 	import Title from '$lib/components/ui/Title.svelte';
 	import { userStore } from '$lib/stores/user.store';
 	import Copy from '$lib/components/ui/Copy.svelte';
@@ -18,7 +18,7 @@
 	import IconDelete from '$lib/components/icons/IconDelete.svelte';
 	import type { Doc } from '@junobuild/core-peer';
 	import type { Neuron } from '$lib/types/juno';
-	import SettingsAside from '$lib/components/settings/SettingsAside.svelte';
+	import Aside from '$lib/components/core/Aside.svelte';
 
 	let status: 'loading' | 'ok' | 'error' = 'loading';
 
@@ -72,11 +72,11 @@
 </script>
 
 <SplitPane col="forward">
-	<SettingsAside slot="aside" />
+	<Aside slot="aside" />
 
 	<UserInitializedGuard>
 		{#if $userNotSignedIn}
-			<SettingsSignIn />
+			<SignInSection />
 		{:else}
 			<Title>Your Settings</Title>
 

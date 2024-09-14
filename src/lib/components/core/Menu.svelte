@@ -10,7 +10,7 @@
 	import { userInitialized, userSignedIn } from '$lib/derived/user.derived';
 	import { signIn, signOut } from '$lib/services/auth.services';
 	import IconLogin from '$lib/components/icons/IconLogin.svelte';
-	import { settingsUrl } from '$lib/utils/nav.utils';
+	import { proposalsUrl, settingsUrl } from '$lib/utils/nav.utils';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
 	import GovernanceMenuLink from '$lib/components/governance/GovernanceMenuLink.svelte';
 
@@ -56,8 +56,13 @@
 						<div class="hover:underline hover:underline-offset-8 mb-4">
 							<a href="/">Home</a>
 						</div>
+
 						<GovernanceMenuLink on:pnwrkClose={close} />
+
 						{#if $userSignedIn}
+							<div class="hover:underline hover:underline-offset-8 mb-4">
+								<a href={proposalsUrl({ governanceId: $governanceIdStore })}>Your Proposals</a>
+							</div>
 							<div class="hover:underline hover:underline-offset-8 mb-4">
 								<a href={settingsUrl({ governanceId: $governanceIdStore })}>Settings</a>
 							</div>
