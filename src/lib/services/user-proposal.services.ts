@@ -21,7 +21,13 @@ export const deleteProposal = async ({
 		return { result: 'error' };
 	}
 
-    // TODO: status check
+    if (doc.data.status !== "draft") {
+		toasts.error({
+			msg: { text: 'Only draft of proposals can be deleted.' }
+		});
+
+		return { result: 'error' };
+	}
 
 	busy.start();
 

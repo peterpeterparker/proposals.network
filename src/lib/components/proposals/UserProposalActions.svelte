@@ -57,9 +57,11 @@
 			<IconView size="20" /> View
 		</UserProposalViewLink>
 
-		<button class="flex gap-2 items-center mt-2" on:click={onDelete}>
-			<IconDelete size="20" /> Delete
-		</button>
+		{#if doc.data.status === 'draft'}
+			<button class="flex gap-2 items-center mt-2" on:click={onDelete}>
+				<IconDelete size="20" /> Delete
+			</button>
+		{/if}
 	</Popover>
 {/if}
 

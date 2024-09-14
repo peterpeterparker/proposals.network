@@ -34,8 +34,10 @@ export type ProposalEditableMetadata = {
 	ProposalNodeProviderEditableMetadata &
 	ProposalSnsTreasuryFundsEditableMetadata;
 
+export type ProposalMetadataStatus = 'draft' | 'submitted';
+
 export type ProposalMetadata = {
-	status: 'draft' | 'submitted';
+	status: ProposalMetadataStatus;
 	proposalId?: bigint;
 } & ProposalEditableMetadata;
 
