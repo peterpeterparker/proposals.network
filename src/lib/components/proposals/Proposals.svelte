@@ -51,7 +51,7 @@
 		use:onIntersectionTitle
 		on:pnwrkIntersecting={onTitleIntersection}
 	>
-		Network
+		Networks
 	</h2>
 
 	<div class="lg:mx-4 mb-4">
