@@ -43,6 +43,9 @@ case $1 in
     deploy
     node scripts/collections.mjs
     ;;
+  upgrade)
+    node scripts/upgrade.mjs
+    ;;
   config)
     node scripts/collections.mjs
     ;;
