@@ -1,7 +1,7 @@
 {
 	"name": "Proposals.network",
 	"short_name": "PNWRK",
-	"description": "Browse and submit proposals on ICP.",
+	"description": "Shape the ICP: NNS & SNS Proposals",
 	"start_url": ".",
 	"display": "standalone",
 	"theme_color": "#000000",

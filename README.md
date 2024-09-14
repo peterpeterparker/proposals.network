@@ -1,6 +1,6 @@
 <div align="center" style="display:flex;flex-direction:column;">
   <a href="https://proposals.network/">
-    <img src="https://raw.githubusercontent.com/peterpeterparker/proposals.network/e806d73949c1f9cafa1028e265ce9a98cfeedb41/static/images/meta-share.jpg?token=GHSAT0AAAAAABY4CYLCYY6T7XK4R6VNIKW4ZLRZ42Q" width="100%" alt="Proposals.network social banner" role="presentation"/>
+    <img src="https://raw.githubusercontent.com/peterpeterparker/proposals.network/e806d73949c1f9cafa1028e265ce9a98cfeedb41/static/images/meta-share-v2.jpg?token=GHSAT0AAAAAABY4CYLCYY6T7XK4R6VNIKW4ZLRZ42Q" width="100%" alt="Proposals.network social banner" role="presentation"/>
   </a>
 
   <br/>
