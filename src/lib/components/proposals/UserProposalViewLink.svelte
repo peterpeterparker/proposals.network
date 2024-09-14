@@ -12,6 +12,6 @@
 	$: href = userProposalUrl({ key, governanceId: governanceId });
 </script>
 
-<a class="inline-flex max-w-full gap-2" {href} on:click>
+<a class="inline-flex items-center max-w-full gap-2" {href} on:click>
 	<slot />
 </a>
