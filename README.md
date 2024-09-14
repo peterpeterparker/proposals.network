@@ -11,12 +11,12 @@
 
 </div>
 
-## Proposals.network
+---
 
 [Proposals.network] is your gateway to shaping the future of the [Internet Computer](https://internetcomputer.org) (ICP). 🚀
 Submit proposals and browse those that matter most to the ICP community.
 
-### Links & Resources
+## 📚 Links & Resources
 
 Here are some useful links:
 
@@ -24,11 +24,11 @@ Here are some useful links:
 - Checkout [Juno](https://juno.build) for the easiest way to get started building on Web3.
 - Have questions, comments, or feedback? Feel free to open an issue or reach out on [X/Twitter](https://twitter.com/daviddalbusco).
 
-## Design
+## 🎨 Design
 
 This dapp's design is inspired by the color palette and features from the nice [Neo-Brutalism UI](https://neo-brutalism-ui-library.vercel.app/) component library.
 
-### Contact
+## 📬 Contact
 
 Find me on X/Twitter at [@daviddalbusco](https://twitter.com/daviddalbusco) or on Juno's [Discord](https://discord.juno.build).
 
