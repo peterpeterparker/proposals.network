@@ -7,6 +7,7 @@
 	} from '$lib/types/juno';
 	import UserProposalLink from '$lib/components/proposals/UserProposalLink.svelte';
 	import UserProposalView from '$lib/components/proposals/UserProposalView.svelte';
+	import UserProposalColumnActions from '$lib/components/proposals/UserProposalColumnActions.svelte';
 	import UserProposalStatus from '$lib/components/proposals/UserProposalStatus.svelte';
 	import ProposalLink from '$lib/components/proposals/ProposalLink.svelte';
 	import GovernanceCell from '$lib/components/governance/GovernanceCell.svelte';
@@ -16,6 +17,7 @@
 	import { governanceSnsesStore } from '$lib/derived/governance.derived';
 
 	export let doc: ProposalMetadataDoc;
+	export let deleteAction = false;
 
 	let key: ProposalKey;
 	let data: ProposalMetadata;
@@ -42,5 +44,9 @@
 	<ProposalLink id={proposalId} />
 	<td class="max-w-lg truncate">{title ?? nodeProviderName ?? ''}</td>
 	<UserProposalStatus {proposalId} {governance} />
-	<UserProposalView {doc} />
+	{#if deleteAction}
+		<UserProposalColumnActions {doc} />
+	{:else}
+		<UserProposalView {doc} />
+	{/if}
 </tr>

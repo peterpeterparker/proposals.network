@@ -39,7 +39,9 @@
 			class:rtl={direction === 'rtl'}
 		>
 			<div
-				class="box relative max-w max-w-sm px-6 py-4 bg-white border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)] top-6 before:w-4 before:h-4 before:rotate-45 before:bg-black before:absolute before:-top-1.5 before:left-2 before:mx-auto before:border-2 before:border-black"
+				class="box relative max-w max-w-sm px-6 py-4 bg-white border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)] top-6 before:w-4 before:h-4 before:rotate-45 before:bg-black before:absolute before:-top-1.5 before:mx-auto before:border-2 before:border-black"
+				class:before:left-2={direction === 'ltr'}
+				class:before:right-2={direction === 'rtl'}
 			>
 				<slot />
 			</div>

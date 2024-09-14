@@ -1,20 +1,13 @@
 <script lang="ts">
 	import ButtonCell from '$lib/components/ui/ButtonCell.svelte';
-	import { userProposalUrl } from '$lib/utils/nav.utils';
-	import type { ProposalDescription, ProposalMetadataDoc } from '$lib/types/juno';
+	import type { ProposalMetadataDoc } from '$lib/types/juno';
+	import UserProposalViewLink from '$lib/components/proposals/UserProposalViewLink.svelte';
 
 	export let doc: ProposalMetadataDoc;
-
-	let key: string;
-	let governanceId: ProposalDescription | undefined;
-	$: ({ key, description: governanceId } = doc);
-
-	let href: string;
-	$: href = userProposalUrl({ key, governanceId: governanceId });
 </script>
 
 <td>
-	<a class="inline-flex max-w-full gap-1 align-text-top" {href}>
+	<UserProposalViewLink {doc}>
 		<ButtonCell>View</ButtonCell>
-	</a>
+	</UserProposalViewLink>
 </td>
