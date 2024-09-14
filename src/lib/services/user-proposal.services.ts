@@ -21,7 +21,7 @@ export const deleteProposal = async ({
 		return { result: 'error' };
 	}
 
-    if (doc.data.status !== "draft") {
+	if (doc.data.status !== 'draft') {
 		toasts.error({
 			msg: { text: 'Only draft of proposals can be deleted.' }
 		});
@@ -40,7 +40,7 @@ export const deleteProposal = async ({
 		// Reload all proposals. Easy solution for now.
 		await loadUserProposals({ startAfter: undefined, governanceId });
 
-		toasts.success("Your proposal has been deleted.");
+		toasts.success('Your proposal has been deleted.');
 
 		return { result: 'ok' };
 	} catch (err: unknown) {

@@ -2,12 +2,11 @@
 	import Popover from '$lib/components/ui/Popover.svelte';
 	import type { ProposalMetadataDoc } from '$lib/types/juno';
 	import { nonNullish } from '@dfinity/utils';
-	import IconView from '$lib/components/icons/IconView.svelte';
-	import IconDelete from '$lib/components/icons/IconDelete.svelte';
-	import UserProposalViewLink from '$lib/components/proposals/UserProposalViewLink.svelte';
+	import UserProposalActionsList from '$lib/components/proposals/UserProposalActionsList.svelte';
 	import UserProposalDeleteDialog from '$lib/components/proposals/UserProposalDeleteDialog.svelte';
 	import { deleteProposal } from '$lib/services/user-proposal.services';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
+	import Dialog from '$lib/components/ui/Dialog.svelte';
 
 	let visible = false;
 	let visibleDelete = false;
@@ -47,22 +46,22 @@
 
 		close();
 	};
+
+	let innerWidth: number | undefined = undefined;
 </script>
 
-<svelte:window on:pnwrkOpenUserProposalActions={onOpen} />
+<svelte:window on:pnwrkOpenUserProposalActions={onOpen} bind:innerWidth on:resize={close} />
 
 {#if nonNullish(button) && nonNullish(doc)}
-	<Popover bind:visible anchor={button} direction="rtl">
-		<UserProposalViewLink {doc} on:click={close}>
-			<IconView size="20" /> View
-		</UserProposalViewLink>
-
-		{#if doc.data.status === 'draft'}
-			<button class="flex gap-2 items-center mt-2" on:click={onDelete}>
-				<IconDelete size="20" /> Delete
-			</button>
-		{/if}
-	</Popover>
+	{#if (innerWidth ?? 0) > 1024}
+		<Popover bind:visible anchor={button} direction="rtl">
+			<UserProposalActionsList {doc} on:pnwrkDelete={onDelete} />
+		</Popover>
+	{:else}
+		<Dialog on:pnwrkClose>
+			<UserProposalActionsList {doc} on:pnwrkDelete={onDelete} />
+		</Dialog>
+	{/if}
 {/if}
 
 {#if visibleDelete && nonNullish(doc)}
