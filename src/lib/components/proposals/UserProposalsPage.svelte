@@ -17,7 +17,7 @@
 		{:else}
 			<Title>Your Proposals</Title>
 
-			<UserProposals hideAction />
+			<UserProposals hideAction deleteAction />
 		{/if}
 	</UserInitializedGuard>
 </SplitPane>
