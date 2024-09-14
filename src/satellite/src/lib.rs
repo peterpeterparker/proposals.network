@@ -1,8 +1,15 @@
+use ic_cdk::id;
 use junobuild_macros::{assert_delete_doc};
-use junobuild_satellite::{include_satellite, AssertDeleteDocContext};
+use junobuild_satellite::{include_satellite, AssertDeleteDocContext, get_doc_store};
 
-#[assert_delete_doc]
-fn assert_delete_doc(_context: AssertDeleteDocContext) -> Result<(), String> {
+#[assert_delete_doc(collections = ["content", "sns-parameters", "sns-logo"])]
+fn assert_delete_doc(context: AssertDeleteDocContext) -> Result<(), String> {
+    let metadata = get_doc_store(id(), "metadata".to_string(), context.data.key)?;
+
+    if let Some(_) = metadata {
+        return Err("The document cannot not be deleted. The related metadata still exists.".to_string());
+    }
+
     Ok(())
 }
 
