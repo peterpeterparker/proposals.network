@@ -54,7 +54,7 @@
 					<div class="pb-8">
 						<span class="text-lg font-bold block mb-4">Proposals.network</span>
 						<div class="hover:underline hover:underline-offset-8 mb-4">
-							<a href="/">Browse</a>
+							<a href="/">Home</a>
 						</div>
 						<GovernanceMenuLink on:pnwrkClose={close} />
 						{#if $userSignedIn}
