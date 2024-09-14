@@ -78,7 +78,7 @@
 		"@dfinity/utils": "^2.5.0",
 		"@junobuild/admin": "^0.0.56",
 		"@junobuild/analytics": "^0.0.28",
-		"@junobuild/core-peer": "^0.0.26",
+		"@junobuild/core-peer": "^0.0.27",
 		"@tiptap/core": "^2.6.6",
 		"@tiptap/extension-code-block-lowlight": "^2.6.6",
 		"@tiptap/extension-highlight": "^2.6.6",
