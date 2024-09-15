@@ -1,11 +1,11 @@
+mod assert;
 mod delete;
+mod types;
 
+use crate::assert::{assert_metadata_exist, assert_metadata_status};
 use crate::delete::{delete_proposal_asset, delete_proposal_doc};
-use ic_cdk::id;
 use junobuild_macros::{assert_delete_doc, on_delete_doc};
-use junobuild_satellite::{
-    get_doc_store, include_satellite, AssertDeleteDocContext, OnDeleteDocContext,
-};
+use junobuild_satellite::{include_satellite, AssertDeleteDocContext, OnDeleteDocContext};
 
 #[on_delete_doc(collections = ["metadata"])]
 async fn on_delete_doc(context: OnDeleteDocContext) -> Result<(), String> {
@@ -22,17 +22,12 @@ async fn on_delete_doc(context: OnDeleteDocContext) -> Result<(), String> {
     Ok(())
 }
 
-#[assert_delete_doc(collections = ["content", "sns-parameters", "sns-logo"])]
+#[assert_delete_doc]
 fn assert_delete_doc(context: AssertDeleteDocContext) -> Result<(), String> {
-    let metadata = get_doc_store(id(), "metadata".to_string(), context.data.key)?;
-
-    if metadata.is_some() {
-        return Err(
-            "The document cannot not be deleted. The related metadata still exists.".to_string(),
-        );
+    match context.data.collection.as_str() {
+        "metadata" => assert_metadata_status(&context),
+        _ => assert_metadata_exist(&context),
     }
-
-    Ok(())
 }
 
 include_satellite!();
