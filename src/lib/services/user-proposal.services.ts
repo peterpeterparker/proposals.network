@@ -2,9 +2,9 @@ import { loadUserProposals } from '$lib/services/loader-stores.services';
 import { busy } from '$lib/stores/busy.store';
 import { toasts } from '$lib/stores/toasts.store';
 import type { OptionGovernanceId } from '$lib/types/governance';
-import type { ProposalContent, ProposalMetadataDoc } from '$lib/types/juno';
+import type { ProposalMetadataDoc } from '$lib/types/juno';
 import { isNullish } from '@dfinity/utils';
-import { deleteManyDocs, getDoc } from '@junobuild/core-peer';
+import { deleteDoc } from '@junobuild/core-peer';
 
 export const deleteProposal = async ({
 	doc,
@@ -32,26 +32,9 @@ export const deleteProposal = async ({
 	busy.start();
 
 	try {
-		const content = await getDoc<ProposalContent>({
-			collection: 'content',
-			key: doc.key
-		});
-
-		await deleteManyDocs({
-			docs: [
-				{
-					collection: 'metadata',
-					doc
-				},
-				...(isNullish(content)
-					? []
-					: [
-							{
-								collection: 'content',
-								doc: content
-							}
-						])
-			]
+		await deleteDoc({
+			collection: 'metadata',
+			doc
 		});
 
 		// Reload all proposals. Easy solution for now.
