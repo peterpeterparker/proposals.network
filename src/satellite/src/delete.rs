@@ -11,8 +11,6 @@ pub fn delete_proposal_doc(collection: &String, key: &str) -> Result<(), String>
             version: content.version,
         };
 
-        ic_cdk::print(format!("DELETELETELELT {} {}", collection, key));
-
         let _ = delete_doc_store(id(), collection.to_string(), key.to_string(), del_doc)?;
     }
 
