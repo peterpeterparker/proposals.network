@@ -1,6 +1,6 @@
 mod proposal;
 
-use crate::proposal::delete_proposal_doc;
+use crate::proposal::{delete_proposal_asset, delete_proposal_doc};
 use ic_cdk::id;
 use junobuild_macros::{assert_delete_doc, on_delete_doc};
 use junobuild_satellite::{
@@ -16,8 +16,8 @@ async fn on_delete_doc(context: OnDeleteDocContext) -> Result<(), String> {
     let key = context.data.key;
 
     delete_proposal_doc(&"content".to_string(), &key)?;
-    delete_proposal_doc(&"sns-parameters".to_string(), &key)?;
-    delete_proposal_doc(&"sns-logo".to_string(), &key)?;
+    delete_proposal_asset(&"sns-parameters".to_string(), &key, "yaml")?;
+    delete_proposal_asset(&"sns-logo".to_string(), &key, "png")?;
 
     Ok(())
 }
