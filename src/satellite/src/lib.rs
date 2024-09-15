@@ -1,6 +1,6 @@
-mod proposal;
+mod delete;
 
-use crate::proposal::{delete_proposal_asset, delete_proposal_doc};
+use crate::delete::{delete_proposal_asset, delete_proposal_doc};
 use ic_cdk::id;
 use junobuild_macros::{assert_delete_doc, on_delete_doc};
 use junobuild_satellite::{
