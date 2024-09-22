@@ -21,6 +21,10 @@ fallback_controller_principals:
   - miso6-cu5ju-xcxwf-v2upq-mn32j-sn7lf-7mgiq-rh5ec-olmvw-a6z54-pqe
 
 dapp_canisters: []
+# Commented out for local testing purposes
+# - cokmz-oiaaa-aaaal-aby6q-cai
+# - klbfr-lqaaa-aaaak-qbwsa-cai
+# - fmkjf-bqaaa-aaaal-acpza-cai
 
 Token:
   name: Juno Build
@@ -87,7 +91,8 @@ Distribution:
   total: 100_000_000 tokens
 
 Swap:
-  minimum_participants: 1
+  # 1 instead of 100 for local testing purposes
+  minimum_participants: 100
 
   minimum_direct_participation_icp: 200_000 tokens
   maximum_direct_participation_icp: 350_000 tokens
@@ -129,9 +134,10 @@ Swap:
     events: 5
     interval: 6 months
 
-  # TODO: commented for local testing purpose
-  # start_time: 1:00 UTC
+  # Commented out for local testing purposes
+  # start_time: 13:00 UTC
 
   duration: 14 days
 
+  # false instead of true for local testing purposes
   neurons_fund_participation: false
