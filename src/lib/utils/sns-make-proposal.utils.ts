@@ -160,7 +160,8 @@ const mapDuration = ({
 };
 
 const mapTimeOfDay = (timeOfDay: string): GlobalTimeOfDay => {
-	const [hours, minutes] = timeOfDay.split(' ')[0].split(':').map(Number);
+	const cleanedTime = timeOfDay.replace(/[^0-9:]/g, '');
+	const [hours, minutes] = cleanedTime.split(':').map(Number);
 
 	return {
 		secondsAfterUtcMidnight: BigInt(hours * 3600 + minutes * 60)
