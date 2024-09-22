@@ -6,12 +6,7 @@ url: https://juno.build
 NnsProposal:
   title: "NNS Proposal to create an SNS named 'Juno Build'"
 
-  # The HTTPS address of a forum post with additional context required to evaluate the NNS
-  # proposal.
-  # This will go in the `url` field of the proposal.
-  # Must be a string of 10 to 2,048 bytes.
-  # The protocol must be HTTPS, and the domain must be forum.dfinity.org.
-  url: "https://forum.dfinity.org/thread-where-this-sns-is-discussed"
+  url: "https://forum.dfinity.org/t/upcoming-juno-build-sns-decentralization-swap/34719"
 
   # Left empty. Generated automatically on proposals.network
   summary: ""
