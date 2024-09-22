@@ -312,6 +312,7 @@ export const mapSnsYamlForContent = (
 	swapDistribution: string;
 	treasuryDistribution: string;
 	developersDistribution: string;
+	neuronsFundParticipation: boolean;
 } => {
 	const { swapParameters, initialTokenDistribution } = mapSnsYamlToCreateServiceNervousSystem({
 		yaml,
@@ -373,6 +374,8 @@ export const mapSnsYamlForContent = (
 		.filter(nonNullish)
 		.reduce((acc, e8s) => acc + e8s, 0n);
 
+	const neuronsFundParticipation = swapParameters?.neuronsFundParticipation ?? false;
+
 	return {
 		minimumParticipantIcp,
 		maximumParticipantIcp,
@@ -401,6 +404,7 @@ export const mapSnsYamlForContent = (
 						token: snsToken
 					})
 				)
-			: BLANK
+			: BLANK,
+		neuronsFundParticipation
 	};
 };

@@ -53,7 +53,8 @@
 			maxDirectParticipationIcp,
 			swapDistribution,
 			treasuryDistribution,
-			developersDistribution
+			developersDistribution,
+			neuronsFundParticipation
 		} = mapSnsYamlForContent(yaml);
 
 		const {
@@ -78,6 +79,7 @@
 			.replaceAll('<MAXIMUM_PARTICIPANT_ICP>', maximumParticipantIcp)
 			.replaceAll('<MIN_DIRECT_PARTICIPATION_ICP>', minDirectParticipationIcp)
 			.replaceAll('<MAX_DIRECT_PARTICIPATION_ICP>', maxDirectParticipationIcp)
+			.replaceAll('<NEURON_FUND>', neuronsFundParticipation ? ' (Without NF)' : '')
 			.replaceAll('<TREASURY_DISTRIBUTION>', treasuryDistribution)
 			.replaceAll('<SWAP_DISTRIBUTION>', swapDistribution)
 			.replaceAll('<DEVELOPERS_DISTRIBUTION>', developersDistribution);
