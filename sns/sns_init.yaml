@@ -87,7 +87,7 @@ Distribution:
 
 Swap:
   # 1 instead of 100 for local testing purposes
-  minimum_participants: 100
+  minimum_participants: 1
 
   minimum_direct_participation_icp: 200_000 tokens
   maximum_direct_participation_icp: 350_000 tokens
