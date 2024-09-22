@@ -2652,6 +2652,45 @@
 							"target_method_name": "withdraw_vector"
 						}
 					}
+				},
+				{
+					"id": 6110,
+					"name": "DeVeFi:ICP/DKP:Create Vector",
+					"description": "Creates a new vector",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "hospv-uaaaa-aaaal-qkkda-cai",
+							"target_canister_id": "hospv-uaaaa-aaaal-qkkda-cai",
+							"validator_method_name": "validate_create_vector",
+							"target_method_name": "create_vector"
+						}
+					}
+				},
+				{
+					"id": 6111,
+					"name": "DeVeFi:ICP/DKP:Modify Vector",
+					"description": "Modifies a vector",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "hospv-uaaaa-aaaal-qkkda-cai",
+							"target_canister_id": "hospv-uaaaa-aaaal-qkkda-cai",
+							"validator_method_name": "validate_modify_vector",
+							"target_method_name": "modify_vector"
+						}
+					}
+				},
+				{
+					"id": 6210,
+					"name": "DeVeFi:ICP/nICP:Create Vector",
+					"description": "Creates a new vector",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "ol6b4-pqaaa-aaaal-qjqia-cai",
+							"target_canister_id": "ol6b4-pqaaa-aaaal-qjqia-cai",
+							"validator_method_name": "validate_create_vector",
+							"target_method_name": "create_vector"
+						}
+					}
 				}
 			]
 		}
@@ -2837,6 +2876,19 @@
 							"target_canister_id": "ok64y-uiaaa-aaaag-qdcbq-cai",
 							"validator_method_name": "validate_deploy_icrc1_tokens_to_icpswap",
 							"target_method_name": "deploy_icrc1_tokens_to_icpswap"
+						}
+					}
+				},
+				{
+					"id": 2005,
+					"name": "transfer_icpex_lp_position",
+					"description": null,
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "ok64y-uiaaa-aaaag-qdcbq-cai",
+							"target_canister_id": "ok64y-uiaaa-aaaag-qdcbq-cai",
+							"validator_method_name": "validate_transfer_icpex_lp_position",
+							"target_method_name": "transfer_icpex_lp_position"
 						}
 					}
 				}
@@ -6134,6 +6186,32 @@
 							"target_canister_id": "ckhlr-yiaaa-aaaar-qag4a-cai",
 							"validator_method_name": "sns_validate_trade_tokens",
 							"target_method_name": "trade_tokens"
+						}
+					}
+				},
+				{
+					"id": 40000,
+					"name": "Upgrade a Canister",
+					"description": "This proposal type calls the top-level-upgrader canister and upgrades one of the canisters within it's control.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "yvs6s-hyaaa-aaaar-qaiea-cai",
+							"target_canister_id": "yvs6s-hyaaa-aaaar-qaiea-cai",
+							"validator_method_name": "sns_validate_upgrade_top_level_canister",
+							"target_method_name": "upgrade_top_level_canister"
+						}
+					}
+				},
+				{
+					"id": 40001,
+					"name": "Upgrade the trade-contracts",
+					"description": "This proposal type calls the cycles-market-main (cm_main) canister and then the cycles-market-main canister upgrades the trade-contract canisters.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "el2py-miaaa-aaaar-qabxq-cai",
+							"target_canister_id": "el2py-miaaa-aaaar-qabxq-cai",
+							"validator_method_name": "sns_validate_controller_upgrade_tcs",
+							"target_method_name": "controller_upgrade_tcs"
 						}
 					}
 				}
