@@ -2,7 +2,7 @@ Proposal to create a SNS named '<SNS_NAME>'.
 
 ## Introduction
 
-<SNS_DESCRIPTION>.
+<SNS_DESCRIPTION>
 
 ## SNS parameters
 
