@@ -5004,6 +5004,45 @@
 							"target_method_name": "withdraw"
 						}
 					}
+				},
+				{
+					"id": 1101,
+					"name": "`admin_add_canister` function",
+					"description": "It is used to add more COSE, Profile, and Channel service canisters to the messaging cluster.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "nscli-qiaaa-aaaaj-qa4pa-cai",
+							"target_canister_id": "nscli-qiaaa-aaaaj-qa4pa-cai",
+							"validator_method_name": "validate_admin_add_canister",
+							"target_method_name": "admin_add_canister"
+						}
+					}
+				},
+				{
+					"id": 1102,
+					"name": "`admin_update_price` function",
+					"description": "It is used to update the price for registering a username and creating a channel.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "nscli-qiaaa-aaaaj-qa4pa-cai",
+							"target_canister_id": "nscli-qiaaa-aaaaj-qa4pa-cai",
+							"validator_method_name": "validate_admin_update_price",
+							"target_method_name": "admin_update_price"
+						}
+					}
+				},
+				{
+					"id": 1103,
+					"name": "`admin_collect_token` function",
+					"description": "It is used to collect tokens to a account.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "nscli-qiaaa-aaaaj-qa4pa-cai",
+							"target_canister_id": "nscli-qiaaa-aaaaj-qa4pa-cai",
+							"validator_method_name": "validate_admin_collect_token",
+							"target_method_name": "admin_collect_token"
+						}
+					}
 				}
 			]
 		}
