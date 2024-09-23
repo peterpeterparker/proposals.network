@@ -26,6 +26,7 @@ async fn on_delete_doc(context: OnDeleteDocContext) -> Result<(), String> {
 fn assert_delete_doc(context: AssertDeleteDocContext) -> Result<(), String> {
     match context.data.collection.as_str() {
         "metadata" => assert_metadata_status(&context),
+        "neuron" => Ok(()),
         _ => assert_metadata_exist(&context),
     }
 }
