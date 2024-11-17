@@ -54,6 +54,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0c4b4d0bd25bd0b74681c0ad21497610ce1b7c91b1022cd21c80c6fbdd9476b0"
 
 [[package]]
+name = "base32"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "23ce669cd6c8588f79e15cf450314f9638f967fc5770ff1c7c1deb0925ea7cfa"
+
+[[package]]
 name = "base64"
 version = "0.13.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -510,10 +516,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "heck"
+version = "0.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2304e00983f87ffb38b55b444b5e3b60a884b5d30c0fca7d82fe33449bbe55ea"
+
+[[package]]
 name = "hex"
 version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7f24254aa9a54b5c858eaee2f5bccdb46aaf0e486a595ed5fd8f86ba55232a70"
+dependencies = [
+ "serde",
+]
 
 [[package]]
 name = "http"
@@ -541,9 +556,9 @@ dependencies = [
 
 [[package]]
 name = "ic-cdk"
-version = "0.15.1"
+version = "0.17.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "038ff230bf0fc8630943e3c52e989d248a7c89834ccb65da408fabc5817a475b"
+checksum = "b2abdf9341da9f9f6b451a40609cb69645a05a8e9eb7784c16209f16f2c0f76f"
 dependencies = [
  "candid",
  "ic-cdk-macros",
@@ -554,9 +569,9 @@ dependencies = [
 
 [[package]]
 name = "ic-cdk-macros"
-version = "0.15.0"
+version = "0.17.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3af44fb4ec3a4b18831c9d3303ca8fa2ace846c4022d50cb8df4122635d3782e"
+checksum = "b8df41980e95dead28735ab0f748c75477b0c5eab37a09a5641c78ec406a1db0"
 dependencies = [
  "candid",
  "proc-macro2",
@@ -568,9 +583,9 @@ dependencies = [
 
 [[package]]
 name = "ic-cdk-timers"
-version = "0.9.0"
+version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "61fdca8e1d9ffb65ae68019b342c182009de9dc206fd849db0b0e90ee19f6fa4"
+checksum = "fb8fd812a9e26f6aa00594546f8fbf4d4853f39c3ba794c8ff11ecf86fd3c9e4"
 dependencies = [
  "futures",
  "ic-cdk",
@@ -628,9 +643,9 @@ dependencies = [
 
 [[package]]
 name = "ic-ledger-types"
-version = "0.12.0"
+version = "0.14.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0fd70c701d11208d5d853c1a908bb143848d89c1951f401413cef9c062642112"
+checksum = "9a7103dea96107c8b1e49d6e80ab452ab48e9f3594d618dbb46449381f4f0a01"
 dependencies = [
  "candid",
  "crc32fast",
@@ -704,6 +719,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "icrc-ledger-types"
+version = "0.1.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "589f7f6b54df25295dd0ce2722d583c15e2ee7eec9cef58c10b424feb54561b2"
+dependencies = [
+ "base32",
+ "candid",
+ "crc32fast",
+ "hex",
+ "itertools",
+ "num-bigint",
+ "num-traits",
+ "serde",
+ "serde_bytes",
+ "sha2",
+ "strum",
+ "time",
+]
+
+[[package]]
 name = "ident_case"
 version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -729,6 +764,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "itertools"
+version = "0.12.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ba291022dbbd398a455acf126c1e341954079855bc60dfdda641363bd6922569"
+dependencies = [
+ "either",
+]
+
+[[package]]
 name = "itoa"
 version = "1.0.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -736,9 +780,9 @@ checksum = "49f1f14873335454500d59611f1cf4a4b0f786f9ac11f4312a78e4cf2566695b"
 
 [[package]]
 name = "junobuild-collections"
-version = "0.0.4"
+version = "0.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2a9ffe2fd8346d8eb57949ea356934abd15e31e77a244978fc817285455a5179"
+checksum = "5ab67d2911d5e83f4c9aafebab7ac9cc8d9bb934a750b08cc2470072beab6a1d"
 dependencies = [
  "candid",
  "ic-cdk",
@@ -750,9 +794,9 @@ dependencies = [
 
 [[package]]
 name = "junobuild-macros"
-version = "0.0.2"
+version = "0.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "841ced7672f3e2f4f66d76564adfb0fc730bff9fee7d69a70e24c82875da0ac1"
+checksum = "9bea8c41b34b67b57af1676997a5c883b39cc581ab948569cf30651d039c8e63"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -763,9 +807,9 @@ dependencies = [
 
 [[package]]
 name = "junobuild-satellite"
-version = "0.0.20-patch.1"
+version = "0.0.21-patch.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d31c721250fcb479d7167e77b91c93578d333f17ef4871cbf6a5479a7e16443f"
+checksum = "bbe3785f3e717fd200041f751efdb3ac6201aee701048a6cfd41026bdae109cf"
 dependencies = [
  "candid",
  "ciborium",
@@ -788,9 +832,9 @@ dependencies = [
 
 [[package]]
 name = "junobuild-shared"
-version = "0.0.18"
+version = "0.0.22"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "32bd03965d22a3f1d16d4f9d768dd9f0ba3ed4048a03ea99d131e9b38c7509ea"
+checksum = "547269cbce66c41fe75bd653ab03cb1fa1a0c1dd3e23e5449b5f97e179d9893e"
 dependencies = [
  "candid",
  "ciborium",
@@ -799,6 +843,7 @@ dependencies = [
  "ic-cdk-macros",
  "ic-ledger-types",
  "ic-stable-structures",
+ "icrc-ledger-types",
  "regex",
  "serde",
  "time",
@@ -806,9 +851,9 @@ dependencies = [
 
 [[package]]
 name = "junobuild-storage"
-version = "0.0.7-patch.1"
+version = "0.0.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e52dd0ce4a6209a81edf48f8b63b77727c2303dba9e4e555a9c3b17d9c2322bb"
+checksum = "f48a60a3b308266bc8d016d06f6365e18ac99546eec61925ae5b8e6b725f9be2"
 dependencies = [
  "base64 0.13.1",
  "candid",
@@ -834,9 +879,9 @@ dependencies = [
 
 [[package]]
 name = "junobuild-utils"
-version = "0.0.3"
+version = "0.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9c090377970d0b3c7970a51723f01ad8a4d26c425b828684e6184047d0e27de5"
+checksum = "526b6b74dc3a27a7c3c7da96abc1090b618efb2887d4d2c7893814a9790f19ab"
 dependencies = [
  "candid",
  "serde",
@@ -860,6 +905,12 @@ name = "libc"
 version = "0.2.158"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d8adc4bb1803a324070e64a98ae98f38934d91957a99cfb3a43dcbc01bc56439"
+
+[[package]]
+name = "libm"
+version = "0.2.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8355be11b20d696c8f18f6cc018c4e372165b1fa8126cef092399c9951984ffa"
 
 [[package]]
 name = "lock_api"
@@ -947,6 +998,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "071dfc062690e90b734c0b2273ce72ad0ffa95f0c74596bc250dcfd960262841"
 dependencies = [
  "autocfg",
+ "libm",
 ]
 
 [[package]]
@@ -1137,7 +1189,7 @@ checksum = "f3cb5ba0dc43242ce17de99c180e96db90b235b8a9fdc9543c96d2209116bd9f"
 
 [[package]]
 name = "satellite"
-version = "0.0.1"
+version = "0.0.2"
 dependencies = [
  "candid",
  "ic-cdk",
@@ -1279,6 +1331,28 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "73473c0e59e6d5812c5dfe2a064a6444949f089e20eec9a2e5506596494e4623"
 
 [[package]]
+name = "strum"
+version = "0.26.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8fec0f0aef304996cf250b31b5a10dee7980c85da9d759361292b8bca5a18f06"
+dependencies = [
+ "strum_macros",
+]
+
+[[package]]
+name = "strum_macros"
+version = "0.26.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4c6bee85a5a24955dc440386795aa378cd9cf82acd5f764469152d2270e581be"
+dependencies = [
+ "heck",
+ "proc-macro2",
+ "quote",
+ "rustversion",
+ "syn 2.0.77",
+]
+
+[[package]]
 name = "syn"
 version = "1.0.109"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1327,10 +1401,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5dfd88e563464686c916c7e46e623e520ddc6d79fa6641390f2e3fa86e83e885"
 dependencies = [
  "deranged",
+ "itoa",
  "num-conv",
  "powerfmt",
  "serde",
  "time-core",
+ "time-macros",
 ]
 
 [[package]]
@@ -1338,6 +1414,16 @@ name = "time-core"
 version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ef927ca75afb808a4d64dd374f00a2adf8d0fcff8e7b184af886c3c87ec4a3f3"
+
+[[package]]
+name = "time-macros"
+version = "0.2.18"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3f252a68540fde3a3877aeea552b832b40ab9a69e318efd078774a01ddee1ccf"
+dependencies = [
+ "num-conv",
+ "time-core",
+]
 
 [[package]]
 name = "tinyvec"
