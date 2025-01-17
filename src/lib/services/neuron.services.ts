@@ -48,9 +48,7 @@ export const deleteNeuronId = async ({
 	const prepareNeuronData = (governanceId: GovernanceCanisterId): Neuron => {
 		const data = {
 			...(nonNullish(neuron) && neuron.data),
-			[governanceId]: [
-				...(neuron?.data[governanceId]?.filter((nId) => neuronId !== `${nId}`) ?? [])
-			]
+			[governanceId]: [...(neuron?.data[governanceId]?.filter((nId) => neuronId !== `${nId}`) ?? [])]
 		};
 
 		if (data[governanceId].length > 0) {
