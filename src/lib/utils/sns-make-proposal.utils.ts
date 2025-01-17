@@ -294,7 +294,7 @@ export const mapSnsYamlToCreateServiceNervousSystem = ({
 			total: mapE8sOrTokens(Distribution.InitialBalances.swap)
 		},
 		treasuryDistribution: {
-			total: mapE8sOrTokens(Distribution.InitialBalances.governance)
+			total: mapE8sOrTokens(Distribution.InitialBalances.treasury)
 		},
 		developerDistribution: {
 			developerNeurons: Distribution.Neurons.map(mapNeuron)
