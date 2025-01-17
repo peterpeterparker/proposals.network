@@ -308,7 +308,7 @@ const swapSchema = z.object({
 	confirmation_text: confirmationSchema.optional(),
 	restricted_countries: countryCodeSchema.array().optional(),
 	VestingSchedule: z.object({
-		events: z.number().min(2),
+		events: z.number().min(2).max(10),
 		interval: durationSchema
 	}),
 	start_time: DEV ? timeOfDaySchema.optional() : timeOfDaySchema,
