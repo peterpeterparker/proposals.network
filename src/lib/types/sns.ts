@@ -270,7 +270,7 @@ export type NeuronSchema = z.infer<typeof neuronSchema>;
 const distributionSchema = z.object({
 	Neurons: neuronSchema.array(),
 	InitialBalances: z.object({
-		governance: e8sOrTokensSchema,
+		treasury: e8sOrTokensSchema,
 		swap: e8sOrTokensSchema
 	}),
 	total: e8sOrTokensSchema
