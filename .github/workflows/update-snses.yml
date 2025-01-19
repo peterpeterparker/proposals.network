@@ -31,7 +31,7 @@ jobs:
         if: env.CHANGES_DETECTED == 'true'
         uses: ./.github/actions/create-pr
         with:
-          branch: bot-cmc-subnets-update
+          branch: bot-snses-update
           title: 'feat: Update Snses'
           body: |
             Modifications have been made to the list of Snses.
