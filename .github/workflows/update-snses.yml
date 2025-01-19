@@ -8,7 +8,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  update-subnets:
+  update-snses:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
