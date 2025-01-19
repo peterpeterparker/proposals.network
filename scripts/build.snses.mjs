@@ -85,8 +85,14 @@ export const findSnses = async () => {
 		const filterIcrc1Metadata = (icrc1_metadata) =>
 			icrc1_metadata.filter(([key, value]) => key !== 'icrc1:logo');
 
-		// All Snses results in a 1.6 JSON data (Apr. 2024). By selecting only the few metadata we actually required, we can spare bytes in the bundle (JSON down to 1.1. Mb).
-		const filterSnsesData = snses.map(
+		// Few SNSes are deprecated such as CTS
+		const filterDeprecatedSnses = ({ canister_ids: { root_canister_id } }) =>
+			!['ibahq-taaaa-aaaaq-aadna-cai'].includes(root_canister_id);
+
+		const activeSnses = snses.filter(filterDeprecatedSnses);
+
+		// All Snses results in a 1.6 MB JSON data (Apr. 2024). By selecting only the few metadata we actually required, we can spare bytes in the bundle (JSON down to 1.1. Mb).
+		const snsesMetadata = activeSnses.map(
 			({
 				canister_ids,
 				meta,
@@ -110,7 +116,7 @@ export const findSnses = async () => {
 			})
 		);
 
-		writeFileSync(join(DATA_FOLDER, 'snses.json'), JSON.stringify(filterSnsesData));
+		writeFileSync(join(DATA_FOLDER, 'snses.json'), JSON.stringify(snsesMetadata));
 
 		await saveLogos(snses);
 	} catch (err) {
