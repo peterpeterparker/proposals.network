@@ -1,8 +1,6 @@
 name: Update Snses
 
 on:
-  schedule:
-    - cron: '30 3 * * MON'
   workflow_dispatch:
 
 jobs:
