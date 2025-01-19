@@ -3,6 +3,10 @@ name: Update Snses
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   update-subnets:
     runs-on: ubuntu-latest
