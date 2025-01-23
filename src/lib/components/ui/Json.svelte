@@ -192,7 +192,7 @@
 			left: 0;
 			top: 0;
 			/* Move left to compensate for the padding of the ul */
-			/* Move down to componsate for the gap between li */
+			/* Move down to compensate for the gap between li */
 			transform: translate(-1rem, calc(0.8 * 0.25rem));
 		}
 		&.expanded::before {
