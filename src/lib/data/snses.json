@@ -2348,6 +2348,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 15,
+					"name": "Advance SNS target version",
+					"description": "Proposal to advance the target version of this SNS.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1000,
 					"name": "setMaxToken",
 					"description": null,
@@ -2392,8 +2398,8 @@
 		},
 		"icrc1_metadata": [
 			["icrc1:decimals", { "Nat": [8] }],
-			["icrc1:name", { "Text": "Gold Governance Token" }],
-			["icrc1:symbol", { "Text": "GLDGov" }],
+			["icrc1:name", { "Text": "GOLDAO" }],
+			["icrc1:symbol", { "Text": "GOLDAO" }],
 			["icrc1:fee", { "Nat": [100000] }],
 			["icrc1:max_memo_length", { "Nat": [32] }]
 		],
@@ -5895,6 +5901,19 @@
 							"target_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
 							"validator_method_name": "addPoolInstallersValidate",
 							"target_method_name": "addPoolInstallers"
+						}
+					}
+				},
+				{
+					"id": 1203,
+					"name": "SetInstallerModuleHash",
+					"description": null,
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
+							"target_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
+							"validator_method_name": "setInstallerModuleHashValidate",
+							"target_method_name": "setInstallerModuleHash"
 						}
 					}
 				},
