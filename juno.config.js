@@ -16,7 +16,8 @@ export default defineConfig({
 					headers: [['Cache-Control', 'public, max-age=31536000']]
 				}
 			]
-		}
+		},
+		predeploy: ['npm run build']
 	},
 	orbiter: {
 		id: '3iier-sqaaa-aaaal-aczaa-cai'
