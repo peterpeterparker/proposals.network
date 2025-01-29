@@ -1,74 +1,49 @@
 <script lang="ts">
-	import IconVotingResults from '$lib/components/icons/IconVotingResults.svelte';
 	import { getContext } from 'svelte';
 	import type { ProposalContext } from '$lib/types/proposal.context';
 	import { PROPOSAL_CONTEXT_KEY } from '$lib/types/proposal.context';
 	import { E8S_PER_ICP } from '$lib/constants/app.constants';
 	import { formatPercentage } from '$lib/utils/format.utils';
 	import Container from '$lib/components/ui/Container.svelte';
+	import ProgressBar from '$lib/components/ui/ProgressBar.svelte';
 
 	const { store }: ProposalContext = getContext<ProposalContext>(PROPOSAL_CONTEXT_KEY);
 
-	let yes: number;
-	$: yes = Number($store?.proposal?.latestTally?.yes ?? 0) / E8S_PER_ICP;
+	let yes = $derived(Number($store?.proposal?.latestTally?.yes ?? 0) / E8S_PER_ICP);
 
-	let no: number;
-	$: no = Number($store?.proposal?.latestTally?.no ?? 0) / E8S_PER_ICP;
+	let no = $derived(Number($store?.proposal?.latestTally?.no ?? 0) / E8S_PER_ICP);
 
-	let total: number;
-	$: total = Number($store?.proposal?.latestTally?.total ?? 0) / E8S_PER_ICP;
+	let total = $derived(Number($store?.proposal?.latestTally?.total ?? 0) / E8S_PER_ICP);
 
-	let yesProportion: number;
-	$: yesProportion = total ? yes / total : 0;
+	let yesProportion = $derived(total ? yes / total : 0);
 
-	let noProportion: number;
-	$: noProportion = total ? no / total : 0;
+	let noProportion = $derived(total ? no / total : 0);
 
-	let yesPercentage: string;
-	$: yesPercentage = formatPercentage(yesProportion, { minFraction: 0, maxFraction: 2 });
-
-	let noPercentage: string;
-	$: noPercentage = formatPercentage(noProportion, { minFraction: 0, maxFraction: 2 });
-
-	let yesPercentageDisplay: string;
-	$: yesPercentageDisplay = formatPercentage(
-		yesProportion >= noProportion ? yesProportion + noProportion : yesProportion,
-		{ minFraction: 0, maxFraction: 2 }
+	// A proposal is immediately adopted or rejected if, before the voting period ends, more than half of the total voting power votes Yes, or at least half votes No, respectively.
+	let immediateMajority = $derived(yesProportion > 0.5);
+	// At the end of the voting period, a proposal is adopted if more than half of the votes cast are Yes votes, provided these votes represent at least 3% of the total voting power. Otherwise, it is rejected. Before a proposal is decided, the voting period can be extended in order to “wait for quiet”. Such voting period extensions occur when a proposal’s voting results turn from either a Yes majority to a No majority or vice versa.
+	let standardMajority = $derived(
+		yesProportion > (yesProportion + noProportion) / 2 / 100 && yesProportion > 0.03
 	);
 
-	let noPercentageDisplay: string;
-	$: noPercentageDisplay = formatPercentage(
-		noProportion > yesProportion ? yesProportion + noProportion : noProportion,
-		{ minFraction: 0, maxFraction: 2 }
+	let yesPercentage = $derived(formatPercentage(yesProportion, { minFraction: 0, maxFraction: 2 }));
+
+	let noPercentage = $derived(formatPercentage(noProportion, { minFraction: 0, maxFraction: 2 }));
+
+	let color: 'cyan' | 'violet' | 'orange' | 'red' | 'yellow' | 'lime' | 'pink' = $derived(
+		immediateMajority || standardMajority ? 'lime' : 'cyan'
+	);
+
+	let containerColor: 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary' = $derived(
+		immediateMajority || standardMajority ? 'tertiary' : 'quinary'
 	);
 </script>
 
-<Container color={noProportion > yesProportion ? 'quinary' : 'tertiary'}>
+<Container color={containerColor}>
 	<svelte:fragment slot="title">Voting Results</svelte:fragment>
 
 	<div class="p-12">
-		<div class="items-center justify-center relative hidden sm:flex">
-			<div
-				class="absolute rounded-full top-1/2 left-1/2 mt-2 transform -translate-x-1/2 -translate-y-1/2 h-[165px] w-[188px] overflow-hidden -rotate-[19.5deg]"
-			>
-				<div
-					class="absolute bottom-0 left-1/2 -translate-x-1/2 bg-lime-400 w-full border-b-4 border-black"
-					class:z-20={yesProportion > noProportion}
-					class:z-40={yesProportion <= noProportion}
-					style={`height: ${yesPercentageDisplay}`}
-				></div>
-				<div
-					class="absolute bottom-0 left-1/2 -translate-x-1/2 bg-red-300 w-full"
-					class:z-20={noProportion > yesProportion}
-					class:z-40={noProportion < yesProportion}
-					style={`height: ${noPercentageDisplay}`}
-				></div>
-			</div>
-
-			<div class="block z-10">
-				<IconVotingResults />
-			</div>
-		</div>
+		<ProgressBar currentValue={(yesProportion ?? 0) * 100} {color} />
 
 		<div class="flex flex-col sm:flex-row justify-center gap-4 sm:mt-8">
 			<div
