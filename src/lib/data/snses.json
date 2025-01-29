@@ -461,6 +461,58 @@
 					}
 				},
 				{
+					"id": 2006,
+					"name": "Set community verification",
+					"description": "This proposal will mark the given public community as 'verified' (blue tick) if it passes. The proposal summary should be used to provide evidence that the given community legitimately represents the given name. Additionally, if a different name is provided for this community and this name is already used by an existing public community or group which isn't itself 'verified' then this proposal will rename that community/group by adding a random suffix like _436 and the given community will take on the given name. This is to address the scenario where a public community or group has been created for a name which it doesn't legitimately represent.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
+							"target_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
+							"validator_method_name": "set_community_verification_validate",
+							"target_method_name": "set_community_verification"
+						}
+					}
+				},
+				{
+					"id": 2007,
+					"name": "Set group verification",
+					"description": "This proposal will mark the given public group as 'verified' (blue tick) if it passes. The proposal summary should be used to provide evidence that the given group legitimately represents the given name. Additionally, if a different name is provided for this group and this name is already used by an existing public group or community which isn't itself 'verified' then this proposal will rename that group/community by adding a random suffix like _436 and the given group will take on the given name. This is to address the scenario where a public group or community has been created for a name which it doesn't legitimately represent.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
+							"target_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
+							"validator_method_name": "set_group_verification_validate",
+							"target_method_name": "set_group_verification"
+						}
+					}
+				},
+				{
+					"id": 2008,
+					"name": "Revoke community verification",
+					"description": "Revoke the verified status (blue tick) of the given community. This would be used if the given community no longer legitimately represents its name. The proposal summary should be used to provide evidence.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
+							"target_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
+							"validator_method_name": "revoke_community_verification_validate",
+							"target_method_name": "revoke_community_verification"
+						}
+					}
+				},
+				{
+					"id": 2009,
+					"name": "Revoke group verification",
+					"description": "Revoke the verified status (blue tick) of the given group. This would be used if the given group no longer legitimately represents its name. The proposal summary should be used to provide evidence.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
+							"target_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
+							"validator_method_name": "revoke_group_verification_validate",
+							"target_method_name": "revoke_group_verification"
+						}
+					}
+				},
+				{
 					"id": 3000,
 					"name": "Upgrade notifications canisters",
 					"description": "This will upload the given WASM to the notifications_index and trigger a rolling upgrade of notifications_canisters on each subnet.",
@@ -2348,6 +2400,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 15,
+					"name": "Advance SNS target version",
+					"description": "Proposal to advance the target version of this SNS.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1000,
 					"name": "setMaxToken",
 					"description": null,
@@ -2392,8 +2450,8 @@
 		},
 		"icrc1_metadata": [
 			["icrc1:decimals", { "Nat": [8] }],
-			["icrc1:name", { "Text": "Gold Governance Token" }],
-			["icrc1:symbol", { "Text": "GLDGov" }],
+			["icrc1:name", { "Text": "GOLDAO" }],
+			["icrc1:symbol", { "Text": "GOLDAO" }],
 			["icrc1:fee", { "Nat": [100000] }],
 			["icrc1:max_memo_length", { "Nat": [32] }]
 		],
@@ -3034,6 +3092,19 @@
 							"target_canister_id": "6jvpj-sqaaa-aaaaj-azwnq-cai",
 							"validator_method_name": "icrc55_command_validate",
 							"target_method_name": "icrc55_command"
+						}
+					}
+				},
+				{
+					"id": 7001,
+					"name": "transfer DKP",
+					"description": "transfer DKP from Neutrinite",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "2kusx-raaaa-aaaal-qjaxq-cai",
+							"target_canister_id": "zfcdd-tqaaa-aaaaq-aaaga-cai",
+							"validator_method_name": "validate_icrc_transfer",
+							"target_method_name": "icrc1_transfer"
 						}
 					}
 				}
@@ -4631,6 +4702,32 @@
 							"target_method_name": "NFTUnStake"
 						}
 					}
+				},
+				{
+					"id": 1097,
+					"name": "monitor_icp_to_cycles",
+					"description": "Converts ICP to Cycles. (This is done manually, Monitor also has an automatic conversion feature based on the configuration.)",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
+							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
+							"validator_method_name": "validatorMonitorIcpToCycles",
+							"target_method_name": "monitor_icp_to_cycles"
+						}
+					}
+				},
+				{
+					"id": 1098,
+					"name": "validatorMonitorSendCycles",
+					"description": "Sends Cycles to a specific canister.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
+							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
+							"validator_method_name": "validatorMonitorSendCycles",
+							"target_method_name": "monitor_send_cycles"
+						}
+					}
 				}
 			]
 		}
@@ -5895,6 +5992,19 @@
 							"target_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
 							"validator_method_name": "addPoolInstallersValidate",
 							"target_method_name": "addPoolInstallers"
+						}
+					}
+				},
+				{
+					"id": 1203,
+					"name": "SetInstallerModuleHash",
+					"description": null,
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
+							"target_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
+							"validator_method_name": "setInstallerModuleHashValidate",
+							"target_method_name": "setInstallerModuleHash"
 						}
 					}
 				},
