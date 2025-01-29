@@ -82,7 +82,7 @@ export const expandObject = (value: unknown): unknown => {
 	if (typeof value === 'string') {
 		try {
 			return JSON.parse(value);
-		} catch (e: unknown) {
+		} catch (_e: unknown) {
 			return value;
 		}
 	}

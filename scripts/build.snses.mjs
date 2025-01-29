@@ -83,7 +83,7 @@ export const findSnses = async () => {
 		// We trim the logos as we are using only Sns projects logo which we are downloading as separate PNGs.
 		// That was the JSON file also get smaller (Apr. 2024 - 135kb).
 		const filterIcrc1Metadata = (icrc1_metadata) =>
-			icrc1_metadata.filter(([key, value]) => key !== 'icrc1:logo');
+			icrc1_metadata.filter(([key, _]) => key !== 'icrc1:logo');
 
 		// Few SNSes are deprecated such as CTS
 		const filterDeprecatedSnses = ({ canister_ids: { root_canister_id } }) =>

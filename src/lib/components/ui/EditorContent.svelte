@@ -38,4 +38,4 @@
 	onDestroy(() => editor?.destroy());
 </script>
 
-<article bind:this={element} />
+<article bind:this={element}></article>

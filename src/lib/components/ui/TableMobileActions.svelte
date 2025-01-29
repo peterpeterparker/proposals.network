@@ -2,17 +2,17 @@
 	import { nonNullish } from '@dfinity/utils';
 	import ButtonView from '$lib/components/ui/ButtonView.svelte';
 	import { fade } from 'svelte/transition';
-	import type { ComponentType } from 'svelte';
+	import type { Component } from 'svelte';
 	import IconView from '$lib/components/icons/IconView.svelte';
 
 	export let table: HTMLTableElement | null;
 	export let rows: number | undefined;
 	export let actionLabel: string | undefined;
-	export let actionIcon: ComponentType | undefined;
+	export let actionIcon: Component | undefined;
 
 	let rowAriaLabel: string;
 	$: rowAriaLabel = actionLabel ?? 'View';
-	let rowActionIcon: ComponentType;
+	let rowActionIcon: Component;
 	$: rowActionIcon = actionIcon ?? IconView;
 
 	let r: number[];

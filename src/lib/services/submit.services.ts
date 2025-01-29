@@ -451,7 +451,7 @@ export const submitTransferTreasuryFundsProposal = async ({
 
 		try {
 			account = decodeIcrcAccount(destinationAddress ?? '');
-		} catch (err: unknown) {
+		} catch (_err: unknown) {
 			toasts.error({
 				msg: { text: `Invalid destination address ${destinationAddress} to submit proposal.` }
 			});
@@ -649,7 +649,7 @@ export const assertSnsTreasuryFundsMetadata = async (
 
 	try {
 		decodeIcrcAccount(destinationAddress ?? '');
-	} catch (err: unknown) {
+	} catch (_err: unknown) {
 		toasts.error({
 			msg: { text: 'Invalid destination address.' }
 		});
