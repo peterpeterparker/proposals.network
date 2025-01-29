@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type { ComponentType } from 'svelte';
+	import type { Component } from 'svelte';
 
 	export let disabled = false;
 	export let ariaLabel: string;
-	export let icon: ComponentType;
+	export let icon: Component;
 </script>
 
 <div class="py-0 px-5 flex items-center justify-center flex-col">

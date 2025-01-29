@@ -11,12 +11,12 @@
 	import SignIn from '$lib/components/core/SignIn.svelte';
 	import UserProposalsLoader from '$lib/components/proposals/UserProposalsLoader.svelte';
 	import IconMore from '$lib/components/icons/IconMore.svelte';
-	import type { ComponentType } from 'svelte';
+	import type { Component } from 'svelte';
 
 	export let hideAction = false;
 	export let deleteAction = false;
 
-	let actionIcon: ComponentType | undefined;
+	let actionIcon: Component | undefined;
 	$: actionIcon = deleteAction ? IconMore : undefined;
 </script>
 
