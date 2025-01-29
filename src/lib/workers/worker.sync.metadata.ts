@@ -2,7 +2,7 @@ import { getMetadata, updateMetadataDoc } from '$lib/services/idb.services';
 import type { ProposalMetadata } from '$lib/types/juno';
 import type { WorkerSyncParams } from '$lib/workers/worker.sync';
 import { isNullish, nonNullish } from '@dfinity/utils';
-import { setDoc } from '@junobuild/core-peer';
+import { setDoc } from '@junobuild/core';
 
 export const syncMetadata = async ({ satellite, governanceId }: WorkerSyncParams) => {
 	const value = await getMetadata();

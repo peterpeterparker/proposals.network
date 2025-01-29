@@ -5,7 +5,7 @@ import type { OptionGovernanceId } from '$lib/types/governance';
 import type { Neuron } from '$lib/types/juno';
 import type { UserOption } from '$lib/types/user';
 import { isNullish, nonNullish } from '@dfinity/utils';
-import { getDoc, setDoc, type Doc } from '@junobuild/core-peer';
+import { getDoc, setDoc, type Doc } from '@junobuild/core';
 
 export const getNeuron = async (
 	user: UserOption

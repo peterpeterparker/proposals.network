@@ -16,7 +16,7 @@
 	import SubmitDone from '$lib/components/submit/SubmitDone.svelte';
 	import SubmitReadonly from '$lib/components/submit/SubmitReadonly.svelte';
 	import SplitPane from '$lib/components/ui/SplitPane.svelte';
-	import type { Doc } from '@junobuild/core-peer';
+	import type { Doc } from '@junobuild/core';
 	import type { Neuron } from '$lib/types/juno';
 	import { firstNeuronId } from '$lib/utils/juno.utils';
 	import { governanceIdStore } from '$lib/derived/governance.derived';

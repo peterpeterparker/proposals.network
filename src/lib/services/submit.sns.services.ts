@@ -6,7 +6,7 @@ import type { ProposalKey, StorageSnsCollections } from '$lib/types/juno';
 import { type SnsYaml, snsYaml } from '$lib/types/sns';
 import type { UserOption } from '$lib/types/user';
 import { isNullish, nonNullish } from '@dfinity/utils';
-import { uploadFile } from '@junobuild/core-peer';
+import { uploadFile } from '@junobuild/core';
 import { nanoid } from 'nanoid';
 import { parse } from 'yaml';
 

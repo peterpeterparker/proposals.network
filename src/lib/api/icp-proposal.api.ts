@@ -18,7 +18,7 @@ import {
 } from '@dfinity/nns';
 import { Principal } from '@dfinity/principal';
 import { assertNonNullish } from '@dfinity/utils';
-import { unsafeIdentity } from '@junobuild/core-peer';
+import { unsafeIdentity } from '@junobuild/core';
 
 export const listIcpProposals = async (
 	beforeProposal: ProposalId | undefined

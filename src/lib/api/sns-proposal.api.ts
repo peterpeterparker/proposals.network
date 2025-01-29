@@ -18,7 +18,7 @@ import {
 } from '@dfinity/sns';
 import type { ListProposalsResponse, ProposalData } from '@dfinity/sns/dist/candid/sns_governance';
 import { fromNullable, hexStringToUint8Array, nonNullish } from '@dfinity/utils';
-import { unsafeIdentity } from '@junobuild/core-peer';
+import { unsafeIdentity } from '@junobuild/core';
 
 export const listSnsProposals = async ({
 	governanceCanisterId,

@@ -2,7 +2,7 @@
 	import { userStore } from '$lib/stores/user.store';
 	import { blur } from 'svelte/transition';
 	import { onMount } from 'svelte';
-	import type { Doc } from '@junobuild/core-peer';
+	import type { Doc } from '@junobuild/core';
 	import type { Neuron } from '$lib/types/juno';
 	import { getNeuron } from '$lib/services/neuron.services';
 	import { fade } from 'svelte/transition';

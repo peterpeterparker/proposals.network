@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { getDocMetadata } from '$lib/services/idb.services';
-	import type { Doc } from '@junobuild/core-peer';
+	import type { Doc } from '@junobuild/core';
 	import type { ProposalMetadata } from '$lib/types/juno';
 	import { isNullish } from '@dfinity/utils';
 	import SpinnerText from '$lib/components/ui/SpinnerText.svelte';

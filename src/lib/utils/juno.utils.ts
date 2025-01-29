@@ -2,7 +2,7 @@ import { DEV, HOST, II_CANISTER_ID, SATELLITE_ID } from '$lib/constants/app.cons
 import type { OptionGovernanceId } from '$lib/types/governance';
 import type { Neuron } from '$lib/types/juno';
 import { isNullish, nonNullish } from '@dfinity/utils';
-import type { Doc, Environment } from '@junobuild/core-peer';
+import type { Doc, Environment } from '@junobuild/core';
 
 export const junoEnvironment = ():
 	| Pick<Environment, 'satelliteId' | 'internetIdentityId' | 'container'>

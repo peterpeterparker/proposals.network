@@ -11,7 +11,7 @@ import {
 	NFIDProvider,
 	signIn as junoSignIn,
 	signOut as junoSignOut
-} from '@junobuild/core-peer';
+} from '@junobuild/core';
 
 export const signIn = async (
 	provider?: 'ic0.app' | 'nfid'

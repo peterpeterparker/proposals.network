@@ -31,7 +31,7 @@ import { assertSHA256, assertUrlsFromWiki } from '$lib/utils/submit.node-provide
 import { decodeIcrcAccount, type IcrcAccount } from '@dfinity/ledger-icrc';
 import type { TransferSnsTreasuryFunds } from '@dfinity/sns/dist/candid/sns_governance';
 import { fromNullable, isNullish, nonNullish, notEmptyString } from '@dfinity/utils';
-import { downloadUrl, getAsset, getDoc, setDoc, type Doc } from '@junobuild/core-peer';
+import { downloadUrl, getAsset, getDoc, setDoc, type Doc } from '@junobuild/core';
 import { nanoid } from 'nanoid';
 
 export const initUserProposal = async ({

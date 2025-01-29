@@ -1,7 +1,7 @@
 <script lang="ts">
 	import InputText from '$lib/components/ui/InputText.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
-	import type { Doc } from '@junobuild/core-peer';
+	import type { Doc } from '@junobuild/core';
 	import type { Neuron } from '$lib/types/juno';
 	import { isNullish } from '@dfinity/utils';
 	import { setNeuron } from '$lib/services/neuron.services';

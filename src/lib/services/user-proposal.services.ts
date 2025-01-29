@@ -4,7 +4,7 @@ import { toasts } from '$lib/stores/toasts.store';
 import type { OptionGovernanceId } from '$lib/types/governance';
 import type { ProposalMetadataDoc } from '$lib/types/juno';
 import { isNullish } from '@dfinity/utils';
-import { deleteDoc } from '@junobuild/core-peer';
+import { deleteDoc } from '@junobuild/core';
 
 export const deleteProposal = async ({
 	doc,

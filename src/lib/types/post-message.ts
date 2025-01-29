@@ -1,6 +1,6 @@
 import type { WizardBusyData } from '$lib/stores/busy.store';
 import type { UserOption } from '$lib/types/user';
-import type { Environment } from '@junobuild/core-peer';
+import type { Environment } from '@junobuild/core';
 
 export type PostMessageDataRequest = {
 	user: UserOption;

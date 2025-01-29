@@ -6,7 +6,7 @@ import type {
 	ProposalKey,
 	ProposalMetadata
 } from '$lib/types/juno';
-import type { Doc } from '@junobuild/core-peer';
+import type { Doc } from '@junobuild/core';
 import {
 	clear as clearIdb,
 	createStore,

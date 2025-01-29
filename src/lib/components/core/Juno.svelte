@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
-	import { authSubscribe, initJuno } from '@junobuild/core-peer';
+	import { authSubscribe, initJuno } from '@junobuild/core';
 	import { userStore } from '$lib/stores/user.store';
 	import { isNullish } from '@dfinity/utils';
 	import { displayAndCleanLogoutMsg, toastAndReload } from '$lib/services/auth.services';

@@ -33,7 +33,7 @@
 		"config": "./junolator config",
 		"collections": "node scripts/collections.mjs",
 		"postinstall_analytics": "node -e \"require('fs').cpSync('node_modules/@junobuild/analytics/dist/workers/', './static/workers', {recursive: true});\"",
-		"postinstall_auth": "node -e \"require('fs').cpSync('node_modules/@junobuild/core-peer/dist/workers/', './static/workers', {recursive: true});\"",
+		"postinstall_auth": "node -e \"require('fs').cpSync('node_modules/@junobuild/core/dist/workers/', './static/workers', {recursive: true});\"",
 		"postinstall": "npm run postinstall_auth && npm run postinstall_analytics"
 	},
 	"devDependencies": {
@@ -81,7 +81,7 @@
 		"@dfinity/sns": "^3.2.8",
 		"@dfinity/utils": "^2.9.0",
 		"@junobuild/analytics": "^0.1.0",
-		"@junobuild/core-peer": "^0.1.1",
+		"@junobuild/core": "^0.1.1",
 		"@tiptap/core": "^2.11.3",
 		"@tiptap/extension-code-block-lowlight": "^2.11.3",
 		"@tiptap/extension-highlight": "^2.11.3",

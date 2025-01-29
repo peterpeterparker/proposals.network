@@ -1,7 +1,7 @@
 import type { GovernanceCanisterId, Markdown } from '$lib/types/core';
 import type { ProposalAction } from '$lib/types/governance';
 import type { IcrcAccountText } from '$lib/types/ic-js';
-import type { Asset, Doc } from '@junobuild/core-peer';
+import type { Asset, Doc } from '@junobuild/core';
 
 export type ProposalContent = Markdown;
 export type ProposalKey = string;

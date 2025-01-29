@@ -1,6 +1,6 @@
 import type { PostMessageDataRequest } from '$lib/types/post-message';
 import { isNullish, nonNullish } from '@dfinity/utils';
-import { unsafeIdentity, type SatelliteOptions } from '@junobuild/core-peer';
+import { unsafeIdentity, type SatelliteOptions } from '@junobuild/core';
 
 export type WorkerSyncParams = {
 	satellite: SatelliteOptions;

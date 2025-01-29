@@ -4,7 +4,7 @@
 	import { getEditableAssets } from '$lib/services/idb.services';
 	import { isNullish, nonNullish } from '@dfinity/utils';
 	import { snsAssetFullPath } from '$lib/services/submit.sns.services';
-	import { downloadUrl as downloadUrlLib } from '@junobuild/core-peer';
+	import { downloadUrl as downloadUrlLib } from '@junobuild/core';
 	import type { StorageSnsCollections } from '$lib/types/juno';
 
 	export let collection: StorageSnsCollections;

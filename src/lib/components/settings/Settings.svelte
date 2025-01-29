@@ -16,7 +16,7 @@
 	import SettingsNeuronRow from '$lib/components/settings/SettingsNeuronRow.svelte';
 	import type { GovernanceCanisterId } from '$lib/types/core';
 	import IconDelete from '$lib/components/icons/IconDelete.svelte';
-	import type { Doc } from '@junobuild/core-peer';
+	import type { Doc } from '@junobuild/core';
 	import type { Neuron } from '$lib/types/juno';
 	import Aside from '$lib/components/core/Aside.svelte';
 

@@ -1,7 +1,7 @@
 import type { ProposalMetadataDoc } from '$lib/types/juno';
 import type { Store } from '$lib/types/store';
 import { nonNullish } from '@dfinity/utils';
-import type { ListResults } from '@junobuild/core-peer';
+import type { ListResults } from '@junobuild/core';
 import { writable } from 'svelte/store';
 
 export type UserProposalsData = ListResults<ProposalMetadataDoc> | undefined | null;

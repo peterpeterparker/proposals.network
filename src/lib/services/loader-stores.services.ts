@@ -14,8 +14,8 @@ import { mapIcpProposal } from '$lib/utils/icp-proposals.utils';
 import { mapSnsProposal } from '$lib/utils/sns-proposals.utils';
 import type { ProposalId } from '@dfinity/nns';
 import { isNullish } from '@dfinity/utils';
-import type { ListPaginate } from '@junobuild/core-peer';
-import { listDocs } from '@junobuild/core-peer';
+import type { ListPaginate } from '@junobuild/core';
+import { listDocs } from '@junobuild/core';
 import { get } from 'svelte/store';
 
 export const loadUserProposals = ({
