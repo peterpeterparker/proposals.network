@@ -54,13 +54,15 @@
 				canisterId: Principal.fromText(GOVERNANCE_CANISTER_ID)
 			});
 
-			for (const proposalId of proposals) {
-				await registerVote({
+			const promises = proposals.map((proposalId) =>
+				registerVote({
 					neuronId: BigInt(neuronId),
 					proposalId: BigInt(proposalId),
 					vote
-				});
-			}
+				})
+			);
+
+			await Promise.all(promises);
 
 			toasts.show({
 				text: 'Votes casted.',
