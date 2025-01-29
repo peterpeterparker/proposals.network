@@ -1,4 +1,7 @@
+import { isNullish } from '@dfinity/utils';
 import DOMPurify from 'dompurify';
+
+let domPurify: typeof DOMPurify | undefined = undefined;
 
 /**
  * A workaround to preserve target="_blank" attribute from sanitizer.
@@ -41,7 +44,23 @@ const flagTargetAttributeHook = (node: Element) => {
  */
 export const sanitize = (text: string): string => {
 	try {
-		return DOMPurify.sanitize(text) ?? '';
+		// DOMPurify initialization
+		if (isNullish(domPurify)) {
+			if (typeof DOMPurify.sanitize === 'function') {
+				domPurify = DOMPurify;
+				// @ts-expect-error we do this to support pre-rendering
+			} else if (typeof global.DOMPurify.sanitize === 'function') {
+				// utilize NodeJS version
+				// @ts-expect-error we do this to support pre-rendering
+				domPurify = global.DOMPurify;
+			}
+
+			// Preserve target="blank" workaround
+			domPurify?.addHook('beforeSanitizeAttributes', flagTargetAttributeHook);
+			domPurify?.addHook('afterSanitizeAttributes', restoreTargetAttributeHook);
+		}
+
+		return domPurify?.sanitize(text) ?? '';
 	} catch (err) {
 		console.error(err);
 	}
@@ -50,9 +69,6 @@ export const sanitize = (text: string): string => {
 
 	return '';
 };
-
-DOMPurify.addHook('beforeSanitizeAttributes', flagTargetAttributeHook);
-DOMPurify.addHook('afterSanitizeAttributes', restoreTargetAttributeHook);
 
 let elementsCounters: Record<string, number> = {};
 export const nextElementId = (prefix: string): string => {

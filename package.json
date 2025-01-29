@@ -50,7 +50,6 @@
 		"@sveltejs/kit": "^2.16.1",
 		"@sveltejs/vite-plugin-svelte": "^5.0.3",
 		"@types/dom-view-transitions": "^1.0.5",
-		"@types/dompurify": "^3.2.0",
 		"@types/node": "^22.12.0",
 		"autoprefixer": "^10.4.20",
 		"dotenv": "^16.4.7",
