@@ -5,7 +5,6 @@
 	import SignInSection from '$lib/components/core/SignInSection.svelte';
 	import Title from '$lib/components/ui/Title.svelte';
 	import { userStore } from '$lib/stores/user.store';
-	import Copy from '$lib/components/ui/Copy.svelte';
 	import TableContainer from '$lib/components/ui/TableContainer.svelte';
 	import { fade } from 'svelte/transition';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
@@ -19,6 +18,7 @@
 	import type { Doc } from '@junobuild/core';
 	import type { Neuron } from '$lib/types/juno';
 	import Aside from '$lib/components/core/Aside.svelte';
+	import UserId from '$lib/components/core/UserId.svelte';
 
 	let status: 'loading' | 'ok' | 'error' = 'loading';
 
@@ -80,12 +80,7 @@
 		{:else}
 			<Title>Your Settings</Title>
 
-			<h2 class="mb-6 text-2xl">
-				Your user is identified by the principal <Copy
-					value={$userStore?.key ?? ''}
-					text="Principal copied."
-				/> on proposals.network.
-			</h2>
+			<UserId />
 
 			{#if status === 'error'}
 				<div in:fade>
