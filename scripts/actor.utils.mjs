@@ -7,7 +7,7 @@ import { satellite } from './satellite.utils.mjs';
 const { HttpAgent, Actor } = pkgAgent;
 
 export const getActor = async () => {
-	const { satelliteId, container: host } = satellite;
+	const { satelliteId, container: _ } = satellite;
 
 	const agent = await getAgent();
 

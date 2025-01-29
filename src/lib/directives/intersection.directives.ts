@@ -32,7 +32,7 @@ const onIntersection = ({
 	threshold: number;
 }) => {
 	// IntersectionObserverInit is not recognized by the linter
-	// eslint-disable-next-line no-undef
+
 	const options: IntersectionObserverInit = {
 		threshold,
 		rootMargin

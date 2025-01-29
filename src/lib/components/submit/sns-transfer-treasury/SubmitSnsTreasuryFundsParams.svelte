@@ -53,7 +53,7 @@
 					amount: BigInt(amountQueryParam),
 					token: ICPToken
 				});
-			} catch (err: unknown) {
+			} catch (_err: unknown) {
 				// We ignore error here
 			}
 
@@ -88,7 +88,7 @@
 				if (token instanceof TokenAmountV2) {
 					return token;
 				}
-			} catch (err: unknown) {
+			} catch (_err: unknown) {
 				// We ignore error here
 			}
 
