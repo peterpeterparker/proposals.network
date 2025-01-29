@@ -54,7 +54,7 @@
 				canisterId: Principal.fromText(GOVERNANCE_CANISTER_ID)
 			});
 
-			for (const proposalId of proposalIds) {
+			for (const proposalId of proposals) {
 				await registerVote({
 					neuronId: BigInt(neuronId),
 					proposalId: BigInt(proposalId),
