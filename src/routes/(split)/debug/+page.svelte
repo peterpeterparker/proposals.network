@@ -22,9 +22,10 @@
 	let neuronId = $state('');
 	let proposalIds = $state('');
 
-	const onsubmit = async ($event: SubmitEvent) => {
-		$event.preventDefault();
+	const voteNo = async () => await vote(Vote.No);
+	const voteYes = async () => await vote(Vote.Yes);
 
+	const vote = async (vote: Vote) => {
 		if (isEmptyString(neuronId)) {
 			toasts.error({
 				msg: { text: 'Please provide a valid NNS neuron ID linked with an hotkey.' }
@@ -57,7 +58,7 @@
 				await registerVote({
 					neuronId: BigInt(neuronId),
 					proposalId: BigInt(proposalId),
-					vote: Vote.No
+					vote
 				});
 			}
 
@@ -85,29 +86,36 @@
 			{#if $userNotSignedIn}
 				<SignInSection />
 			{:else}
-				<form {onsubmit}>
-					<Title>Debug</Title>
+				<Title>Debug</Title>
 
-					<UserId />
+				<UserId />
 
-					<InputText
-						placeholder="Your Neuron ID (NNS)"
-						bind:value={neuronId}
-						pinPlaceholder={neuronId !== ''}
-					/>
+				<InputText
+					placeholder="Your Neuron ID (NNS)"
+					bind:value={neuronId}
+					pinPlaceholder={neuronId !== ''}
+				/>
 
-					<InputText
-						placeholder="Proposal IDs (comma separated)"
-						bind:value={proposalIds}
-						pinPlaceholder={proposalIds !== ''}
-					/>
+				<InputText
+					placeholder="Proposal IDs (comma separated)"
+					bind:value={proposalIds}
+					pinPlaceholder={proposalIds !== ''}
+				/>
 
-					<h3 class="bg-black border-2 border-black text-white text-center p-2 my-8 lg:rounded">
-						⚠️ Please be absolutely sure before continuing ⚠️
-					</h3>
+				<h3 class="bg-black border-2 border-black text-white text-center p-2 my-8 lg:rounded">
+					<span class="animate-pulse"> ⚠️</span> Please be absolutely sure before continuing
+					<span class="animate-pulse"> ⚠️</span>
+				</h3>
 
-					<Button type="submit" color="tertiary" disabled={$isBusy}>Vote NO</Button>
-				</form>
+				<p class="leading-relaxed mb-4">
+					Would you like to vote on all selected proposals one after the other?
+				</p>
+
+				<div class="flex gap-2">
+					<Button color="tertiary" on:click={voteYes} disabled={$isBusy}>Approve</Button>
+
+					<Button color="quaternary" on:click={voteNo} disabled={$isBusy}>Reject</Button>
+				</div>
 			{/if}
 		</UserInitializedGuard>
 	</SplitPane>
