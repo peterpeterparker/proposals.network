@@ -7,8 +7,6 @@ let agents: Record<string, HttpAgent> | undefined | null = undefined;
 export const getAgent = async ({ identity }: { identity: Identity }): Promise<HttpAgent> => {
 	const key = identity.getPrincipal().toText();
 
-	console.log(HOST, LOCAL, identity.getPrincipal().toText());
-
 	if (isNullish(agents) || isNullish(agents[key])) {
 		const agent = await createAgent({
 			host: HOST,
