@@ -81,7 +81,7 @@
 		"@dfinity/principal": "^2.2.0",
 		"@dfinity/sns": "^3.2.8",
 		"@dfinity/utils": "^2.9.0",
-		"@junobuild/analytics": "^0.1.0",
+		"@junobuild/analytics": "^0.1.1",
 		"@junobuild/core": "^0.1.1",
 		"@tiptap/core": "^2.11.3",
 		"@tiptap/extension-code-block-lowlight": "^2.11.3",
