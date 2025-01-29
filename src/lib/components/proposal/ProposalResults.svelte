@@ -45,7 +45,7 @@
 	<div class="p-12">
 		<ProgressBar currentValue={(yesProportion ?? 0) * 100} {color} />
 
-		<div class="flex flex-col sm:flex-row justify-center gap-4 sm:mt-8">
+		<div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
 			<div
 				class="bg-black border-2 border-black flex items-center justify-between py-1 px-1 gap-2 rounded-lg min-w-[160px]"
 			>
