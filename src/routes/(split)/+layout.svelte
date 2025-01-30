@@ -5,6 +5,6 @@
 
 <Header />
 
-<main class="snap-mandatory snap-y overflow-scroll">
+<main class="snap-mandatory snap-y overflow-auto">
 	<slot />
 </main>

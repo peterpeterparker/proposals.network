@@ -8,7 +8,7 @@
 	class:flex-col-reverse={col === 'reverse'}
 >
 	<aside
-		class="flex justify-center lg:block lg:bg-cyan-200 lg:fixed lg:top-20 lg:left-0 lg:w-[300px] lg:h-screen lg:overflow-y-scroll lg:px-14 lg:pt-16 lg:border-r-2 lg:border-black"
+		class="flex justify-center lg:block lg:bg-cyan-200 lg:fixed lg:top-20 lg:left-0 lg:w-[300px] lg:h-screen lg:overflow-y-auto lg:px-14 lg:pt-16 lg:border-r-2 lg:border-black"
 		class:pt-36={col === 'forward'}
 		class:pb-16={col === 'reverse'}
 	>
