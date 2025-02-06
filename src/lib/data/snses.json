@@ -1016,9 +1016,9 @@
 			"ledger_canister_id": "6rdgd-kyaaa-aaaaq-aaavq-cai"
 		},
 		"meta": {
-			"url": "https://yral.com",
-			"name": "YRAL",
-			"description": "A decentralized short-video social media platform governed by the people for the people",
+			"url": "https://dolr.ai",
+			"name": "DOLR AI",
+			"description": "World’s First AI-Powered Unstoppable Social Cloud",
 			"logo": "/v1/sns/root/67bll-riaaa-aaaaq-aaauq-cai/logo.png"
 		},
 		"icrc1_metadata": [
@@ -3357,7 +3357,7 @@
 			"reject_cost_e8s": 10000000000
 		},
 		"parameters": {
-			"reserved_ids": [1015],
+			"reserved_ids": [1015, 1098],
 			"functions": [
 				{
 					"id": 0,
@@ -4717,8 +4717,8 @@
 					}
 				},
 				{
-					"id": 1098,
-					"name": "validatorMonitorSendCycles",
+					"id": 1099,
+					"name": "monitor_send_cycles",
 					"description": "Sends Cycles to a specific canister.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
@@ -5294,6 +5294,136 @@
 							"target_canister_id": "bgpwv-eqaaa-aaaal-qb6eq-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
 							"target_method_name": "commit_proposed_batch"
+						}
+					}
+				},
+				{
+					"id": 50000,
+					"name": "Increase Player Value",
+					"description": "Increase a players value by £0.25m.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
+							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
+							"validator_method_name": "validateRevaluePlayerUp",
+							"target_method_name": "revaluePlayerUp"
+						}
+					}
+				},
+				{
+					"id": 51000,
+					"name": "Decrease Player Value",
+					"description": "Decrease a players value by £0.25m.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
+							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
+							"validator_method_name": "validateRevaluePlayerDown",
+							"target_method_name": "revaluePlayerDown"
+						}
+					}
+				},
+				{
+					"id": 52000,
+					"name": "Loan Player",
+					"description": "Loan a player to a different club.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
+							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
+							"validator_method_name": "validateLoanPlayer",
+							"target_method_name": "loanPlayer"
+						}
+					}
+				},
+				{
+					"id": 53000,
+					"name": "Transfer Player",
+					"description": "Transfer a player to a different club.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
+							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
+							"validator_method_name": "validateTransferPlayer",
+							"target_method_name": "transferPlayer"
+						}
+					}
+				},
+				{
+					"id": 54000,
+					"name": "Submit Fixture Data",
+					"description": "Function to submit fixture data for a match.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
+							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
+							"validator_method_name": "validateSubmitFixtureData",
+							"target_method_name": "submitFixtureData"
+						}
+					}
+				},
+				{
+					"id": 55000,
+					"name": "Create New League",
+					"description": "Function to create a new football league.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
+							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
+							"validator_method_name": "validateCreateLeague",
+							"target_method_name": "createLeague"
+						}
+					}
+				},
+				{
+					"id": 56000,
+					"name": "Update League",
+					"description": "Function to update a football league's details.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
+							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
+							"validator_method_name": "validateUpdateLeague",
+							"target_method_name": "updateLeague"
+						}
+					}
+				},
+				{
+					"id": 57000,
+					"name": "Reschedule Fixture",
+					"description": "Function to reschedule a postponed fixture.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
+							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
+							"validator_method_name": "validateRescheduleFixture",
+							"target_method_name": "rescheduleFixture"
+						}
+					}
+				},
+				{
+					"id": 58000,
+					"name": "Create Player",
+					"description": "Function to create a new player.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
+							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
+							"validator_method_name": "validateCreatePlayer",
+							"target_method_name": "createPlayer"
+						}
+					}
+				},
+				{
+					"id": 59000,
+					"name": "Create Club",
+					"description": "Function to create a new football club.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
+							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
+							"validator_method_name": "validateCreateClub",
+							"target_method_name": "createClub"
 						}
 					}
 				}
@@ -6767,6 +6897,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 15,
+					"name": "Advance SNS target version",
+					"description": "Proposal to advance the target version of this SNS.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 2001,
 					"name": "Upgrade OGY dashboard frontend.",
 					"description": "Proposal to upgrade the OGY dashboard frontend to new version.",
@@ -6941,7 +7077,7 @@
 			["icrc1:decimals", { "Nat": [8] }],
 			["icrc1:name", { "Text": "DOGMI" }],
 			["icrc1:symbol", { "Text": "DOGMI" }],
-			["icrc1:fee", { "Nat": [705032704, 1] }],
+			["icrc1:fee", { "Nat": [1215752192, 23] }],
 			["icrc1:max_memo_length", { "Nat": [32] }]
 		],
 		"nervous_system_parameters": {
@@ -7512,7 +7648,7 @@
 			["icrc1:decimals", { "Nat": [8] }],
 			["icrc1:name", { "Text": "ALICE" }],
 			["icrc1:symbol", { "Text": "ALICE" }],
-			["icrc1:fee", { "Nat": [100000000] }],
+			["icrc1:fee", { "Nat": [500000000] }],
 			["icrc1:max_memo_length", { "Nat": [32] }]
 		],
 		"nervous_system_parameters": {
