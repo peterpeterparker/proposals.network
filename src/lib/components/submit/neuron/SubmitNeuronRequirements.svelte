@@ -46,7 +46,7 @@
 		dissolve delay can submit proposals. So the next step is to add a hotkey to your neuron that meets
 		these criteria.
 	{:else}
-		Neurons with at least 10 ICP and a 6-month dissolve delay can submit proposals. So the next step
+		Neurons with at least 25 ICP and a 6-month dissolve delay can submit proposals. So the next step
 		is to add a hotkey to your neuron that meets these criteria.
 	{/if}
 </h2>
