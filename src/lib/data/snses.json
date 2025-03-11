@@ -123,6 +123,25 @@
 					"name": "Advance SNS target version",
 					"description": "Proposal to advance the target version of this SNS.",
 					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 2000,
+					"name": "Transfer nICP",
+					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
+							"target_canister_id": "buwm7-7yaaa-aaaar-qagva-cai",
+							"validator_method_name": "validate_icrc1_transfer",
+							"target_method_name": "icrc1_transfer"
+						}
+					}
 				}
 			]
 		}
@@ -154,7 +173,7 @@
 			"reject_cost_e8s": 1000000000
 		},
 		"parameters": {
-			"reserved_ids": [1005, 1006, 1007, 5000, 100000, 100001, 100002, 100003],
+			"reserved_ids": [1005, 1006, 1007, 1013, 5000, 100000, 100001, 100002, 100003],
 			"functions": [
 				{
 					"id": 0,
@@ -250,6 +269,12 @@
 					"id": 15,
 					"name": "Advance SNS target version",
 					"description": "Proposal to advance the target version of this SNS.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -383,19 +408,6 @@
 					}
 				},
 				{
-					"id": 1013,
-					"name": "Register a bot",
-					"description": "This will register a new bot to extend the capabilities of OpenChat",
-					"function_type": {
-						"GenericNervousSystemFunction": {
-							"validator_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
-							"target_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
-							"validator_method_name": "register_bot_validate",
-							"target_method_name": "register_bot"
-						}
-					}
-				},
-				{
 					"id": 1014,
 					"name": "Remove a bot",
 					"description": "This will remove an existing bot from OpenChat",
@@ -405,6 +417,19 @@
 							"target_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"validator_method_name": "remove_bot_validate",
 							"target_method_name": "remove_bot"
+						}
+					}
+				},
+				{
+					"id": 1015,
+					"name": "Publish a bot",
+					"description": "This will publish a registered bot allowing it to be found and installed in OpenChat communities, groups and directly with users",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
+							"target_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
+							"validator_method_name": "publish_bot_validate",
+							"target_method_name": "publish_bot"
 						}
 					}
 				},
@@ -927,6 +952,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1000,
 					"name": "grant_permission",
 					"description": "grant permission to asset canister",
@@ -1339,6 +1370,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1000,
 					"name": "burn",
 					"description": null,
@@ -1493,6 +1530,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 2761,
 					"name": "transferPosition",
 					"description": null,
@@ -1515,6 +1558,19 @@
 							"target_canister_id": "ddmi3-laaaa-aaaah-qdbqa-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
 							"target_method_name": "commit_proposed_batch"
+						}
+					}
+				},
+				{
+					"id": 1694553093583,
+					"name": "Transfer nICP",
+					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
+							"target_canister_id": "buwm7-7yaaa-aaaar-qagva-cai",
+							"validator_method_name": "validate_icrc1_transfer",
+							"target_method_name": "icrc1_transfer"
 						}
 					}
 				}
@@ -1644,6 +1700,12 @@
 					"id": 15,
 					"name": "Advance SNS target version",
 					"description": "Proposal to advance the target version of this SNS.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -1944,6 +2006,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1002,
 					"name": "transfer DKP",
 					"description": "transfer DKP from Catalyze",
@@ -2108,6 +2176,12 @@
 					"id": 15,
 					"name": "Advance SNS target version",
 					"description": "Proposal to advance the target version of this SNS.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -2432,6 +2506,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1000,
 					"name": "setMaxToken",
 					"description": null,
@@ -2599,6 +2679,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1001,
 					"name": "Manage NNS neuron",
 					"description": "Proposal to manage an ICP neuron under control of the Gold DAO.",
@@ -2673,6 +2759,32 @@
 							"target_canister_id": "j4jiq-sqaaa-aaaap-ab23a-cai",
 							"validator_method_name": "manage_cycle_management_account_validate",
 							"target_method_name": "manage_cycle_management_account"
+						}
+					}
+				},
+				{
+					"id": 1007,
+					"name": "Add a swap client to buyback burn canister.",
+					"description": "Proposal to add another swap client to the buyback and burn canister.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "atslz-hiaaa-aaaam-acq6q-cai",
+							"target_canister_id": "atslz-hiaaa-aaaam-acq6q-cai",
+							"validator_method_name": "add_swap_clients_validate",
+							"target_method_name": "add_swap_clients"
+						}
+					}
+				},
+				{
+					"id": 1008,
+					"name": "Set buybackburn canister of Gold DAO.",
+					"description": "Proposal to define the buyback and burn canister on the gldt_swap canister. The gldt_swap canister will send the fees accumulating in GLDT to this canister to then buyback and burn GOLDAO tokens.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "6f6ua-hqaaa-aaaar-qairq-cai",
+							"target_canister_id": "6f6ua-hqaaa-aaaar-qairq-cai",
+							"validator_method_name": "set_buy_back_canister_validate",
+							"target_method_name": "set_buy_back_canister"
 						}
 					}
 				},
@@ -2972,6 +3084,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 5000,
 					"name": "Transfer SNS Treasury ckBTC",
 					"description": "Transfer ckBTC from the SNS treasury",
@@ -3152,6 +3270,32 @@
 							"target_method_name": "icrc1_transfer"
 						}
 					}
+				},
+				{
+					"id": 88001,
+					"name": "Transfer ckUSDT",
+					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
+							"target_canister_id": "cngnf-vqaaa-aaaar-qag4q-cai",
+							"validator_method_name": "validate_icrc1_transfer",
+							"target_method_name": "icrc1_transfer"
+						}
+					}
+				},
+				{
+					"id": 88002,
+					"name": "Transfer nICP",
+					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
+							"target_canister_id": "buwm7-7yaaa-aaaar-qagva-cai",
+							"validator_method_name": "validate_icrc1_transfer",
+							"target_method_name": "icrc1_transfer"
+						}
+					}
 				}
 			]
 		}
@@ -3279,6 +3423,12 @@
 					"id": 15,
 					"name": "Advance SNS target version",
 					"description": "Proposal to advance the target version of this SNS.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -3511,6 +3661,12 @@
 					"id": 15,
 					"name": "Advance SNS target version",
 					"description": "Proposal to advance the target version of this SNS.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -4927,9 +5083,9 @@
 			"ledger_canister_id": "ddsp7-7iaaa-aaaaq-aacqq-cai"
 		},
 		"meta": {
-			"url": "https://openfpl.xyz/",
-			"name": "OpenFPL",
-			"description": "Decentralised fantasy football\n",
+			"url": "https://icfc.app/",
+			"name": "ICFC",
+			"description": "The ICFC football ecosystem designed to reward fans for their love of football.",
 			"logo": "/v1/sns/root/gyito-zyaaa-aaaaq-aacpq-cai/logo.png"
 		},
 		"icrc1_metadata": [
@@ -5044,6 +5200,12 @@
 					"id": 15,
 					"name": "Advance SNS target version",
 					"description": "Proposal to advance the target version of this SNS.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -5393,6 +5555,12 @@
 					"id": 15,
 					"name": "Advance SNS target version",
 					"description": "Proposal to advance the target version of this SNS.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -5781,6 +5949,12 @@
 					"id": 15,
 					"name": "Advance SNS target version",
 					"description": "Proposal to advance the target version of this SNS.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -6235,6 +6409,12 @@
 					"name": "Advance SNS target version",
 					"description": "Proposal to advance the target version of this SNS.",
 					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
 		}
@@ -6493,6 +6673,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1000,
 					"name": "transferPosition",
 					"description": null,
@@ -6502,6 +6688,19 @@
 							"target_canister_id": "quzhj-7aaaa-aaaag-qjwga-cai",
 							"validator_method_name": "validate_transfer_position",
 							"target_method_name": "transferPosition"
+						}
+					}
+				},
+				{
+					"id": 1001,
+					"name": "Transfer BAD.OT",
+					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
+							"target_canister_id": "y3qt2-4iaaa-aaaar-qaifa-cai",
+							"validator_method_name": "validate_icrc1_transfer",
+							"target_method_name": "icrc1_transfer"
 						}
 					}
 				}
@@ -6756,6 +6955,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 2001,
 					"name": "Upgrade OGY dashboard frontend.",
 					"description": "Proposal to upgrade the OGY dashboard frontend to new version.",
@@ -6894,6 +7099,12 @@
 					"id": 15,
 					"name": "Advance SNS target version",
 					"description": "Proposal to advance the target version of this SNS.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -7192,6 +7403,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 2001,
 					"name": "Update canister config",
 					"description": "Update canister configuration",
@@ -7359,6 +7576,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1234,
 					"name": "Update kong frontend",
 					"description": "Update the asset canister",
@@ -7498,6 +7721,12 @@
 					"name": "Advance SNS target version",
 					"description": "Proposal to advance the target version of this SNS.",
 					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
 		}
@@ -7626,6 +7855,12 @@
 					"name": "Advance SNS target version",
 					"description": "Proposal to advance the target version of this SNS.",
 					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
 		}
@@ -7753,6 +7988,12 @@
 					"id": 15,
 					"name": "Advance SNS target version",
 					"description": "Proposal to advance the target version of this SNS.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -7921,6 +8162,12 @@
 					"name": "Advance SNS target version",
 					"description": "Proposal to advance the target version of this SNS.",
 					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
 		}
@@ -8048,6 +8295,12 @@
 					"id": 15,
 					"name": "Advance SNS target version",
 					"description": "Proposal to advance the target version of this SNS.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
