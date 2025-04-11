@@ -136,6 +136,7 @@
 					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "Governance",
 							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
 							"target_canister_id": "buwm7-7yaaa-aaaar-qagva-cai",
 							"validator_method_name": "validate_icrc1_transfer",
@@ -149,6 +150,7 @@
 					"description": "Approve tokens from the SNS treasury via icrc2_approve",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
 							"target_canister_id": "f54if-eqaaa-aaaaq-aacea-cai",
 							"validator_method_name": "validate_icrc2_approve",
@@ -162,6 +164,7 @@
 					"description": "Register manage neuron method for NFIDW",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
 							"target_canister_id": "mpg2i-yyaaa-aaaaq-aaeka-cai",
 							"validator_method_name": "validate_manage_neuron",
@@ -175,6 +178,7 @@
 					"description": "Approve GHOST from the SNS treasury via icrc2_approve",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
 							"target_canister_id": "4c4fd-caaaa-aaaaq-aaa3a-cai",
 							"validator_method_name": "validate_icrc2_approve",
@@ -188,6 +192,7 @@
 					"description": "Register manage neuron method for NTN",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
 							"target_canister_id": "eqsml-lyaaa-aaaaq-aacdq-cai",
 							"validator_method_name": "validate_manage_neuron",
@@ -335,6 +340,7 @@
 					"description": "This will upload the given WASM to the user_index and trigger a rolling upgrade of local_user_index canisters on each subnet.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"target_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"validator_method_name": "upgrade_local_user_index_canister_wasm_validate",
@@ -348,6 +354,7 @@
 					"description": "This will upload the given WASM to the user_index which will in turn call c2c_upgrade_user_canister_wasm on the local_user_index on each subnet. These will each trigger a rolling upgrade of user canisters on their subnet.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"target_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"validator_method_name": "upgrade_user_canister_wasm_validate",
@@ -361,6 +368,7 @@
 					"description": "This will add a reference to an uninstalled local_user_index canister on a new subnet.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"target_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"validator_method_name": "add_local_user_index_canister_validate",
@@ -374,6 +382,7 @@
 					"description": "This will mark the local_user_index with the given canister_id as full so that no more users will be created on this subnet.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"target_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"validator_method_name": "mark_local_user_index_full_validate",
@@ -387,6 +396,7 @@
 					"description": "During a rolling user canister upgrade this controls how many user canisters can be upgraded concurrently. Setting a value of zero stops the upgrade altogether. Setting this value too high will slow down subnets during user upgrade.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"target_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"validator_method_name": "set_max_concurrent_user_canister_upgrades_validate",
@@ -400,6 +410,7 @@
 					"description": "The user with the given user id will be given the role of platform moderator. These users have the authority to suspend users and freeze groups.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "Governance",
 							"validator_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"target_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"validator_method_name": "add_platform_moderator_validate",
@@ -413,6 +424,7 @@
 					"description": "The user with the given user id will have the role of platform moderator rescinded.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "Governance",
 							"validator_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"target_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"validator_method_name": "remove_platform_moderator_validate",
@@ -426,6 +438,7 @@
 					"description": "The user with the given user id will be given the role of platform operator. These users have the authority to call endpoints which affect rolling canister deployments such as setting the concurrency level.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "Governance",
 							"validator_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"target_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"validator_method_name": "add_platform_operator_validate",
@@ -439,6 +452,7 @@
 					"description": "The user with the given user id will have the role of platform operator rescinded.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "Governance",
 							"validator_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"target_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"validator_method_name": "remove_platform_operator_validate",
@@ -452,6 +466,7 @@
 					"description": "This will register a new external achievement which users can complete to earn CHIT",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"target_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"validator_method_name": "register_external_achievement_validate",
@@ -465,6 +480,7 @@
 					"description": "This will remove an existing bot from OpenChat",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"target_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"validator_method_name": "remove_bot_validate",
@@ -478,6 +494,7 @@
 					"description": "This will publish a registered bot allowing it to be found and installed in OpenChat communities, groups and directly with users",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"target_canister_id": "4bkt6-4aaaa-aaaaf-aaaiq-cai",
 							"validator_method_name": "publish_bot_validate",
@@ -491,6 +508,7 @@
 					"description": "This will upload the given WASM to the group_index and trigger a rolling upgrade of local_group_index canisters on each subnet.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
 							"target_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
 							"validator_method_name": "upgrade_local_group_index_canister_wasm_validate",
@@ -504,6 +522,7 @@
 					"description": "This will upload the given WASM to the group_index which will in turn call c2c_upgrade_group_canister_wasm on the local_group_index on each subnet. These will each trigger a rolling upgrade of group canisters on their subnet.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
 							"target_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
 							"validator_method_name": "upgrade_group_canister_wasm_validate",
@@ -517,6 +536,7 @@
 					"description": "This will add a reference to an uninstalled local_group_index canister on a new subnet.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
 							"target_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
 							"validator_method_name": "add_local_group_index_canister_validate",
@@ -530,6 +550,7 @@
 					"description": "This will mark the local_group_index with the given canister_id as full so that no more groups will be created on this subnet.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
 							"target_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
 							"validator_method_name": "mark_local_group_index_full_validate",
@@ -543,6 +564,7 @@
 					"description": "During a rolling group canister upgrade this controls how many group canisters can be upgraded concurrently. Setting a value of zero stops the upgrade altogether. Setting this value too high will slow down subnets during group upgrade.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
 							"target_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
 							"validator_method_name": "set_max_concurrent_group_canister_upgrades_validate",
@@ -556,6 +578,7 @@
 					"description": "This will upload the given WASM to the group_index which will in turn call c2c_upgrade_community_canister_wasm on the local_group_index on each subnet. These will each trigger a rolling upgrade of community canisters on their subnet.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
 							"target_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
 							"validator_method_name": "upgrade_community_canister_wasm_validate",
@@ -569,6 +592,7 @@
 					"description": "This proposal will mark the given public community as 'verified' (blue tick) if it passes. The proposal summary should be used to provide evidence that the given community legitimately represents the given name. Additionally, if a different name is provided for this community and this name is already used by an existing public community or group which isn't itself 'verified' then this proposal will rename that community/group by adding a random suffix like _436 and the given community will take on the given name. This is to address the scenario where a public community or group has been created for a name which it doesn't legitimately represent.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
 							"target_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
 							"validator_method_name": "set_community_verification_validate",
@@ -582,6 +606,7 @@
 					"description": "This proposal will mark the given public group as 'verified' (blue tick) if it passes. The proposal summary should be used to provide evidence that the given group legitimately represents the given name. Additionally, if a different name is provided for this group and this name is already used by an existing public group or community which isn't itself 'verified' then this proposal will rename that group/community by adding a random suffix like _436 and the given group will take on the given name. This is to address the scenario where a public group or community has been created for a name which it doesn't legitimately represent.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
 							"target_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
 							"validator_method_name": "set_group_verification_validate",
@@ -595,6 +620,7 @@
 					"description": "Revoke the verified status (blue tick) of the given community. This would be used if the given community no longer legitimately represents its name. The proposal summary should be used to provide evidence.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
 							"target_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
 							"validator_method_name": "revoke_community_verification_validate",
@@ -608,6 +634,7 @@
 					"description": "Revoke the verified status (blue tick) of the given group. This would be used if the given group no longer legitimately represents its name. The proposal summary should be used to provide evidence.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
 							"target_canister_id": "4ijyc-kiaaa-aaaaf-aaaja-cai",
 							"validator_method_name": "revoke_group_verification_validate",
@@ -621,6 +648,7 @@
 					"description": "This will upload the given WASM to the notifications_index and trigger a rolling upgrade of notifications_canisters on each subnet.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "4glvk-ryaaa-aaaaf-aaaia-cai",
 							"target_canister_id": "4glvk-ryaaa-aaaaf-aaaia-cai",
 							"validator_method_name": "upgrade_notifications_canister_wasm_validate",
@@ -634,6 +662,7 @@
 					"description": "This will add a reference to an uninstalled notifications canister on a new subnet.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "4glvk-ryaaa-aaaaf-aaaia-cai",
 							"target_canister_id": "4glvk-ryaaa-aaaaf-aaaia-cai",
 							"validator_method_name": "add_notifications_canister_validate",
@@ -647,6 +676,7 @@
 					"description": "This will create a new proposals group with the given details and sync it with proposals from the given SNS governance canister.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "iywa7-ayaaa-aaaaf-aemga-cai",
 							"target_canister_id": "iywa7-ayaaa-aaaaf-aemga-cai",
 							"validator_method_name": "add_governance_canister_validate",
@@ -660,6 +690,7 @@
 					"description": "This will remove a proposals group linked to the given SNS governance canister id.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "iywa7-ayaaa-aaaaf-aemga-cai",
 							"target_canister_id": "iywa7-ayaaa-aaaaf-aemga-cai",
 							"validator_method_name": "remove_governance_canister_validate",
@@ -673,6 +704,7 @@
 					"description": "For each given user, the proposals_bot will call into the group canister corresponding to the given governance canister, to set the user's role within the group to admin.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "iywa7-ayaaa-aaaaf-aemga-cai",
 							"target_canister_id": "iywa7-ayaaa-aaaaf-aemga-cai",
 							"validator_method_name": "appoint_admins_validate",
@@ -686,6 +718,7 @@
 					"description": "Import the specified proposals group into the specified community.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "iywa7-ayaaa-aaaaf-aemga-cai",
 							"target_canister_id": "iywa7-ayaaa-aaaaf-aemga-cai",
 							"validator_method_name": "import_proposals_group_into_community_validate",
@@ -699,6 +732,7 @@
 					"description": "This will add a reference to an uninstalled storage_bucket canister.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "rturd-qaaaa-aaaaf-aabaq-cai",
 							"target_canister_id": "rturd-qaaaa-aaaaf-aabaq-cai",
 							"validator_method_name": "add_bucket_canister_validate",
@@ -712,6 +746,7 @@
 					"description": "This will mark the storage_bucket with the given canister_id as full so that no more files will be uploaded to this bucket.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "rturd-qaaaa-aaaaf-aabaq-cai",
 							"target_canister_id": "rturd-qaaaa-aaaaf-aabaq-cai",
 							"validator_method_name": "set_bucket_full_validate",
@@ -725,6 +760,7 @@
 					"description": "This will upload the given WASM to the storage_index canister and trigger a rolling upgrade of the storage_bucket canisters.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "rturd-qaaaa-aaaaf-aabaq-cai",
 							"target_canister_id": "rturd-qaaaa-aaaaf-aabaq-cai",
 							"validator_method_name": "upgrade_bucket_canister_wasm_validate",
@@ -738,6 +774,7 @@
 					"description": "The cycles_dispenser will keep the added canister topped up with cycles.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "gonut-hqaaa-aaaaf-aby7a-cai",
 							"target_canister_id": "gonut-hqaaa-aaaaf-aby7a-cai",
 							"validator_method_name": "add_canister_validate",
@@ -751,6 +788,7 @@
 					"description": "This will update the configuration of the cycles_dispenser canister such as max_top_up_amount and min_cycles_balance.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "gonut-hqaaa-aaaaf-aby7a-cai",
 							"target_canister_id": "gonut-hqaaa-aaaaf-aby7a-cai",
 							"validator_method_name": "update_config_validate",
@@ -764,6 +802,7 @@
 					"description": "This will add the specified token to the Registry, enabling users to send it within OpenChat messages.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "cpi5u-yiaaa-aaaar-aqw5a-cai",
 							"target_canister_id": "cpi5u-yiaaa-aaaar-aqw5a-cai",
 							"validator_method_name": "add_token_validate",
@@ -777,6 +816,7 @@
 					"description": "This will update the specified token's details in the Registry, updating the value of each field provided in the payload.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "cpi5u-yiaaa-aaaar-aqw5a-cai",
 							"target_canister_id": "cpi5u-yiaaa-aaaar-aqw5a-cai",
 							"validator_method_name": "update_token_validate",
@@ -790,6 +830,7 @@
 					"description": "This will instruct the Registry to expand OpenChat onto a new subnet, allowing it to scale to many more users, groups and communities",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "cpi5u-yiaaa-aaaar-aqw5a-cai",
 							"target_canister_id": "cpi5u-yiaaa-aaaar-aqw5a-cai",
 							"validator_method_name": "expand_onto_subnet_validate",
@@ -803,6 +844,7 @@
 					"description": "This will instruct the NeuronController canister to stake a new neuron with 1 ICP.\n\nSubsequent 'ManageNnsNeuron' and 'TransferFromTreasury' proposals can be made to update the neuron's configuration and increase its stake.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "tktqu-nyaaa-aaaar-qackq-cai",
 							"target_canister_id": "tktqu-nyaaa-aaaar-qackq-cai",
 							"validator_method_name": "stake_nns_neuron_validate",
@@ -816,6 +858,7 @@
 					"description": "This will instruct the NeuronController canister to call 'manage_neuron' on the NNS governance canister to manage one of the neurons it controls.\n\nThis can be used to configure the neuron, set up following, spawn a new neuron, etc.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "tktqu-nyaaa-aaaar-qackq-cai",
 							"target_canister_id": "tktqu-nyaaa-aaaar-qackq-cai",
 							"validator_method_name": "manage_nns_neuron_validate",
@@ -829,6 +872,7 @@
 					"description": "This will instruct the OpenChatInstaller canister to upgrade the specified canister.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "jodzs-iqaaa-aaaar-qamqa-cai",
 							"target_canister_id": "jodzs-iqaaa-aaaar-qamqa-cai",
 							"validator_method_name": "upgrade_canister_validate",
@@ -842,6 +886,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "w7lbn-qyaaa-aaaar-qacuq-cai",
 							"target_canister_id": "w7lbn-qyaaa-aaaar-qacuq-cai",
 							"validator_method_name": "sns_validate_trade_tokens",
@@ -855,6 +900,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "w7lbn-qyaaa-aaaar-qacuq-cai",
 							"target_canister_id": "w7lbn-qyaaa-aaaar-qacuq-cai",
 							"validator_method_name": "sns_validate_void_position",
@@ -868,6 +914,7 @@
 					"description": "This will enable the OpenChat SNS Governance canister to manage NNS neurons, allowing it to perform actions such as voting on NNS proposals",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "wkype-7qaaa-aaaar-ajfyq-cai",
 							"target_canister_id": "rrkah-fqaaa-aaaaa-aaaaq-cai",
 							"validator_method_name": "nns_governance_manage_neuron_validate",
@@ -881,6 +928,7 @@
 					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "Governance",
 							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
 							"target_canister_id": "buwm7-7yaaa-aaaar-qagva-cai",
 							"validator_method_name": "validate_icrc1_transfer",
@@ -1028,6 +1076,7 @@
 					"description": "grant permission to asset canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "74iy7-xqaaa-aaaaf-qagra-cai",
 							"target_canister_id": "74iy7-xqaaa-aaaaf-qagra-cai",
 							"validator_method_name": "validate_grant_permission",
@@ -1041,6 +1090,7 @@
 					"description": "revoke permission to asset canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "74iy7-xqaaa-aaaaf-qagra-cai",
 							"target_canister_id": "74iy7-xqaaa-aaaaf-qagra-cai",
 							"validator_method_name": "validate_revoke_permission",
@@ -1054,6 +1104,7 @@
 					"description": "commit the batch that proposed by community who has Prepare permisson",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "74iy7-xqaaa-aaaaf-qagra-cai",
 							"target_canister_id": "74iy7-xqaaa-aaaaf-qagra-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
@@ -1067,6 +1118,7 @@
 					"description": "grant permission to asset canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "va3nt-myaaa-aaaak-afjga-cai",
 							"target_canister_id": "va3nt-myaaa-aaaak-afjga-cai",
 							"validator_method_name": "validate_grant_permission",
@@ -1080,6 +1132,7 @@
 					"description": "commit the batch that proposed by community who has Prepare permission",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "va3nt-myaaa-aaaak-afjga-cai",
 							"target_canister_id": "va3nt-myaaa-aaaak-afjga-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
@@ -1093,6 +1146,7 @@
 					"description": "commit the batch that proposed by community who has Prepare permission",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "xcvai-qiaaa-aaaak-afowq-cai",
 							"target_canister_id": "xcvai-qiaaa-aaaak-afowq-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
@@ -1106,6 +1160,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "y2hpc-naaaa-aaaar-qadua-cai",
 							"target_canister_id": "y2hpc-naaaa-aaaar-qadua-cai",
 							"validator_method_name": "sns_validate_trade_tokens",
@@ -1119,6 +1174,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "wwikr-gqaaa-aaaar-qacva-cai",
 							"target_canister_id": "wwikr-gqaaa-aaaar-qacva-cai",
 							"validator_method_name": "sns_validate_cycles_out",
@@ -1266,6 +1322,7 @@
 					"description": "grant permission to asset canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "vyatz-hqaaa-aaaam-qauea-cai",
 							"target_canister_id": "vyatz-hqaaa-aaaam-qauea-cai",
 							"validator_method_name": "validate_grant_permission",
@@ -1279,6 +1336,7 @@
 					"description": "revoke permission to asset canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "vyatz-hqaaa-aaaam-qauea-cai",
 							"target_canister_id": "vyatz-hqaaa-aaaam-qauea-cai",
 							"validator_method_name": "validate_revoke_permission",
@@ -1292,6 +1350,7 @@
 					"description": "Generic proposal to reset indiviudal user canisters",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "rimrc-piaaa-aaaao-aaljq-cai",
 							"target_canister_id": "rimrc-piaaa-aaaao-aaljq-cai",
 							"validator_method_name": "validate_reset_user_individual_canisters",
@@ -1305,6 +1364,7 @@
 					"description": "Generic proposal to execute commands from platform orchestrator",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "74zq4-iqaaa-aaaam-ab53a-cai",
 							"target_canister_id": "74zq4-iqaaa-aaaam-ab53a-cai",
 							"validator_method_name": "validate_platform_orchestrator_generic_function",
@@ -1452,6 +1512,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "Governance",
 							"validator_canister_id": "p3sub-gqaaa-aaaal-acwza-cai",
 							"target_canister_id": "p3sub-gqaaa-aaaal-acwza-cai",
 							"validator_method_name": "validate_burn",
@@ -1465,6 +1526,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "Governance",
 							"validator_canister_id": "3eiym-hqaaa-aaaal-adqia-cai",
 							"target_canister_id": "dwahc-eyaaa-aaaag-qcgnq-cai",
 							"validator_method_name": "validate_transfer_position",
@@ -1612,6 +1674,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "eefpt-6yaaa-aaaam-adbxq-cai",
 							"target_canister_id": "tupjz-uyaaa-aaaag-qcjmq-cai",
 							"validator_method_name": "validate_transfer_position",
@@ -1625,6 +1688,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "ddmi3-laaaa-aaaah-qdbqa-cai",
 							"target_canister_id": "ddmi3-laaaa-aaaah-qdbqa-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
@@ -1638,6 +1702,7 @@
 					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "Governance",
 							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
 							"target_canister_id": "buwm7-7yaaa-aaaar-qagva-cai",
 							"validator_method_name": "validate_icrc1_transfer",
@@ -1785,6 +1850,7 @@
 					"description": "Add a new custom SNS function to the asset canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "awcae-maaaa-aaaam-abmyq-cai",
 							"target_canister_id": "awcae-maaaa-aaaam-abmyq-cai",
 							"validator_method_name": "validate_take_ownership",
@@ -1798,6 +1864,7 @@
 					"description": "Add a new custom SNS function to the asset canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "awcae-maaaa-aaaam-abmyq-cai",
 							"target_canister_id": "awcae-maaaa-aaaam-abmyq-cai",
 							"validator_method_name": "validate_grant_permission",
@@ -1811,6 +1878,7 @@
 					"description": "Add a new custom SNS function to the WorldHub canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "j362g-ziaaa-aaaap-abf6a-cai",
 							"target_canister_id": "j362g-ziaaa-aaaap-abf6a-cai",
 							"validator_method_name": "validate_upgrade_usernodes",
@@ -1824,6 +1892,7 @@
 					"description": "Execute icrc1_transfer function in ICPSwap ledger canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "fglgf-uyaaa-aaaal-qbzcq-cai",
 							"target_canister_id": "ca6gz-lqaaa-aaaaq-aacwa-cai",
 							"validator_method_name": "validate_ICS_icrc1_transfer",
@@ -1837,6 +1906,7 @@
 					"description": "Call upload_ledger_wasm function to commit changes to upgrade BOOM Launchpad Swap canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "d6dgo-aaaaa-aaaap-akpqq-cai",
 							"target_canister_id": "d6dgo-aaaaa-aaaap-akpqq-cai",
 							"validator_method_name": "validate_upload_ledger_wasm",
@@ -1850,6 +1920,7 @@
 					"description": "Call remove_ledger_wasm function to commit changes to upgrade BOOM Launchpad Swap canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "d6dgo-aaaaa-aaaap-akpqq-cai",
 							"target_canister_id": "d6dgo-aaaaa-aaaap-akpqq-cai",
 							"validator_method_name": "validate_remove_ledger_wasm",
@@ -1863,6 +1934,7 @@
 					"description": "Call create_icrc_token function to create a new ICRC token ledger under BOOM Launchpad Swap canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "d6dgo-aaaaa-aaaap-akpqq-cai",
 							"target_canister_id": "d6dgo-aaaaa-aaaap-akpqq-cai",
 							"validator_method_name": "validate_create_icrc_token",
@@ -1876,6 +1948,7 @@
 					"description": "Call set_token_swap_configs function to set up configuration for a new token launch event via BOOM Launchpad",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "d6dgo-aaaaa-aaaap-akpqq-cai",
 							"target_canister_id": "d6dgo-aaaaa-aaaap-akpqq-cai",
 							"validator_method_name": "validate_set_token_swap_configs",
@@ -1889,6 +1962,7 @@
 					"description": "Call mint_pow_supply function to mint Proof of Work mining event token supply to Proof of Work Minter canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "d6dgo-aaaaa-aaaap-akpqq-cai",
 							"target_canister_id": "d6dgo-aaaaa-aaaap-akpqq-cai",
 							"validator_method_name": "validate_mint_pow_supply",
@@ -1902,6 +1976,7 @@
 					"description": "Call commit_proposed_batch function to commit changes to upgrade Game Launcher asset canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "awcae-maaaa-aaaam-abmyq-cai",
 							"target_canister_id": "awcae-maaaa-aaaam-abmyq-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
@@ -1915,6 +1990,7 @@
 					"description": "Execute upgrade_worlds function in World Deployer to upgrade all World canisters",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "js5r2-paaaa-aaaap-abf7q-cai",
 							"target_canister_id": "js5r2-paaaa-aaaap-abf7q-cai",
 							"validator_method_name": "validate_upgrade_worlds",
@@ -1928,6 +2004,7 @@
 					"description": "Call commit_proposed_batch function to commit changes to upgrade Login Webpage asset canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "7p3gx-jaaaa-aaaal-acbda-cai",
 							"target_canister_id": "7p3gx-jaaaa-aaaal-acbda-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
@@ -1941,6 +2018,7 @@
 					"description": "Execute delete_cache function in WorldHub canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "j362g-ziaaa-aaaap-abf6a-cai",
 							"target_canister_id": "j362g-ziaaa-aaaap-abf6a-cai",
 							"validator_method_name": "validate_delete_cache",
@@ -2088,6 +2166,7 @@
 					"description": "transfer DKP from Catalyze",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "2kusx-raaaa-aaaal-qjaxq-cai",
 							"target_canister_id": "zfcdd-tqaaa-aaaaq-aaaga-cai",
 							"validator_method_name": "validate_icrc_transfer",
@@ -2101,6 +2180,7 @@
 					"description": "Manage NTN neuron owned by Catalyze",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "2kusx-raaaa-aaaal-qjaxq-cai",
 							"target_canister_id": "eqsml-lyaaa-aaaaq-aacdq-cai",
 							"validator_method_name": "validate_manage_neuron",
@@ -2114,6 +2194,7 @@
 					"description": "Manage CTZ neuron owned by Catalyze",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "2kusx-raaaa-aaaal-qjaxq-cai",
 							"target_canister_id": "jfnic-kaaaa-aaaaq-aadla-cai",
 							"validator_method_name": "validate_manage_neuron",
@@ -2261,6 +2342,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "oulla-fyaaa-aaaag-qa6fa-cai",
 							"target_canister_id": "oulla-fyaaa-aaaag-qa6fa-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
@@ -2274,6 +2356,7 @@
 					"description": "Grant permission to asset canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "oulla-fyaaa-aaaag-qa6fa-cai",
 							"target_canister_id": "oulla-fyaaa-aaaag-qa6fa-cai",
 							"validator_method_name": "validate_grant_permission",
@@ -2287,6 +2370,7 @@
 					"description": "Revoke permission to asset canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "oulla-fyaaa-aaaag-qa6fa-cai",
 							"target_canister_id": "oulla-fyaaa-aaaag-qa6fa-cai",
 							"validator_method_name": "validate_revoke_permission",
@@ -2434,6 +2518,7 @@
 					"description": "Commit frontend canister assets via proposal",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "exwqn-uaaaa-aaaaf-qaeaa-cai",
 							"target_canister_id": "exwqn-uaaaa-aaaaf-qaeaa-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
@@ -2447,6 +2532,7 @@
 					"description": "revoke_permission can revoke Prepare, ManagePermissions, and Commit",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "exwqn-uaaaa-aaaaf-qaeaa-cai",
 							"target_canister_id": "exwqn-uaaaa-aaaaf-qaeaa-cai",
 							"validator_method_name": "validate_revoke_permission",
@@ -2594,6 +2680,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "3xwpq-ziaaa-aaaah-qcn4a-cai",
 							"target_canister_id": "3xwpq-ziaaa-aaaah-qcn4a-cai",
 							"validator_method_name": "setMaxTokenValidate",
@@ -2607,6 +2694,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "3xwpq-ziaaa-aaaah-qcn4a-cai",
 							"target_canister_id": "3xwpq-ziaaa-aaaah-qcn4a-cai",
 							"validator_method_name": "addTokenValidate",
@@ -2620,6 +2708,7 @@
 					"description": "This will enable the SONIC SNS Governance canister to manage WTN neurons, allowing it to perform actions such as voting on WTN proposals",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "3xwpq-ziaaa-aaaah-qcn4a-cai",
 							"target_canister_id": "jfnic-kaaaa-aaaaq-aadla-cai",
 							"validator_method_name": "manageWTNValidate",
@@ -2767,6 +2856,7 @@
 					"description": "Proposal to manage an ICP neuron under control of the Gold DAO.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "j4jiq-sqaaa-aaaap-ab23a-cai",
 							"target_canister_id": "j4jiq-sqaaa-aaaap-ab23a-cai",
 							"validator_method_name": "manage_nns_neuron_validate",
@@ -2780,6 +2870,7 @@
 					"description": "Proposal to manage the recipients of the disbursed maturity of the NNS neurons.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "j4jiq-sqaaa-aaaap-ab23a-cai",
 							"target_canister_id": "j4jiq-sqaaa-aaaap-ab23a-cai",
 							"validator_method_name": "manage_reward_recipients_validate",
@@ -2793,6 +2884,7 @@
 					"description": "Proposal to adjust the daily amount of GLDGov transferred from the reserve pool to the rewards pool of the sns_rewards canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "iyehc-lqaaa-aaaap-ab25a-cai",
 							"target_canister_id": "iyehc-lqaaa-aaaap-ab25a-cai",
 							"validator_method_name": "set_reserve_transfer_amounts_validate",
@@ -2806,6 +2898,7 @@
 					"description": "Proposal to adjust the daily amount of GLDGov burned from the reserve pool of the sns_rewards canister.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "iyehc-lqaaa-aaaap-ab25a-cai",
 							"target_canister_id": "iyehc-lqaaa-aaaap-ab25a-cai",
 							"validator_method_name": "set_daily_gldgov_burn_rate_validate",
@@ -2819,6 +2912,7 @@
 					"description": "Proposal to update the tokens in which rewards are paid to Gold DAO neurons.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "iyehc-lqaaa-aaaap-ab25a-cai",
 							"target_canister_id": "iyehc-lqaaa-aaaap-ab25a-cai",
 							"validator_method_name": "set_reward_token_types_validate",
@@ -2832,6 +2926,7 @@
 					"description": "Proposal to update the wallet which receives the ICP for cycles management of the Gold DAO canisters.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "j4jiq-sqaaa-aaaap-ab23a-cai",
 							"target_canister_id": "j4jiq-sqaaa-aaaap-ab23a-cai",
 							"validator_method_name": "manage_cycle_management_account_validate",
@@ -2845,6 +2940,7 @@
 					"description": "Proposal to add another swap client to the buyback and burn canister.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "atslz-hiaaa-aaaam-acq6q-cai",
 							"target_canister_id": "atslz-hiaaa-aaaam-acq6q-cai",
 							"validator_method_name": "add_swap_clients_validate",
@@ -2858,10 +2954,39 @@
 					"description": "Proposal to define the buyback and burn canister on the gldt_swap canister. The gldt_swap canister will send the fees accumulating in GLDT to this canister to then buyback and burn GOLDAO tokens.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "6f6ua-hqaaa-aaaar-qairq-cai",
 							"target_canister_id": "6f6ua-hqaaa-aaaar-qairq-cai",
 							"validator_method_name": "set_buy_back_canister_validate",
 							"target_method_name": "set_buy_back_canister"
+						}
+					}
+				},
+				{
+					"id": 1009,
+					"name": "Stake new SNS neuron.",
+					"description": "This proposal stakes a new SNS neuron. The details about the neuron is in the payload and can be for example OGY or WTN (or others) combined with the amount and dissolve delay.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "54vkq-taaaa-aaaap-ahqra-cai",
+							"target_canister_id": "54vkq-taaaa-aaaap-ahqra-cai",
+							"validator_method_name": "stake_sns_neuron_validate",
+							"target_method_name": "stake_sns_neuron"
+						}
+					}
+				},
+				{
+					"id": 1010,
+					"name": "Manage Gold DAO owned SNS neuron.",
+					"description": "This proposal manages a Gold DAO controlled SNS neuron and effective calls the manage_neuron command of this SNS neuron. These neurons can be different SNS neurons, for example OGY or WTN neurons, which the Gold DAO owns.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "54vkq-taaaa-aaaap-ahqra-cai",
+							"target_canister_id": "54vkq-taaaa-aaaap-ahqra-cai",
+							"validator_method_name": "manage_sns_neuron_validate",
+							"target_method_name": "manage_sns_neuron"
 						}
 					}
 				},
@@ -2871,6 +2996,7 @@
 					"description": "Proposal to upgrade the GLD dashboard frontend to a new version.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "rbsh4-yyaaa-aaaal-qdigq-cai",
 							"target_canister_id": "rbsh4-yyaaa-aaaal-qdigq-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
@@ -3018,6 +3144,7 @@
 					"description": "Start dissolving NTN DAO neurons held by our DAO.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "eqsml-lyaaa-aaaaq-aacdq-cai",
 							"target_canister_id": "eqsml-lyaaa-aaaaq-aacdq-cai",
 							"validator_method_name": "validate_manage_neuron",
@@ -3031,6 +3158,7 @@
 					"description": "Start dissolving NTN DAO neurons held by our DAO.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "2kusx-raaaa-aaaal-qjaxq-cai",
 							"target_canister_id": "eqsml-lyaaa-aaaaq-aacdq-cai",
 							"validator_method_name": "validate_manage_neuron",
@@ -3178,6 +3306,7 @@
 					"description": "Transfer ckBTC from the SNS treasury",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "uwkt7-miaaa-aaaal-qdeuq-cai",
 							"target_canister_id": "mxzaz-hqaaa-aaaar-qaada-cai",
 							"validator_method_name": "validate_icrc1_transfer",
@@ -3191,6 +3320,7 @@
 					"description": "Add vector pair canister to DeFi Vectors",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "wxer6-3yaaa-aaaal-qjnua-cai",
 							"target_canister_id": "wxer6-3yaaa-aaaal-qjnua-cai",
 							"validator_method_name": "validate_add_pair",
@@ -3204,6 +3334,7 @@
 					"description": "Creates a new vector",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "wqfxk-waaaa-aaaal-qjnuq-cai",
 							"target_canister_id": "wqfxk-waaaa-aaaal-qjnuq-cai",
 							"validator_method_name": "validate_create_vector",
@@ -3217,6 +3348,7 @@
 					"description": "Modifies a vector",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "wqfxk-waaaa-aaaal-qjnuq-cai",
 							"target_canister_id": "wqfxk-waaaa-aaaal-qjnuq-cai",
 							"validator_method_name": "validate_modify_vector",
@@ -3230,6 +3362,7 @@
 					"description": "Withdraws tokens from a vector",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "wqfxk-waaaa-aaaal-qjnuq-cai",
 							"target_canister_id": "wqfxk-waaaa-aaaal-qjnuq-cai",
 							"validator_method_name": "validate_withdraw_vector",
@@ -3243,6 +3376,7 @@
 					"description": "Creates a new vector",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "hospv-uaaaa-aaaal-qkkda-cai",
 							"target_canister_id": "hospv-uaaaa-aaaal-qkkda-cai",
 							"validator_method_name": "validate_create_vector",
@@ -3256,6 +3390,7 @@
 					"description": "Modifies a vector",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "hospv-uaaaa-aaaal-qkkda-cai",
 							"target_canister_id": "hospv-uaaaa-aaaal-qkkda-cai",
 							"validator_method_name": "validate_modify_vector",
@@ -3269,6 +3404,7 @@
 					"description": "Creates a new vector",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "ol6b4-pqaaa-aaaal-qjqia-cai",
 							"target_canister_id": "ol6b4-pqaaa-aaaal-qjqia-cai",
 							"validator_method_name": "validate_create_vector",
@@ -3282,6 +3418,7 @@
 					"description": "transfer ICS from Neutrinite",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "2kusx-raaaa-aaaal-qjaxq-cai",
 							"target_canister_id": "ca6gz-lqaaa-aaaaq-aacwa-cai",
 							"validator_method_name": "validate_icrc_transfer",
@@ -3295,6 +3432,7 @@
 					"description": "Manage NTN neuron owned by Neutrinite",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "2kusx-raaaa-aaaal-qjaxq-cai",
 							"target_canister_id": "jfnic-kaaaa-aaaaq-aadla-cai",
 							"validator_method_name": "validate_manage_neuron",
@@ -3308,6 +3446,7 @@
 					"description": "Manage NTN neuron owned by Neutrinite",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "2kusx-raaaa-aaaal-qjaxq-cai",
 							"target_canister_id": "oypg6-faaaa-aaaaq-aadza-cai",
 							"validator_method_name": "validate_manage_neuron",
@@ -3321,6 +3460,7 @@
 					"description": "Creates a new vector",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "vxjx3-pqaaa-aaaal-qr7ua-cai",
 							"target_canister_id": "vxjx3-pqaaa-aaaal-qr7ua-cai",
 							"validator_method_name": "validate_create_vector",
@@ -3334,6 +3474,7 @@
 					"description": "Manage vectors in the neuron pylon.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6jvpj-sqaaa-aaaaj-azwnq-cai",
 							"target_canister_id": "6jvpj-sqaaa-aaaaj-azwnq-cai",
 							"validator_method_name": "icrc55_command_validate",
@@ -3347,6 +3488,7 @@
 					"description": "transfer DKP from Neutrinite",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "2kusx-raaaa-aaaal-qjaxq-cai",
 							"target_canister_id": "zfcdd-tqaaa-aaaaq-aaaga-cai",
 							"validator_method_name": "validate_icrc_transfer",
@@ -3360,6 +3502,7 @@
 					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
 							"target_canister_id": "cngnf-vqaaa-aaaar-qag4q-cai",
 							"validator_method_name": "validate_icrc1_transfer",
@@ -3373,6 +3516,7 @@
 					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
 							"target_canister_id": "buwm7-7yaaa-aaaar-qagva-cai",
 							"validator_method_name": "validate_icrc1_transfer",
@@ -3520,6 +3664,7 @@
 					"description": "Set the ledger and index canister ids of the old and new Sneed tokens.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "CriticalDappOperations",
 							"validator_canister_id": "5ceyv-syaaa-aaaag-qc43q-cai",
 							"target_canister_id": "5ceyv-syaaa-aaaag-qc43q-cai",
 							"validator_method_name": "validate_set_canister_ids",
@@ -3533,6 +3678,7 @@
 					"description": "Burn the specified amount of old tokens gathered on the canister.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "5ceyv-syaaa-aaaag-qc43q-cai",
 							"target_canister_id": "5ceyv-syaaa-aaaag-qc43q-cai",
 							"validator_method_name": "validate_burn_old_tokens",
@@ -3546,6 +3692,7 @@
 					"description": "Send the specified amount of icrc1 tokens from the DeFi canister to the specified principal and subaccount. Burn tokens by sending them to the icrc1 token ledger's burn address and specify a null expected fee.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "ok64y-uiaaa-aaaag-qdcbq-cai",
 							"target_canister_id": "ok64y-uiaaa-aaaag-qdcbq-cai",
 							"validator_method_name": "validate_send_icrc1_tokens",
@@ -3559,6 +3706,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "ok64y-uiaaa-aaaag-qdcbq-cai",
 							"target_canister_id": "ok64y-uiaaa-aaaag-qdcbq-cai",
 							"validator_method_name": "validate_transfer_icpswap_lp_position",
@@ -3572,6 +3720,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "ok64y-uiaaa-aaaag-qdcbq-cai",
 							"target_canister_id": "ok64y-uiaaa-aaaag-qdcbq-cai",
 							"validator_method_name": "validate_deploy_icrc1_tokens_to_icpswap",
@@ -3585,6 +3734,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "ok64y-uiaaa-aaaag-qdcbq-cai",
 							"target_canister_id": "ok64y-uiaaa-aaaag-qdcbq-cai",
 							"validator_method_name": "validate_transfer_icpex_lp_position",
@@ -3598,6 +3748,7 @@
 					"description": "Manage vectors in the neuron pylon.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "6jvpj-sqaaa-aaaaj-azwnq-cai",
 							"target_canister_id": "6jvpj-sqaaa-aaaaj-azwnq-cai",
 							"validator_method_name": "icrc55_command_validate",
@@ -3611,6 +3762,7 @@
 					"description": "Deploys ICRC1 token",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "ok64y-uiaaa-aaaag-qdcbq-cai",
 							"target_canister_id": "ok64y-uiaaa-aaaag-qdcbq-cai",
 							"validator_method_name": "validate_deploy_icrc1_tokens",
@@ -3758,6 +3910,7 @@
 					"description": "Configure the system parameters of the ICDexRouter.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorSysConfig",
@@ -3771,6 +3924,7 @@
 					"description": "Set the wasm of the ICDexPair.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorSetICDexPairWasm",
@@ -3784,6 +3938,7 @@
 					"description": "Set the wasm of the ICDexMaker.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorSetICDexMakerWasm",
@@ -3797,6 +3952,7 @@
 					"description": "Modifying the controllers of the trading pair.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorSetControllers",
@@ -3810,6 +3966,7 @@
 					"description": " Modify the controllers of an ICDexMaker canister.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorMakerSetControllers",
@@ -3823,6 +3980,7 @@
 					"description": "Create a new trading pair by governance.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorCreate",
@@ -3836,6 +3994,7 @@
 					"description": "Create a new Automated Market Maker (ICDexMaker). ",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorMakerMakerCreate",
@@ -3849,6 +4008,7 @@
 					"description": "Set up vip-maker qualification and configure rebate rate.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairSetVipMaker",
@@ -3862,6 +4022,7 @@
 					"description": "Suspend (true) or open (false) a trading pair. If `_openingTime` is specified, it means that the pair will be opened automatically after that time.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairPause",
@@ -3875,6 +4036,7 @@
 					"description": "Suspend (true) or open (false) all trading pairs. ",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairPauseAll",
@@ -3888,6 +4050,7 @@
 					"description": " Upgrade all ICDexPairs to latest version.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorUpdateAll",
@@ -3901,6 +4064,7 @@
 					"description": " Pause or enable Automated Market Maker (ICDexMaker).",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorMakerSetPause",
@@ -3914,6 +4078,7 @@
 					"description": "Upgrade all ICDexMakers to the latest version. ",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorMakerUpdateAll",
@@ -3927,6 +4092,7 @@
 					"description": "Add frontend governance method `commit_proposed_batch`",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "7vkf4-jqaaa-aaaaj-azrua-cai",
 							"target_canister_id": "7vkf4-jqaaa-aaaaj-azrua-cai",
 							"validator_method_name": "commit_proposed_batch",
@@ -3940,6 +4106,7 @@
 					"description": "Withdrawing funds from Trader to SNS Treasury",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "3yss5-5qaaa-aaaar-qad7a-cai",
 							"validator_method_name": "validatorTraderWithdraw",
@@ -3953,6 +4120,7 @@
 					"description": "Backs up and saves a snapshot of a trading pair.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorBackup",
@@ -3966,6 +4134,7 @@
 					"description": "Backup the data of a trading pair to another canister.  ",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorBackupToTempCanister",
@@ -3979,6 +4148,7 @@
 					"description": "This is a feature to be opened in the future. Register a trading competition with a third party for display.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorDexAddCompetition",
@@ -3992,6 +4162,7 @@
 					"description": "Let ICDexMaker approve the `_amount` of the sysToken the trading pair could spend.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorMakerApproveToPair",
@@ -4005,6 +4176,7 @@
 					"description": "Lock or unlock an Automated Market Maker (ICDexMaker) system transaction lock.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorMakerTransactionLock",
@@ -4018,6 +4190,7 @@
 					"description": "Add governance method `ICDexRouter.update()`",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorUpdate",
@@ -4031,6 +4204,7 @@
 					"description": "Reinstall a trading pair canister which is paused.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorReinstall",
@@ -4044,6 +4218,7 @@
 					"description": "Removes all snapshots prior to the specified timestamp of the trading pair.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorRemoveSnapshot",
@@ -4057,6 +4232,7 @@
 					"description": "\"Recover data for a trading pair.   Note: You need to check the wasm version and the status of the trading pair, the operation may lead to data loss.\"",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorRecovery",
@@ -4070,6 +4246,7 @@
 					"description": "\"Save the data of snapshot to another canister.   Note: Canister `_pairTo` is created only for backing up data and should not be used for trading. It needs to implement the recover() method like ICDexPair.\"",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorSnapshotToTempCanister",
@@ -4083,6 +4260,7 @@
 					"description": "Puts a pair into a list of trading pairs.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPut",
@@ -4096,6 +4274,7 @@
 					"description": "Removes a pair from the list of trading pairs.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorRemove",
@@ -4109,6 +4288,7 @@
 					"description": "Enable/disable Auction Mode",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairSetAuctionMode",
@@ -4122,6 +4302,7 @@
 					"description": "Open IDO of a trading pair and configure parameters",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairIDOSetFunder",
@@ -4135,6 +4316,7 @@
 					"description": "Configure the trading pair parameters and configure its DRC205 parameters.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairConfig",
@@ -4148,6 +4330,7 @@
 					"description": "When the data is too large to be backed up, you can set the UpgradeMode to #Base.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairSetUpgradeMode",
@@ -4161,6 +4344,7 @@
 					"description": "Sets an order with #Todo status as an error order.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairSetOrderFail",
@@ -4174,6 +4358,7 @@
 					"description": "Enable strategy orders for a trading pair.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairEnableStratOrder",
@@ -4187,6 +4372,7 @@
 					"description": "Configuring strategy order parameters for a trading pair.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorStoConfig",
@@ -4200,6 +4386,7 @@
 					"description": "Query all orders in pending status.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairPendingAll",
@@ -4213,6 +4400,7 @@
 					"description": "Withdraw cycles.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairWithdrawCycles",
@@ -4226,6 +4414,7 @@
 					"description": "Add/Remove ICTC Administrator",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairIctcSetAdmin",
@@ -4239,6 +4428,7 @@
 					"description": "Clear logs of transaction orders and transaction tasks. ",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairIctcClearLog",
@@ -4252,6 +4442,7 @@
 					"description": "Try the task again.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairIctcRedoTT",
@@ -4265,6 +4456,7 @@
 					"description": "Complete a blocking order.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairIctcCompleteTO",
@@ -4278,6 +4470,7 @@
 					"description": "Add a whitelist trading pair (only these pairs are allowed to be traded)",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "3jd4g-jyaaa-aaaar-qaeba-cai",
 							"validator_method_name": "validatorTraderSetWhitelist",
@@ -4291,6 +4484,7 @@
 					"description": "Add asset canister permission",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "7vkf4-jqaaa-aaaaj-azrua-cai",
 							"target_canister_id": "7vkf4-jqaaa-aaaaj-azrua-cai",
 							"validator_method_name": "validate_grant_permission",
@@ -4304,6 +4498,7 @@
 					"description": "Set status of a pending task.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairIctcDoneTT",
@@ -4317,6 +4512,7 @@
 					"description": "Set status of a pending order.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairIctcDoneTO",
@@ -4330,6 +4526,7 @@
 					"description": "Run the ICTC actuator and check the status of the transaction order `toid`.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairIctcRunTO",
@@ -4343,6 +4540,7 @@
 					"description": "Change the status of a transaction order to #Blocking.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairIctcBlockTO",
@@ -4356,6 +4554,7 @@
 					"description": "Synchronizing token0 and token1 transfer fees.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairSync",
@@ -4369,6 +4568,7 @@
 					"description": "Removes vip-maker qualification.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairRemoveVipMaker",
@@ -4382,6 +4582,7 @@
 					"description": "Retrieve missing funds from the order's TxAccount. The funds of the TxAccount will be refunded to the ICDexRouter canister-id.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairFallbackByTxid",
@@ -4395,6 +4596,7 @@
 					"description": "Cancels an order.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairCancelByTxid",
@@ -4408,6 +4610,7 @@
 					"description": "Submit a text description of the Trading Ambassadors (referral) system.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorPairTaSetDescription",
@@ -4421,6 +4624,7 @@
 					"description": "Withdraw the token to the specified account.Withdrawals can only be made to a DAO address, or to a blackhole address (destruction), not to a private address.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorSysWithdraw",
@@ -4434,6 +4638,7 @@
 					"description": "Placing an order in a trading pair as a trader.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorSysOrder",
@@ -4447,6 +4652,7 @@
 					"description": "Cancel own orders as a trader.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorSysCancelOrder",
@@ -4460,6 +4666,7 @@
 					"description": "Reinstall an ICDexMaker canister which is paused. Note: Operate with caution. Consider calling this method only if upgrading is not possible.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorMakerReinstall",
@@ -4473,6 +4680,7 @@
 					"description": "Upgrade an ICDexMaker canister. Permissions: Dao, Private Maker Creator",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorMakerUpdate",
@@ -4486,6 +4694,7 @@
 					"description": "Remove an Automated Market Maker (ICDexMaker).Permissions: Dao, Private Maker Creator",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorMakerRemove",
@@ -4499,6 +4708,7 @@
 					"description": "Configure an Automated Market Maker (ICDexMaker).",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorMakerConfig",
@@ -4512,6 +4722,7 @@
 					"description": "Reset Automated Market Maker (ICDexMaker) local account balance.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorMakerResetLocalBalance",
@@ -4525,6 +4736,7 @@
 					"description": "Withdraw funds from the trading pair to an Automated Market Maker (ICDexMaker) local account.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorMakerDexWithdraw",
@@ -4538,6 +4750,7 @@
 					"description": "Deposit from Automated Market Maker (ICDexMaker) to TraderAccount for the trading pair.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorMakerDexDeposit",
@@ -4551,6 +4764,7 @@
 					"description": "Deletes grid order from Automated Market Maker (ICDexMaker).",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorMakerDeleteGridOrder",
@@ -4564,6 +4778,7 @@
 					"description": "Creates a grid order for Automated Market Maker (ICDexMaker) on the trading pair.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorMakerCreateGridOrder",
@@ -4577,6 +4792,7 @@
 					"description": "Batch conversion of fees in ICDexRouter.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorSysConversionFees",
@@ -4590,6 +4806,7 @@
 					"description": "Calls specified canister's methods, such as trading pairs, using ICDexRouter as a proxy for governance purposes. This is a generic ICDex governance method with the disadvantage that the parameters are in binary unreadable form.  Proposals that call this method, where its parameters are not clear, please vote to reject.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorSysCall",
@@ -4603,6 +4820,7 @@
 					"description": "frontend governance method commit_proposed_batch",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "7vkf4-jqaaa-aaaaj-azrua-cai",
 							"target_canister_id": "7vkf4-jqaaa-aaaaj-azrua-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
@@ -4616,6 +4834,7 @@
 					"description": "Cancels trade orders in pending on the trading pair placed by Automated Market Maker (ICDexMaker).",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorMakerCancelAllOrders",
@@ -4629,6 +4848,7 @@
 					"description": "Put a canister-id into Cycles Monitor.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorMonitorPut",
@@ -4642,6 +4862,7 @@
 					"description": "Remove a canister-id from Cycles Monitor.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorMonitorRemove",
@@ -4655,6 +4876,7 @@
 					"description": "Returns a canister's caniter_status information.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorDebugCanisterStatus",
@@ -4668,6 +4890,7 @@
 					"description": "Start the Timer, it will be started automatically when upgrading the canister.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorTimerStart",
@@ -4681,6 +4904,7 @@
 					"description": "Synchronize trading fees for all pairs.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorSync",
@@ -4694,6 +4918,7 @@
 					"description": "Perform a monitoring. Typically, monitoring is implemented in a timer.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorDebugMonitor",
@@ -4707,6 +4932,7 @@
 					"description": "Stop the Timer",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorTimerStop",
@@ -4720,6 +4946,7 @@
 					"description": "Synchronize the vip-maker records of all pairs into the ICDexRouter.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorSyncVipMakers",
@@ -4733,6 +4960,7 @@
 					"description": "Open a new round mining event.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "odhfn-cqaaa-aaaar-qaana-cai",
 							"validator_method_name": "validatorMiningNewRound",
@@ -4746,6 +4974,7 @@
 					"description": "Update data for specified rounds.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "odhfn-cqaaa-aaaar-qaana-cai",
 							"validator_method_name": "validatorMiningUpdateRound",
@@ -4759,6 +4988,7 @@
 					"description": "Synchronize all token fees",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i2ied-uqaaa-aaaar-qaaza-cai",
 							"validator_method_name": "dexAggrSyncAllTokenFee",
@@ -4772,6 +5002,7 @@
 					"description": "Add a pair to the list",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i2ied-uqaaa-aaaar-qaaza-cai",
 							"validator_method_name": "dexAggrPutTradingPair",
@@ -4785,6 +5016,7 @@
 					"description": "Remove a pair to the list",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i2ied-uqaaa-aaaar-qaaza-cai",
 							"validator_method_name": "dexAggrRemoveTradingPair",
@@ -4798,6 +5030,7 @@
 					"description": "Set the score of a pair (score2, max 20)",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i2ied-uqaaa-aaaar-qaaza-cai",
 							"validator_method_name": "dexAggrSetScore",
@@ -4811,6 +5044,7 @@
 					"description": "Add a currency token to the list",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i2ied-uqaaa-aaaar-qaaza-cai",
 							"validator_method_name": "dexAggrPutCurrency",
@@ -4824,6 +5058,7 @@
 					"description": "Remove a currency token to the list",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i2ied-uqaaa-aaaar-qaaza-cai",
 							"validator_method_name": "dexAggrRemoveCurrency",
@@ -4837,6 +5072,7 @@
 					"description": "Submit a Dex to DexAggregator",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i2ied-uqaaa-aaaar-qaaza-cai",
 							"validator_method_name": "dexAggrSetDex",
@@ -4850,6 +5086,7 @@
 					"description": "Remove a Dex from DexAggregator",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i2ied-uqaaa-aaaar-qaaza-cai",
 							"validator_method_name": "dexAggrDelDex",
@@ -4863,6 +5100,7 @@
 					"description": "Add a pair to a Market list",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i2ied-uqaaa-aaaar-qaaza-cai",
 							"validator_method_name": "dexAggrPutPairToMarket",
@@ -4876,6 +5114,7 @@
 					"description": "Remove a pair from the market list",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i2ied-uqaaa-aaaar-qaaza-cai",
 							"validator_method_name": "dexAggrRemovePairFromMarket",
@@ -4889,6 +5128,7 @@
 					"description": "Add metadata to a token",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i2ied-uqaaa-aaaar-qaaza-cai",
 							"validator_method_name": "dexAggrAddTokenMetadata",
@@ -4902,6 +5142,7 @@
 					"description": "Remove metadata of a token",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i2ied-uqaaa-aaaar-qaaza-cai",
 							"validator_method_name": "dexAggrRemoveTokenMetadata",
@@ -4915,6 +5156,7 @@
 					"description": "Configuring DexAggregator",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i2ied-uqaaa-aaaar-qaaza-cai",
 							"validator_method_name": "dexAggrConfig",
@@ -4928,6 +5170,7 @@
 					"description": "Withdraw token from DexAggregator",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i2ied-uqaaa-aaaar-qaaza-cai",
 							"validator_method_name": "dexAggrSysWithdraw",
@@ -4941,6 +5184,7 @@
 					"description": "Burn token from DexAggregator",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i2ied-uqaaa-aaaar-qaaza-cai",
 							"validator_method_name": "dexAggrSysBurn",
@@ -4954,6 +5198,7 @@
 					"description": "Verify listing referrer",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i2ied-uqaaa-aaaar-qaaza-cai",
 							"validator_method_name": "dexAggrVerifyListingReferrer",
@@ -4967,6 +5212,7 @@
 					"description": "Deleting a verified listing referrer",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i2ied-uqaaa-aaaar-qaaza-cai",
 							"validator_method_name": "dexAggrDropListingReferrer",
@@ -4980,6 +5226,7 @@
 					"description": "Listing Referrer creates a proposal to increase the trading pair score",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i2ied-uqaaa-aaaar-qaaza-cai",
 							"validator_method_name": "dexAggrPropose",
@@ -4993,6 +5240,7 @@
 					"description": "Unlocking NFTs locked in DexAggregator by NFT holders",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i2ied-uqaaa-aaaar-qaaza-cai",
 							"validator_method_name": "dexAggrMngNFTUnStake",
@@ -5006,6 +5254,7 @@
 					"description": "Converts ICP to Cycles. (This is done manually, Monitor also has an automatic conversion feature based on the configuration.)",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorMonitorIcpToCycles",
@@ -5019,6 +5268,7 @@
 					"description": "Sends Cycles to a specific canister.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "6zwik-gaaaa-aaaap-ab63q-cai",
 							"target_canister_id": "i5jcx-ziaaa-aaaar-qaazq-cai",
 							"validator_method_name": "validatorMonitorSendCycles",
@@ -5303,6 +5553,7 @@
 					"description": "Proposal to create the endpoint for adding the callback function for increasing a Premier League player's value.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "bboqb-jiaaa-aaaal-qb6ea-cai",
 							"target_canister_id": "bboqb-jiaaa-aaaal-qb6ea-cai",
 							"validator_method_name": "validateRevaluePlayerUp",
@@ -5316,6 +5567,7 @@
 					"description": "Proposal to create the endpoint for adding the callback function for decreasing a Premier League player's value.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "bboqb-jiaaa-aaaal-qb6ea-cai",
 							"target_canister_id": "bboqb-jiaaa-aaaal-qb6ea-cai",
 							"validator_method_name": "validateRevaluePlayerDown",
@@ -5329,6 +5581,7 @@
 					"description": "Proposal to create the endpoint for adding the callback function for creating the DAO controlled neuron.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "bboqb-jiaaa-aaaal-qb6ea-cai",
 							"target_canister_id": "bboqb-jiaaa-aaaal-qb6ea-cai",
 							"validator_method_name": "validateCreateDAONeuron",
@@ -5342,6 +5595,7 @@
 					"description": "Proposal to create the endpoint for adding the callback function for managing the DAO controlled neuron.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "bboqb-jiaaa-aaaal-qb6ea-cai",
 							"target_canister_id": "bboqb-jiaaa-aaaal-qb6ea-cai",
 							"validator_method_name": "validateManageDAONeuron",
@@ -5355,6 +5609,7 @@
 					"description": "Commit updated frontend canister with computed evidence.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "bgpwv-eqaaa-aaaal-qb6eq-cai",
 							"target_canister_id": "bgpwv-eqaaa-aaaal-qb6eq-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
@@ -5368,6 +5623,7 @@
 					"description": "Increase a players value by £0.25m.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"validator_method_name": "validateRevaluePlayerUp",
@@ -5381,6 +5637,7 @@
 					"description": "Decrease a players value by £0.25m.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"validator_method_name": "validateRevaluePlayerDown",
@@ -5394,6 +5651,7 @@
 					"description": "Loan a player to a different club.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"validator_method_name": "validateLoanPlayer",
@@ -5407,6 +5665,7 @@
 					"description": "Transfer a player to a different club.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"validator_method_name": "validateTransferPlayer",
@@ -5420,6 +5679,7 @@
 					"description": "Function to submit fixture data for a match.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"validator_method_name": "validateSubmitFixtureData",
@@ -5433,6 +5693,7 @@
 					"description": "Function to create a new football league.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"validator_method_name": "validateCreateLeague",
@@ -5446,6 +5707,7 @@
 					"description": "Function to update a football league's details.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"validator_method_name": "validateUpdateLeague",
@@ -5459,6 +5721,7 @@
 					"description": "Function to reschedule a postponed fixture.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"validator_method_name": "validateRescheduleFixture",
@@ -5472,6 +5735,7 @@
 					"description": "Function to create a new player.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"validator_method_name": "validateCreatePlayer",
@@ -5485,6 +5749,7 @@
 					"description": "Function to create a new football club.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"validator_method_name": "validateCreateClub",
@@ -5498,6 +5763,7 @@
 					"description": "Function to update a football player.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"validator_method_name": "validateUpdatePlayer",
@@ -5511,6 +5777,7 @@
 					"description": "Function to move a fixture.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"validator_method_name": "validateMoveFixture",
@@ -5658,6 +5925,7 @@
 					"description": "Commit proposed assets for upgrading the frontend canister.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "c63a7-6yaaa-aaaap-ab3gq-cai",
 							"target_canister_id": "c63a7-6yaaa-aaaap-ab3gq-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
@@ -5671,6 +5939,7 @@
 					"description": "It is used to transfer PANDA tokens to DAO treasury.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DaoCommunitySettings",
 							"validator_canister_id": "a7cug-2qaaa-aaaap-ab3la-cai",
 							"target_canister_id": "a7cug-2qaaa-aaaap-ab3la-cai",
 							"validator_method_name": "validate_admin_collect_tokens",
@@ -5684,6 +5953,7 @@
 					"description": "It is used to transfer ICP tokens to DAO treasury.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DaoCommunitySettings",
 							"validator_canister_id": "a7cug-2qaaa-aaaap-ab3la-cai",
 							"target_canister_id": "a7cug-2qaaa-aaaap-ab3la-cai",
 							"validator_method_name": "validate2_admin_collect_icp",
@@ -5697,6 +5967,7 @@
 					"description": "Commit proposed assets for upgrading the ic_message_frontend canister.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "2fvu6-tqaaa-aaaap-akksa-cai",
 							"target_canister_id": "2fvu6-tqaaa-aaaap-akksa-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
@@ -5710,6 +5981,7 @@
 					"description": "It is used to add more COSE, Profile, and Channel service canisters to the messaging cluster.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "nscli-qiaaa-aaaaj-qa4pa-cai",
 							"target_canister_id": "nscli-qiaaa-aaaaj-qa4pa-cai",
 							"validator_method_name": "validate_admin_add_canister",
@@ -5723,6 +5995,7 @@
 					"description": "It is used to update the price for registering a username and creating a channel.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DaoCommunitySettings",
 							"validator_canister_id": "nscli-qiaaa-aaaaj-qa4pa-cai",
 							"target_canister_id": "nscli-qiaaa-aaaaj-qa4pa-cai",
 							"validator_method_name": "validate_admin_update_price",
@@ -5736,6 +6009,7 @@
 					"description": "It is used to collect tokens to a account.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DaoCommunitySettings",
 							"validator_canister_id": "nscli-qiaaa-aaaaj-qa4pa-cai",
 							"target_canister_id": "nscli-qiaaa-aaaaj-qa4pa-cai",
 							"validator_method_name": "validate_admin_collect_token",
@@ -5749,6 +6023,7 @@
 					"description": "It is used to update the price for registering a username and creating a channel.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DaoCommunitySettings",
 							"validator_canister_id": "nscli-qiaaa-aaaaj-qa4pa-cai",
 							"target_canister_id": "nscli-qiaaa-aaaaj-qa4pa-cai",
 							"validator_method_name": "validate2_admin_update_price",
@@ -5762,6 +6037,7 @@
 					"description": "It is used to add more IC-OSS canisters to ic_message_profile service.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "ijyxz-wyaaa-aaaaj-qa4qa-cai",
 							"target_canister_id": "ijyxz-wyaaa-aaaaj-qa4qa-cai",
 							"validator_method_name": "validate_admin_add_canister",
@@ -5775,6 +6051,7 @@
 					"description": "It is used to add more IC-OSS canisters to ic_message_channel service.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "nvdn4-5qaaa-aaaaj-qa4pq-cai",
 							"target_canister_id": "nvdn4-5qaaa-aaaaj-qa4pq-cai",
 							"validator_method_name": "validate_admin_add_canister",
@@ -5788,6 +6065,7 @@
 					"description": "It is used to add more IC-OSS canisters to ic_message_channel_02 service.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "zof5a-5yaaa-aaaai-acr2q-cai",
 							"target_canister_id": "zof5a-5yaaa-aaaai-acr2q-cai",
 							"validator_method_name": "validate_admin_add_canister",
@@ -5801,6 +6079,7 @@
 					"description": "It is used to add more IC-OSS canisters to ic_message_channel_03 service.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DaoCommunitySettings",
 							"validator_canister_id": "4jxyd-pqaaa-aaaah-qdqtq-cai",
 							"target_canister_id": "4jxyd-pqaaa-aaaah-qdqtq-cai",
 							"validator_method_name": "validate_admin_add_canister",
@@ -5814,6 +6093,7 @@
 					"description": "It is used to remove managers from the ic_message canister.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DaoCommunitySettings",
 							"validator_canister_id": "nscli-qiaaa-aaaaj-qa4pa-cai",
 							"target_canister_id": "nscli-qiaaa-aaaaj-qa4pa-cai",
 							"validator_method_name": "validate2_admin_remove_managers",
@@ -5827,6 +6107,7 @@
 					"description": "It is used to remove managers from the ic_message_profile canister.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DaoCommunitySettings",
 							"validator_canister_id": "ijyxz-wyaaa-aaaaj-qa4qa-cai",
 							"target_canister_id": "ijyxz-wyaaa-aaaaj-qa4qa-cai",
 							"validator_method_name": "validate2_admin_remove_managers",
@@ -5840,6 +6121,7 @@
 					"description": "It is used to remove managers from the ic_message_channel canister.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DaoCommunitySettings",
 							"validator_canister_id": "nvdn4-5qaaa-aaaaj-qa4pq-cai",
 							"target_canister_id": "nvdn4-5qaaa-aaaaj-qa4pq-cai",
 							"validator_method_name": "validate2_admin_remove_managers",
@@ -5853,6 +6135,7 @@
 					"description": "It is used to remove managers from the ic_message_channel_02 canister.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DaoCommunitySettings",
 							"validator_canister_id": "zof5a-5yaaa-aaaai-acr2q-cai",
 							"target_canister_id": "zof5a-5yaaa-aaaai-acr2q-cai",
 							"validator_method_name": "validate2_admin_remove_managers",
@@ -5866,6 +6149,7 @@
 					"description": "It is used to remove managers from the ic_message_channel_03 canister.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DaoCommunitySettings",
 							"validator_canister_id": "4jxyd-pqaaa-aaaah-qdqtq-cai",
 							"target_canister_id": "4jxyd-pqaaa-aaaah-qdqtq-cai",
 							"validator_method_name": "validate2_admin_remove_managers",
@@ -5879,6 +6163,7 @@
 					"description": "It is used to update bucket canister settings from the ic_oss_cluster canister.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "5szpn-tiaaa-aaaaj-qncoq-cai",
 							"target_canister_id": "5szpn-tiaaa-aaaaj-qncoq-cai",
 							"validator_method_name": "validate_admin_update_bucket_canister_settings",
@@ -5892,6 +6177,7 @@
 					"description": "It is used to upgrade bucket canister WASM from the ic_oss_cluster canister.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "5szpn-tiaaa-aaaaj-qncoq-cai",
 							"target_canister_id": "5szpn-tiaaa-aaaaj-qncoq-cai",
 							"validator_method_name": "validate2_admin_deploy_bucket",
@@ -5905,6 +6191,7 @@
 					"description": "It is used to remove managers from the ic_cose_canister canister.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DaoCommunitySettings",
 							"validator_canister_id": "n3bau-gaaaa-aaaaj-qa4oq-cai",
 							"target_canister_id": "n3bau-gaaaa-aaaaj-qa4oq-cai",
 							"validator_method_name": "validate2_admin_remove_managers",
@@ -5918,6 +6205,7 @@
 					"description": "It is used to transfer position in ICPSwap.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "7i4z4-fyaaa-aaaap-anzsa-cai",
 							"target_canister_id": "5fq4w-lyaaa-aaaag-qjqta-cai",
 							"validator_method_name": "validate_transfer_position",
@@ -6065,6 +6353,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "7vygu-3yaaa-aaaag-qjxaq-cai",
 							"target_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
 							"validator_method_name": "setPoolAdminsValidate",
@@ -6078,6 +6367,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "7vygu-3yaaa-aaaag-qjxaq-cai",
 							"target_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
 							"validator_method_name": "addPoolControllersValidate",
@@ -6091,6 +6381,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "7vygu-3yaaa-aaaag-qjxaq-cai",
 							"target_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
 							"validator_method_name": "removePoolControllersValidate",
@@ -6104,6 +6395,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "7vygu-3yaaa-aaaag-qjxaq-cai",
 							"target_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
 							"validator_method_name": "batchSetPoolAdminsValidate",
@@ -6117,6 +6409,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "7vygu-3yaaa-aaaag-qjxaq-cai",
 							"target_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
 							"validator_method_name": "batchAddPoolControllersValidate",
@@ -6130,6 +6423,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "7vygu-3yaaa-aaaag-qjxaq-cai",
 							"target_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
 							"validator_method_name": "batchRemovePoolControllersValidate",
@@ -6143,6 +6437,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "7vygu-3yaaa-aaaag-qjxaq-cai",
 							"target_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
 							"validator_method_name": "upgradePoolTokenStandardValidate",
@@ -6156,6 +6451,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "7vygu-3yaaa-aaaag-qjxaq-cai",
 							"target_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
 							"validator_method_name": "batchSetPoolLimitOrderAvailableValidate",
@@ -6169,6 +6465,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "7vygu-3yaaa-aaaag-qjxaq-cai",
 							"target_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
 							"validator_method_name": "batchSetPoolAvailableValidate",
@@ -6182,6 +6479,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "7vygu-3yaaa-aaaag-qjxaq-cai",
 							"target_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
 							"validator_method_name": "setUpgradePoolListValidate",
@@ -6195,6 +6493,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "7vygu-3yaaa-aaaag-qjxaq-cai",
 							"target_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
 							"validator_method_name": "removePoolValidate",
@@ -6208,6 +6507,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "7vygu-3yaaa-aaaag-qjxaq-cai",
 							"target_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
 							"validator_method_name": "batchRemovePoolsValidate",
@@ -6221,6 +6521,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "7vygu-3yaaa-aaaag-qjxaq-cai",
 							"target_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
 							"validator_method_name": "batchClearRemovedPoolValidate",
@@ -6234,6 +6535,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
 							"target_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
 							"validator_method_name": "addPoolInstallersValidate",
@@ -6247,6 +6549,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
 							"target_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
 							"validator_method_name": "setInstallerModuleHashValidate",
@@ -6260,6 +6563,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "7eikv-2iaaa-aaaag-qdgwa-cai",
 							"target_canister_id": "7eikv-2iaaa-aaaag-qdgwa-cai",
 							"validator_method_name": "transferValidate",
@@ -6273,6 +6577,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "7vygu-3yaaa-aaaag-qjxaq-cai",
 							"target_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
 							"validator_method_name": "setAdminsValidate",
@@ -6286,6 +6591,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "arxpg-cyaaa-aaaag-qjzhq-cai",
 							"target_canister_id": "c5jrt-yaaaa-aaaag-qb5ra-cai",
 							"validator_method_name": "setFarmAdminsValidate",
@@ -6299,6 +6605,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "arxpg-cyaaa-aaaag-qjzhq-cai",
 							"target_canister_id": "c5jrt-yaaaa-aaaag-qb5ra-cai",
 							"validator_method_name": "addFarmControllersValidate",
@@ -6312,6 +6619,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "arxpg-cyaaa-aaaag-qjzhq-cai",
 							"target_canister_id": "c5jrt-yaaaa-aaaag-qb5ra-cai",
 							"validator_method_name": "removeFarmControllersValidate",
@@ -6325,6 +6633,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "arxpg-cyaaa-aaaag-qjzhq-cai",
 							"target_canister_id": "c5jrt-yaaaa-aaaag-qb5ra-cai",
 							"validator_method_name": "createValidate",
@@ -6338,6 +6647,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "3oics-6iaaa-aaaag-qkaoq-cai",
 							"target_canister_id": "34ovl-syaaa-aaaag-qkanq-cai",
 							"validator_method_name": "setStakingPoolAdminsValidate",
@@ -6351,6 +6661,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "3oics-6iaaa-aaaag-qkaoq-cai",
 							"target_canister_id": "34ovl-syaaa-aaaag-qkanq-cai",
 							"validator_method_name": "addStakingPoolControllersValidate",
@@ -6364,6 +6675,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "3oics-6iaaa-aaaag-qkaoq-cai",
 							"target_canister_id": "34ovl-syaaa-aaaag-qkanq-cai",
 							"validator_method_name": "createStakingPoolValidate",
@@ -6377,6 +6689,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "Governance",
 							"validator_canister_id": "bh4xn-xiaaa-aaaag-qjzcq-cai",
 							"target_canister_id": "uizni-yiaaa-aaaag-qjrca-cai",
 							"validator_method_name": "validate_transfer_position",
@@ -6677,12 +6990,12 @@
 			["icrc1:max_memo_length", { "Nat": [32] }]
 		],
 		"nervous_system_parameters": {
-			"neuron_minimum_dissolve_delay_to_vote_seconds": 604800,
+			"neuron_minimum_dissolve_delay_to_vote_seconds": 2592000,
 			"neuron_minimum_stake_e8s": 1000000000,
 			"reject_cost_e8s": 250000000000
 		},
 		"parameters": {
-			"reserved_ids": [],
+			"reserved_ids": [1002],
 			"functions": [
 				{
 					"id": 0,
@@ -6792,6 +7105,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "bh4xn-xiaaa-aaaag-qjzcq-cai",
 							"target_canister_id": "quzhj-7aaaa-aaaag-qjwga-cai",
 							"validator_method_name": "validate_transfer_position",
@@ -6805,10 +7119,25 @@
 					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
 							"target_canister_id": "y3qt2-4iaaa-aaaar-qaifa-cai",
 							"validator_method_name": "validate_icrc1_transfer",
 							"target_method_name": "icrc1_transfer"
+						}
+					}
+				},
+				{
+					"id": 1003,
+					"name": "Transfer ICP/MOTOKOINS from Motoko-Pals Upgrades Treasury",
+					"description": "Transfer Motokoins/ICP from Motoko-Pals Upgrades Treasury to a specific principal id.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "6fbif-qqaaa-aaaam-aeifq-cai",
+							"target_canister_id": "6fbif-qqaaa-aaaam-aeifq-cai",
+							"validator_method_name": "validate_transfer_to_principal",
+							"target_method_name": "transfer_to_principal"
 						}
 					}
 				}
@@ -6831,8 +7160,8 @@
 		},
 		"icrc1_metadata": [
 			["icrc1:decimals", { "Nat": [8] }],
-			["icrc1:name", { "Text": "ICPCC DAO LLC" }],
-			["icrc1:symbol", { "Text": "CONF" }],
+			["icrc1:name", { "Text": "SWAMPDAO" }],
+			["icrc1:symbol", { "Text": "SWAMP" }],
 			["icrc1:fee", { "Nat": [10000] }],
 			["icrc1:max_memo_length", { "Nat": [32] }]
 		],
@@ -7074,6 +7403,7 @@
 					"description": "Proposal to upgrade the OGY dashboard frontend to new version.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "jbj2y-2qaaa-aaaal-ajc5q-cai",
 							"target_canister_id": "jbj2y-2qaaa-aaaal-ajc5q-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
@@ -7221,6 +7551,7 @@
 					"description": "Vote yes to a given NNS proposal. If there is no strict majority, vote for the majority outcome.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "tsbvt-pyaaa-aaaar-qafva-cai",
 							"target_canister_id": "tsbvt-pyaaa-aaaar-qafva-cai",
 							"validator_method_name": "approve_proposal_validate",
@@ -7368,6 +7699,7 @@
 					"description": "Add a new custom SNS function to the old DOGMI SNS Token Swap Canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "kw5rk-raaaa-aaaai-qpfoa-cai",
 							"target_canister_id": "kw5rk-raaaa-aaaai-qpfoa-cai",
 							"validator_method_name": "validate_set_canister_ids",
@@ -7381,6 +7713,7 @@
 					"description": "Updates the converter settings through SNS governance",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "kw5rk-raaaa-aaaai-qpfoa-cai",
 							"target_canister_id": "kw5rk-raaaa-aaaai-qpfoa-cai",
 							"validator_method_name": "validate_set_settings",
@@ -7394,6 +7727,7 @@
 					"description": "Execute ICRC1 token transfers.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "Governance",
 							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
 							"target_canister_id": "ry5ih-gaaaa-aaaai-aqayq-cai",
 							"validator_method_name": "validate_icrc1_transfer",
@@ -7541,6 +7875,7 @@
 					"description": "Update canister configuration",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "zwxjr-7aaaa-aaaap-qhodq-cai",
 							"target_canister_id": "zwxjr-7aaaa-aaaap-qhodq-cai",
 							"validator_method_name": "validate_update_canister_config",
@@ -7554,6 +7889,7 @@
 					"description": "Allow voting on ICVC projects",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "zwxjr-7aaaa-aaaap-qhodq-cai",
 							"target_canister_id": "zwxjr-7aaaa-aaaap-qhodq-cai",
 							"validator_method_name": "validate_project_vote_proposal",
@@ -7567,6 +7903,7 @@
 					"description": "Commit updated frontend canister with computed evidence",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "mnc6b-aaaaa-aaaap-qhnrq-cai",
 							"target_canister_id": "mnc6b-aaaaa-aaaap-qhnrq-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
@@ -7714,6 +8051,7 @@
 					"description": "Update the asset canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "3ldz4-aiaaa-aaaar-qaina-cai",
 							"target_canister_id": "3ldz4-aiaaa-aaaar-qaina-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
@@ -8129,6 +8467,7 @@
 					"description": "Proposal to add new NervousSystemFunction: grant_permission",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "3y5ko-7qaaa-aaaal-aaaaq-cai",
 							"target_canister_id": "3y5ko-7qaaa-aaaal-aaaaq-cai",
 							"validator_method_name": "validate_grant_permission",
@@ -8142,6 +8481,7 @@
 					"description": "Proposal to add new NervousSystemFunction: revoke_permission",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "3y5ko-7qaaa-aaaal-aaaaq-cai",
 							"target_canister_id": "3y5ko-7qaaa-aaaal-aaaaq-cai",
 							"validator_method_name": "validate_revoke_permission",
@@ -8155,6 +8495,7 @@
 					"description": "commit the batch that proposed by community who has Prepare permisson",
 					"function_type": {
 						"GenericNervousSystemFunction": {
+							"topic": null,
 							"validator_canister_id": "3y5ko-7qaaa-aaaal-aaaaq-cai",
 							"target_canister_id": "3y5ko-7qaaa-aaaal-aaaaq-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
