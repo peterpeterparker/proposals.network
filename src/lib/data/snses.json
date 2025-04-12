@@ -1674,7 +1674,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "eefpt-6yaaa-aaaam-adbxq-cai",
 							"target_canister_id": "tupjz-uyaaa-aaaag-qcjmq-cai",
 							"validator_method_name": "validate_transfer_position",
@@ -1688,7 +1688,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "ddmi3-laaaa-aaaah-qdbqa-cai",
 							"target_canister_id": "ddmi3-laaaa-aaaah-qdbqa-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
@@ -7154,7 +7154,7 @@
 		},
 		"meta": {
 			"url": "https://osjzm-oaaaa-aaaal-ajcoq-cai.icp0.io/",
-			"name": "ICPCC DAO LLC",
+			"name": "Swampies",
 			"description": "ICPCC DAO LLC is a community-owned and fully self-sustaining decentralized conference event series devoted to highlighting the ICP's technology and ecosystem.  This DAO is registered and legally recognized as a Non-Profit Marshall Islands DAO LLC.  According to the ICPCC Constitution, important proposals will be guided by an ICPCC Council made up of ICP ecosystem leaders elected by the DAO.  The ICPCC Council members will have no power to act on behalf of the DAO; they are simply vendors hired by the DAO to submit quality proposals for it to vote on.\n",
 			"logo": "/v1/sns/root/l7ra6-uqaaa-aaaaq-aadea-cai/logo.png"
 		},
