@@ -13,7 +13,7 @@
 </script>
 
 <InputPlaceholder {placeholder} {pinPlaceholder} dirty={dirty && nonNullish(value)}>
-	<div class:opacity-20={disabled} class="p-2.5 focus:outline-none w-full">
+	<div class:opacity-20={disabled} class="p-2.5 focus:outline-hidden w-full">
 		<Input
 			name="currency"
 			inputType="currency"

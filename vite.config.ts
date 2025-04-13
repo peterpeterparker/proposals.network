@@ -6,7 +6,6 @@ import { join } from 'node:path';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { defineConfig, loadEnv, type UserConfig } from 'vite';
-import tailwindcss from '@tailwindcss/vite';
 
 const file = fileURLToPath(new URL('package.json', import.meta.url));
 const json = readFileSync(file, 'utf8');
@@ -93,7 +92,7 @@ const dfxCanisterIds = ({ prefix }: { prefix?: string }): Record<string, string>
 };
 
 const config: UserConfig = {
-	plugins: [sveltekit(), tailwindcss()],
+	plugins: [sveltekit()],
 	css: {
 		preprocessorOptions: {
 			scss: {

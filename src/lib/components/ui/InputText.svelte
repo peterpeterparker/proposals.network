@@ -16,7 +16,7 @@
 		{disabled}
 		on:focus
 		class:opacity-20={disabled}
-		class="p-2.5 focus:outline-none w-full placeholder-black"
+		class="p-2.5 focus:outline-hidden w-full placeholder-black"
 		on:input={() => (dirty = true)}
 	/>
 </InputPlaceholder>
