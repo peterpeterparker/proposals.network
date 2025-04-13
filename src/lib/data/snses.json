@@ -1322,7 +1322,7 @@
 					"description": "grant permission to asset canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "SnsFrameworkManagement",
 							"validator_canister_id": "vyatz-hqaaa-aaaam-qauea-cai",
 							"target_canister_id": "vyatz-hqaaa-aaaam-qauea-cai",
 							"validator_method_name": "validate_grant_permission",
@@ -1336,7 +1336,7 @@
 					"description": "revoke permission to asset canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "SnsFrameworkManagement",
 							"validator_canister_id": "vyatz-hqaaa-aaaam-qauea-cai",
 							"target_canister_id": "vyatz-hqaaa-aaaam-qauea-cai",
 							"validator_method_name": "validate_revoke_permission",
@@ -1364,7 +1364,7 @@
 					"description": "Generic proposal to execute commands from platform orchestrator",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "74zq4-iqaaa-aaaam-ab53a-cai",
 							"target_canister_id": "74zq4-iqaaa-aaaam-ab53a-cai",
 							"validator_method_name": "validate_platform_orchestrator_generic_function",
@@ -2223,7 +2223,7 @@
 			["icrc1:decimals", { "Nat": [8] }],
 			["icrc1:name", { "Text": "Seers" }],
 			["icrc1:symbol", { "Text": "SEER" }],
-			["icrc1:fee", { "Nat": [100000] }],
+			["icrc1:fee", { "Nat": [100000000] }],
 			["icrc1:max_memo_length", { "Nat": [32] }]
 		],
 		"nervous_system_parameters": {
