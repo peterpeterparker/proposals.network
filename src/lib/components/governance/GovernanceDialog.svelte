@@ -50,7 +50,7 @@
 		<h2 class="mb-6 text-2xl">Which governance?</h2>
 
 		<div class="grid grid-flow-row gap-4 grid-cols-3">
-			{#each governances as governance}
+			{#each governances as governance (governance.id)}
 				<button
 					on:click={() => onSelectGovernance(governance.id)}
 					class="inline-flex justify-center sm:justify-start gap-1 align-middle border-black border-2 py-1 px-2.5 lg:rounded-md hover:bg-[#79F7FF] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:bg-[#00E1EF]"
