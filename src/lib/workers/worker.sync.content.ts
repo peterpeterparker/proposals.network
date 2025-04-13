@@ -18,7 +18,7 @@ export const syncContent = async ({ satellite }: WorkerSyncParams) => {
 		collection: 'content',
 		doc: {
 			key,
-			data: editableContent,
+			data: editableContent ?? '',
 			...(nonNullish(docContent) && { version: docContent.version })
 		}
 	});
