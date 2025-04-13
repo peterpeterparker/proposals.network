@@ -38,7 +38,7 @@
 		"postinstall": "npm run postinstall_auth && npm run postinstall_analytics"
 	},
 	"devDependencies": {
-		"@dfinity/identity-secp256k1": "^2.2.0",
+		"@dfinity/identity-secp256k1": "^2.4.1",
 		"@eslint/compat": "^1.2.8",
 		"@eslint/js": "^9.24.0",
 		"@junobuild/cli-tools": "^0.1.9",
@@ -72,13 +72,13 @@
 		"vitest": "^3.1.1"
 	},
 	"dependencies": {
-		"@dfinity/identity": "^2.2.0",
-		"@dfinity/ledger-icp": "^2.6.7",
-		"@dfinity/ledger-icrc": "^2.7.2",
-		"@dfinity/nns": "^8.2.1",
-		"@dfinity/principal": "^2.2.0",
-		"@dfinity/sns": "^3.2.8",
-		"@dfinity/utils": "^2.9.0",
+		"@dfinity/identity": "^2.4.1",
+		"@dfinity/ledger-icp": "^2.6.12",
+		"@dfinity/ledger-icrc": "^2.8.0",
+		"@dfinity/nns": "^8.4.0",
+		"@dfinity/principal": "^2.4.1",
+		"@dfinity/sns": "^3.5.0",
+		"@dfinity/utils": "^2.12.0",
 		"@junobuild/admin": "^0.2.0",
 		"@junobuild/analytics": "^0.1.8",
 		"@junobuild/core": "^0.1.11",
