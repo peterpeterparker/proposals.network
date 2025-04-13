@@ -14,7 +14,7 @@ import {
 	type SnsPercentage,
 	type SnsProposalData
 } from '@dfinity/sns';
-import type { NeuronId, ProposalData } from '@dfinity/sns/dist/candid/sns_governance';
+import type { NeuronId, ProposalData, Topic } from '@dfinity/sns/dist/candid/sns_governance';
 import { fromNullable, isNullish, nonNullish, toNullable } from '@dfinity/utils';
 
 export const convertNervousFunction = ({
@@ -28,6 +28,33 @@ export const convertNervousFunction = ({
 	description: toNullable(description),
 	function_type: nonNullish(function_type) ? toNullable(convertFunctionType(function_type)) : []
 });
+
+const convertOptionalStringToGenericNervousSystemFunctionTopic = (
+	value: string | null
+): [Topic] | [] => {
+	if (isNullish(value)) {
+		return toNullable();
+	}
+
+	switch (value) {
+		case 'DappCanisterManagement':
+			return toNullable({ DappCanisterManagement: null });
+		case 'DaoCommunitySettings':
+			return toNullable({ DaoCommunitySettings: null });
+		case 'ApplicationBusinessLogic':
+			return toNullable({ ApplicationBusinessLogic: null });
+		case 'CriticalDappOperations':
+			return toNullable({ CriticalDappOperations: null });
+		case 'TreasuryAssetManagement':
+			return toNullable({ TreasuryAssetManagement: null });
+		case 'Governance':
+			return toNullable({ Governance: null });
+		case 'SnsFrameworkManagement':
+			return toNullable({ SnsFrameworkManagement: null });
+	}
+
+	throw new Error('Unknown GenericNervousSystemFunction.Topic to decode proposal.');
+};
 
 const convertFunctionType = (functionType: CachedFunctionTypeDto): SnsFunctionType => {
 	if ('NativeNervousSystemFunction' in functionType) {
@@ -43,7 +70,10 @@ const convertFunctionType = (functionType: CachedFunctionTypeDto): SnsFunctionTy
 				GenericNervousSystemFunction.target_canister_id
 			),
 			validator_method_name: toNullable(GenericNervousSystemFunction.validator_method_name),
-			target_method_name: toNullable(GenericNervousSystemFunction.target_method_name)
+			target_method_name: toNullable(GenericNervousSystemFunction.target_method_name),
+			topic: convertOptionalStringToGenericNervousSystemFunctionTopic(
+				GenericNervousSystemFunction.topic
+			)
 		}
 	};
 };
