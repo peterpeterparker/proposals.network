@@ -13,6 +13,6 @@
 	on:click|stopPropagation={close}
 	on:keypress={($event) => handleKeyPress({ $event, callback: close })}
 	on:click
-	class={`fixed inset-0 ${transparent ? '' : 'bg-gray-800 opacity-80 backdrop-blur-sm'}`}
+	class={`fixed inset-0 ${transparent ? '' : 'bg-gray-800 opacity-80 backdrop-blur-xs'}`}
 	tabindex="-1"
 ></div>

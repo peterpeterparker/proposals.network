@@ -25,7 +25,7 @@
 				editorProps: {
 					attributes: {
 						class:
-							'prose dark:prose-invert prose-sm sm:prose-base lg:prose-lg xl:prose-2xl my-8 mx-5 focus:outline-none overflow-x-auto'
+							'prose dark:prose-invert prose-sm sm:prose-base lg:prose-lg xl:prose-2xl my-8 mx-5 focus:outline-hidden overflow-x-auto'
 					}
 				},
 				onUpdate: async ({ editor }) => {

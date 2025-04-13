@@ -11,7 +11,7 @@
 	class:py-24={!wide}
 	class:px-4={!wide}
 >
-	<div class=" lg:mx-auto lg:max-w-screen-2xl">
+	<div class=" lg:mx-auto lg:max-w-(--breakpoint-2xl)">
 		<slot />
 	</div>
 </section>

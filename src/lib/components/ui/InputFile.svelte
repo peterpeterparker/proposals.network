@@ -24,7 +24,7 @@
 		{placeholder}
 		{disabled}
 		class:opacity-20={disabled}
-		class="p-2.5 focus:outline-none w-full placeholder-black"
+		class="p-2.5 focus:outline-hidden w-full placeholder-black"
 		{accept}
 	/>
 
