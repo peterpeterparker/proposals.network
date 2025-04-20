@@ -7000,13 +7000,13 @@
 			["icrc1:decimals", { "Nat": [8] }],
 			["icrc1:name", { "Text": "Motoko" }],
 			["icrc1:symbol", { "Text": "MOTOKO" }],
-			["icrc1:fee", { "Nat": [100000000] }],
+			["icrc1:fee", { "Nat": [10000000] }],
 			["icrc1:max_memo_length", { "Nat": [32] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2592000,
 			"neuron_minimum_stake_e8s": 1000000000,
-			"reject_cost_e8s": 250000000000
+			"reject_cost_e8s": 25000000000
 		},
 		"parameters": {
 			"reserved_ids": [1002],
@@ -7275,6 +7275,18 @@
 					"id": 14,
 					"name": "Manage dapp canister settings",
 					"description": "Proposal to change canister settings for some dapp canisters.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 15,
+					"name": "Advance SNS target version",
+					"description": "Proposal to advance the target version of this SNS.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
