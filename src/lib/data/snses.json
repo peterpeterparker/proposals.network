@@ -1076,7 +1076,7 @@
 					"description": "grant permission to asset canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "74iy7-xqaaa-aaaaf-qagra-cai",
 							"target_canister_id": "74iy7-xqaaa-aaaaf-qagra-cai",
 							"validator_method_name": "validate_grant_permission",
@@ -1090,7 +1090,7 @@
 					"description": "revoke permission to asset canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "74iy7-xqaaa-aaaaf-qagra-cai",
 							"target_canister_id": "74iy7-xqaaa-aaaaf-qagra-cai",
 							"validator_method_name": "validate_revoke_permission",
@@ -1104,7 +1104,7 @@
 					"description": "commit the batch that proposed by community who has Prepare permisson",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "74iy7-xqaaa-aaaaf-qagra-cai",
 							"target_canister_id": "74iy7-xqaaa-aaaaf-qagra-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
@@ -1118,7 +1118,7 @@
 					"description": "grant permission to asset canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "va3nt-myaaa-aaaak-afjga-cai",
 							"target_canister_id": "va3nt-myaaa-aaaak-afjga-cai",
 							"validator_method_name": "validate_grant_permission",
@@ -1132,7 +1132,7 @@
 					"description": "commit the batch that proposed by community who has Prepare permission",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "va3nt-myaaa-aaaak-afjga-cai",
 							"target_canister_id": "va3nt-myaaa-aaaak-afjga-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
@@ -1146,7 +1146,7 @@
 					"description": "commit the batch that proposed by community who has Prepare permission",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "xcvai-qiaaa-aaaak-afowq-cai",
 							"target_canister_id": "xcvai-qiaaa-aaaak-afowq-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
@@ -1385,7 +1385,7 @@
 		},
 		"meta": {
 			"url": "https://yadjb-mqaaa-aaaan-qaqlq-cai.raw.ic0.app/",
-			"name": "ICGhost",
+			"name": "Ghost",
 			"description": "The First Decentralized Meme Coin on IC",
 			"logo": "/v1/sns/root/4m6il-zqaaa-aaaaq-aaa2a-cai/logo.png"
 		},
@@ -1397,7 +1397,7 @@
 			["icrc1:max_memo_length", { "Nat": [32] }]
 		],
 		"nervous_system_parameters": {
-			"neuron_minimum_dissolve_delay_to_vote_seconds": 604800,
+			"neuron_minimum_dissolve_delay_to_vote_seconds": 2592000,
 			"neuron_minimum_stake_e8s": 1000000000000,
 			"reject_cost_e8s": 10000000000000
 		},
@@ -2567,7 +2567,7 @@
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
 			"neuron_minimum_stake_e8s": 500000000,
-			"reject_cost_e8s": 12500000000
+			"reject_cost_e8s": 5555500000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -3521,6 +3521,34 @@
 							"target_canister_id": "buwm7-7yaaa-aaaar-qagva-cai",
 							"validator_method_name": "validate_icrc1_transfer",
 							"target_method_name": "icrc1_transfer"
+						}
+					}
+				},
+				{
+					"id": 88003,
+					"name": "Transfer position on ICP Swap",
+					"description": null,
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "Governance",
+							"validator_canister_id": "kv5pw-kyaaa-aaaag-qcyya-cai",
+							"target_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
+							"validator_method_name": "transferPosition",
+							"target_method_name": "validate_icpswap_transfer_position"
+						}
+					}
+				},
+				{
+					"id": 88004,
+					"name": "Transfer position on ICP Swap",
+					"description": null,
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "Governance",
+							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
+							"target_canister_id": "kv5pw-kyaaa-aaaag-qcyya-cai",
+							"validator_method_name": "validate_icpswap_transfer_position",
+							"target_method_name": "transferPosition"
 						}
 					}
 				}
@@ -7152,6 +7180,20 @@
 							"target_canister_id": "6fbif-qqaaa-aaaam-aeifq-cai",
 							"validator_method_name": "validate_transfer_to_principal",
 							"target_method_name": "transfer_to_principal"
+						}
+					}
+				},
+				{
+					"id": 1004,
+					"name": "Transfer MOTOKOINS",
+					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
+							"target_canister_id": "r5ola-uyaaa-aaaag-at3za-cai",
+							"validator_method_name": "validate_icrc1_transfer",
+							"target_method_name": "icrc1_transfer"
 						}
 					}
 				}
