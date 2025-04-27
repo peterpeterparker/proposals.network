@@ -199,6 +199,20 @@
 							"target_method_name": "manage_neuron"
 						}
 					}
+				},
+				{
+					"id": 2005,
+					"name": "Set module",
+					"description": null,
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "Governance",
+							"validator_canister_id": "heixj-ryaaa-aaaal-qsm5a-cai",
+							"target_canister_id": "heixj-ryaaa-aaaal-qsm5a-cai",
+							"validator_method_name": "validate_set_module",
+							"target_method_name": "set_module"
+						}
+					}
 				}
 			]
 		}
@@ -1398,7 +1412,7 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2592000,
-			"neuron_minimum_stake_e8s": 1000000000000,
+			"neuron_minimum_stake_e8s": 30000000000000000,
 			"reject_cost_e8s": 10000000000000
 		},
 		"parameters": {
@@ -1729,13 +1743,13 @@
 		},
 		"icrc1_metadata": [
 			["icrc1:decimals", { "Nat": [8] }],
-			["icrc1:name", { "Text": "BoomDAO" }],
-			["icrc1:symbol", { "Text": "BOOM" }],
-			["icrc1:fee", { "Nat": [100000] }],
+			["icrc1:name", { "Text": "Mimic Clay" }],
+			["icrc1:symbol", { "Text": "CLAY" }],
+			["icrc1:fee", { "Nat": [1000000] }],
 			["icrc1:max_memo_length", { "Nat": [32] }]
 		],
 		"nervous_system_parameters": {
-			"neuron_minimum_dissolve_delay_to_vote_seconds": 2628000,
+			"neuron_minimum_dissolve_delay_to_vote_seconds": 172800,
 			"neuron_minimum_stake_e8s": 500000000,
 			"reject_cost_e8s": 10000000000
 		},
@@ -2680,7 +2694,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "3xwpq-ziaaa-aaaah-qcn4a-cai",
 							"target_canister_id": "3xwpq-ziaaa-aaaah-qcn4a-cai",
 							"validator_method_name": "setMaxTokenValidate",
@@ -2694,7 +2708,7 @@
 					"description": null,
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "3xwpq-ziaaa-aaaah-qcn4a-cai",
 							"target_canister_id": "3xwpq-ziaaa-aaaah-qcn4a-cai",
 							"validator_method_name": "addTokenValidate",
@@ -2708,7 +2722,7 @@
 					"description": "This will enable the SONIC SNS Governance canister to manage WTN neurons, allowing it to perform actions such as voting on WTN proposals",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "3xwpq-ziaaa-aaaah-qcn4a-cai",
 							"target_canister_id": "jfnic-kaaaa-aaaaq-aadla-cai",
 							"validator_method_name": "manageWTNValidate",
