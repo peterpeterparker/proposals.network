@@ -85,9 +85,9 @@ export const findSnses = async () => {
 		const filterIcrc1Metadata = (icrc1_metadata) =>
 			icrc1_metadata.filter(([key, _]) => key !== 'icrc1:logo');
 
-		// Few SNSes are deprecated such as CTS
+		// Few SNSes are deprecated such as CTS and Seers
 		const filterDeprecatedSnses = ({ canister_ids: { root_canister_id } }) =>
-			!['ibahq-taaaa-aaaaq-aadna-cai'].includes(root_canister_id);
+			!['ibahq-taaaa-aaaaq-aadna-cai', 'u67kc-jyaaa-aaaaq-aabpq-cai'].includes(root_canister_id);
 
 		const activeSnses = snses.filter(filterDeprecatedSnses);
 
@@ -118,7 +118,7 @@ export const findSnses = async () => {
 
 		writeFileSync(join(DATA_FOLDER, 'snses.json'), JSON.stringify(snsesMetadata));
 
-		await saveLogos(snses);
+		await saveLogos(activeSnses);
 	} catch (err) {
 		throw new Error('Error querying Snses', err);
 	}
