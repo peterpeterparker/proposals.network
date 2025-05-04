@@ -26,7 +26,7 @@
 			"reject_cost_e8s": 5000000000000
 		},
 		"parameters": {
-			"reserved_ids": [1001],
+			"reserved_ids": [1001, 2005],
 			"functions": [
 				{
 					"id": 0,
@@ -201,16 +201,16 @@
 					}
 				},
 				{
-					"id": 2005,
-					"name": "Set module",
-					"description": null,
+					"id": 2006,
+					"name": "Toolkit service - manage neurons",
+					"description": "Manage neurons managed by the toolkit service canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": "Governance",
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "heixj-ryaaa-aaaal-qsm5a-cai",
 							"target_canister_id": "heixj-ryaaa-aaaal-qsm5a-cai",
-							"validator_method_name": "validate_set_module",
-							"target_method_name": "set_module"
+							"validator_method_name": "tk_service_validate_manage_neuron",
+							"target_method_name": "tk_service_manage_neuron"
 						}
 					}
 				}
@@ -1743,14 +1743,14 @@
 		},
 		"icrc1_metadata": [
 			["icrc1:decimals", { "Nat": [8] }],
-			["icrc1:name", { "Text": "Mimic Clay" }],
-			["icrc1:symbol", { "Text": "CLAY" }],
+			["icrc1:name", { "Text": "BOOM" }],
+			["icrc1:symbol", { "Text": "BOOM" }],
 			["icrc1:fee", { "Nat": [1000000] }],
 			["icrc1:max_memo_length", { "Nat": [32] }]
 		],
 		"nervous_system_parameters": {
-			"neuron_minimum_dissolve_delay_to_vote_seconds": 172800,
-			"neuron_minimum_stake_e8s": 500000000,
+			"neuron_minimum_dissolve_delay_to_vote_seconds": 86400,
+			"neuron_minimum_stake_e8s": 1500000000000000,
 			"reject_cost_e8s": 10000000000
 		},
 		"parameters": {
@@ -2694,7 +2694,7 @@
 					"description": "Proposal to manage an ICP neuron under control of the Gold DAO.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "j4jiq-sqaaa-aaaap-ab23a-cai",
 							"target_canister_id": "j4jiq-sqaaa-aaaap-ab23a-cai",
 							"validator_method_name": "manage_nns_neuron_validate",
@@ -3312,7 +3312,7 @@
 					"description": "Manage vectors in the neuron pylon.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "6jvpj-sqaaa-aaaaj-azwnq-cai",
 							"target_canister_id": "6jvpj-sqaaa-aaaaj-azwnq-cai",
 							"validator_method_name": "icrc55_command_validate",
