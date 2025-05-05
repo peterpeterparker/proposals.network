@@ -1749,7 +1749,7 @@
 			["icrc1:max_memo_length", { "Nat": [32] }]
 		],
 		"nervous_system_parameters": {
-			"neuron_minimum_dissolve_delay_to_vote_seconds": 86400,
+			"neuron_minimum_dissolve_delay_to_vote_seconds": 172800,
 			"neuron_minimum_stake_e8s": 1500000000000000,
 			"reject_cost_e8s": 10000000000
 		},
@@ -5531,7 +5531,7 @@
 					"description": "Function to submit fixture data for a match.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"validator_method_name": "validateSubmitFixtureData",
@@ -5587,7 +5587,7 @@
 					"description": "Function to create a new player.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"target_canister_id": "52fzd-2aaaa-aaaal-qmzsa-cai",
 							"validator_method_name": "validateCreatePlayer",
@@ -7046,7 +7046,7 @@
 			["icrc1:max_memo_length", { "Nat": [32] }]
 		],
 		"nervous_system_parameters": {
-			"neuron_minimum_dissolve_delay_to_vote_seconds": 31557600,
+			"neuron_minimum_dissolve_delay_to_vote_seconds": 15778800,
 			"neuron_minimum_stake_e8s": 1000000,
 			"reject_cost_e8s": 2000000000
 		},
