@@ -32,6 +32,9 @@
 
 		if (!DISABLE_ANALYTICS && !LOCAL && nonNullish(ORBITER_ID)) {
 			initOrbiter({
+				options: {
+					userAgentParser: true
+				},
 				satelliteId: SATELLITE_ID!,
 				orbiterId: ORBITER_ID,
 				...(DEV && { container: HOST })
