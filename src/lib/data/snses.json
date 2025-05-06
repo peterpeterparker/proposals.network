@@ -213,6 +213,20 @@
 							"target_method_name": "tk_service_manage_neuron"
 						}
 					}
+				},
+				{
+					"id": 2007,
+					"name": "Transfer CLAY",
+					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
+							"target_canister_id": "4c4fd-caaaa-aaaaq-aaa3a-cai",
+							"validator_method_name": "validate_icrc1_transfer",
+							"target_method_name": "icrc1_transfer"
+						}
+					}
 				}
 			]
 		}
@@ -1398,21 +1412,21 @@
 			"ledger_canister_id": "4c4fd-caaaa-aaaaq-aaa3a-cai"
 		},
 		"meta": {
-			"url": "https://yadjb-mqaaa-aaaan-qaqlq-cai.raw.ic0.app/",
-			"name": "Ghost",
-			"description": "The First Decentralized Meme Coin on IC",
+			"url": "https://github.com/dragginzgame/mimic",
+			"name": "Mimic",
+			"description": "Description cooming soon",
 			"logo": "/v1/sns/root/4m6il-zqaaa-aaaaq-aaa2a-cai/logo.png"
 		},
 		"icrc1_metadata": [
 			["icrc1:decimals", { "Nat": [8] }],
-			["icrc1:name", { "Text": "GHOST" }],
-			["icrc1:symbol", { "Text": "GHOST" }],
+			["icrc1:name", { "Text": "Mimic Clay" }],
+			["icrc1:symbol", { "Text": "CLAY" }],
 			["icrc1:fee", { "Nat": [100000000] }],
 			["icrc1:max_memo_length", { "Nat": [32] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2592000,
-			"neuron_minimum_stake_e8s": 30000000000000000,
+			"neuron_minimum_stake_e8s": 5000000000000,
 			"reject_cost_e8s": 10000000000000
 		},
 		"parameters": {
@@ -1749,8 +1763,8 @@
 			["icrc1:max_memo_length", { "Nat": [32] }]
 		],
 		"nervous_system_parameters": {
-			"neuron_minimum_dissolve_delay_to_vote_seconds": 172800,
-			"neuron_minimum_stake_e8s": 1500000000000000,
+			"neuron_minimum_dissolve_delay_to_vote_seconds": 86400,
+			"neuron_minimum_stake_e8s": 500000000,
 			"reject_cost_e8s": 10000000000
 		},
 		"parameters": {
@@ -7020,6 +7034,20 @@
 							"target_method_name": "icrc1_transfer"
 						}
 					}
+				},
+				{
+					"id": 1005,
+					"name": "Toolkit Service - Manage Neuron",
+					"description": null,
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "pwjva-bqaaa-aaaal-qsniq-cai",
+							"target_canister_id": "pwjva-bqaaa-aaaal-qsniq-cai",
+							"validator_method_name": "tk_service_validate_manage_neuron",
+							"target_method_name": "tk_service_manage_neuron"
+						}
+					}
 				}
 			]
 		}
@@ -7463,22 +7491,22 @@
 			"ledger_canister_id": "np5km-uyaaa-aaaaq-aadrq-cai"
 		},
 		"meta": {
-			"url": "https://qu2gy-uqaaa-aaaal-qcv6a-cai.icp0.io",
-			"name": "DOGMI",
-			"description": "DOGMI is an ICP memecoin that aims to bolster the ICP ecosystem through innovative and engaging marketing strategies decided by the community.\n",
+			"url": "https://www.pokedbots.com",
+			"name": "PokedBots",
+			"description": "A collection of 10,000 unique ROBOTS!  This DAO is going to serve as the controller for all PokedStudio collections on toko.app.  We will allow migration from Entrepot (web -1) to toko.app (web3) so don't worry, all NFTs will be safe.",
 			"logo": "/v1/sns/root/nb7he-piaaa-aaaaq-aadqq-cai/logo.png"
 		},
 		"icrc1_metadata": [
 			["icrc1:decimals", { "Nat": [8] }],
-			["icrc1:name", { "Text": "DOGMI" }],
-			["icrc1:symbol", { "Text": "DOGMI" }],
+			["icrc1:name", { "Text": "Poked" }],
+			["icrc1:symbol", { "Text": "POKED" }],
 			["icrc1:fee", { "Nat": [1215752192, 23] }],
 			["icrc1:max_memo_length", { "Nat": [32] }]
 		],
 		"nervous_system_parameters": {
-			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
-			"neuron_minimum_stake_e8s": 1000000000000,
-			"reject_cost_e8s": 1500000000000
+			"neuron_minimum_dissolve_delay_to_vote_seconds": 63115200,
+			"neuron_minimum_stake_e8s": 50000000000000,
+			"reject_cost_e8s": 500000000000000
 		},
 		"parameters": {
 			"reserved_ids": [],
