@@ -227,6 +227,20 @@
 							"target_method_name": "icrc1_transfer"
 						}
 					}
+				},
+				{
+					"id": 2008,
+					"name": "Transfer NTN",
+					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
+							"target_canister_id": "f54if-eqaaa-aaaaq-aacea-cai",
+							"validator_method_name": "validate_icrc1_transfer",
+							"target_method_name": "icrc1_transfer"
+						}
+					}
 				}
 			]
 		}
@@ -7358,7 +7372,7 @@
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 7890048,
 			"neuron_minimum_stake_e8s": 10000000000,
-			"reject_cost_e8s": 10000000000
+			"reject_cost_e8s": 100000000000
 		},
 		"parameters": {
 			"reserved_ids": [],
