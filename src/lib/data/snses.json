@@ -241,6 +241,20 @@
 							"target_method_name": "icrc1_transfer"
 						}
 					}
+				},
+				{
+					"id": 2009,
+					"name": "Transfer ICS",
+					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
+							"target_canister_id": "ca6gz-lqaaa-aaaaq-aacwa-cai",
+							"validator_method_name": "validate_icrc1_transfer",
+							"target_method_name": "icrc1_transfer"
+						}
+					}
 				}
 			]
 		}
