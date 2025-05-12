@@ -8415,7 +8415,7 @@
 					"description": "Proposal to add new NervousSystemFunction: grant_permission",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "3y5ko-7qaaa-aaaal-aaaaq-cai",
 							"target_canister_id": "3y5ko-7qaaa-aaaal-aaaaq-cai",
 							"validator_method_name": "validate_grant_permission",
@@ -8429,7 +8429,7 @@
 					"description": "Proposal to add new NervousSystemFunction: revoke_permission",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "3y5ko-7qaaa-aaaal-aaaaq-cai",
 							"target_canister_id": "3y5ko-7qaaa-aaaal-aaaaq-cai",
 							"validator_method_name": "validate_revoke_permission",
@@ -8443,7 +8443,7 @@
 					"description": "commit the batch that proposed by community who has Prepare permisson",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "3y5ko-7qaaa-aaaal-aaaaq-cai",
 							"target_canister_id": "3y5ko-7qaaa-aaaal-aaaaq-cai",
 							"validator_method_name": "validate_commit_proposed_batch",
