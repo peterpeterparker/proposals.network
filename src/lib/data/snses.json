@@ -7096,7 +7096,7 @@
 		},
 		"icrc1_metadata": [
 			["icrc1:decimals", { "Nat": [8] }],
-			["icrc1:name", { "Text": "SWAMPDAO" }],
+			["icrc1:name", { "Text": "Swampies" }],
 			["icrc1:symbol", { "Text": "SWAMP" }],
 			["icrc1:fee", { "Nat": [10000] }],
 			["icrc1:max_memo_length", { "Nat": [32] }]
@@ -7104,7 +7104,7 @@
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 15778800,
 			"neuron_minimum_stake_e8s": 1000000,
-			"reject_cost_e8s": 2000000000
+			"reject_cost_e8s": 10000000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -8845,6 +8845,12 @@
 					"id": 15,
 					"name": "Advance SNS target version",
 					"description": "Proposal to advance the target version of this SNS.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 16,
+					"name": "Set topics for custom proposals",
+					"description": "Proposal to set the topics for custom SNS proposals.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
