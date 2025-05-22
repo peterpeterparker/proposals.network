@@ -1589,6 +1589,20 @@
 							"target_method_name": "transferPosition"
 						}
 					}
+				},
+				{
+					"id": 2001,
+					"name": "Toolkit service - manage neurons",
+					"description": "Manage neurons managed by the toolkit service canister",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "kntjr-haaaa-aaaal-qsnxq-cai",
+							"target_canister_id": "kntjr-haaaa-aaaal-qsnxq-cai",
+							"validator_method_name": "tk_service_validate_manage_neuron",
+							"target_method_name": "tk_service_manage_neuron"
+						}
+					}
 				}
 			]
 		}
@@ -2750,7 +2764,7 @@
 					"description": "Proposal to manage the recipients of the disbursed maturity of the NNS neurons.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "j4jiq-sqaaa-aaaap-ab23a-cai",
 							"target_canister_id": "j4jiq-sqaaa-aaaap-ab23a-cai",
 							"validator_method_name": "manage_reward_recipients_validate",
@@ -2764,7 +2778,7 @@
 					"description": "Proposal to adjust the daily amount of GLDGov transferred from the reserve pool to the rewards pool of the sns_rewards canister",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "iyehc-lqaaa-aaaap-ab25a-cai",
 							"target_canister_id": "iyehc-lqaaa-aaaap-ab25a-cai",
 							"validator_method_name": "set_reserve_transfer_amounts_validate",
@@ -2778,7 +2792,7 @@
 					"description": "Proposal to adjust the daily amount of GLDGov burned from the reserve pool of the sns_rewards canister.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "iyehc-lqaaa-aaaap-ab25a-cai",
 							"target_canister_id": "iyehc-lqaaa-aaaap-ab25a-cai",
 							"validator_method_name": "set_daily_gldgov_burn_rate_validate",
@@ -2792,7 +2806,7 @@
 					"description": "Proposal to update the tokens in which rewards are paid to Gold DAO neurons.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "iyehc-lqaaa-aaaap-ab25a-cai",
 							"target_canister_id": "iyehc-lqaaa-aaaap-ab25a-cai",
 							"validator_method_name": "set_reward_token_types_validate",
@@ -2806,7 +2820,7 @@
 					"description": "Proposal to update the wallet which receives the ICP for cycles management of the Gold DAO canisters.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "j4jiq-sqaaa-aaaap-ab23a-cai",
 							"target_canister_id": "j4jiq-sqaaa-aaaap-ab23a-cai",
 							"validator_method_name": "manage_cycle_management_account_validate",
@@ -7680,6 +7694,20 @@
 							"target_canister_id": "ry5ih-gaaaa-aaaai-aqayq-cai",
 							"validator_method_name": "validate_icrc1_transfer",
 							"target_method_name": "icrc1_transfer"
+						}
+					}
+				},
+				{
+					"id": 10001,
+					"name": "Toolkit service - manage neurons",
+					"description": "Manage neurons managed by the toolkit service canister",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "kkspf-kyaaa-aaaal-qsnxa-cai",
+							"target_canister_id": "kkspf-kyaaa-aaaal-qsnxa-cai",
+							"validator_method_name": "tk_service_validate_manage_neuron",
+							"target_method_name": "tk_service_manage_neuron"
 						}
 					}
 				}
