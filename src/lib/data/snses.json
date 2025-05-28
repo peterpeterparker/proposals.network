@@ -1211,6 +1211,20 @@
 					}
 				},
 				{
+					"id": 1007,
+					"name": "call_nns_manage_neuron_api",
+					"description": "This function calls the manage_neuron API of the NNS governance canister.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "cmwbp-2qaaa-aaaak-ak2bq-cai",
+							"target_canister_id": "rrkah-fqaaa-aaaaa-aaaaq-cai",
+							"validator_method_name": "validate_manage_neuron",
+							"target_method_name": "manage_neuron"
+						}
+					}
+				},
+				{
 					"id": 101000,
 					"name": "Call `trade_tokens` on the KINIC trading pair canister at the CYCLES-TRANSFER-STATION.",
 					"description": null,
@@ -2897,6 +2911,34 @@
 							"target_method_name": "commit_proposed_batch"
 						}
 					}
+				},
+				{
+					"id": 3000,
+					"name": "Transfer liquidity position on ICPSwap",
+					"description": "This method allows to transfer a liquidity position on ICPSwap, owned by the Gold DAO SNS governance canister",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "g5je6-yaaaa-aaaap-ahkza-cai",
+							"target_canister_id": "k46ek-4qaaa-aaaag-qcyzq-cai",
+							"validator_method_name": "dex_transfer_position_validate",
+							"target_method_name": "transferPosition"
+						}
+					}
+				},
+				{
+					"id": 3001,
+					"name": "Transfer liquidity position on Sonic",
+					"description": "This method allows to transfer a liquidity position on Sonic, owned by the Gold DAO SNS governance canister",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "g5je6-yaaaa-aaaap-ahkza-cai",
+							"target_canister_id": "3dyvk-bqaaa-aaaak-qtr3q-cai",
+							"validator_method_name": "dex_transfer_position_validate",
+							"target_method_name": "transferPosition"
+						}
+					}
 				}
 			]
 		}
@@ -3200,7 +3242,7 @@
 					"description": "Transfer ckBTC from the SNS treasury",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "ApplicationBusinessLogic",
 							"validator_canister_id": "uwkt7-miaaa-aaaal-qdeuq-cai",
 							"target_canister_id": "mxzaz-hqaaa-aaaar-qaada-cai",
 							"validator_method_name": "validate_icrc1_transfer",
@@ -3340,7 +3382,7 @@
 					"description": "Manage NTN neuron owned by Neutrinite",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "2kusx-raaaa-aaaal-qjaxq-cai",
 							"target_canister_id": "oypg6-faaaa-aaaaq-aadza-cai",
 							"validator_method_name": "validate_manage_neuron",
@@ -3429,6 +3471,20 @@
 							"target_canister_id": "kv5pw-kyaaa-aaaag-qcyya-cai",
 							"validator_method_name": "validate_icpswap_transfer_position",
 							"target_method_name": "transferPosition"
+						}
+					}
+				},
+				{
+					"id": 88005,
+					"name": "Transfer cICP",
+					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
+							"target_canister_id": "n6tkf-tqaaa-aaaal-qsneq-cai",
+							"validator_method_name": "validate_icrc1_transfer",
+							"target_method_name": "icrc1_transfer"
 						}
 					}
 				}
@@ -7117,7 +7173,7 @@
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 15778800,
-			"neuron_minimum_stake_e8s": 1000000,
+			"neuron_minimum_stake_e8s": 100000000,
 			"reject_cost_e8s": 10000000000
 		},
 		"parameters": {
@@ -7224,6 +7280,20 @@
 					"name": "Set topics for custom proposals",
 					"description": "Proposal to set the topics for custom SNS proposals.",
 					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 1001,
+					"name": "Toolkit service - manage neurons",
+					"description": "Manage neurons managed by the toolkit service canister",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "kdrez-4qaaa-aaaal-qsnwq-cai",
+							"target_canister_id": "kdrez-4qaaa-aaaal-qsnwq-cai",
+							"validator_method_name": "tk_service_validate_manage_neuron",
+							"target_method_name": "tk_service_manage_neuron"
+						}
+					}
 				}
 			]
 		}
@@ -9282,6 +9352,20 @@
 					"name": "Set topics for custom proposals",
 					"description": "Proposal to set the topics for custom SNS proposals.",
 					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 1001,
+					"name": "addToken",
+					"description": "Registers a token as trusted given its ledger id.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "CriticalDappOperations",
+							"validator_canister_id": "th44n-iyaaa-aaaan-qzz5a-cai",
+							"target_canister_id": "vxqw7-iqaaa-aaaan-qzziq-cai",
+							"validator_method_name": "validate_addToken",
+							"target_method_name": "addToken"
+						}
+					}
 				}
 			]
 		}
