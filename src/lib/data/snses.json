@@ -18,7 +18,9 @@
 			["icrc1:name", { "Text": "Draggin Karma Points" }],
 			["icrc1:symbol", { "Text": "DKP" }],
 			["icrc1:fee", { "Nat": [100000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2629800,
@@ -255,6 +257,20 @@
 							"target_method_name": "icrc1_transfer"
 						}
 					}
+				},
+				{
+					"id": 2010,
+					"name": "Transfer cICP",
+					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
+							"target_canister_id": "n6tkf-tqaaa-aaaal-qsneq-cai",
+							"validator_method_name": "validate_icrc1_transfer",
+							"target_method_name": "icrc1_transfer"
+						}
+					}
 				}
 			]
 		}
@@ -278,7 +294,9 @@
 			["icrc1:name", { "Text": "CHAT" }],
 			["icrc1:symbol", { "Text": "CHAT" }],
 			["icrc1:fee", { "Nat": [100000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2628000,
@@ -1014,7 +1032,9 @@
 			["icrc1:name", { "Text": "KINIC" }],
 			["icrc1:symbol", { "Text": "KINIC" }],
 			["icrc1:fee", { "Nat": [100000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2628000,
@@ -1274,7 +1294,9 @@
 			["icrc1:name", { "Text": "DOLR AI" }],
 			["icrc1:symbol", { "Text": "DOLR" }],
 			["icrc1:fee", { "Nat": [100000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 7889400,
@@ -1464,7 +1486,9 @@
 			["icrc1:name", { "Text": "Mimic Clay" }],
 			["icrc1:symbol", { "Text": "CLAY" }],
 			["icrc1:fee", { "Nat": [100000000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2592000,
@@ -1640,7 +1664,9 @@
 			["icrc1:name", { "Text": "DecideAI" }],
 			["icrc1:symbol", { "Text": "DCD" }],
 			["icrc1:fee", { "Nat": [10000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2629800,
@@ -1816,7 +1842,9 @@
 			["icrc1:name", { "Text": "BOOM" }],
 			["icrc1:symbol", { "Text": "BOOM" }],
 			["icrc1:fee", { "Nat": [1000000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 86400,
@@ -2132,7 +2160,9 @@
 			["icrc1:name", { "Text": "CatalyzeDAO" }],
 			["icrc1:symbol", { "Text": "CTZ" }],
 			["icrc1:fee", { "Nat": [100000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2629000,
@@ -2308,7 +2338,9 @@
 			["icrc1:name", { "Text": "Nuance" }],
 			["icrc1:symbol", { "Text": "NUA" }],
 			["icrc1:fee", { "Nat": [100000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 5260032,
@@ -2470,7 +2502,9 @@
 			["icrc1:name", { "Text": "Sonic" }],
 			["icrc1:symbol", { "Text": "SONIC" }],
 			["icrc1:fee", { "Nat": [100000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
@@ -2962,7 +2996,9 @@
 			["icrc1:name", { "Text": "TRAX" }],
 			["icrc1:symbol", { "Text": "TRAX" }],
 			["icrc1:fee", { "Nat": [100000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
@@ -3101,6 +3137,20 @@
 							"target_method_name": "manage_neuron"
 						}
 					}
+				},
+				{
+					"id": 5003,
+					"name": "Transfer cICP",
+					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
+							"target_canister_id": "n6tkf-tqaaa-aaaal-qsneq-cai",
+							"validator_method_name": "validate_icrc1_transfer",
+							"target_method_name": "icrc1_transfer"
+						}
+					}
 				}
 			]
 		}
@@ -3124,7 +3174,9 @@
 			["icrc1:name", { "Text": "Neutrinite" }],
 			["icrc1:symbol", { "Text": "NTN" }],
 			["icrc1:fee", { "Nat": [10000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
@@ -3510,7 +3562,9 @@
 			["icrc1:name", { "Text": "Sneed DAO" }],
 			["icrc1:symbol", { "Text": "SNEED" }],
 			["icrc1:fee", { "Nat": [1000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
@@ -3756,7 +3810,9 @@
 			["icrc1:name", { "Text": "ICLighthouse DAO" }],
 			["icrc1:symbol", { "Text": "ICL" }],
 			["icrc1:fee", { "Nat": [1000000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
@@ -5262,7 +5318,9 @@
 			["icrc1:name", { "Text": "ELNA" }],
 			["icrc1:symbol", { "Text": "ELNA" }],
 			["icrc1:fee", { "Nat": [100000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
@@ -5785,10 +5843,12 @@
 			["icrc1:name", { "Text": "ICPanda" }],
 			["icrc1:symbol", { "Text": "PANDA" }],
 			["icrc1:fee", { "Nat": [10000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
-			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
+			"neuron_minimum_dissolve_delay_to_vote_seconds": 604800,
 			"neuron_minimum_stake_e8s": 100000000000,
 			"reject_cost_e8s": 700000000
 		},
@@ -6213,7 +6273,9 @@
 			["icrc1:name", { "Text": "ICPSwap Token" }],
 			["icrc1:symbol", { "Text": "ICS" }],
 			["icrc1:fee", { "Nat": [1000000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
@@ -6536,6 +6598,34 @@
 					}
 				},
 				{
+					"id": 1204,
+					"name": "SetAdmins",
+					"description": null,
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
+							"validator_canister_id": "7vygu-3yaaa-aaaag-qjxaq-cai",
+							"target_canister_id": "aeloy-wyaaa-aaaar-qanbq-cai",
+							"validator_method_name": "setAdminsValidate",
+							"target_method_name": "setAdmins"
+						}
+					}
+				},
+				{
+					"id": 1205,
+					"name": "BatchAddInstallerControllers",
+					"description": null,
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
+							"validator_canister_id": "7vygu-3yaaa-aaaag-qjxaq-cai",
+							"target_canister_id": "4mmnk-kiaaa-aaaag-qbllq-cai",
+							"validator_method_name": "batchAddInstallerControllersValidate",
+							"target_method_name": "batchAddInstallerControllers"
+						}
+					}
+				},
+				{
 					"id": 1701,
 					"name": "Transfer",
 					"description": null,
@@ -6697,7 +6787,9 @@
 			["icrc1:name", { "Text": "Yuku AI" }],
 			["icrc1:symbol", { "Text": "YUKU" }],
 			["icrc1:fee", { "Nat": [1000000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 7890048,
@@ -6821,7 +6913,7 @@
 			"ledger_canister_id": "bliq2-niaaa-aaaaq-aac4q-cai"
 		},
 		"meta": {
-			"url": "https://wbdy5-yyaaa-aaaap-abysq-cai.icp0.io/",
+			"url": "https://estatedao.org/",
 			"name": "EstateDAO",
 			"description": "A vacation real estate tokenization and rental platform on Internet Computer, enabling users to invest in vacation real estate with investments as low as USD 100.\n",
 			"logo": "/v1/sns/root/abhsa-pyaaa-aaaaq-aac3q-cai/logo.png"
@@ -6831,7 +6923,9 @@
 			["icrc1:name", { "Text": "ESTATE" }],
 			["icrc1:symbol", { "Text": "EST" }],
 			["icrc1:fee", { "Nat": [100000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 7890048,
@@ -6965,7 +7059,9 @@
 			["icrc1:name", { "Text": "Motoko" }],
 			["icrc1:symbol", { "Text": "MOTOKO" }],
 			["icrc1:fee", { "Nat": [10000000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2592000,
@@ -7169,7 +7265,9 @@
 			["icrc1:name", { "Text": "Swampies" }],
 			["icrc1:symbol", { "Text": "SWAMP" }],
 			["icrc1:fee", { "Nat": [10000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 15778800,
@@ -7613,7 +7711,9 @@
 			["icrc1:name", { "Text": "Poked" }],
 			["icrc1:symbol", { "Text": "POKED" }],
 			["icrc1:fee", { "Nat": [1215752192, 23] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 63115200,
@@ -7803,7 +7903,9 @@
 			["icrc1:name", { "Text": "ICVC" }],
 			["icrc1:symbol", { "Text": "ICVC" }],
 			["icrc1:fee", { "Nat": [10000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 15780096,
@@ -7979,7 +8081,9 @@
 			["icrc1:name", { "Text": "KongSwap" }],
 			["icrc1:symbol", { "Text": "KONG" }],
 			["icrc1:fee", { "Nat": [10000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
@@ -8127,7 +8231,9 @@
 			["icrc1:name", { "Text": "FomoWell" }],
 			["icrc1:symbol", { "Text": "WELL" }],
 			["icrc1:fee", { "Nat": [100000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
@@ -8261,7 +8367,9 @@
 			["icrc1:name", { "Text": "ALICE" }],
 			["icrc1:symbol", { "Text": "ALICE" }],
 			["icrc1:fee", { "Nat": [500000000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 86400,
@@ -8395,7 +8503,9 @@
 			["icrc1:name", { "Text": "NFID Wallet" }],
 			["icrc1:symbol", { "Text": "NFIDW" }],
 			["icrc1:fee", { "Nat": [10000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
@@ -8705,7 +8815,9 @@
 			["icrc1:name", { "Text": "ICExplorer" }],
 			["icrc1:symbol", { "Text": "ICE" }],
 			["icrc1:fee", { "Nat": [100000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
@@ -8973,7 +9085,9 @@
 			["icrc1:name", { "Text": "Cecil The Lion DAO" }],
 			["icrc1:symbol", { "Text": "CECIL" }],
 			["icrc1:fee", { "Nat": [1000000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 94672800,
@@ -9107,7 +9221,9 @@
 			["icrc1:name", { "Text": "ICPEx" }],
 			["icrc1:symbol", { "Text": "ICX" }],
 			["icrc1:fee", { "Nat": [100000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
@@ -9241,7 +9357,9 @@
 			["icrc1:name", { "Text": "TACO DAO Token" }],
 			["icrc1:symbol", { "Text": "TACO" }],
 			["icrc1:fee", { "Nat": [10000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 604800,
