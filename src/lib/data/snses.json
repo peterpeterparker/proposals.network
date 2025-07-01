@@ -133,6 +133,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 2000,
 					"name": "Transfer nICP",
 					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
@@ -406,6 +412,12 @@
 					"id": 16,
 					"name": "Set topics for custom proposals",
 					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -1147,6 +1159,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1000,
 					"name": "grant_permission",
 					"description": "grant permission to asset canister",
@@ -1409,6 +1427,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1000,
 					"name": "grant_permission",
 					"description": "grant permission to asset canister",
@@ -1601,6 +1625,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1000,
 					"name": "burn",
 					"description": null,
@@ -1639,6 +1669,20 @@
 							"target_canister_id": "kntjr-haaaa-aaaal-qsnxq-cai",
 							"validator_method_name": "tk_service_validate_manage_neuron",
 							"target_method_name": "tk_service_manage_neuron"
+						}
+					}
+				},
+				{
+					"id": 2002,
+					"name": "Transfer cICP",
+					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
+							"target_canister_id": "n6tkf-tqaaa-aaaal-qsneq-cai",
+							"validator_method_name": "validate_icrc1_transfer",
+							"target_method_name": "icrc1_transfer"
 						}
 					}
 				}
@@ -1776,6 +1820,12 @@
 					"id": 16,
 					"name": "Set topics for custom proposals",
 					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -1954,6 +2004,12 @@
 					"id": 16,
 					"name": "Set topics for custom proposals",
 					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -2275,6 +2331,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1002,
 					"name": "transfer DKP",
 					"description": "transfer DKP from Catalyze",
@@ -2453,6 +2515,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1010,
 					"name": "nuance_assets_commit_proposed_batch",
 					"description": "Commit frontend canister assets via proposal",
@@ -2617,6 +2685,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1000,
 					"name": "setMaxToken",
 					"description": null,
@@ -2680,7 +2754,9 @@
 			["icrc1:name", { "Text": "GOLDAO" }],
 			["icrc1:symbol", { "Text": "GOLDAO" }],
 			["icrc1:fee", { "Nat": [100000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 7890048,
@@ -3111,6 +3187,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 5001,
 					"name": "Generic Function to Dissolve NTN Neurons owned by TRAX DAO",
 					"description": "Start dissolving NTN DAO neurons held by our DAO.",
@@ -3286,6 +3368,12 @@
 					"id": 16,
 					"name": "Set topics for custom proposals",
 					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -3677,6 +3765,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 2000,
 					"name": "set_canister_ids",
 					"description": "Set the ledger and index canister ids of the old and new Sneed tokens.",
@@ -3785,6 +3879,20 @@
 							"target_canister_id": "ok64y-uiaaa-aaaag-qdcbq-cai",
 							"validator_method_name": "validate_deploy_icrc1_tokens",
 							"target_method_name": "deploy_icrc1_tokens"
+						}
+					}
+				},
+				{
+					"id": 3002,
+					"name": "Transcendence Pylon: ICRC55 Command",
+					"description": "Manage vectors in the transcendence pylon.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "togwv-zqaaa-aaaal-qr7aa-cai",
+							"target_canister_id": "togwv-zqaaa-aaaal-qr7aa-cai",
+							"validator_method_name": "icrc55_command_validate",
+							"target_method_name": "icrc55_command"
 						}
 					}
 				}
@@ -3922,6 +4030,12 @@
 					"id": 16,
 					"name": "Set topics for custom proposals",
 					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -5431,6 +5545,12 @@
 					"name": "Set topics for custom proposals",
 					"description": "Proposal to set the topics for custom SNS proposals.",
 					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
 		}
@@ -5958,6 +6078,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1000,
 					"name": "Commit proposed assets for upgrading the frontend canister",
 					"description": "Commit proposed assets for upgrading the frontend canister.",
@@ -6238,6 +6364,20 @@
 					}
 				},
 				{
+					"id": 1117,
+					"name": "`admin_add_allowed_apis` function",
+					"description": "It is used to add API to enable more APIs for ic_cose_canister service.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
+							"validator_canister_id": "n3bau-gaaaa-aaaaj-qa4oq-cai",
+							"target_canister_id": "n3bau-gaaaa-aaaaj-qa4oq-cai",
+							"validator_method_name": "validate2_admin_add_allowed_apis",
+							"target_method_name": "admin_add_allowed_apis"
+						}
+					}
+				},
+				{
 					"id": 2000,
 					"name": "`transferPosition` function",
 					"description": "It is used to transfer position in ICPSwap.",
@@ -6385,6 +6525,12 @@
 					"id": 16,
 					"name": "Set topics for custom proposals",
 					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -6900,6 +7046,12 @@
 					"name": "Set topics for custom proposals",
 					"description": "Proposal to set the topics for custom SNS proposals.",
 					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
 		}
@@ -7035,6 +7187,12 @@
 					"id": 16,
 					"name": "Set topics for custom proposals",
 					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
@@ -7174,6 +7332,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1000,
 					"name": "transferPosition",
 					"description": null,
@@ -7240,6 +7404,20 @@
 							"target_canister_id": "pwjva-bqaaa-aaaal-qsniq-cai",
 							"validator_method_name": "tk_service_validate_manage_neuron",
 							"target_method_name": "tk_service_manage_neuron"
+						}
+					}
+				},
+				{
+					"id": 1006,
+					"name": "Transfer cICP",
+					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
+							"target_canister_id": "n6tkf-tqaaa-aaaal-qsneq-cai",
+							"validator_method_name": "validate_icrc1_transfer",
+							"target_method_name": "icrc1_transfer"
 						}
 					}
 				}
@@ -7380,6 +7558,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1001,
 					"name": "Toolkit service - manage neurons",
 					"description": "Manage neurons managed by the toolkit service canister",
@@ -7390,6 +7574,20 @@
 							"target_canister_id": "kdrez-4qaaa-aaaal-qsnwq-cai",
 							"validator_method_name": "tk_service_validate_manage_neuron",
 							"target_method_name": "tk_service_manage_neuron"
+						}
+					}
+				},
+				{
+					"id": 1002,
+					"name": "Transfer cICP",
+					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
+							"target_canister_id": "n6tkf-tqaaa-aaaal-qsneq-cai",
+							"validator_method_name": "validate_icrc1_transfer",
+							"target_method_name": "icrc1_transfer"
 						}
 					}
 				}
@@ -7415,7 +7613,9 @@
 			["icrc1:name", { "Text": "ORIGYN" }],
 			["icrc1:symbol", { "Text": "OGY" }],
 			["icrc1:fee", { "Nat": [200000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 31560192,
@@ -7826,6 +8026,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1000,
 					"name": "Add a new custom SNS function set_canister_ids",
 					"description": "Add a new custom SNS function to the old DOGMI SNS Token Swap Canister",
@@ -7878,6 +8084,20 @@
 							"target_canister_id": "kkspf-kyaaa-aaaal-qsnxa-cai",
 							"validator_method_name": "tk_service_validate_manage_neuron",
 							"target_method_name": "tk_service_manage_neuron"
+						}
+					}
+				},
+				{
+					"id": 10002,
+					"name": "Transfer cICP",
+					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "xho54-tyaaa-aaaap-antuq-cai",
+							"target_canister_id": "n6tkf-tqaaa-aaaal-qsneq-cai",
+							"validator_method_name": "validate_icrc1_transfer",
+							"target_method_name": "icrc1_transfer"
 						}
 					}
 				}
@@ -8015,6 +8235,12 @@
 					"id": 16,
 					"name": "Set topics for custom proposals",
 					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -8196,6 +8422,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1234,
 					"name": "Update kong frontend",
 					"description": "Update the asset canister",
@@ -8344,6 +8576,12 @@
 					"name": "Set topics for custom proposals",
 					"description": "Proposal to set the topics for custom SNS proposals.",
 					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
 		}
@@ -8480,6 +8718,12 @@
 					"name": "Set topics for custom proposals",
 					"description": "Proposal to set the topics for custom SNS proposals.",
 					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
 		}
@@ -8615,6 +8859,12 @@
 					"id": 16,
 					"name": "Set topics for custom proposals",
 					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -8928,6 +9178,12 @@
 					"name": "Set topics for custom proposals",
 					"description": "Proposal to set the topics for custom SNS proposals.",
 					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
 		}
@@ -9198,6 +9454,12 @@
 					"name": "Set topics for custom proposals",
 					"description": "Proposal to set the topics for custom SNS proposals.",
 					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
 		}
@@ -9334,6 +9596,12 @@
 					"name": "Set topics for custom proposals",
 					"description": "Proposal to set the topics for custom SNS proposals.",
 					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
 		}
@@ -9469,6 +9737,12 @@
 					"id": 16,
 					"name": "Set topics for custom proposals",
 					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
