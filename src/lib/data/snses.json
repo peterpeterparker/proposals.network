@@ -967,6 +967,20 @@
 					}
 				},
 				{
+					"id": 10000,
+					"name": "Update OpenChat frontend assets",
+					"description": "This will commit a newly prepared batch of assets which have been uploaded to the asset canister by a principal which has been granted the \"Prepare\" permission.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
+							"validator_canister_id": "6hsbt-vqaaa-aaaaf-aaafq-cai",
+							"target_canister_id": "6hsbt-vqaaa-aaaaf-aaafq-cai",
+							"validator_method_name": "validate_commit_proposed_batch",
+							"target_method_name": "commit_proposed_batch"
+						}
+					}
+				},
+				{
 					"id": 101000,
 					"name": "Call trade_tokens on the CHAT/CYCLES trading pair canister at the CYCLES-TRANSFER-STATION.",
 					"description": null,
@@ -3198,7 +3212,7 @@
 					"description": "Start dissolving NTN DAO neurons held by our DAO.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "eqsml-lyaaa-aaaaq-aacdq-cai",
 							"target_canister_id": "eqsml-lyaaa-aaaaq-aacdq-cai",
 							"validator_method_name": "validate_manage_neuron",
@@ -3212,7 +3226,7 @@
 					"description": "Start dissolving NTN DAO neurons held by our DAO.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": null,
+							"topic": "TreasuryAssetManagement",
 							"validator_canister_id": "2kusx-raaaa-aaaal-qjaxq-cai",
 							"target_canister_id": "eqsml-lyaaa-aaaaq-aacdq-cai",
 							"validator_method_name": "validate_manage_neuron",
@@ -5574,7 +5588,9 @@
 			["icrc1:name", { "Text": "ICFC" }],
 			["icrc1:symbol", { "Text": "ICFC" }],
 			["icrc1:fee", { "Nat": [100000] }],
-			["icrc1:max_memo_length", { "Nat": [32] }]
+			["icrc1:max_memo_length", { "Nat": [32] }],
+			["icrc103:public_allowances", { "Text": "true" }],
+			["icrc103:max_take_value", { "Nat": [500] }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2592000,
@@ -5687,6 +5703,12 @@
 					"id": 16,
 					"name": "Set topics for custom proposals",
 					"description": "Proposal to set the topics for custom SNS proposals.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 17,
+					"name": "Register SNS extension",
+					"description": "Proposal to register a new SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -7216,7 +7238,7 @@
 			["icrc1:decimals", { "Nat": [8] }],
 			["icrc1:name", { "Text": "Motoko" }],
 			["icrc1:symbol", { "Text": "MOTOKO" }],
-			["icrc1:fee", { "Nat": [10000000] }],
+			["icrc1:fee", { "Nat": [1000000] }],
 			["icrc1:max_memo_length", { "Nat": [32] }],
 			["icrc103:public_allowances", { "Text": "true" }],
 			["icrc103:max_take_value", { "Nat": [500] }]
@@ -7224,7 +7246,7 @@
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2592000,
 			"neuron_minimum_stake_e8s": 1000000000,
-			"reject_cost_e8s": 25000000000
+			"reject_cost_e8s": 100000000000
 		},
 		"parameters": {
 			"reserved_ids": [1002],
@@ -7418,6 +7440,20 @@
 							"target_canister_id": "n6tkf-tqaaa-aaaal-qsneq-cai",
 							"validator_method_name": "validate_icrc1_transfer",
 							"target_method_name": "icrc1_transfer"
+						}
+					}
+				},
+				{
+					"id": 1007,
+					"name": "commit_proposed_batch_frontend",
+					"description": null,
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
+							"validator_canister_id": "ydpnf-caaaa-aaaag-abzvq-cai",
+							"target_canister_id": "ydpnf-caaaa-aaaag-abzvq-cai",
+							"validator_method_name": "validate_commit_proposed_batch",
+							"target_method_name": "commit_proposed_batch"
 						}
 					}
 				}
@@ -7910,7 +7946,7 @@
 			["icrc1:decimals", { "Nat": [8] }],
 			["icrc1:name", { "Text": "Poked" }],
 			["icrc1:symbol", { "Text": "POKED" }],
-			["icrc1:fee", { "Nat": [1215752192, 23] }],
+			["icrc1:fee", { "Nat": [100000000] }],
 			["icrc1:max_memo_length", { "Nat": [32] }],
 			["icrc103:public_allowances", { "Text": "true" }],
 			["icrc103:max_take_value", { "Nat": [500] }]
@@ -8455,7 +8491,7 @@
 		"meta": {
 			"url": "https://fomowell.com/",
 			"name": "FomoWell",
-			"description": "FomoWell is a fair launch platform for Web3 projects on the ICP blockchain.\n",
+			"description": "A High-Performance Bitcoin Asset Issuance and Trading Platform, Powered by @Dfinity",
 			"logo": "/v1/sns/root/pww3s-sqaaa-aaaaq-aaedq-cai/logo.png"
 		},
 		"icrc1_metadata": [
@@ -9622,7 +9658,7 @@
 		},
 		"icrc1_metadata": [
 			["icrc1:decimals", { "Nat": [8] }],
-			["icrc1:name", { "Text": "TACO DAO Token" }],
+			["icrc1:name", { "Text": "TACO" }],
 			["icrc1:symbol", { "Text": "TACO" }],
 			["icrc1:fee", { "Nat": [10000] }],
 			["icrc1:max_memo_length", { "Nat": [32] }],
@@ -9751,7 +9787,7 @@
 					"description": "Registers a token as trusted given its ledger id.",
 					"function_type": {
 						"GenericNervousSystemFunction": {
-							"topic": "CriticalDappOperations",
+							"topic": "DappCanisterManagement",
 							"validator_canister_id": "th44n-iyaaa-aaaan-qzz5a-cai",
 							"target_canister_id": "vxqw7-iqaaa-aaaan-qzziq-cai",
 							"validator_method_name": "validate_addToken",
