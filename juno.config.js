@@ -19,9 +19,9 @@ export default defineConfig({
 		},
 		predeploy: ['npm run build'],
 		precompress: {
-            mode: "replace",
-			algorithm: "brotli"
-        }
+			mode: 'replace',
+			algorithm: 'brotli'
+		}
 	},
 	orbiter: {
 		id: '3iier-sqaaa-aaaal-aczaa-cai'
