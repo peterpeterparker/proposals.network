@@ -146,6 +146,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 2000,
 					"name": "Transfer nICP",
 					"description": "Transfer tokens from the SNS treasury via icrc1_transfer",
@@ -432,6 +438,12 @@
 					"id": 18,
 					"name": "Execute SNS extension operation",
 					"description": "Proposal to execute an operation on a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -1200,6 +1212,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1000,
 					"name": "grant_permission",
 					"description": "grant permission to asset canister",
@@ -1475,6 +1493,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1000,
 					"name": "grant_permission",
 					"description": "grant permission to asset canister",
@@ -1677,6 +1701,12 @@
 					"id": 18,
 					"name": "Execute SNS extension operation",
 					"description": "Proposal to execute an operation on a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -1885,6 +1915,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 2761,
 					"name": "transferPosition",
 					"description": null,
@@ -2073,6 +2109,12 @@
 					"id": 18,
 					"name": "Execute SNS extension operation",
 					"description": "Proposal to execute an operation on a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -2407,6 +2449,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1002,
 					"name": "transfer DKP",
 					"description": "transfer DKP from Catalyze",
@@ -2598,6 +2646,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1010,
 					"name": "nuance_assets_commit_proposed_batch",
 					"description": "Commit frontend canister assets via proposal",
@@ -2658,7 +2712,7 @@
 			"reject_cost_e8s": 5555500000000
 		},
 		"parameters": {
-			"reserved_ids": [],
+			"reserved_ids": [1000],
 			"functions": [
 				{
 					"id": 0,
@@ -2775,18 +2829,10 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
-					"id": 1000,
-					"name": "setMaxToken",
-					"description": null,
-					"function_type": {
-						"GenericNervousSystemFunction": {
-							"topic": "ApplicationBusinessLogic",
-							"validator_canister_id": "3xwpq-ziaaa-aaaah-qcn4a-cai",
-							"target_canister_id": "3xwpq-ziaaa-aaaah-qcn4a-cai",
-							"validator_method_name": "setMaxTokenValidate",
-							"target_method_name": "setMaxTokens"
-						}
-					}
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
 					"id": 1001,
@@ -3297,6 +3343,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 5001,
 					"name": "Generic Function to Dissolve NTN Neurons owned by TRAX DAO",
 					"description": "Start dissolving NTN DAO neurons held by our DAO.",
@@ -3485,6 +3537,12 @@
 					"id": 18,
 					"name": "Execute SNS extension operation",
 					"description": "Proposal to execute an operation on a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -3889,6 +3947,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 2000,
 					"name": "set_canister_ids",
 					"description": "Set the ledger and index canister ids of the old and new Sneed tokens.",
@@ -4189,6 +4253,12 @@
 					"id": 18,
 					"name": "Execute SNS extension operation",
 					"description": "Proposal to execute an operation on a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -5753,6 +5823,12 @@
 					"name": "Execute SNS extension operation",
 					"description": "Proposal to execute an operation on a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
 		}
@@ -5904,6 +5980,12 @@
 					"id": 18,
 					"name": "Execute SNS extension operation",
 					"description": "Proposal to execute an operation on a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -6172,7 +6254,7 @@
 		"meta": {
 			"url": "https://panda.fans",
 			"name": "ICPanda",
-			"description": "A technical panda fully running on the Internet Computer blockchain, building chain-native infrastructures and practical Web3 apps. About us: https://dmsg.net/panda",
+			"description": "We’re building the foundational infrastructure and applications that empower AI agents to thrive as first-class citizens in the Web3 ecosystem. Anda.AI | dMsg.net",
 			"logo": "/v1/sns/root/d7wvo-iiaaa-aaaaq-aacsq-cai/logo.png"
 		},
 		"icrc1_metadata": [
@@ -6305,6 +6387,12 @@
 					"id": 18,
 					"name": "Execute SNS extension operation",
 					"description": "Proposal to execute an operation on a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -6762,6 +6850,12 @@
 					"id": 18,
 					"name": "Execute SNS extension operation",
 					"description": "Proposal to execute an operation on a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -7290,6 +7384,12 @@
 					"name": "Execute SNS extension operation",
 					"description": "Proposal to execute an operation on a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
 		}
@@ -7439,6 +7539,12 @@
 					"name": "Execute SNS extension operation",
 					"description": "Proposal to execute an operation on a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
 		}
@@ -7587,6 +7693,12 @@
 					"id": 18,
 					"name": "Execute SNS extension operation",
 					"description": "Proposal to execute an operation on a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -7848,6 +7960,12 @@
 					"id": 18,
 					"name": "Execute SNS extension operation",
 					"description": "Proposal to execute an operation on a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -8354,6 +8472,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1000,
 					"name": "Add a new custom SNS function set_canister_ids",
 					"description": "Add a new custom SNS function to the old DOGMI SNS Token Swap Canister",
@@ -8791,6 +8915,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1234,
 					"name": "Update kong frontend",
 					"description": "Update the asset canister",
@@ -8952,6 +9082,12 @@
 					"name": "Execute SNS extension operation",
 					"description": "Proposal to execute an operation on a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
 		}
@@ -9101,6 +9237,12 @@
 					"name": "Execute SNS extension operation",
 					"description": "Proposal to execute an operation on a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
 		}
@@ -9249,6 +9391,12 @@
 					"id": 18,
 					"name": "Execute SNS extension operation",
 					"description": "Proposal to execute an operation on a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
@@ -9575,6 +9723,12 @@
 					"name": "Execute SNS extension operation",
 					"description": "Proposal to execute an operation on a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
 		}
@@ -9873,6 +10027,12 @@
 					"name": "Execute SNS extension operation",
 					"description": "Proposal to execute an operation on a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
 		}
@@ -10022,6 +10182,12 @@
 					"name": "Execute SNS extension operation",
 					"description": "Proposal to execute an operation on a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
 		}
@@ -10170,6 +10336,12 @@
 					"id": 18,
 					"name": "Execute SNS extension operation",
 					"description": "Proposal to execute an operation on a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
