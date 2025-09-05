@@ -26,12 +26,17 @@ type AssetNoContent = record {
 };
 type AssetsUpgradeOptions = record { clear_existing_assets : opt bool };
 type AuthenticationConfig = record {
+  updated_at : opt nat64;
+  created_at : opt nat64;
+  version : opt nat64;
   internet_identity : opt AuthenticationConfigInternetIdentity;
+  rules : opt AuthenticationRules;
 };
 type AuthenticationConfigInternetIdentity = record {
   derivation_origin : opt text;
   external_alternative_origins : opt vec text;
 };
+type AuthenticationRules = record { allowed_callers : vec principal };
 type CollectionType = variant { Db; Storage };
 type CommitBatch = record {
   batch_id : nat;
@@ -59,7 +64,12 @@ type CustomDomain = record {
   version : opt nat64;
   bn_id : opt text;
 };
-type DbConfig = record { max_memory_size : opt ConfigMaxMemorySize };
+type DbConfig = record {
+  updated_at : opt nat64;
+  created_at : opt nat64;
+  version : opt nat64;
+  max_memory_size : opt ConfigMaxMemorySize;
+};
 type DelDoc = record { version : opt nat64 };
 type DelRule = record { version : opt nat64 };
 type DeleteControllersArgs = record { controllers : vec principal };
@@ -187,6 +197,11 @@ type SegmentsDeploymentOptions = record {
   mission_control_version : opt text;
   satellite_version : opt text;
 };
+type SetAuthenticationConfig = record {
+  version : opt nat64;
+  internet_identity : opt AuthenticationConfigInternetIdentity;
+  rules : opt AuthenticationRules;
+};
 type SetController = record {
   metadata : vec record { text; text };
   scope : ControllerScope;
@@ -195,6 +210,10 @@ type SetController = record {
 type SetControllersArgs = record {
   controller : SetController;
   controllers : vec principal;
+};
+type SetDbConfig = record {
+  version : opt nat64;
+  max_memory_size : opt ConfigMaxMemorySize;
 };
 type SetDoc = record {
   data : blob;
@@ -212,10 +231,22 @@ type SetRule = record {
   write : Permission;
   max_changes_per_user : opt nat32;
 };
-type StorageConfig = record {
+type SetStorageConfig = record {
   iframe : opt StorageConfigIFrame;
   rewrites : vec record { text; text };
   headers : vec record { text; vec record { text; text } };
+  version : opt nat64;
+  max_memory_size : opt ConfigMaxMemorySize;
+  raw_access : opt StorageConfigRawAccess;
+  redirects : opt vec record { text; StorageConfigRedirect };
+};
+type StorageConfig = record {
+  iframe : opt StorageConfigIFrame;
+  updated_at : opt nat64;
+  rewrites : vec record { text; text };
+  headers : vec record { text; vec record { text; text } };
+  created_at : opt nat64;
+  version : opt nat64;
   max_memory_size : opt ConfigMaxMemorySize;
   raw_access : opt StorageConfigRawAccess;
   redirects : opt vec record { text; StorageConfigRedirect };
@@ -258,6 +289,7 @@ service : () -> {
   commit_asset_upload : (CommitBatch) -> ();
   commit_proposal : (CommitProposal) -> (null);
   commit_proposal_asset_upload : (CommitBatch) -> ();
+  commit_proposal_many_assets_upload : (vec CommitBatch) -> ();
   count_assets : (text, ListParams) -> (nat64) query;
   count_collection_assets : (text) -> (nat64) query;
   count_collection_docs : (text) -> (nat64) query;
@@ -299,6 +331,9 @@ service : () -> {
   init_asset_upload : (InitAssetKey) -> (InitUploadResult);
   init_proposal : (ProposalType) -> (nat, Proposal);
   init_proposal_asset_upload : (InitAssetKey, nat) -> (InitUploadResult);
+  init_proposal_many_assets_upload : (vec InitAssetKey, nat) -> (
+      vec record { text; InitUploadResult },
+    );
   list_assets : (text, ListParams) -> (ListResults) query;
   list_controllers : () -> (vec record { principal; Controller }) query;
   list_custom_domains : () -> (vec record { text; CustomDomain }) query;
@@ -307,18 +342,18 @@ service : () -> {
   list_rules : (CollectionType, ListRulesParams) -> (ListRulesResults) query;
   memory_size : () -> (MemorySize) query;
   reject_proposal : (CommitProposal) -> (null);
-  set_auth_config : (AuthenticationConfig) -> ();
+  set_auth_config : (SetAuthenticationConfig) -> (AuthenticationConfig);
   set_controllers : (SetControllersArgs) -> (
       vec record { principal; Controller },
     );
   set_custom_domain : (text, opt text) -> ();
-  set_db_config : (DbConfig) -> ();
+  set_db_config : (SetDbConfig) -> (DbConfig);
   set_doc : (text, text, SetDoc) -> (Doc);
   set_many_docs : (vec record { text; text; SetDoc }) -> (
       vec record { text; Doc },
     );
   set_rule : (CollectionType, text, SetRule) -> (Rule);
-  set_storage_config : (StorageConfig) -> ();
+  set_storage_config : (SetStorageConfig) -> (StorageConfig);
   submit_proposal : (nat) -> (nat, Proposal);
   upload_asset_chunk : (UploadChunk) -> (UploadChunkResult);
   upload_proposal_asset_chunk : (UploadChunk) -> (UploadChunkResult);
