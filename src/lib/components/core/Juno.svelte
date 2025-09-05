@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
-	import { authSubscribe, initJuno } from '@junobuild/core';
+	import { onAuthStateChange, initSatellite } from '@junobuild/core';
 	import { userStore } from '$lib/stores/user.store';
 	import { isNullish, nonNullish } from '@dfinity/utils';
 	import { displayAndCleanLogoutMsg, toastAndReload } from '$lib/services/auth.services';
@@ -28,7 +28,7 @@
 			return;
 		}
 
-		unsubscribe = authSubscribe((user) => userStore.set(user));
+		unsubscribe = onAuthStateChange((user) => userStore.set(user));
 
 		if (!DISABLE_ANALYTICS && !LOCAL && nonNullish(ORBITER_ID)) {
 			initOrbiter({
@@ -42,7 +42,7 @@
 		}
 
 		await Promise.all([
-			initJuno({
+			initSatellite({
 				...env,
 				workers: {
 					auth: true
