@@ -6,7 +6,7 @@
 
 <input
 	bind:value
-	class="w-96 border-black border-2 p-2.5 focus:outline-hidden focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] transition-all"
+	class="bg-white w-96 border-black border-2 p-2.5 focus:outline-hidden focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] transition-all"
 	{placeholder}
 	{disabled}
 	class:opacity-20={disabled}
