@@ -17,7 +17,19 @@ export default defineConfig({
 				}
 			]
 		},
-		predeploy: ['npm run build']
+		predeploy: ['npm run build'],
+		precompress: [
+			{
+				pattern: '**/*.+(js|mjs|css)',
+				algorithm: 'brotli',
+				mode: 'replace'
+			},
+			{
+				pattern: '**/*.html',
+				algorithm: 'brotli',
+				mode: 'both'
+			}
+		]
 	},
 	orbiter: {
 		id: '3iier-sqaaa-aaaal-aczaa-cai'

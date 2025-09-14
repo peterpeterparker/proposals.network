@@ -46,7 +46,14 @@ const transformImg = (img: string): string => {
 	const shouldEscape = isNullish(src) || src.startsWith('data:image');
 	const imageHtml = shouldEscape
 		? escapeHtml(img)
-		: imageToLinkRenderer({ href: src, title: title ?? null, text: alt, type: 'image', raw: src });
+		: imageToLinkRenderer({
+				href: src,
+				title: title ?? null,
+				text: alt,
+				type: 'image',
+				raw: src,
+				tokens: []
+			});
 
 	return imageHtml;
 };

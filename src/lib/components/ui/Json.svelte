@@ -108,7 +108,7 @@
 		>
 		<!-- children -->
 		<ul>
-			{#each children as [key, value]}
+			{#each children as [key, value] (key)}
 				<li class="pl-2">
 					<svelte:self json={value} _key={key} {defaultExpandedLevel} _level={_level + 1} />
 				</li>

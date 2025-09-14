@@ -1,6 +1,6 @@
 [package]
 name = "satellite"
-version = "0.0.2"
+version = "0.0.4"
 edition = "2021"
 publish = false
 
@@ -8,12 +8,11 @@ publish = false
 crate-type = ["cdylib"]
 
 [dependencies]
-candid = "0.10.13"
-ic-cdk = "0.17.1"
-ic-cdk-macros = "0.17.1"
+candid = "0.10.14"
+ic-cdk = "0.18.5"
 serde = "1.0.217"
 serde_cbor = "0.11.2"
-junobuild-satellite = { version = "0.0.22", default-features = false, features = ["on_delete_doc", "assert_delete_doc"] }
-junobuild-macros = "0.0.4"
-junobuild-utils = "0.0.4"
+junobuild-satellite = { version = "0.2.5", default-features = false, features = ["on_delete_doc", "assert_delete_doc"] }
+junobuild-macros = "0.1.1"
+junobuild-utils = "0.1.3"
 

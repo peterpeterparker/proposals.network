@@ -1,9 +1,11 @@
-@import './global/body';
-@import './global/table';
-@import './global/font-faces';
-@import './global/fonts';
-@import './global/variables';
-@import './global/selection';
-@import './global/tiptap';
-@import './global/display';
-@import './global/select';
+@use 'sass:meta';
+
+@include meta.load-css('global/body');
+@include meta.load-css('global/table');
+@include meta.load-css('global/font-faces');
+@include meta.load-css('global/fonts');
+@include meta.load-css('global/variables');
+@include meta.load-css('global/selection');
+@include meta.load-css('global/tiptap');
+@include meta.load-css('global/display');
+@include meta.load-css('global/select');

@@ -31,7 +31,7 @@
 		class="absolute right-0 top-0 bottom-0 flex flex-col lg:hidden"
 		transition:fade={{ duration: 150 }}
 	>
-		{#each r as row}
+		{#each r as row (row)}
 			<ButtonView on:click={() => trigger(row)} ariaLabel={rowAriaLabel} icon={rowActionIcon} />
 		{/each}
 	</div>

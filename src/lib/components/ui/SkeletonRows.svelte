@@ -14,9 +14,9 @@
 	$: c = Array.from({ length: columns - 1 }, (_, i) => i);
 </script>
 
-{#each r as _row}
+{#each r as row (row)}
 	<tr>
-		{#each c as _column}
+		{#each c as column (column)}
 			<td><SkeletonText /></td>
 		{/each}
 

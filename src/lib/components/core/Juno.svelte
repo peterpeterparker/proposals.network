@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
-	import { authSubscribe, initJuno } from '@junobuild/core';
+	import { onAuthStateChange, initSatellite } from '@junobuild/core';
 	import { userStore } from '$lib/stores/user.store';
-	import { isNullish } from '@dfinity/utils';
+	import { isNullish, nonNullish } from '@dfinity/utils';
 	import { displayAndCleanLogoutMsg, toastAndReload } from '$lib/services/auth.services';
 	import { junoEnvironment } from '$lib/utils/juno.utils';
 	import { toasts } from '$lib/stores/toasts.store';
@@ -28,24 +28,26 @@
 			return;
 		}
 
-		unsubscribe = authSubscribe((user) => userStore.set(user));
+		unsubscribe = onAuthStateChange((user) => userStore.set(user));
+
+		if (!DISABLE_ANALYTICS && !LOCAL && nonNullish(ORBITER_ID)) {
+			initOrbiter({
+				options: {
+					userAgentParser: true
+				},
+				satelliteId: SATELLITE_ID!,
+				orbiterId: ORBITER_ID,
+				...(DEV && { container: HOST })
+			});
+		}
 
 		await Promise.all([
-			initJuno({
+			initSatellite({
 				...env,
 				workers: {
 					auth: true
 				}
-			}),
-			...(DISABLE_ANALYTICS || LOCAL || isNullish(ORBITER_ID)
-				? []
-				: [
-						initOrbiter({
-							satelliteId: SATELLITE_ID!,
-							orbiterId: ORBITER_ID,
-							...(DEV && { container: HOST })
-						})
-					])
+			})
 		]);
 
 		displayAndCleanLogoutMsg();

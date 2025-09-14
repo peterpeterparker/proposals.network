@@ -20,6 +20,7 @@ interface GenericNervousSystemFunctionDto {
 	target_canister_id: string | null;
 	validator_method_name: string | null;
 	target_method_name: string | null;
+	topic: string | null;
 }
 
 export type CachedFunctionTypeDto =
