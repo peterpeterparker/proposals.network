@@ -138,8 +138,6 @@
 {/if}
 
 <style lang="postcss">
-	@reference '../../../app.css';
-
 	.root,
 	.root ~ ul,
 	.root ~ span {

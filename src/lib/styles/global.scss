@@ -1,11 +1,88 @@
 @use 'sass:meta';
 
-@include meta.load-css('global/body');
-@include meta.load-css('global/table');
-@include meta.load-css('global/font-faces');
-@include meta.load-css('global/fonts');
-@include meta.load-css('global/variables');
-@include meta.load-css('global/selection');
-@include meta.load-css('global/tiptap');
-@include meta.load-css('global/display');
-@include meta.load-css('global/select');
+@import 'tailwindcss';
+
+@theme {
+  --font-sans:
+          Inter, sans-serif, ui-sans-serif, system-ui, sans-serif,
+          'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  --color-inherit: inherit;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-black: rgb(0 0 0);
+  --color-white: rgb(255 255 255);
+
+  --color-violet-100: #a5b4fb;
+  --color-violet-200: #a8a6ff;
+  --color-violet-300: #918efa;
+  --color-violet-400: #807dfa;
+
+  --color-pink-200: #ffa6f6;
+  --color-pink-300: #fa8cef;
+  --color-pink-400: #fa7fee;
+
+  --color-red-200: #ff9f9f;
+  --color-red-300: #fa7a7a;
+  --color-red-400: #f76363;
+
+  --color-orange-200: #ffc29f;
+  --color-orange-300: #ff965b;
+  --color-orange-400: #fa8543;
+
+  --color-yellow-200: #fff59f;
+  --color-yellow-300: #fff066;
+  --color-yellow-400: #ffe500;
+
+  --color-lime-100: #c6fab4;
+  --color-lime-200: #b8ff9f;
+  --color-lime-300: #9dfc7c;
+  --color-lime-400: #7df752;
+
+  --color-cyan-200: #a6faff;
+  --color-cyan-300: #79f7ff;
+  --color-cyan-400: #53f2fc;
+
+  --color-gray-50: #f6f7f9;
+  --color-gray-100: #eceef2;
+  --color-gray-200: #d5dae2;
+  --color-gray-300: #b0bac9;
+  --color-gray-400: #8594ab;
+  --color-gray-500: #667891;
+  --color-gray-600: #516078;
+  --color-gray-700: #424e62;
+  --color-gray-800: #394353;
+  --color-gray-900: #343b48;
+  --color-gray-950: #22262f;
+
+  --animate-spin-slow: spin 25s linear infinite;
+  --animate-spin-medium: spin 20s linear infinite;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
+  @include meta.load-css('global/body');
+  @include meta.load-css('global/table');
+  @include meta.load-css('global/font-faces');
+  @include meta.load-css('global/fonts');
+  @include meta.load-css('global/variables');
+  @include meta.load-css('global/selection');
+  @include meta.load-css('global/tiptap');
+  @include meta.load-css('global/display');
+  @include meta.load-css('global/select');
+}
