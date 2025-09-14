@@ -18,7 +18,7 @@
 </script>
 
 <div
-	class="tiptap w-full focus:outline-none bg-white border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)] lg:rounded-md overflow-hidden mb-8 h-full"
+	class="tiptap w-full focus:outline-hidden bg-white border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)] lg:rounded-md overflow-hidden mb-8 h-full"
 >
 	<aside
 		class="flex flex-wrap gap-2 items-center border-b-2 border-black p-2"

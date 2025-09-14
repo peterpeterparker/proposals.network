@@ -104,7 +104,7 @@
 					pinPlaceholder={proposalIds !== ''}
 				/>
 
-				<h3 class="bg-black border-2 border-black text-white text-center p-2 my-8 lg:rounded">
+				<h3 class="bg-black border-2 border-black text-white text-center p-2 my-8 lg:rounded-xs">
 					<span class="animate-pulse"> ⚠️</span> Please be absolutely sure before continuing
 					<span class="animate-pulse"> ⚠️</span>
 				</h3>

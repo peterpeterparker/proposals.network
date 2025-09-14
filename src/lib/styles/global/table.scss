@@ -7,9 +7,7 @@ table {
 	border-spacing: 0;
 	table-layout: auto;
 
-	@screen lg {
-		table-layout: fixed;
-	}
+	@apply lg:table-fixed;
 }
 
 @layer base {

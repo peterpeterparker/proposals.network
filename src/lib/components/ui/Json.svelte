@@ -138,6 +138,8 @@
 {/if}
 
 <style lang="postcss">
+	@reference "tailwindcss";
+
 	.root,
 	.root ~ ul,
 	.root ~ span {

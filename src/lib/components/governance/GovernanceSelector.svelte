@@ -12,7 +12,7 @@
 
 <button
 	on:click={onSelect}
-	class="flex justify-between items-center sm:w-96 transition-all w-full outline-none bg-white border-2 border-black h-12 hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] hover:bg-cyan-300 focus:bg-cyan-400"
+	class="flex justify-between items-center sm:w-96 transition-all w-full outline-hidden bg-white border-2 border-black h-12 hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] hover:bg-cyan-300 focus:bg-cyan-400"
 >
 	<div class="p-2 pointer-events-none max-w-[48px]">
 		<Img src={logoSrc} width="48px" />

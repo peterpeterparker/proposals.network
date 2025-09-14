@@ -127,9 +127,7 @@
 		}
 
 		table {
-			@screen lg {
-				table-layout: auto;
-			}
+			@apply lg:table-auto;
 
 			th {
 				@apply bg-orange-200;

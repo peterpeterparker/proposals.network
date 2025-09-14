@@ -17,7 +17,7 @@
 	<ProposalLoader>
 		<ProposalHeader />
 
-		<div class="xl:grid grid-cols-[1fr,auto] items-center gap-16">
+		<div class="xl:grid grid-cols-[1fr_auto] items-center gap-16">
 			<ProposalInfo />
 
 			<ProposalResults />
