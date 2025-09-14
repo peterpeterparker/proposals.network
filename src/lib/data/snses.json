@@ -2712,7 +2712,7 @@
 			"reject_cost_e8s": 5555500000000
 		},
 		"parameters": {
-			"reserved_ids": [1000],
+			"reserved_ids": [1000, 1001],
 			"functions": [
 				{
 					"id": 0,
@@ -2833,20 +2833,6 @@
 					"name": "Upgrade SNS extension",
 					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
-				},
-				{
-					"id": 1001,
-					"name": "addToken",
-					"description": null,
-					"function_type": {
-						"GenericNervousSystemFunction": {
-							"topic": "ApplicationBusinessLogic",
-							"validator_canister_id": "3xwpq-ziaaa-aaaah-qcn4a-cai",
-							"target_canister_id": "3xwpq-ziaaa-aaaah-qcn4a-cai",
-							"validator_method_name": "addTokenValidate",
-							"target_method_name": "addToken"
-						}
-					}
 				},
 				{
 					"id": 1005,
@@ -8143,6 +8129,12 @@
 					"id": 18,
 					"name": "Execute SNS extension operation",
 					"description": "Proposal to execute an operation on a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
