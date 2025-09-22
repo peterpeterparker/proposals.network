@@ -2998,6 +2998,12 @@
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
 					"id": 1001,
 					"name": "Manage NNS neuron",
 					"description": "Proposal to manage an ICP neuron under control of the Gold DAO.",
@@ -6240,7 +6246,7 @@
 		"meta": {
 			"url": "https://panda.fans",
 			"name": "ICPanda",
-			"description": "We’re building the foundational infrastructure and applications that empower AI agents to thrive as first-class citizens in the Web3 ecosystem. Anda.AI | dMsg.net",
+			"description": "Breathing life into sovereign AI. We are building the open-source stack for agents to remember, transact, and evolve as first-class citizens in Web3. https://Anda.AI | https://dMsg.net",
 			"logo": "/v1/sns/root/d7wvo-iiaaa-aaaaq-aacsq-cai/logo.png"
 		},
 		"icrc1_metadata": [
@@ -7544,7 +7550,7 @@
 			"ledger_canister_id": "k45jy-aiaaa-aaaaq-aadcq-cai"
 		},
 		"meta": {
-			"url": "https://2uktw-yiaaa-aaaah-adwxq-cai.icp0.io/",
+			"url": "https://motokoghosts.com/",
 			"name": "Motoko",
 			"description": "A community initiative aiming to drive awareness of the Motoko branding\n",
 			"logo": "/v1/sns/root/ko36b-myaaa-aaaaq-aadbq-cai/logo.png"
@@ -8326,15 +8332,15 @@
 			"ledger_canister_id": "np5km-uyaaa-aaaaq-aadrq-cai"
 		},
 		"meta": {
-			"url": "https://www.pokedbots.com",
-			"name": "PokedBots",
-			"description": "A collection of 10,000 unique ROBOTS!  This DAO is going to serve as the controller for all PokedStudio collections on toko.app.  We will allow migration from Entrepot (web -1) to toko.app (web3) so don't worry, all NFTs will be safe.",
+			"url": "https://phasma-lm0.caffeine.xyz",
+			"name": "PHASMA",
+			"description": "A hub for NFTs, curated art, and next-gen robotics innovation",
 			"logo": "/v1/sns/root/nb7he-piaaa-aaaaq-aadqq-cai/logo.png"
 		},
 		"icrc1_metadata": [
 			["icrc1:decimals", { "Nat": [8] }],
-			["icrc1:name", { "Text": "Poked" }],
-			["icrc1:symbol", { "Text": "POKED" }],
+			["icrc1:name", { "Text": "PHASMA" }],
+			["icrc1:symbol", { "Text": "PHASMA" }],
 			["icrc1:fee", { "Nat": [100000000] }],
 			["icrc1:max_memo_length", { "Nat": [32] }],
 			["icrc103:public_allowances", { "Text": "true" }],
@@ -8342,7 +8348,7 @@
 			["icrc106:index_principal", { "Text": "n535v-yiaaa-aaaaq-aadsq-cai" }]
 		],
 		"nervous_system_parameters": {
-			"neuron_minimum_dissolve_delay_to_vote_seconds": 63115200,
+			"neuron_minimum_dissolve_delay_to_vote_seconds": 5184000,
 			"neuron_minimum_stake_e8s": 50000000000000,
 			"reject_cost_e8s": 500000000000000
 		},
@@ -10361,6 +10367,20 @@
 							"target_canister_id": "6jvpj-sqaaa-aaaaj-azwnq-cai",
 							"validator_method_name": "icrc55_command_validate",
 							"target_method_name": "icrc55_command"
+						}
+					}
+				},
+				{
+					"id": 3001,
+					"name": "sendToken",
+					"description": "Sends specified amount of given icrc1 token to provided account",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "th44n-iyaaa-aaaan-qzz5a-cai",
+							"target_canister_id": "v6t5d-6yaaa-aaaan-qzzja-cai",
+							"validator_method_name": "validate_sendToken",
+							"target_method_name": "sendToken"
 						}
 					}
 				}
