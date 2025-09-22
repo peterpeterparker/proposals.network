@@ -14,7 +14,7 @@
 		({ bottom, left, right } = anchor
 			? anchor.getBoundingClientRect()
 			: { bottom: 0, left: 0, right: 0 });
-	$: anchor, visible, initPosition();
+	$: (anchor, visible, initPosition());
 </script>
 
 <svelte:window on:resize={initPosition} />

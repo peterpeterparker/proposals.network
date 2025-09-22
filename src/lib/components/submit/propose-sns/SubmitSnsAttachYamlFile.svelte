@@ -47,7 +47,7 @@
 
 	const debounceSave = debounce(save);
 
-	$: file, (() => debounceSave())();
+	$: (file, (() => debounceSave())());
 </script>
 
 <SubmitSnsFile {extension} {collection} bind:downloadUrl>

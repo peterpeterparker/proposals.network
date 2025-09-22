@@ -52,7 +52,7 @@
 		neuron = n;
 	};
 
-	$: $userStore, $governanceIdStore, (async () => load())();
+	$: ($userStore, $governanceIdStore, (async () => load())());
 
 	const deleteNeuron = async ({ detail: neuronId }: CustomEvent<string | bigint>) => {
 		const { result, neuron: updatedNeuron } = await deleteNeuronId({

@@ -37,7 +37,7 @@
 
 	const debounceSaveYaml = debounce(save);
 
-	$: file, (() => debounceSaveYaml())();
+	$: (file, (() => debounceSaveYaml())());
 </script>
 
 <SubmitSnsFile {extension} {collection} bind:downloadUrl>

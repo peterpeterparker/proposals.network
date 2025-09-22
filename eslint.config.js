@@ -32,7 +32,7 @@ export default ts.config(
 		}
 	},
 	{
-		ignores: ['src/declarations/**/*', 'static/workers/**/*']
+		ignores: ['src/declarations/**/*', 'static/workers/**/*', 'src/custom-events.d.ts']
 	},
 	{
 		rules: {
@@ -45,7 +45,8 @@ export default ts.config(
 					caughtErrorsIgnorePattern: '^_'
 				}
 			],
-			'@typescript-eslint/no-unused-expressions': 'off'
+			'@typescript-eslint/no-unused-expressions': 'off',
+			'svelte/no-navigation-without-resolve': 'off'
 		}
 	}
 );

@@ -12,7 +12,7 @@
 
 	onMount(async () => (worker = await initWorker()));
 
-	$: worker,
+	$: (worker,
 		$governanceIdStore,
 		$userStore,
 		(() => {
@@ -43,7 +43,7 @@
 				governanceId: $governanceIdStore,
 				...env
 			});
-		})();
+		})());
 
 	onDestroy(() => worker?.stop());
 </script>

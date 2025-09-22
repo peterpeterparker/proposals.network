@@ -33,7 +33,7 @@
 	onDestroy(() => clearTimeout(timer));
 
 	let reorgDetail: string | undefined;
-	$: detail,
+	$: (detail,
 		(() => {
 			if (isNullish(detail)) {
 				reorgDetail = undefined;
@@ -53,7 +53,7 @@
 			reorgDetail = `${last[0]?.trim() ?? ''}${
 				splits.length > 0 ? ` | Stacktrace: ${splits.join('').trim()}` : ''
 			}`;
-		})();
+		})());
 </script>
 
 <div
