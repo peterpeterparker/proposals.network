@@ -92,13 +92,6 @@ const dfxCanisterIds = ({ prefix }: { prefix?: string }): Record<string, string>
 
 const config: UserConfig = {
 	plugins: [sveltekit()],
-	css: {
-		preprocessorOptions: {
-			scss: {
-				api: 'modern-compiler'
-			}
-		}
-	},
 	build: {
 		target: 'es2020',
 		rollupOptions: {
