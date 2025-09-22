@@ -104,6 +104,11 @@ type InitAssetKey = record {
   encoding_type : opt text;
   full_path : text;
 };
+type InitSatelliteArgs = record {
+  controllers : vec principal;
+  storage : opt InitStorageArgs;
+};
+type InitStorageArgs = record { system_memory : opt Memory };
 type InitUploadResult = record { batch_id : nat };
 type ListMatcher = record {
   key : opt text;
@@ -285,7 +290,7 @@ type UploadChunk = record {
   order_id : opt nat;
 };
 type UploadChunkResult = record { chunk_id : nat };
-service : () -> {
+service : (InitSatelliteArgs) -> {
   commit_asset_upload : (CommitBatch) -> ();
   commit_proposal : (CommitProposal) -> (null);
   commit_proposal_asset_upload : (CommitBatch) -> ();
@@ -355,6 +360,7 @@ service : () -> {
   set_rule : (CollectionType, text, SetRule) -> (Rule);
   set_storage_config : (SetStorageConfig) -> (StorageConfig);
   submit_proposal : (nat) -> (nat, Proposal);
+  switch_storage_system_memory : () -> ();
   upload_asset_chunk : (UploadChunk) -> (UploadChunkResult);
   upload_proposal_asset_chunk : (UploadChunk) -> (UploadChunkResult);
 }
