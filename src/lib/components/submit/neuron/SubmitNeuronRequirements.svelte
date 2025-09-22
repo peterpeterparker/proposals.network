@@ -15,7 +15,7 @@
 	$: rejectCostE8s = $snsStore?.nervous_system_parameters.reject_cost_e8s;
 
 	let amount: TokenAmountV2 | undefined;
-	$: $governanceStore,
+	$: ($governanceStore,
 		$snsStore,
 		(() => {
 			if (nonNullish($snsStore) && nonNullish(rejectCostE8s)) {
@@ -34,7 +34,7 @@
 				amount: BigInt(ICP_NEURON_MINIMUM_STAKE_E8S),
 				token: ICPToken
 			});
-		})();
+		})());
 </script>
 
 <h2 class="text-2xl mb-8">

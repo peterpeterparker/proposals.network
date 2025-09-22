@@ -60,7 +60,7 @@
 		step = isNullish(metadata?.proposalAction) ? 'select' : 'write';
 	};
 
-	$: $userStore, $routeKey, (async () => await init())();
+	$: ($userStore, $routeKey, (async () => await init())());
 
 	$: confirmToCloseBrowser($isWizardBusy);
 
@@ -94,7 +94,7 @@
 
 	const reload = async () => await loadMetadata();
 
-	$: step, (async () => await loadMetadata())();
+	$: (step, (async () => await loadMetadata())());
 
 	setContext<SubmitContext>(SUBMIT_CONTEXT_KEY, {
 		store: metadataStore,

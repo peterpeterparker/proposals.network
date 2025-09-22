@@ -51,7 +51,7 @@
 		await initWithQueryParam();
 	};
 
-	$: $store, (async () => await init())();
+	$: ($store, (async () => await init())());
 
 	const save = async () => {
 		if (isNullish(proposalAction)) {

@@ -65,7 +65,7 @@
 		}
 	};
 
-	$: $routeProposalId, (async () => load())();
+	$: ($routeProposalId, (async () => load())());
 </script>
 
 {#if isNullish($proposalStore?.proposal)}

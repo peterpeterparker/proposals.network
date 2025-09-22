@@ -26,9 +26,9 @@
 					: 'done';
 	};
 
-	$: step, $userStore, initSignInStatus();
+	$: (step, $userStore, initSignInStatus());
 
-	$: step,
+	$: (step,
 		$userStore,
 		(() =>
 			(selectStatus =
@@ -38,9 +38,9 @@
 						? 'pending'
 						: $userSignedIn
 							? 'done'
-							: 'pending'))();
+							: 'pending'))());
 
-	$: step,
+	$: (step,
 		(() =>
 			(writeStatus =
 				step === 'write'
@@ -49,25 +49,25 @@
 						? 'pending'
 						: signInStatus === 'done' && $userSignedIn
 							? 'done'
-							: 'pending'))();
+							: 'pending'))());
 
-	$: step,
+	$: (step,
 		(() =>
 			(neuronStatus =
 				step === 'neuron'
 					? 'active'
 					: nonNullish(step) && ['review', 'submitted'].includes(step)
 						? 'done'
-						: 'pending'))();
+						: 'pending'))());
 
-	$: step,
+	$: (step,
 		(() =>
 			(reviewStatus =
 				step === 'review'
 					? 'active'
 					: nonNullish(step) && ['submitted', 'readonly'].includes(step)
 						? 'done'
-						: 'pending'))();
+						: 'pending'))());
 </script>
 
 <Aside>

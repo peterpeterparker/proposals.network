@@ -42,7 +42,7 @@
 		});
 	};
 
-	$: intersecting, $governanceIdStore, (async () => load())();
+	$: (intersecting, $governanceIdStore, (async () => load())());
 </script>
 
 <Section color="secondary">

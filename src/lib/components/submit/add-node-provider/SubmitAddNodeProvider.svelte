@@ -28,7 +28,7 @@
 		nodeProviderId = $store?.metadata?.nodeProviderId ?? '';
 	};
 
-	$: $store, init();
+	$: ($store, init());
 
 	const save = async () => {
 		if (
@@ -74,7 +74,7 @@
 
 	const debounceSave = debounce(save);
 
-	$: nodeProviderId,
+	$: (nodeProviderId,
 		nodeProviderName,
 		url,
 		urlSelfDeclaration,
@@ -95,7 +95,7 @@
 			}
 
 			debounceSave();
-		})();
+		})());
 
 	const dispatch = createEventDispatcher();
 	const next = async () => {

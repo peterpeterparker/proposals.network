@@ -15,7 +15,7 @@
 		content = existingContent;
 	};
 
-	$: $store, (async () => await init())();
+	$: ($store, (async () => await init())());
 
 	const onUpdate = async (content: ProposalContent) => await setContent(content);
 </script>

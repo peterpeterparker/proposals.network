@@ -18,7 +18,7 @@
 		motionText = $store?.metadata?.motionText ?? '';
 	};
 
-	$: $store, (async () => await init())();
+	$: ($store, (async () => await init())());
 
 	const save = async () => {
 		if (motionText === '' && title === '' && url === '') {
@@ -45,7 +45,7 @@
 
 	const debounceSave = debounce(save);
 
-	$: motionText,
+	$: (motionText,
 		title,
 		url,
 		(() => {
@@ -54,7 +54,7 @@
 			}
 
 			debounceSave();
-		})();
+		})());
 </script>
 
 <SubmitWriteContent>

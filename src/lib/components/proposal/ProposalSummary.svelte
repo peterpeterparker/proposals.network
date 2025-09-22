@@ -11,7 +11,7 @@
 	$: summary = $store?.proposal?.summary;
 
 	let cmp: HtmlMarkdown;
-	$: summary, (async () => await cmp?.reload())();
+	$: (summary, (async () => await cmp?.reload())());
 </script>
 
 {#if nonNullish(summary)}

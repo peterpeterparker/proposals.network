@@ -88,7 +88,7 @@
 		status = 'ok';
 	};
 
-	$: $store, (async () => init())();
+	$: ($store, (async () => init())());
 
 	const dispatch = createEventDispatcher();
 

@@ -54,7 +54,7 @@
 	let currency = false;
 	$: currency = ['icp', 'currency'].includes(inputType);
 
-	$: value,
+	$: (value,
 		(() => {
 			if (!internalValueChange && currency) {
 				if (typeof value === 'number') {
@@ -67,7 +67,7 @@
 			}
 
 			internalValueChange = false;
-		})();
+		})());
 
 	const restoreFromValidValue = (noValue = false) => {
 		if (isNullish(inputElement) || !currency) {

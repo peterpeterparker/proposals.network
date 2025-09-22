@@ -37,7 +37,7 @@
 			: undefined;
 	};
 
-	$: $store, (async () => await init())();
+	$: ($store, (async () => await init())());
 </script>
 
 <slot />

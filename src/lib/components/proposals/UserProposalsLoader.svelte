@@ -18,7 +18,7 @@
 		await loadUserProposals({ startAfter: undefined, governanceId: $governanceIdStore });
 	};
 
-	$: $userStore, $governanceIdStore, (async () => load())();
+	$: ($userStore, $governanceIdStore, (async () => load())());
 </script>
 
 <slot />

@@ -134,7 +134,7 @@
 
 	const debounceSave = debounce(save);
 
-	$: destinationAddress,
+	$: (destinationAddress,
 		amount,
 		(() => {
 			if (destinationAddress === '' && (isNullish(amount) || amount === '') && url === '') {
@@ -142,7 +142,7 @@
 			}
 
 			debounceSave();
-		})();
+		})());
 
 	const dispatch = createEventDispatcher();
 	const next = async () => {
