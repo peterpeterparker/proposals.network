@@ -15,7 +15,7 @@
 		on:change
 		class:text-gray-400={isNullish(value)}
 		{disabled}
-		class="transition-all w-full outline-hidden border-2 border-black h-12 hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] hover:bg-cyan-300 focus:bg-cyan-400"
+		class="bg-white transition-all w-full outline-hidden border-2 border-black h-12 hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] hover:bg-cyan-300 focus:bg-cyan-400"
 		class:px-12={logo}
 		class:pr-12={!logo}
 		class:pl-4={!logo}
