@@ -40,8 +40,8 @@
 		"@dfinity/identity-secp256k1": "^3.2.6",
 		"@eslint/compat": "^1.2.9",
 		"@eslint/js": "^9.26.0",
-		"@junobuild/cli-tools": "^0.7.2",
-		"@junobuild/config": "^2.1.1",
+		"@junobuild/cli-tools": "^0.8.0",
+		"@junobuild/config": "^2.4.3",
 		"@playwright/test": "^1.52.0",
 		"@sveltejs/adapter-static": "^3.0.8",
 		"@sveltejs/kit": "^2.20.8",
@@ -78,7 +78,7 @@
 		"@dfinity/principal": "^3.2.6",
 		"@dfinity/sns": "^4.0.2",
 		"@dfinity/utils": "^3.1.0",
-		"@junobuild/admin": "^2.2.2",
+		"@junobuild/admin": "^2.3.0",
 		"@junobuild/analytics": "^0.2.7",
 		"@junobuild/core": "^2.2.0",
 		"@tiptap/core": "^2.12.0",
@@ -101,6 +101,6 @@
 		"svelte-confetti": "^2.3.1",
 		"tiptap-markdown": "^0.8.10",
 		"yaml": "^2.7.1",
-		"zod": "^3.25.71"
+		"zod": "^4.1.11"
 	}
 }
