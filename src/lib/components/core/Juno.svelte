@@ -7,14 +7,7 @@
 	import { junoEnvironment } from '$lib/utils/juno.utils';
 	import { toasts } from '$lib/stores/toasts.store';
 	import { initOrbiter } from '@junobuild/analytics';
-	import {
-		DEV,
-		DISABLE_ANALYTICS,
-		HOST,
-		LOCAL,
-		ORBITER_ID,
-		SATELLITE_ID
-	} from '$lib/constants/app.constants';
+	import { DEV, DISABLE_ANALYTICS, ORBITER_ID, SATELLITE_ID } from '$lib/constants/app.constants';
 
 	let unsubscribe: (() => void) | undefined = undefined;
 
@@ -30,14 +23,13 @@
 
 		unsubscribe = onAuthStateChange((user) => userStore.set(user));
 
-		if (!DISABLE_ANALYTICS && !LOCAL && nonNullish(ORBITER_ID)) {
+		if ((!DISABLE_ANALYTICS || !DEV) && nonNullish(ORBITER_ID)) {
 			initOrbiter({
 				options: {
 					userAgentParser: true
 				},
 				satelliteId: SATELLITE_ID!,
-				orbiterId: ORBITER_ID,
-				...(DEV && { container: HOST })
+				orbiterId: ORBITER_ID
 			});
 		}
 

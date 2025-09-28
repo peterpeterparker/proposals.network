@@ -1,4 +1,4 @@
-import { HOST, LOCAL } from '$lib/constants/app.constants';
+import { DEV, HOST } from '$lib/constants/app.constants';
 import type { HttpAgent, Identity } from '@dfinity/agent';
 import { createAgent, isNullish } from '@dfinity/utils';
 
@@ -11,7 +11,7 @@ export const getAgent = async ({ identity }: { identity: Identity }): Promise<Ht
 		const agent = await createAgent({
 			host: HOST,
 			identity,
-			fetchRootKey: LOCAL
+			fetchRootKey: DEV
 		});
 
 		agents = {
