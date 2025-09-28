@@ -1,12 +1,9 @@
 #!/usr/bin/env node
 
-import { config } from 'dotenv';
 import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
-import { ENV, findHtmlFiles } from './build.utils.mjs';
-
-config({ path: `.env.${ENV}` });
+import { findHtmlFiles } from './build.utils.mjs';
 
 const buildCsp = (htmlFile) => {
 	// 1. We extract the start script parsed by SvelteKit into the html file
