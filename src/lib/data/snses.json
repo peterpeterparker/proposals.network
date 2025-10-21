@@ -8569,7 +8569,8 @@
 			["icrc1:fee", { "Nat": [10000] }],
 			["icrc1:max_memo_length", { "Nat": [32] }],
 			["icrc103:public_allowances", { "Text": "true" }],
-			["icrc103:max_take_value", { "Nat": [500] }]
+			["icrc103:max_take_value", { "Nat": [500] }],
+			["icrc106:index_principal", { "Text": "mqvz3-xaaaa-aaaaq-aadva-cai" }]
 		],
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 15780096,
@@ -8691,6 +8692,12 @@
 					"id": 18,
 					"name": "Execute SNS extension operation",
 					"description": "Proposal to execute an operation on a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				},
 				{
