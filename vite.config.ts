@@ -28,7 +28,6 @@ const config: UserConfig = {
 					const folder = dirname(id);
 
 					const lazy = [
-						'@dfinity/nns',
 						'@tiptap',
 						'highlight.js',
 						'prosemirror',
