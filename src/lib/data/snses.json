@@ -2244,6 +2244,20 @@
 					}
 				},
 				{
+					"id": 1009,
+					"name": "BOOM Gaming Guilds canister function add_hot_quest",
+					"description": "Call add_hot_quest function to add a new Hot Quest to BOOM Gaming Guilds",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
+							"validator_canister_id": "erej6-riaaa-aaaap-ab4ma-cai",
+							"target_canister_id": "erej6-riaaa-aaaap-ab4ma-cai",
+							"validator_method_name": "validate_add_hot_quest",
+							"target_method_name": "add_hot_quest"
+						}
+					}
+				},
+				{
 					"id": 1010,
 					"name": "Game Launcher asset canister function commit_proposed_batch",
 					"description": "Call commit_proposed_batch function to commit changes to upgrade Game Launcher asset canister",
@@ -6682,6 +6696,34 @@
 					}
 				},
 				{
+					"id": 1200,
+					"name": "Commit proposed assets for upgrading the anda_cloud_website canister",
+					"description": "Commit proposed assets for upgrading the anda_cloud_website canister.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
+							"validator_canister_id": "lxeb6-dyaaa-aaaap-an2ga-cai",
+							"target_canister_id": "lxeb6-dyaaa-aaaap-an2ga-cai",
+							"validator_method_name": "validate_commit_proposed_batch",
+							"target_method_name": "commit_proposed_batch"
+						}
+					}
+				},
+				{
+					"id": 1300,
+					"name": "Commit proposed assets for upgrading the one_bridge_app canister",
+					"description": "Commit proposed assets for upgrading the one_bridge_app canister.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
+							"validator_canister_id": "ejwdq-iyaaa-aaaap-an47q-cai",
+							"target_canister_id": "ejwdq-iyaaa-aaaap-an47q-cai",
+							"validator_method_name": "validate_commit_proposed_batch",
+							"target_method_name": "commit_proposed_batch"
+						}
+					}
+				},
+				{
 					"id": 2000,
 					"name": "`transferPosition` function",
 					"description": "It is used to transfer position in ICPSwap.",
@@ -9882,6 +9924,12 @@
 					"id": 18,
 					"name": "Execute SNS extension operation",
 					"description": "Proposal to execute an operation on a registered SNS extension.",
+					"function_type": { "NativeNervousSystemFunction": {} }
+				},
+				{
+					"id": 19,
+					"name": "Upgrade SNS extension",
+					"description": "Proposal to upgrade the WASM of a registered SNS extension.",
 					"function_type": { "NativeNervousSystemFunction": {} }
 				}
 			]
