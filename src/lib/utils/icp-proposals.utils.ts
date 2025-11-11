@@ -2,6 +2,7 @@ import { ICP_NEURON_URL } from '$lib/constants/dashboard.constants';
 import en from '$lib/i18n/en.governance.json';
 import type { Proposal } from '$lib/types/governance';
 import { keyOf, keyOfOptional } from '$lib/utils/utils';
+import type { ProposalInfo } from '@dfinity/nns';
 import {
 	NnsFunction,
 	ProposalRewardStatus,
@@ -9,7 +10,6 @@ import {
 	Topic,
 	type Proposal as ProposalNns
 } from '@dfinity/nns';
-import type { ProposalInfo } from '@dfinity/nns/dist/types/types/governance_converters';
 import { nonNullish } from '@dfinity/utils';
 
 export type ProposalInfoMap = {

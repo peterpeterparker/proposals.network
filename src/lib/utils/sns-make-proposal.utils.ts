@@ -1,12 +1,13 @@
 import { type NeuronSchema, type SnsYaml } from '$lib/types/sns';
 import { formatToken } from '$lib/utils/token.utils';
-import type { CreateServiceNervousSystem, Tokens } from '@dfinity/nns';
 import type {
+	CreateServiceNervousSystem,
 	Duration,
 	GlobalTimeOfDay,
 	NeuronDistribution,
-	Percentage
-} from '@dfinity/nns/dist/types/types/governance_converters';
+	Percentage,
+	Tokens
+} from '@dfinity/nns';
 import { convertStringToE8s, isNullish, nonNullish, TokenAmountV2 } from '@dfinity/utils';
 
 interface UnitsToSeconds {
