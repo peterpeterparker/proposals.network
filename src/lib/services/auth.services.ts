@@ -9,40 +9,23 @@ import { isNullish } from '@dfinity/utils';
 import {
 	SignInUserInterruptError,
 	signIn as junoSignIn,
-	signOut as junoSignOut,
-	type SignInOptions
+	signOut as junoSignOut
 } from '@junobuild/core';
 
-export const signIn = async (
-	provider?: 'ic0.app' | 'nfid'
-): Promise<{
+export const signIn = async (): Promise<{
 	success: 'ok' | 'cancelled' | 'error';
 	err?: unknown;
 }> => {
 	busy.show();
 
 	try {
-		const signOptions: SignInOptions =
-			provider === 'nfid'
-				? {
-						nfid: {
-							options: {
-								appName: 'proposals.network',
-								logoUrl: 'https://proposals.network/favicons/icon-192x192.png',
-								maxTimeToLiveInNanoseconds: AUTH_MAX_TIME_TO_LIVE
-							}
-						}
-					}
-				: {
-						internet_identity: {
-							options: {
-								maxTimeToLiveInNanoseconds: AUTH_MAX_TIME_TO_LIVE,
-								...(provider === 'ic0.app' && { domain: 'ic0.app' })
-							}
-						}
-					};
-
-		await junoSignIn(signOptions);
+		await junoSignIn({
+			internet_identity: {
+				options: {
+					maxTimeToLiveInNanoseconds: AUTH_MAX_TIME_TO_LIVE
+				}
+			}
+		});
 
 		// We clean previous messages in case user was signed out automatically before sign-in again.
 		toasts.clean();
