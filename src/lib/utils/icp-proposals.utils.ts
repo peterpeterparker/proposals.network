@@ -2,15 +2,15 @@ import { ICP_NEURON_URL } from '$lib/constants/dashboard.constants';
 import en from '$lib/i18n/en.governance.json';
 import type { Proposal } from '$lib/types/governance';
 import { keyOf, keyOfOptional } from '$lib/utils/utils';
-import type { ProposalInfo } from '@dfinity/nns';
+import { nonNullish } from '@dfinity/utils';
+import type { ProposalInfo } from '@icp-sdk/canisters/nns';
 import {
 	NnsFunction,
 	ProposalRewardStatus,
 	ProposalStatus,
 	Topic,
 	type Proposal as ProposalNns
-} from '@dfinity/nns';
-import { nonNullish } from '@dfinity/utils';
+} from '@icp-sdk/canisters/nns';
 
 export type ProposalInfoMap = {
 	type: string | undefined;

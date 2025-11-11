@@ -1,6 +1,6 @@
 import { DEV, HOST } from '$lib/constants/app.constants';
-import type { HttpAgent, Identity } from '@dfinity/agent';
 import { createAgent, isNullish } from '@dfinity/utils';
+import type { HttpAgent, Identity } from '@icp-sdk/core/agent';
 
 let agents: Record<string, HttpAgent> | undefined | null = undefined;
 

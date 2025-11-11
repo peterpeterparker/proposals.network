@@ -1,5 +1,6 @@
 import { type NeuronSchema, type SnsYaml } from '$lib/types/sns';
 import { formatToken } from '$lib/utils/token.utils';
+import { convertStringToE8s, isNullish, nonNullish, TokenAmountV2 } from '@dfinity/utils';
 import type {
 	CreateServiceNervousSystem,
 	Duration,
@@ -7,8 +8,7 @@ import type {
 	NeuronDistribution,
 	Percentage,
 	Tokens
-} from '@dfinity/nns';
-import { convertStringToE8s, isNullish, nonNullish, TokenAmountV2 } from '@dfinity/utils';
+} from '@icp-sdk/canisters/nns';
 
 interface UnitsToSeconds {
 	seconds: number;

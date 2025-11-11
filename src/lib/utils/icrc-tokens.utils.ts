@@ -3,8 +3,8 @@ import {
 	type CachedSnsTokenMetadataDtoNat,
 	type CachedSnsTokenMetadataDtoText
 } from '$lib/types/sns-aggregator';
-import { IcrcMetadataResponseEntries } from '@dfinity/ledger-icrc';
 import { isNullish, type Token } from '@dfinity/utils';
+import { IcrcMetadataResponseEntries } from '@icp-sdk/canisters/ledger/icrc';
 
 export const mapOptionalToken = (dto: CachedSnsTokenMetadataDto): Token | undefined => {
 	const nullishToken: Partial<Token> = dto.reduce((acc, [key, value]) => {

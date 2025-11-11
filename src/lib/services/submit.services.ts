@@ -28,9 +28,9 @@ import type { UserOption } from '$lib/types/user';
 import { replaceHistory } from '$lib/utils/route.utils';
 import { mapSnsYamlToCreateServiceNervousSystem } from '$lib/utils/sns-make-proposal.utils';
 import { assertSHA256, assertUrlsFromWiki } from '$lib/utils/submit.node-provider.utils';
-import { decodeIcrcAccount, type IcrcAccount } from '@dfinity/ledger-icrc';
 import type { TransferSnsTreasuryFunds } from '@dfinity/sns/dist/candid/sns_governance';
 import { fromNullable, isNullish, nonNullish, notEmptyString } from '@dfinity/utils';
+import { decodeIcrcAccount, type IcrcAccount } from '@icp-sdk/canisters/ledger/icrc';
 import { downloadUrl, getAsset, getDoc, setDoc, type Doc } from '@junobuild/core';
 import { nanoid } from 'nanoid';
 

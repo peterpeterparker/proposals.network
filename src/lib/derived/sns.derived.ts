@@ -3,8 +3,8 @@ import { snsesStore } from '$lib/stores/snses.store';
 import type { GovernanceId } from '$lib/types/governance';
 import type { CachedSnsDto } from '$lib/types/sns-aggregator';
 import { convertNervousFunction } from '$lib/utils/sns-proposals.utils';
-import type { SnsNervousSystemFunction } from '@dfinity/sns';
 import { nonNullish } from '@dfinity/utils';
+import type { SnsNervousSystemFunction } from '@icp-sdk/canisters/sns';
 import { derived, type Readable } from 'svelte/store';
 
 export const sortedSnsesStore: Readable<CachedSnsDto[]> = derived(snsesStore, ($snsesStore) =>
