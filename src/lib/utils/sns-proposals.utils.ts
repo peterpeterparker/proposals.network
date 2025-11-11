@@ -6,6 +6,7 @@ import { nowInSeconds } from '$lib/utils/date.utils';
 import { keyOf } from '$lib/utils/utils';
 import { Vote } from '@dfinity/nns';
 import { Principal } from '@dfinity/principal';
+import type { SnsNeuronId, SnsTopic } from '@dfinity/sns';
 import {
 	SnsProposalDecisionStatus,
 	SnsProposalRewardStatus,
@@ -14,7 +15,6 @@ import {
 	type SnsPercentage,
 	type SnsProposalData
 } from '@dfinity/sns';
-import type { NeuronId, ProposalData, Topic } from '@dfinity/sns/dist/candid/sns_governance';
 import { fromNullable, isNullish, nonNullish, toNullable } from '@dfinity/utils';
 
 export const convertNervousFunction = ({
@@ -31,7 +31,7 @@ export const convertNervousFunction = ({
 
 const convertOptionalStringToGenericNervousSystemFunctionTopic = (
 	value: string | null
-): [Topic] | [] => {
+): [SnsTopic] | [] => {
 	if (isNullish(value)) {
 		return toNullable();
 	}
@@ -230,7 +230,7 @@ const bytesToHexString = (bytes: number[]): string =>
 const subaccountToHexString = (subaccount: Uint8Array | number[]): string =>
 	bytesToHexString(Array.from(subaccount));
 
-const getSnsNeuronIdAsHexString = (neuronId: NeuronId | undefined): string =>
+const getSnsNeuronIdAsHexString = (neuronId: SnsNeuronId | undefined): string =>
 	subaccountToHexString(neuronId?.id ?? new Uint8Array());
 
 export const mapSnsProposal = ({
@@ -238,7 +238,7 @@ export const mapSnsProposal = ({
 	nsFunctions,
 	rootCanisterId
 }: {
-	proposal: ProposalData;
+	proposal: SnsProposalData;
 	nsFunctions: SnsNervousSystemFunction[] | undefined;
 	rootCanisterId: string | undefined | null;
 }): Proposal => {

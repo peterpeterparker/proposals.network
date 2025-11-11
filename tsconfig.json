@@ -9,7 +9,13 @@
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,
-		"moduleResolution": "bundler"
+		"moduleResolution": "bundler",
+		"paths": {
+			"$lib": ["./src/lib"],
+			"$lib/*": ["./src/lib/*"],
+			"$app/types": ["./.svelte-kit/types/index.d.ts"],
+			"@dfinity/sns/dist/candid/*": ["./node_modules/@dfinity/sns/dist/candid/*"]
+		}
 	}
 	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
 	//

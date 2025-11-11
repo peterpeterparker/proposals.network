@@ -1,6 +1,6 @@
 import { E8S_PER_ICP } from '$lib/constants/app.constants';
+import type { Token } from '@dfinity/utils';
 import { type TokenAmountV2 } from '@dfinity/utils';
-import type { Token } from '@dfinity/utils/dist/types/parser/token';
 
 export const formatToken = (value: TokenAmountV2): string => {
 	const decimals = value.token.decimals;

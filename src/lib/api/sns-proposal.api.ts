@@ -10,13 +10,13 @@ import type {
 import { AnonymousIdentity } from '@dfinity/agent';
 import type { ProposalId } from '@dfinity/nns';
 import { Principal } from '@dfinity/principal';
+import type { SnsListProposalsResponse, SnsProposalData } from '@dfinity/sns';
 import {
 	type SnsAction,
 	SnsGovernanceCanister,
 	type SnsManageNeuron,
 	type SnsNeuronId
 } from '@dfinity/sns';
-import type { ListProposalsResponse, ProposalData } from '@dfinity/sns/dist/candid/sns_governance';
 import { fromNullable, hexStringToUint8Array, nonNullish } from '@dfinity/utils';
 import { unsafeIdentity } from '@junobuild/core';
 
@@ -26,7 +26,7 @@ export const listSnsProposals = async ({
 }: {
 	beforeProposal: ProposalId | undefined;
 	governanceCanisterId: GovernanceId;
-}): Promise<ListProposalsResponse> => {
+}): Promise<SnsListProposalsResponse> => {
 	const agent = await getAgent({ identity: new AnonymousIdentity() });
 
 	const { listProposals } = SnsGovernanceCanister.create({
@@ -47,7 +47,7 @@ export const getProposal = async ({
 }: {
 	proposalId: ProposalId;
 	governanceCanisterId: GovernanceId;
-}): Promise<ProposalData | undefined> => {
+}): Promise<SnsProposalData | undefined> => {
 	const agent = await getAgent({ identity: new AnonymousIdentity() });
 
 	const { getProposal } = SnsGovernanceCanister.create({
