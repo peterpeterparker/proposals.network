@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Option } from '@dfinity/nns';
+	import type { Option } from '@icp-sdk/canisters/nns';
 	import { isNullish, nonNullish, secondsToDuration } from '@dfinity/utils';
 	import { onDestroy, onMount } from 'svelte';
 	import { fade } from 'svelte/transition';

@@ -21,8 +21,8 @@ import type {
 } from '$lib/types/proposal.params';
 import { mapIcpProposal } from '$lib/utils/icp-proposals.utils';
 import { mapSnsProposal } from '$lib/utils/sns-proposals.utils';
-import type { ProposalId } from '@dfinity/nns';
 import { assertNonNullish, nonNullish } from '@dfinity/utils';
+import type { ProposalId } from '@icp-sdk/canisters/nns';
 import { get } from 'svelte/store';
 
 export const submitMotionProposal = async ({

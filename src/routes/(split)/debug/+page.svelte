@@ -16,8 +16,8 @@
 	import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
 	import { getAgent } from '$lib/api/agent.api';
 	import { unsafeIdentity } from '@junobuild/core';
-	import { GovernanceCanister, Vote } from '@dfinity/nns';
-	import { Principal } from '@dfinity/principal';
+	import { GovernanceCanister, Vote } from '@icp-sdk/canisters/nns';
+	import { Principal } from '@icp-sdk/core/principal';
 
 	let neuronId = $state('');
 	let proposalIds = $state('');

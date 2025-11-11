@@ -1,4 +1,4 @@
-import { GovernanceError } from '@dfinity/nns';
+import { GovernanceError } from '@icp-sdk/canisters/nns';
 
 export const errorDetailToString = (err: unknown): string | undefined =>
 	typeof err === 'string'

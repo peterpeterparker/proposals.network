@@ -1,7 +1,7 @@
 import { DEV } from '$lib/constants/app.constants';
 import { assertBytes } from '$lib/types/assertions';
-import { Principal } from '@dfinity/principal';
 import { convertStringToE8s, isNullish, nonNullish } from '@dfinity/utils';
+import { Principal } from '@icp-sdk/core/principal';
 import { z } from 'zod';
 
 const assertE8sValue = (input: string): boolean => {

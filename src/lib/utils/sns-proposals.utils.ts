@@ -4,9 +4,9 @@ import type { Proposal } from '$lib/types/governance';
 import type { CachedFunctionTypeDto, CachedNervousFunctionDto } from '$lib/types/sns-aggregator';
 import { nowInSeconds } from '$lib/utils/date.utils';
 import { keyOf } from '$lib/utils/utils';
-import { Vote } from '@dfinity/nns';
-import { Principal } from '@dfinity/principal';
-import type { SnsNeuronId, SnsTopic } from '@dfinity/sns';
+import { fromNullable, isNullish, nonNullish, toNullable } from '@dfinity/utils';
+import { Vote } from '@icp-sdk/canisters/nns';
+import type { SnsNeuronId, SnsTopic } from '@icp-sdk/canisters/sns';
 import {
 	SnsProposalDecisionStatus,
 	SnsProposalRewardStatus,
@@ -14,8 +14,8 @@ import {
 	type SnsNervousSystemFunction,
 	type SnsPercentage,
 	type SnsProposalData
-} from '@dfinity/sns';
-import { fromNullable, isNullish, nonNullish, toNullable } from '@dfinity/utils';
+} from '@icp-sdk/canisters/sns';
+import { Principal } from '@icp-sdk/core/principal';
 
 export const convertNervousFunction = ({
 	id,
