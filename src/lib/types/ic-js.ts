@@ -1,4 +1,4 @@
-import type { SnsAction } from '@dfinity/sns';
+import type { SnsAction } from '@icp-sdk/canisters/sns';
 
 export interface SnsProposal {
 	url: string;

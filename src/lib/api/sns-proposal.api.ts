@@ -7,17 +7,17 @@ import type {
 	ProposalParams,
 	TransferTreasuryFundsParams
 } from '$lib/types/proposal.params';
-import { AnonymousIdentity } from '@dfinity/agent';
-import type { ProposalId } from '@dfinity/nns';
-import { Principal } from '@dfinity/principal';
-import type { SnsListProposalsResponse, SnsProposalData } from '@dfinity/sns';
+import { fromNullable, hexStringToUint8Array, nonNullish } from '@dfinity/utils';
+import type { ProposalId } from '@icp-sdk/canisters/nns';
+import type { SnsListProposalsResponse, SnsProposalData } from '@icp-sdk/canisters/sns';
 import {
 	type SnsAction,
 	SnsGovernanceCanister,
 	type SnsManageNeuron,
 	type SnsNeuronId
-} from '@dfinity/sns';
-import { fromNullable, hexStringToUint8Array, nonNullish } from '@dfinity/utils';
+} from '@icp-sdk/canisters/sns';
+import { AnonymousIdentity } from '@icp-sdk/core/agent';
+import { Principal } from '@icp-sdk/core/principal';
 import { unsafeIdentity } from '@junobuild/core';
 
 export const listSnsProposals = async ({

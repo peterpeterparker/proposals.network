@@ -1,7 +1,7 @@
 import type { GovernanceCanisterId } from '$lib/types/core';
-import type { ProposalInfo, Proposal as ProposalNns, Tally } from '@dfinity/nns';
-import type { SnsTally } from '@dfinity/sns';
 import type { Token } from '@dfinity/utils';
+import type { ProposalInfo, Proposal as ProposalNns, Tally } from '@icp-sdk/canisters/nns';
+import type { SnsTally } from '@icp-sdk/canisters/sns';
 
 export type GovernanceId = GovernanceCanisterId;
 export type OptionGovernanceId = GovernanceCanisterId | undefined | null;

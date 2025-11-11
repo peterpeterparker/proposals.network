@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ProposalId } from '@dfinity/nns';
+	import type { ProposalId } from '@icp-sdk/canisters/nns';
 	import ProposalLink from '$lib/components/proposals/ProposalLink.svelte';
 	import ProposalCountdown from '$lib/components/proposals/ProposalCountdown.svelte';
 	import ProposalView from '$lib/components/proposals/ProposalView.svelte';

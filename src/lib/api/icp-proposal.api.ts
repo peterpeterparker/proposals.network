@@ -6,8 +6,8 @@ import type {
 	MotionProposalParams
 } from '$lib/types/proposal.params';
 import { enumsExclude } from '$lib/utils/enum.utils';
-import { AnonymousIdentity } from '@dfinity/agent';
-import type { ListProposalsResponse, ProposalInfo } from '@dfinity/nns';
+import { assertNonNullish } from '@dfinity/utils';
+import type { ListProposalsResponse, ProposalInfo } from '@icp-sdk/canisters/nns';
 import {
 	GovernanceCanister,
 	ProposalRewardStatus,
@@ -15,9 +15,9 @@ import {
 	Topic,
 	type MakeProposalRequest,
 	type ProposalId
-} from '@dfinity/nns';
-import { Principal } from '@dfinity/principal';
-import { assertNonNullish } from '@dfinity/utils';
+} from '@icp-sdk/canisters/nns';
+import { AnonymousIdentity } from '@icp-sdk/core/agent';
+import { Principal } from '@icp-sdk/core/principal';
 import { unsafeIdentity } from '@junobuild/core';
 
 export const listIcpProposals = async (

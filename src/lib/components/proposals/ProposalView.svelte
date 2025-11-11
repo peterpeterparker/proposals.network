@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ButtonCell from '$lib/components/ui/ButtonCell.svelte';
-	import type { Option, ProposalId } from '@dfinity/nns';
+	import type { Option, ProposalId } from '@icp-sdk/canisters/nns';
 	import { isNullish } from '@dfinity/utils';
 	import { proposalUrl } from '$lib/utils/nav.utils';
 	import { governanceIdStore } from '$lib/derived/governance.derived';

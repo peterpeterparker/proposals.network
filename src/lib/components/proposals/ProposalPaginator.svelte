@@ -3,7 +3,7 @@
 	import { last } from '$lib/utils/utils';
 	import { selectedProposalsStore } from '$lib/derived/proposals.derived';
 	import { loadProposals } from '$lib/services/loader-stores.services';
-	import type { ProposalId } from '@dfinity/nns';
+	import type { ProposalId } from '@icp-sdk/canisters/nns';
 	import Paginator from '$lib/components/ui/Paginator.svelte';
 	import { governanceIdStore, governanceTypeStore } from '$lib/derived/governance.derived';
 

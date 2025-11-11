@@ -1,7 +1,7 @@
 <script lang="ts">
 	import IconLink from '$lib/components/icons/IconLink.svelte';
-	import type { Option } from '@dfinity/nns';
-	import type { ProposalId } from '@dfinity/nns';
+	import type { Option } from '@icp-sdk/canisters/nns';
+	import type { ProposalId } from '@icp-sdk/canisters/nns';
 	import { nonNullish } from '@dfinity/utils';
 	import { proposalUrl } from '$lib/utils/nav.utils';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
