@@ -7,12 +7,8 @@ runs:
   steps:
     - uses: actions/setup-node@v4
       with:
-        node-version: 22
+        node-version: 24
         registry-url: "https://registry.npmjs.org"
-
-    - name: Update npm
-      shell: bash
-      run: npm i -g npm
 
     - name: Install dependencies
       shell: bash
