@@ -73,6 +73,11 @@ export default defineConfig({
 					mutablePermissions: true
 				}
 			]
+		},
+		authentication: {
+			google: {
+				clientId: '974645854757-ebf6equ4ceskmeqahu83e1qqmm7ndrod.apps.googleusercontent.com'
+			}
 		}
 	},
 	orbiter: {
