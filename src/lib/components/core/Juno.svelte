@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
+	import { onDestroy } from 'svelte';
 	import { onAuthStateChange, initSatellite } from '@junobuild/core';
 	import { userStore } from '$lib/stores/user.store';
 	import { isNullish, nonNullish } from '@dfinity/utils';
@@ -11,7 +11,7 @@
 
 	let unsubscribe: (() => void) | undefined = undefined;
 
-	onMount(async () => {
+	const sync = async () => {
 		const env = junoEnvironment();
 
 		if (isNullish(env)) {
@@ -36,14 +36,16 @@
 		await Promise.all([
 			initSatellite({
 				...env,
-				workers: {
-					auth: true
-				}
+				...(DEV !== true && {
+					workers: {
+						auth: true
+					}
+				})
 			})
 		]);
 
 		displayAndCleanLogoutMsg();
-	});
+	};
 
 	const automaticSignOut = () =>
 		toastAndReload({
@@ -56,4 +58,8 @@
 
 <svelte:window on:junoSignOutAuthTimer={automaticSignOut} />
 
-<slot />
+{#await sync()}
+	<!-- No animation as initializing the auth should be fast -->
+{:then _}
+	<slot />
+{/await}

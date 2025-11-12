@@ -1,11 +1,15 @@
 <script lang="ts">
-	import { signIn } from '$lib/services/auth.services';
-	import IconICMonochrome from '$lib/components/icons/IconICMonochrome.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
+	import SignInWithGoogle from '$lib/components/core/SignInWithGoogle.svelte';
+	import SignInWithII from '$lib/components/core/SignInWithII.svelte';
 
-	export let color: 'secondary' | 'quaternary' = 'secondary';
+	interface Props {
+		color?: 'secondary' | 'quaternary';
+	}
+
+	let props: Props = $props();
 </script>
 
-<Button {color} on:click={async () => await signIn()}>
-	<IconICMonochrome /> Continue with Internet Identity
-</Button>
+<div class="inline-flex flex-col gap-2">
+	<SignInWithGoogle {...props} />
+	<SignInWithII {...props} />
+</div>
