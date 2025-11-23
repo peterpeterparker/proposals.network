@@ -38,6 +38,7 @@
 	"devDependencies": {
 		"@eslint/compat": "^1.2.9",
 		"@eslint/js": "^9.26.0",
+		"@icp-sdk/bindgen": "^0.2.0",
 		"@junobuild/config": "^2.6.0",
 		"@junobuild/vite-plugin": "^4.4.0",
 		"@playwright/test": "^1.52.0",
