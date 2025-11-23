@@ -6724,6 +6724,62 @@
 					}
 				},
 				{
+					"id": 1301,
+					"name": "Set EVM providers on the one_bridge_canister canister",
+					"description": "Set EVM providers on the one_bridge_canister canister.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
+							"validator_canister_id": "dpjyw-raaaa-aaaar-qbxlq-cai",
+							"target_canister_id": "dpjyw-raaaa-aaaar-qbxlq-cai",
+							"validator_method_name": "validate_admin_set_evm_providers",
+							"target_method_name": "admin_set_evm_providers"
+						}
+					}
+				},
+				{
+					"id": 1302,
+					"name": "Set SVM providers on the one_bridge_canister canister",
+					"description": "Set SVM providers on the one_bridge_canister canister.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
+							"validator_canister_id": "dpjyw-raaaa-aaaar-qbxlq-cai",
+							"target_canister_id": "dpjyw-raaaa-aaaar-qbxlq-cai",
+							"validator_method_name": "validate_admin_set_svm_providers",
+							"target_method_name": "admin_set_svm_providers"
+						}
+					}
+				},
+				{
+					"id": 1303,
+					"name": "Add EVM contract on the one_bridge_canister canister",
+					"description": "Add EVM contract on the one_bridge_canister canister.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
+							"validator_canister_id": "dpjyw-raaaa-aaaar-qbxlq-cai",
+							"target_canister_id": "dpjyw-raaaa-aaaar-qbxlq-cai",
+							"validator_method_name": "validate_admin_add_evm_contract",
+							"target_method_name": "admin_add_evm_contract"
+						}
+					}
+				},
+				{
+					"id": 1304,
+					"name": "Add SVM contract on the one_bridge_canister canister",
+					"description": "Add SVM contract on the one_bridge_canister canister.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
+							"validator_canister_id": "dpjyw-raaaa-aaaar-qbxlq-cai",
+							"target_canister_id": "dpjyw-raaaa-aaaar-qbxlq-cai",
+							"validator_method_name": "validate_admin_add_svm_contract",
+							"target_method_name": "admin_add_svm_contract"
+						}
+					}
+				},
+				{
 					"id": 2000,
 					"name": "`transferPosition` function",
 					"description": "It is used to transfer position in ICPSwap.",
@@ -8359,6 +8415,20 @@
 							"target_canister_id": "tsbvt-pyaaa-aaaar-qafva-cai",
 							"validator_method_name": "approve_proposal_validate",
 							"target_method_name": "approve_proposal"
+						}
+					}
+				},
+				{
+					"id": 1001,
+					"name": "Transfer nICP",
+					"description": "Calls the nICP ledger transfer method.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "Governance",
+							"validator_canister_id": "buwm7-7yaaa-aaaar-qagva-cai",
+							"target_canister_id": "buwm7-7yaaa-aaaar-qagva-cai",
+							"validator_method_name": "icrc1_transfer",
+							"target_method_name": "icrc1_transfer"
 						}
 					}
 				}
