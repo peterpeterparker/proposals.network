@@ -2,12 +2,10 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { onAuthStateChange, initSatellite } from '@junobuild/core';
 	import { userStore } from '$lib/stores/user.store';
-	import { isNullish, nonNullish } from '@dfinity/utils';
+	import { isNullish } from '@dfinity/utils';
 	import { displayAndCleanLogoutMsg, toastAndReload } from '$lib/services/auth.services';
 	import { junoEnvironment } from '$lib/utils/juno.utils';
 	import { toasts } from '$lib/stores/toasts.store';
-	import { initOrbiter } from '@junobuild/analytics';
-	import { DEV, DISABLE_ANALYTICS, ORBITER_ID, SATELLITE_ID } from '$lib/constants/app.constants';
 
 	let unsubscribe: (() => void) | undefined = undefined;
 
@@ -22,16 +20,6 @@
 		}
 
 		unsubscribe = onAuthStateChange((user) => userStore.set(user));
-
-		if ((!DISABLE_ANALYTICS || !DEV) && nonNullish(ORBITER_ID)) {
-			initOrbiter({
-				options: {
-					userAgentParser: true
-				},
-				satelliteId: SATELLITE_ID!,
-				orbiterId: ORBITER_ID
-			});
-		}
 
 		await Promise.all([
 			initSatellite({

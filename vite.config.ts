@@ -9,8 +9,6 @@ const file = fileURLToPath(new URL('package.json', import.meta.url));
 const json = readFileSync(file, 'utf8');
 const { version } = JSON.parse(json);
 
-const disableAnalytics = process.env.JUNO_ANALYTICS === 'disabled';
-
 const config: UserConfig = {
 	plugins: [sveltekit(), juno()],
 	css: {
@@ -77,8 +75,7 @@ export default defineConfig(
 	(): UserConfig => ({
 		...config,
 		define: {
-			'import.meta.env.VITE_APP_VERSION': JSON.stringify(version),
-			'import.meta.env.VITE_JUNO_DISABLE_ANALYTICS': JSON.stringify(disableAnalytics)
+			'import.meta.env.VITE_APP_VERSION': JSON.stringify(version)
 		}
 	})
 );
