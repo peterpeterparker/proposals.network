@@ -1587,7 +1587,7 @@ checksum = "f3cb5ba0dc43242ce17de99c180e96db90b235b8a9fdc9543c96d2209116bd9f"
 
 [[package]]
 name = "satellite"
-version = "0.0.6"
+version = "0.0.7"
 dependencies = [
  "candid",
  "ic-cdk",
