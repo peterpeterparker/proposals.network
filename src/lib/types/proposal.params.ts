@@ -1,11 +1,11 @@
 import type { Governance } from '$lib/types/governance';
-import type { SnsGovernanceDid } from '@icp-sdk/canisters/sns';
 import type {
 	CreateServiceNervousSystem,
 	MakeProposalRequest,
 	Motion,
 	NodeProvider
 } from '@icp-sdk/canisters/nns';
+import type { SnsGovernanceDid } from '@icp-sdk/canisters/sns';
 
 export type ProposalParams = Omit<MakeProposalRequest, 'action' | 'title' | 'neuronId'> & {
 	neuronId: string;

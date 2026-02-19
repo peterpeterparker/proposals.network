@@ -1,6 +1,6 @@
 import { type NeuronSchema, type SnsYaml } from '$lib/types/sns';
 import { formatToken } from '$lib/utils/token.utils';
-import { convertStringToE8s, isNullish, nonNullish, TokenAmountV2, toNullable } from '@dfinity/utils';
+import { convertStringToE8s, isNullish, nonNullish, TokenAmountV2 } from '@dfinity/utils';
 import type {
 	CreateServiceNervousSystem,
 	Duration,

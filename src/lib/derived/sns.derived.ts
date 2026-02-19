@@ -25,16 +25,14 @@ export const snsIdStore: Readable<GovernanceId | undefined> = derived(
 			: undefined
 );
 
-export const snsNsFunctionsStore: Readable<SnsGovernanceDid.NervousSystemFunction[] | undefined> = derived(
-	[snsIdStore, snsesStore],
-	([$snsIdStore, $snsesStore]) => {
+export const snsNsFunctionsStore: Readable<SnsGovernanceDid.NervousSystemFunction[] | undefined> =
+	derived([snsIdStore, snsesStore], ([$snsIdStore, $snsesStore]) => {
 		const aggregatorProject: CachedSnsDto | undefined = $snsesStore.find(
 			({ canister_ids: { governance_canister_id } }) => governance_canister_id === $snsIdStore
 		);
 
 		return aggregatorProject?.parameters.functions.map(convertNervousFunction);
-	}
-);
+	});
 
 export const rootCanisterIdStore: Readable<string | undefined | null> = derived(
 	[snsIdStore, snsesStore],
