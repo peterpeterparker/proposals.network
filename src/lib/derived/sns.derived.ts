@@ -4,7 +4,7 @@ import type { GovernanceId } from '$lib/types/governance';
 import type { CachedSnsDto } from '$lib/types/sns-aggregator';
 import { convertNervousFunction } from '$lib/utils/sns-proposals.utils';
 import { nonNullish } from '@dfinity/utils';
-import type { SnsNervousSystemFunction } from '@icp-sdk/canisters/sns';
+import type { SnsGovernanceDid } from '@icp-sdk/canisters/sns';
 import { derived, type Readable } from 'svelte/store';
 
 export const sortedSnsesStore: Readable<CachedSnsDto[]> = derived(snsesStore, ($snsesStore) =>
@@ -25,16 +25,14 @@ export const snsIdStore: Readable<GovernanceId | undefined> = derived(
 			: undefined
 );
 
-export const snsNsFunctionsStore: Readable<SnsNervousSystemFunction[] | undefined> = derived(
-	[snsIdStore, snsesStore],
-	([$snsIdStore, $snsesStore]) => {
+export const snsNsFunctionsStore: Readable<SnsGovernanceDid.NervousSystemFunction[] | undefined> =
+	derived([snsIdStore, snsesStore], ([$snsIdStore, $snsesStore]) => {
 		const aggregatorProject: CachedSnsDto | undefined = $snsesStore.find(
 			({ canister_ids: { governance_canister_id } }) => governance_canister_id === $snsIdStore
 		);
 
 		return aggregatorProject?.parameters.functions.map(convertNervousFunction);
-	}
-);
+	});
 
 export const rootCanisterIdStore: Readable<string | undefined | null> = derived(
 	[snsIdStore, snsesStore],

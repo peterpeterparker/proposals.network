@@ -257,7 +257,8 @@ export const mapSnsYamlToCreateServiceNervousSystem = ({
 			}),
 			initialRewardRate: mapPercentage(Voting.RewardRate.initial),
 			finalRewardRate: mapPercentage(Voting.RewardRate.final)
-		}
+		},
+		customProposalCriticality: undefined
 	},
 	fallbackControllerPrincipalIds,
 	dappCanisters,
