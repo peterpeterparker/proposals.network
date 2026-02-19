@@ -16,7 +16,7 @@
 	import { GOVERNANCE_CANISTER_ID } from '$lib/constants/app.constants';
 	import { getAgent } from '$lib/api/agent.api';
 	import { unsafeIdentity } from '@junobuild/core';
-	import { GovernanceCanister, Vote } from '@icp-sdk/canisters/nns';
+	import { NnsGovernanceCanister, Vote } from '@icp-sdk/canisters/nns';
 	import { Principal } from '@icp-sdk/core/principal';
 
 	let neuronId = $state('');
@@ -49,7 +49,7 @@
 
 			const agent = await getAgent({ identity: await unsafeIdentity() });
 
-			const { registerVote } = GovernanceCanister.create({
+			const { registerVote } = NnsGovernanceCanister.create({
 				agent,
 				canisterId: Principal.fromText(GOVERNANCE_CANISTER_ID)
 			});
