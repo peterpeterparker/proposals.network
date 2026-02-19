@@ -1,5 +1,5 @@
 import type { Governance } from '$lib/types/governance';
-import type { TransferSnsTreasuryFunds } from '@dfinity/sns/dist/candid/sns_governance';
+import type { SnsGovernanceDid } from '@icp-sdk/canisters/sns';
 import type {
 	CreateServiceNervousSystem,
 	MakeProposalRequest,
@@ -21,5 +21,5 @@ export type CreateServiceNervousSystemParams = ProposalParams & {
 };
 
 export type TransferTreasuryFundsParams = ProposalParams & {
-	transferFunds: TransferSnsTreasuryFunds;
+	transferFunds: SnsGovernanceDid.TransferSnsTreasuryFunds;
 };

@@ -9,7 +9,7 @@ import { enumsExclude } from '$lib/utils/enum.utils';
 import { assertNonNullish } from '@dfinity/utils';
 import type { ListProposalsResponse, ProposalInfo } from '@icp-sdk/canisters/nns';
 import {
-	GovernanceCanister,
+	NnsGovernanceCanister,
 	ProposalRewardStatus,
 	ProposalStatus,
 	Topic,
@@ -27,7 +27,7 @@ export const listIcpProposals = async (
 
 	const agent = await getAgent({ identity: new AnonymousIdentity() });
 
-	const { listProposals } = GovernanceCanister.create({
+	const { listProposals } = NnsGovernanceCanister.create({
 		agent,
 		canisterId: Principal.fromText(GOVERNANCE_CANISTER_ID)
 	});
@@ -61,7 +61,7 @@ export const getProposal = async ({
 
 	const agent = await getAgent({ identity: new AnonymousIdentity() });
 
-	const { getProposal } = GovernanceCanister.create({
+	const { getProposal } = NnsGovernanceCanister.create({
 		agent,
 		canisterId: Principal.fromText(GOVERNANCE_CANISTER_ID)
 	});
@@ -95,7 +95,7 @@ const makeProposal = async (request: MakeProposalRequest): Promise<ProposalId | 
 
 	const agent = await getAgent({ identity: await unsafeIdentity() });
 
-	const { makeProposal } = GovernanceCanister.create({
+	const { makeProposal } = NnsGovernanceCanister.create({
 		agent,
 		canisterId: Principal.fromText(GOVERNANCE_CANISTER_ID)
 	});

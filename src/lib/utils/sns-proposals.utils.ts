@@ -6,15 +6,8 @@ import { nowInSeconds } from '$lib/utils/date.utils';
 import { keyOf } from '$lib/utils/utils';
 import { fromNullable, isNullish, nonNullish, toNullable } from '@dfinity/utils';
 import { Vote } from '@icp-sdk/canisters/nns';
-import type { SnsNeuronId, SnsTopic } from '@icp-sdk/canisters/sns';
-import {
-	SnsProposalDecisionStatus,
-	SnsProposalRewardStatus,
-	type SnsFunctionType,
-	type SnsNervousSystemFunction,
-	type SnsPercentage,
-	type SnsProposalData
-} from '@icp-sdk/canisters/sns';
+import type { SnsGovernanceDid } from '@icp-sdk/canisters/sns';
+import { SnsProposalDecisionStatus, SnsProposalRewardStatus } from '@icp-sdk/canisters/sns';
 import { Principal } from '@icp-sdk/core/principal';
 
 export const convertNervousFunction = ({
@@ -22,7 +15,7 @@ export const convertNervousFunction = ({
 	name,
 	description,
 	function_type
-}: CachedNervousFunctionDto): SnsNervousSystemFunction => ({
+}: CachedNervousFunctionDto): SnsGovernanceDid.NervousSystemFunction => ({
 	id: BigInt(id),
 	name: name,
 	description: toNullable(description),
@@ -31,7 +24,7 @@ export const convertNervousFunction = ({
 
 const convertOptionalStringToGenericNervousSystemFunctionTopic = (
 	value: string | null
-): [SnsTopic] | [] => {
+): [SnsGovernanceDid.Topic] | [] => {
 	if (isNullish(value)) {
 		return toNullable();
 	}
@@ -56,7 +49,9 @@ const convertOptionalStringToGenericNervousSystemFunctionTopic = (
 	throw new Error('Unknown GenericNervousSystemFunction.Topic to decode proposal.');
 };
 
-const convertFunctionType = (functionType: CachedFunctionTypeDto): SnsFunctionType => {
+const convertFunctionType = (
+	functionType: CachedFunctionTypeDto
+): SnsGovernanceDid.FunctionType => {
 	if ('NativeNervousSystemFunction' in functionType) {
 		return { NativeNervousSystemFunction: {} };
 	}
@@ -91,7 +86,9 @@ const convertOptionalStringToOptionalPrincipal = (
  * @param {SnsProposalData} proposal
  * @returns {SnsProposalDecisionStatus}
  */
-export const snsDecisionStatus = (proposal: SnsProposalData): SnsProposalDecisionStatus => {
+export const snsDecisionStatus = (
+	proposal: SnsGovernanceDid.ProposalData
+): SnsProposalDecisionStatus => {
 	const { decided_timestamp_seconds, executed_timestamp_seconds, failed_timestamp_seconds } =
 		proposal;
 	if (decided_timestamp_seconds === BigInt(0)) {
@@ -123,7 +120,7 @@ export const snsRewardStatus = ({
 	reward_event_round,
 	wait_for_quiet_state,
 	is_eligible_for_rewards
-}: SnsProposalData): SnsProposalRewardStatus => {
+}: SnsGovernanceDid.ProposalData): SnsProposalRewardStatus => {
 	if (reward_event_round > BigInt(0)) {
 		return SnsProposalRewardStatus.PROPOSAL_REWARD_STATUS_SETTLED;
 	}
@@ -151,7 +148,7 @@ export const snsRewardStatus = ({
  * @param {SnsProposalData} proposal
  * @returns {boolean}
  */
-export const isAccepted = (proposal: SnsProposalData): boolean => {
+export const isAccepted = (proposal: SnsGovernanceDid.ProposalData): boolean => {
 	const { latest_tally } = proposal;
 	const tally = fromNullable(latest_tally);
 
@@ -183,17 +180,19 @@ export const MINIMUM_YES_PROPORTION_OF_TOTAL_VOTING_POWER = 300n;
  */
 export const MINIMUM_YES_PROPORTION_OF_EXERCISED_VOTING_POWER = 5_000n;
 
-const fromPercentageBasisPoints = (value: [] | [SnsPercentage]): bigint | undefined => {
+const fromPercentageBasisPoints = (
+	value: [] | [SnsGovernanceDid.Percentage]
+): bigint | undefined => {
 	const percentage = fromNullable(value);
 	return isNullish(percentage) ? undefined : fromNullable(percentage.basis_points);
 };
 
-export const minimumYesProportionOfTotal = (proposal: SnsProposalData): bigint =>
+export const minimumYesProportionOfTotal = (proposal: SnsGovernanceDid.ProposalData): bigint =>
 	// `minimum_yes_proportion_of_total` property could be missing in older canister versions
 	fromPercentageBasisPoints(proposal.minimum_yes_proportion_of_total ?? []) ??
 	MINIMUM_YES_PROPORTION_OF_TOTAL_VOTING_POWER;
 
-export const minimumYesProportionOfExercised = (proposal: SnsProposalData): bigint =>
+export const minimumYesProportionOfExercised = (proposal: SnsGovernanceDid.ProposalData): bigint =>
 	// `minimum_yes_proportion_of_exercised` property could be missing in older canister versions
 	fromPercentageBasisPoints(proposal.minimum_yes_proportion_of_exercised ?? []) ??
 	MINIMUM_YES_PROPORTION_OF_EXERCISED_VOTING_POWER;
@@ -230,7 +229,7 @@ const bytesToHexString = (bytes: number[]): string =>
 const subaccountToHexString = (subaccount: Uint8Array | number[]): string =>
 	bytesToHexString(Array.from(subaccount));
 
-const getSnsNeuronIdAsHexString = (neuronId: SnsNeuronId | undefined): string =>
+const getSnsNeuronIdAsHexString = (neuronId: SnsGovernanceDid.NeuronId | undefined): string =>
 	subaccountToHexString(neuronId?.id ?? new Uint8Array());
 
 export const mapSnsProposal = ({
@@ -238,8 +237,8 @@ export const mapSnsProposal = ({
 	nsFunctions,
 	rootCanisterId
 }: {
-	proposal: SnsProposalData;
-	nsFunctions: SnsNervousSystemFunction[] | undefined;
+	proposal: SnsGovernanceDid.ProposalData;
+	nsFunctions: SnsGovernanceDid.NervousSystemFunction[] | undefined;
 	rootCanisterId: string | undefined | null;
 }): Proposal => {
 	const {

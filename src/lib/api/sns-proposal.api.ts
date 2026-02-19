@@ -9,13 +9,7 @@ import type {
 } from '$lib/types/proposal.params';
 import { fromNullable, hexStringToUint8Array, nonNullish } from '@dfinity/utils';
 import type { ProposalId } from '@icp-sdk/canisters/nns';
-import type { SnsListProposalsResponse, SnsProposalData } from '@icp-sdk/canisters/sns';
-import {
-	type SnsAction,
-	SnsGovernanceCanister,
-	type SnsManageNeuron,
-	type SnsNeuronId
-} from '@icp-sdk/canisters/sns';
+import { SnsGovernanceCanister, type SnsGovernanceDid } from '@icp-sdk/canisters/sns';
 import { AnonymousIdentity } from '@icp-sdk/core/agent';
 import { Principal } from '@icp-sdk/core/principal';
 import { unsafeIdentity } from '@junobuild/core';
@@ -26,7 +20,7 @@ export const listSnsProposals = async ({
 }: {
 	beforeProposal: ProposalId | undefined;
 	governanceCanisterId: GovernanceId;
-}): Promise<SnsListProposalsResponse> => {
+}): Promise<SnsGovernanceDid.ListProposalsResponse> => {
 	const agent = await getAgent({ identity: new AnonymousIdentity() });
 
 	const { listProposals } = SnsGovernanceCanister.create({
@@ -47,7 +41,7 @@ export const getProposal = async ({
 }: {
 	proposalId: ProposalId;
 	governanceCanisterId: GovernanceId;
-}): Promise<SnsProposalData | undefined> => {
+}): Promise<SnsGovernanceDid.ProposalData | undefined> => {
 	const agent = await getAgent({ identity: new AnonymousIdentity() });
 
 	const { getProposal } = SnsGovernanceCanister.create({
@@ -95,9 +89,10 @@ const makeProposal = async ({
 	neuronId,
 	action,
 	governanceId
-}: Omit<ProposalParams, 'governance'> & { governanceId: GovernanceId; action: SnsAction }): Promise<
-	ProposalId | undefined
-> => {
+}: Omit<ProposalParams, 'governance'> & {
+	governanceId: GovernanceId;
+	action: SnsGovernanceDid.Action;
+}): Promise<ProposalId | undefined> => {
 	const agent = await getAgent({ identity: await unsafeIdentity() });
 
 	const { manageNeuron } = SnsGovernanceCanister.create({
@@ -109,14 +104,14 @@ const makeProposal = async ({
 		neuronId: { id },
 		command
 	}: {
-		neuronId: SnsNeuronId;
+		neuronId: SnsGovernanceDid.NeuronId;
 		command: { MakeProposal: SnsProposal };
-	}): SnsManageNeuron => ({
+	}): SnsGovernanceDid.ManageNeuron => ({
 		subaccount: id,
 		command: [command]
 	});
 
-	const toMakeProposalRequest = (): SnsManageNeuron =>
+	const toMakeProposalRequest = (): SnsGovernanceDid.ManageNeuron =>
 		toManageNeuronCommand({
 			neuronId: { id: hexStringToUint8Array(neuronId) },
 			command: {
