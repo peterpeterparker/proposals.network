@@ -1,9 +1,9 @@
-import type { SnsAction } from '@icp-sdk/canisters/sns';
+import type { SnsGovernanceDid } from '@icp-sdk/canisters/sns';
 
 export interface SnsProposal {
 	url: string;
 	title: string;
-	action: [] | [SnsAction];
+	action: [] | [SnsGovernanceDid.Action];
 	summary: string;
 }
 
