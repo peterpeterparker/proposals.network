@@ -9975,7 +9975,7 @@
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 2630016,
 			"neuron_minimum_stake_e8s": 100000000,
-			"reject_cost_e8s": 100000000
+			"reject_cost_e8s": 1000000000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -11320,8 +11320,8 @@
 		},
 		"meta": {
 			"url": "https://zdgud-kqaaa-aaaal-ajn4q-cai.icp0.io/",
-			"name": "bobdotfun",
-			"description": "Build on bob",
+			"name": "Waifu.ai",
+			"description": "A rude chicken",
 			"logo": "/v1/sns/root/kwj3g-oyaaa-aaaaq-aae6a-cai/logo.png"
 		},
 		"icrc1_metadata": [
