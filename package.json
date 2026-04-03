@@ -38,8 +38,8 @@
 	"devDependencies": {
 		"@eslint/compat": "^1.2.9",
 		"@eslint/js": "^9.26.0",
-		"@icp-sdk/bindgen": "^0.2.0",
-		"@junobuild/config": "^2.11.0",
+		"@icp-sdk/bindgen": "^0.3.0",
+		"@junobuild/config": "^2.15.1",
 		"@junobuild/vite-plugin": "^4.7.0",
 		"@playwright/test": "^1.52.0",
 		"@sveltejs/adapter-static": "^3.0.8",
@@ -68,10 +68,10 @@
 		"vitest": "^3.1.3"
 	},
 	"dependencies": {
-		"@dfinity/utils": "^4.1.0",
-		"@icp-sdk/canisters": "^3.5.0",
-		"@icp-sdk/core": "^5.0.0",
-		"@junobuild/core": "^5.2.0",
+		"@dfinity/utils": "^4.2.1",
+		"@icp-sdk/canisters": "^3.5.2",
+		"@icp-sdk/core": "^5.2.1",
+		"@junobuild/core": "^5.3.1",
 		"@tiptap/core": "^2.12.0",
 		"@tiptap/extension-code-block-lowlight": "^2.12.0",
 		"@tiptap/extension-highlight": "^2.12.0",
@@ -92,7 +92,7 @@
 		"svelte-confetti": "^2.3.1",
 		"tiptap-markdown": "^0.8.10",
 		"yaml": "^2.7.1",
-		"zod": "^4.1.11"
+		"zod": "^4.3.6"
 	},
 	"engines": {
 		"node": ">=24",
