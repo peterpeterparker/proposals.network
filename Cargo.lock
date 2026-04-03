@@ -1006,9 +1006,9 @@ checksum = "49f1f14873335454500d59611f1cf4a4b0f786f9ac11f4312a78e4cf2566695b"
 
 [[package]]
 name = "jsonwebtoken-ic"
-version = "10.2.0-ic.1"
+version = "10.3.0-ic.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "61afa40c6d5df5e17e149b52f5ce72cb2d80755daed474ed7c2b9cd95736bffa"
+checksum = "a933564a674e40368f3c12c9435e261ea9b4150ca509f2b2324196d1bcdf8049"
 dependencies = [
  "base64",
  "ed25519-dalek",
@@ -1027,9 +1027,9 @@ dependencies = [
 
 [[package]]
 name = "junobuild-auth"
-version = "0.3.1"
+version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9b8e46c80abaf8f496d4776e75d4544d6c280877b991fc48eeac8ec825f1a572"
+checksum = "46dff282e5bc2a5b2feae25c524029bb29d1a04c1abb42a61bd233dfba7c4331"
 dependencies = [
  "base64",
  "candid",
@@ -1048,9 +1048,9 @@ dependencies = [
 
 [[package]]
 name = "junobuild-cdn"
-version = "0.6.0"
+version = "0.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d5116833ee83f80a611b5f52d8496d6c53cfe291bc4bcbf1ef4b69c5f63b2ec9"
+checksum = "2b66c6e40bb216d4c26c82e35d92d20def35f68790f5abc79dafcc222c9e6f38"
 dependencies = [
  "candid",
  "hex",
@@ -1065,9 +1065,9 @@ dependencies = [
 
 [[package]]
 name = "junobuild-collections"
-version = "0.4.0"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f12126e08566e4fa561657ce10722f3384714ee1e6036772cbce5631cf5e4024"
+checksum = "37b92adba3f93204dde672ac6fff4f205595552a4220e2a28b96c63d6a3381fc"
 dependencies = [
  "candid",
  "ic-cdk",
@@ -1077,9 +1077,9 @@ dependencies = [
 
 [[package]]
 name = "junobuild-macros"
-version = "0.2.0"
+version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "70a8e55646cac08a36a7ea5996ea6a64984b5a33a7dcbc57a02a6113d1831041"
+checksum = "5045a4edc5d6893f64df7e5f3656649a0a279caff2c3964b766c08ea018f142f"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1090,9 +1090,9 @@ dependencies = [
 
 [[package]]
 name = "junobuild-satellite"
-version = "0.5.0"
+version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "085c5c28841abadab6e08b4d48bd5d08fdf7ba54ea404a2963cba98e0a1fa695"
+checksum = "8802c6a435e3a4983879e1ec7eb0b1d594fdba117ad0fb8785dea5e07f7d8ad2"
 dependencies = [
  "candid",
  "ciborium",
@@ -1117,9 +1117,9 @@ dependencies = [
 
 [[package]]
 name = "junobuild-shared"
-version = "0.7.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "80b454b3dc862ad0fe33a467ef3d9a1885fbf396d766df9448292c02d986cb91"
+checksum = "f668a52662876b28bb1cc1bfd2f9285b77c715350566238d652b453990d8d308"
 dependencies = [
  "candid",
  "ciborium",
@@ -1137,9 +1137,9 @@ dependencies = [
 
 [[package]]
 name = "junobuild-storage"
-version = "0.6.0"
+version = "0.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "df2befb25799f9ba223fd5294fab65e5998e70ec9bf8288ccda5a05adc70fba9"
+checksum = "c4bd75009dec58a51edee3e7f6368011d45e23e8e56398dfd6612c63fc61ff03"
 dependencies = [
  "base64",
  "candid",
@@ -1162,9 +1162,9 @@ dependencies = [
 
 [[package]]
 name = "junobuild-utils"
-version = "0.2.0"
+version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fdbe637cfaa966dc552cad23153e44a15d5839d12f8606f5d016e56d2b2b7340"
+checksum = "8c1e96b53a29a30aa95b5eb53167232801ed90554671212ce5069e623f5e00ef"
 dependencies = [
  "candid",
  "serde",
@@ -1580,12 +1580,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "955d28af4278de8121b7ebeb796b6a45735dc01436d898801014aced2773a3d6"
 
 [[package]]
-name = "ryu"
-version = "1.0.18"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f3cb5ba0dc43242ce17de99c180e96db90b235b8a9fdc9543c96d2209116bd9f"
-
-[[package]]
 name = "satellite"
 version = "0.0.8"
 dependencies = [
@@ -1620,9 +1614,9 @@ checksum = "d767eb0aabc880b29956c35734170f26ed551a859dbd361d140cdbeca61ab1e2"
 
 [[package]]
 name = "serde"
-version = "1.0.226"
+version = "1.0.228"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0dca6411025b24b60bfa7ec1fe1f8e710ac09782dca409ee8237ba74b51295fd"
+checksum = "9a8e94ea7f378bd32cbbd37198a4a91436180c5bb472411e48b5ec2e2124ae9e"
 dependencies = [
  "serde_core",
  "serde_derive",
@@ -1650,18 +1644,18 @@ dependencies = [
 
 [[package]]
 name = "serde_core"
-version = "1.0.226"
+version = "1.0.228"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ba2ba63999edb9dac981fb34b3e5c0d111a69b0924e253ed29d83f7c99e966a4"
+checksum = "41d385c7d4ca58e59fc732af25c3983b67ac852c1a25000afe1175de458b67ad"
 dependencies = [
  "serde_derive",
 ]
 
 [[package]]
 name = "serde_derive"
-version = "1.0.226"
+version = "1.0.228"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8db53ae22f34573731bafa1db20f04027b2d25e02d8205921b569171699cdb33"
+checksum = "d540f220d3187173da220f885ab66608367b6574e925011a9353e4badda91d79"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1670,15 +1664,15 @@ dependencies = [
 
 [[package]]
 name = "serde_json"
-version = "1.0.145"
+version = "1.0.149"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "402a6f66d8c709116cf22f558eab210f5a50187f702eb4d7e5ef38d9a7f1c79c"
+checksum = "83fc039473c5595ace860d8c4fafa220ff474b3fc6bfdb4293327f1a37e94d86"
 dependencies = [
  "itoa",
  "memchr",
- "ryu",
  "serde",
  "serde_core",
+ "zmij",
 ]
 
 [[package]]
@@ -2208,3 +2202,9 @@ dependencies = [
  "quote",
  "syn 2.0.98",
 ]
+
+[[package]]
+name = "zmij"
+version = "1.0.21"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b8848ee67ecc8aedbaf3e4122217aff892639231befc6a1b58d29fff4c2cabaa"
