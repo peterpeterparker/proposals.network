@@ -20,4 +20,4 @@ jobs:
       - name: Deploy to Juno
         uses: junobuild/juno-action@main
         with:
-          args: deploy
+          args: hosting deploy --prune
