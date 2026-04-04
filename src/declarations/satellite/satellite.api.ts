@@ -3,9 +3,5 @@
 
 /* eslint-disable */
 /* prettier-ignore */
+// @ts-nocheck
 
-// @ts-expect-error - generated JS file without type declarations
-
-export const functions = {
-	
-};
