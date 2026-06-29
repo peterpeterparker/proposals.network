@@ -3,8 +3,8 @@
 	import { governanceStore, snsStore } from '$lib/derived/governance.derived';
 	import { formatToken } from '$lib/utils/token.utils';
 
-	const ICP_MIN_DISSOLVE_DELAY = 15_780_000; // 6 months
-	const ICP_NEURON_MINIMUM_STAKE_E8S = 10; // 10 ICP
+	const ICP_MIN_DISSOLVE_DELAY = 1_209_600; // 14 days
+	const ICP_NEURON_MINIMUM_STAKE_E8S = 50; // 50 ICP
 
 	let detailToVoteSeconds = ICP_MIN_DISSOLVE_DELAY;
 	$: detailToVoteSeconds =
@@ -46,7 +46,7 @@
 		dissolve delay can submit proposals. So the next step is to add a hotkey to your neuron that meets
 		these criteria.
 	{:else}
-		Neurons with at least 25 ICP and a 6-month dissolve delay can submit proposals. So the next step
+		Neurons with at least 50 ICP and a 14-days dissolve delay can submit proposals. So the next step
 		is to add a hotkey to your neuron that meets these criteria.
 	{/if}
 </h2>
