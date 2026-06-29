@@ -3200,6 +3200,34 @@
 					}
 				},
 				{
+					"id": 1012,
+					"name": "Update exchange config of DEX purchasing canister.",
+					"description": "This proposal updates the exchange configuration for the DEX purchasing canister (formerly 'buyback_burn canister'). This allows to modify which tokens are traded on which pools of DEXs.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
+							"validator_canister_id": "atslz-hiaaa-aaaam-acq6q-cai",
+							"target_canister_id": "atslz-hiaaa-aaaam-acq6q-cai",
+							"validator_method_name": "update_exchange_config_validate",
+							"target_method_name": "update_exchange_config"
+						}
+					}
+				},
+				{
+					"id": 1013,
+					"name": "Add exchange jobs to DEX purchasing canister.",
+					"description": "This proposal adds exchange jobs to the DEX purchasing canister (formerly 'buyback_burn canister'). This allows to add new exchange jobs to the DEX purchasing canister.",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "DappCanisterManagement",
+							"validator_canister_id": "atslz-hiaaa-aaaam-acq6q-cai",
+							"target_canister_id": "atslz-hiaaa-aaaam-acq6q-cai",
+							"validator_method_name": "add_exchange_jobs_validate",
+							"target_method_name": "add_exchange_jobs"
+						}
+					}
+				},
+				{
 					"id": 2001,
 					"name": "Upgrade GLD dashboard frontend.",
 					"description": "Proposal to upgrade the GLD dashboard frontend to a new version.",
@@ -8186,7 +8214,7 @@
 		"nervous_system_parameters": {
 			"neuron_minimum_dissolve_delay_to_vote_seconds": 31560192,
 			"neuron_minimum_stake_e8s": 88800000000,
-			"reject_cost_e8s": 100000000000
+			"reject_cost_e8s": 8888800000000
 		},
 		"parameters": {
 			"reserved_ids": [],
@@ -8515,6 +8543,62 @@
 							"target_method_name": "icrc1_transfer"
 						}
 					}
+				},
+				{
+					"id": 1003,
+					"name": "Set neuron visibility",
+					"description": "Calls set_neuron_visibility(neuron_nonce, visibility) on the WaterNeuron canister",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
+							"validator_canister_id": "tsbvt-pyaaa-aaaar-qafva-cai",
+							"target_canister_id": "tsbvt-pyaaa-aaaar-qafva-cai",
+							"validator_method_name": "set_neuron_visibility_validate",
+							"target_method_name": "set_neuron_visibility"
+						}
+					}
+				},
+				{
+					"id": 1004,
+					"name": "Start dissolving main neuron",
+					"description": "Calls start_dissolving_main_neuron() on the WaterNeuron canister",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
+							"validator_canister_id": "tsbvt-pyaaa-aaaar-qafva-cai",
+							"target_canister_id": "tsbvt-pyaaa-aaaar-qafva-cai",
+							"validator_method_name": "start_dissolving_main_neuron_validate",
+							"target_method_name": "start_dissolving_main_neuron"
+						}
+					}
+				},
+				{
+					"id": 1005,
+					"name": "Stop dissolving main neuron",
+					"description": "Calls stop_dissolving_main_neuron() on the WaterNeuron canister",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
+							"validator_canister_id": "tsbvt-pyaaa-aaaar-qafva-cai",
+							"target_canister_id": "tsbvt-pyaaa-aaaar-qafva-cai",
+							"validator_method_name": "stop_dissolving_main_neuron_validate",
+							"target_method_name": "stop_dissolving_main_neuron"
+						}
+					}
+				},
+				{
+					"id": 1006,
+					"name": "Set main neuron to min dissolve delay",
+					"description": "Calls set_main_neuron_to_min_dissolve_delay() on the WaterNeuron canister",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "ApplicationBusinessLogic",
+							"validator_canister_id": "tsbvt-pyaaa-aaaar-qafva-cai",
+							"target_canister_id": "tsbvt-pyaaa-aaaar-qafva-cai",
+							"validator_method_name": "set_main_neuron_to_min_dissolve_delay_validate",
+							"target_method_name": "set_main_neuron_to_min_dissolve_delay"
+						}
+					}
 				}
 			]
 		}
@@ -8528,7 +8612,7 @@
 			"ledger_canister_id": "np5km-uyaaa-aaaaq-aadrq-cai"
 		},
 		"meta": {
-			"url": "https://phasma-lm0.caffeine.xyz",
+			"url": "https://phasma.biz",
 			"name": "PHASMA",
 			"description": "Next-generation robotics and curated art",
 			"logo": "/v1/sns/root/nb7he-piaaa-aaaaq-aadqq-cai/logo.png"
@@ -9303,7 +9387,7 @@
 		},
 		"meta": {
 			"url": "https://alice.fun/",
-			"name": "Alice Strategy",
+			"name": "ALICE",
 			"description": "$BOB Hodler",
 			"logo": "/v1/sns/root/oh4fn-kyaaa-aaaaq-aaega-cai/logo.png"
 		},
@@ -11306,6 +11390,20 @@
 							"target_method_name": "commit_proposed_batch"
 						}
 					}
+				},
+				{
+					"id": 3104,
+					"name": "validate_transfer_nacho_treasury",
+					"description": "transfer NACHO out of SNS Governance via direct icrc1_transfer to the NACHO ledger (o6ncl-lyaaa-aaaan-q6dua-cai). Validator decodes the standard ICRC-1 TransferArg and returns a human-readable summary for voters. ",
+					"function_type": {
+						"GenericNervousSystemFunction": {
+							"topic": "TreasuryAssetManagement",
+							"validator_canister_id": "th44n-iyaaa-aaaan-qzz5a-cai",
+							"target_canister_id": "o6ncl-lyaaa-aaaan-q6dua-cai",
+							"validator_method_name": "validate_transfer_nacho_treasury",
+							"target_method_name": "icrc1_transfer"
+						}
+					}
 				}
 			]
 		}
@@ -11319,7 +11417,7 @@
 			"ledger_canister_id": "kylwo-viaaa-aaaaq-aae7a-cai"
 		},
 		"meta": {
-			"url": "https://zdgud-kqaaa-aaaal-ajn4q-cai.icp0.io/",
+			"url": "https://waifu.ic0.ai/",
 			"name": "Waifu.ai",
 			"description": "A rude chicken",
 			"logo": "/v1/sns/root/kwj3g-oyaaa-aaaaq-aae6a-cai/logo.png"
