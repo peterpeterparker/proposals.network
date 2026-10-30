@@ -5,6 +5,7 @@
 	import GovernanceSubmitLink from '$lib/components/governance/GovernanceSubmitLink.svelte';
 	import { governanceIdStore } from '$lib/derived/governance.derived';
 	import { homeUrl } from '$lib/utils/nav.utils';
+	import DeprecationNotice from '$lib/components/core/DeprecationNotice.svelte';
 
 	export let submit = false;
 
@@ -14,7 +15,9 @@
 	$: url = homeUrl({ governanceId: $governanceIdStore });
 </script>
 
-<header class="bg-white h-20 w-full fixed top-0 z-10 border-b-2 border-black z-40">
+<DeprecationNotice />
+
+<header class="bg-white h-20 w-full fixed top-10 z-10 border-b-2 border-black z-40">
 	<div class="w-full h-full m-auto flex justify-between items-center px-5 md:px-24">
 		<a class="text-2xl font-bold" href={url} aria-label="Proposals.network home"><IconLogo /></a>
 		<nav class="w-1/2 h-full">
